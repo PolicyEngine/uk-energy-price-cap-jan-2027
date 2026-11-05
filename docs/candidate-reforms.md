@@ -18,7 +18,7 @@ Probable levers between the 25 November announcement and spring 2027, with the r
 | `cap_q1_2027` | The January to March 2027 cap | £2,180 | £1,950 to £2,300 | certain | dashboard-param | policyengine-uk 2.175+ (#1); one rate for both fuels (#2) |
 | `hep_top_up` | Larger Household Energy Payment | £200 | £100 to £300; a second payment | medium | dashboard-param | #1 |
 | `hep_band_e` | Payment extended to band E | bands A to E | A to E | low | dashboard-param | #1 |
-| `hep_great_britain` | Payment in Scotland and Wales | England, Scotland, Wales | announced by both devolved governments | announced | dashboard-param | #1; band valuations differ by nation |
+| `hep_great_britain` | Payment in Scotland and Wales | England, Scotland, Wales | reported plans in both nations; official sources not yet confirmed | medium | dashboard-param | #1; band valuations differ by nation |
 | `whd_uplift` | Larger Warm Home Discount | £300 | £250 to £400 | medium | dashboard-param | #1; #5 (income measure) |
 | `whd_disability_benefits` | Warm Home Discount for disability benefits | add PIP, Attendance Allowance | wider benefit list | low | dashboard-param | #1; #5 |
 | `electricity_vat_to_march_2028` | 0% VAT on electricity to March 2028 | to 31 March 2028 | to September 2027 or permanent | medium | dashboard-param | #1 |

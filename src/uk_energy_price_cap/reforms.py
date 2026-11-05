@@ -88,8 +88,9 @@ REFORMS: list[Reform] = [
         name="Household Energy Payment in Scotland and Wales",
         description=(
             "Placeholder. Pays the £100 to households in bands A to D in "
-            "Scotland and Wales as well as England, as the devolved "
-            "governments have said they will. Band valuations differ by "
+            "Scotland and Wales as well as England. Both devolved "
+            "governments have been reported as planning this; neither "
+            "official source is confirmed yet. Band valuations differ by "
             "nation."
         ),
         parameter_changes=list_change(
@@ -99,7 +100,7 @@ REFORMS: list[Reform] = [
         route=Route.DASHBOARD_PARAM,
         status=PH,
         lever="support",
-        likelihood="announced",
+        likelihood="medium",
     ),
     Reform(
         id="whd_uplift",

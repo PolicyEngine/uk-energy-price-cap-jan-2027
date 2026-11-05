@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uk_energy_price_cap"
+version = "0.1.0"
+description = "Data pipeline and household calculator for the January to March 2027 energy price cap dashboard"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "AGPL-3.0-only" }
+authors = [{ name = "PolicyEngine", email = "hello@policyengine.org" }]
+# The core package (registry, limits, cap scenarios, household calculator,
+# placeholder results, public data checks) is pure Python, so the tests run
+# without microdata or the model.
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+# The engine for real runs. Provisional: policyengine 6.14.0 pins
+# policyengine-uk 2.151.0, which lacks the Household Energy Payment, the
+# Warm Home Discount, the electricity VAT rate and the energy price index.
+# No certified Microcosm build pairs with 2.175 yet (issue #1). Until one
+# does, every figure is labelled "unvalidated under this engine".
+model = [
+    "policyengine-uk==2.175.4",
+    "numpy>=1.24.0",
+    "h5py>=3.0.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.6.0",
+]
+
+[project.scripts]
+uk-energy-price-cap = "uk_energy_price_cap.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+uk_energy_price_cap = ["years.json", "cap_levels.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --tb=short"
+
+[tool.ruff]
+line-length = 79
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]

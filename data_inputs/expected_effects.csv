@@ -1,0 +1,10 @@
+measure_id,year,quantity,expected_sign,low,high,unit,basis
+cap_q1_2027,2026,household energy spend change (annualised at Jan-Mar 2027 prices),+,9000,16000,GBP m,PolicyEngine arithmetic: +13% to +33% on about £48.7bn spend; planning range only
+hep_top_up,2026,Exchequer cost per extra £100,+,1800,2100,GBP m,about 19.7m England households in bands A to D
+hep_band_e,2026,Exchequer cost,+,200,320,GBP m,England band E households times £100
+hep_great_britain,2026,Exchequer cost,+,250,400,GBP m,Scotland about 1.9m homes and Wales bands A to D times £100
+whd_uplift,2026,Exchequer or bill-funded cost per extra £150,+,700,950,GBP m,about 5m to 6m recipients in England and Wales
+whd_disability_benefits,2026,cost,+,150,500,GBP m,depends on overlap with qualifying benefits
+electricity_vat_to_march_2028,2027,VAT forgone July 2027 to March 2028,+,800,1300,GBP m,OBR: £0.7bn for October 2026 to March 2027; scaled to nine months and the higher cap
+universal_bill_credit,2026,cost per £150,+,4000,4400,GBP m,about 28m Great Britain households
+wfp_top_up,2026,gross cost per extra £100,+,1000,1250,GBP m,about 11m to 12m households before recovery

@@ -1,0 +1,2848 @@
+{
+  "meta": {
+    "placeholder": true,
+    "notice": "Pre-release template: every figure on this page comes from synthetic households and placeholder settings. It is not an estimate of the January to March 2027 cap or its effects.",
+    "title": "Energy price cap, January to March 2027",
+    "event_quarter": "2027Q1",
+    "source": "synthetic",
+    "template_date": "2026-11-05",
+    "engine": {
+      "policyengine_uk": "not run (placeholder)",
+      "dataset": "none (synthetic households)",
+      "validated": false
+    },
+    "basis": {
+      "year": "fiscal (April to March); the model year 2026 is 2026-27",
+      "flow": "household spending, VAT included, cash",
+      "behaviour": "static: energy use does not respond to price",
+      "support": "gross of clawback unless the measure says otherwise"
+    },
+    "years": [
+      {
+        "year": 2026,
+        "label": "2026-27"
+      },
+      {
+        "year": 2027,
+        "label": "2027-28"
+      }
+    ],
+    "default_scenario": "central",
+    "disclosure_floor": 10
+  },
+  "cap": {
+    "current_period": "2026Q4",
+    "history": [
+      {
+        "period": "2026Q1",
+        "label": "Jan to Mar 2026",
+        "direct_debit": 1758,
+        "tdcv_basis": "2023"
+      },
+      {
+        "period": "2026Q2",
+        "label": "Apr to Jun 2026",
+        "direct_debit": 1641,
+        "tdcv_basis": "2023"
+      },
+      {
+        "period": "2026Q3",
+        "label": "Jul to Sep 2026",
+        "direct_debit": 1862,
+        "tdcv_basis": "2023",
+        "restated": true
+      },
+      {
+        "period": "2026Q3",
+        "label": "Jul to Sep 2026",
+        "direct_debit": 1663,
+        "tdcv_basis": "2026"
+      },
+      {
+        "period": "2026Q4",
+        "label": "Oct to Dec 2026",
+        "direct_debit": 1723,
+        "tdcv_basis": "2026"
+      }
+    ],
+    "payment_methods": {
+      "2026Q3": {
+        "direct_debit": 1663,
+        "standard_credit": 1796,
+        "prepayment": 1620,
+        "economy_7_direct_debit": 1039
+      },
+      "2026Q4": {
+        "direct_debit": 1723,
+        "standard_credit": 1861,
+        "prepayment": 1678,
+        "economy_7_direct_debit": 1046
+      }
+    },
+    "rates": {
+      "electricity_unit_p_per_kwh": 26.32,
+      "electricity_standing_p_per_day": 54.83,
+      "gas_unit_p_per_kwh": 7.97,
+      "gas_standing_p_per_day": 29.68,
+      "vat": {
+        "electricity": 0.0,
+        "gas": 0.05,
+        "included": true
+      }
+    },
+    "scenarios": [
+      {
+        "id": "obr_path",
+        "label": "Forecast path in the model (OBR, October 2026)",
+        "direct_debit": 1875,
+        "placeholder": true,
+        "change_pct": 8.8
+      },
+      {
+        "id": "low",
+        "label": "Low (placeholder)",
+        "direct_debit": 1950,
+        "placeholder": true,
+        "change_pct": 13.2
+      },
+      {
+        "id": "central",
+        "label": "Central (placeholder)",
+        "direct_debit": 2180,
+        "placeholder": true,
+        "change_pct": 26.5
+      },
+      {
+        "id": "high",
+        "label": "High (placeholder)",
+        "direct_debit": 2300,
+        "placeholder": true,
+        "change_pct": 33.5
+      }
+    ],
+    "sources": {
+      "levels": "Ofgem, summary of changes to the energy price cap, 1 October to 31 December 2026 (26 August 2026) and 1 July to 30 September 2026 (revised TDCV)",
+      "rates": "Ofgem, energy price cap unit rates and standing charges (GB average, Direct Debit, October to December 2026)",
+      "obr_path": "OBR, Economic and fiscal outlook, October 2026, para 2.22",
+      "range": "Supplier and market forecasts, 30 September to 4 November 2026 (placeholder range only)"
+    }
+  },
+  "measures": [
+    {
+      "id": "cap_q1_2027",
+      "name": "Energy price cap, January to March 2027",
+      "description": "Placeholder. Moves household electricity and gas spend from the forecast path in the model to the announced cap, as one percentage change on both fuels.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "bills",
+      "likelihood": "certain",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "hep_top_up",
+      "name": "Larger Household Energy Payment",
+      "description": "Placeholder. Raises the Household Energy Payment for households in council tax bands A to D in England from £100 to £200 in 2026-27.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "medium",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 1886.0,
+      "households_reached_m": 18.86
+    },
+    {
+      "id": "hep_band_e",
+      "name": "Household Energy Payment extended to band E",
+      "description": "Placeholder. Pays the £100 Household Energy Payment to households in council tax bands A to E in England.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 233.0,
+      "households_reached_m": 2.33
+    },
+    {
+      "id": "hep_great_britain",
+      "name": "Household Energy Payment in Scotland and Wales",
+      "description": "Placeholder. Pays the £100 to households in bands A to D in Scotland and Wales as well as England, as the devolved governments have said they will. Band valuations differ by nation.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "announced",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 309.0,
+      "households_reached_m": 3.09
+    },
+    {
+      "id": "whd_uplift",
+      "name": "Larger Warm Home Discount",
+      "description": "Placeholder. Raises the Warm Home Discount from £150 to £300 for the 2026-27 scheme year (England and Wales).",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "medium",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 941.0,
+      "households_reached_m": 6.27
+    },
+    {
+      "id": "whd_disability_benefits",
+      "name": "Warm Home Discount for disability benefit recipients",
+      "description": "Placeholder. Adds Personal Independence Payment and Attendance Allowance to the benefits that qualify for the Warm Home Discount.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 325.0,
+      "households_reached_m": 2.17
+    },
+    {
+      "id": "electricity_vat_to_march_2028",
+      "name": "0% VAT on domestic electricity to March 2028",
+      "description": "Placeholder. Keeps the 0% VAT rate on domestic electricity in Great Britain from 1 July 2027, when it is due to return to 5%, to 31 March 2028.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "medium",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2027,
+      "cost_gbp_m": 1110.0,
+      "households_reached_m": 28.15
+    },
+    {
+      "id": "gas_vat_zero",
+      "name": "0% VAT on domestic gas",
+      "description": "Placeholder. Cuts VAT on domestic gas from 5% to 0%.",
+      "route": "needs-pe-uk-first",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": false,
+      "reason": "Gas has no VAT rate of its own in the model; it reads the reduced rate that every reduced-rate good shares (issue #6).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "universal_bill_credit",
+      "name": "Credit on every household energy bill",
+      "description": "Placeholder. A £150 credit to every household with an electricity account in 2026-27.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 4222.0,
+      "households_reached_m": 28.15
+    },
+    {
+      "id": "wfp_top_up",
+      "name": "Larger Winter Fuel Payment",
+      "description": "Placeholder. Adds £100 to the Winter Fuel Payment for 2026-27: £300 to £400 for the higher rate, £200 to £300 for the lower.",
+      "route": "dashboard-param",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": true,
+      "reason": null,
+      "calculator_only": false,
+      "year": 2026,
+      "cost_gbp_m": 1234.0,
+      "households_reached_m": 12.34
+    },
+    {
+      "id": "targeted_energy_discount",
+      "name": "Targeted energy discount",
+      "description": "Placeholder. A discount of £175 a year for households whose highest individual income is below £24,000 or who receive a means-tested benefit.",
+      "route": "needs-pe-uk-first",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "medium",
+      "computable": false,
+      "reason": "The reform exists as contributed code in PolicyEngine's earlier energy reforms analysis, outside policyengine-uk; it must be ported here as one modifier module (measures/) and checked against the engine pinned at the freeze.",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "gas_standing_charge_removal",
+      "name": "Gas standing charge moved into the unit rate",
+      "description": "Placeholder. Removes the gas standing charge and recovers the cost through a higher unit rate, so that bills raise the same total.",
+      "route": "not-computable",
+      "status": "placeholder",
+      "lever": "bills",
+      "likelihood": "announced",
+      "computable": false,
+      "reason": "Needs gas kWh and a mains gas flag; the data hold spend in pounds only, and the model has no unit rate or standing charge parameters (issue #4).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "electricity_standing_charge_shift",
+      "name": "Part of the electricity standing charge moved into the unit rate",
+      "description": "Placeholder. Moves half of the electricity standing charge into the unit rate.",
+      "route": "not-computable",
+      "status": "placeholder",
+      "lever": "bills",
+      "likelihood": "low",
+      "computable": false,
+      "reason": "Needs electricity kWh and tariff type; neither is in the data (issue #4).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "price_guarantee",
+      "name": "Bills held at a set typical level",
+      "description": "Placeholder. A subsidy per unit that holds the typical Direct Debit bill at £1,723 for January to March 2027.",
+      "route": "needs-pe-uk-first",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": false,
+      "reason": "The cap parameter mixes typical-consumption bases across July 2026, and the subsidy scales by its ratio (issue #3).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "levies_off_electricity",
+      "name": "Remaining policy costs moved off electricity bills",
+      "description": "Placeholder. Moves the remaining Renewables Obligation and Feed-in Tariff costs from electricity bills into taxation.",
+      "route": "needs-pe-uk-first",
+      "status": "placeholder",
+      "lever": "bills",
+      "likelihood": "low",
+      "computable": false,
+      "reason": "Electricity and gas share one price growth rate in the model, so electricity cannot move alone (issue #2).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "cold_weather_payment",
+      "name": "Larger Cold Weather Payment",
+      "description": "Placeholder. Raises the payment from £25 to £50 a week.",
+      "route": "needs-pe-uk-first",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "low",
+      "computable": false,
+      "reason": "No Cold Weather Payment variable (issue #8).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "energy_debt_relief",
+      "name": "Energy debt relief",
+      "description": "Placeholder. One-off relief for households with energy debt on means-tested or disability benefits.",
+      "route": "ledger",
+      "status": "placeholder",
+      "lever": "support",
+      "likelihood": "announced",
+      "computable": false,
+      "reason": "No energy arrears in the data; the official figure is recorded in the ledger, not modelled.",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    },
+    {
+      "id": "prepayment_levelisation",
+      "name": "Prepayment levelisation",
+      "description": "Placeholder. Changes to how prepayment and Direct Debit costs are levelled.",
+      "route": "not-computable",
+      "status": "placeholder",
+      "lever": "bills",
+      "likelihood": "low",
+      "computable": false,
+      "reason": "The data flag prepayment meters, but the model has no rates by payment method (issue #4).",
+      "calculator_only": false,
+      "year": null,
+      "cost_gbp_m": null,
+      "households_reached_m": null
+    }
+  ],
+  "bills": {
+    "by_decile": [
+      {
+        "scenario_id": "obr_path",
+        "decile": 1,
+        "gross_change_gbp": {
+          "value": 143.67
+        },
+        "share_of_net_income_pct": {
+          "value": 1.62
+        },
+        "change_after_support_gbp": {
+          "value": -94.16
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 2,
+        "gross_change_gbp": {
+          "value": 138.56
+        },
+        "share_of_net_income_pct": {
+          "value": 0.7
+        },
+        "change_after_support_gbp": {
+          "value": -88.44
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 3,
+        "gross_change_gbp": {
+          "value": 141.11
+        },
+        "share_of_net_income_pct": {
+          "value": 0.44
+        },
+        "change_after_support_gbp": {
+          "value": -83.89
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 4,
+        "gross_change_gbp": {
+          "value": 146.99
+        },
+        "share_of_net_income_pct": {
+          "value": 0.33
+        },
+        "change_after_support_gbp": {
+          "value": -67.68
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 5,
+        "gross_change_gbp": {
+          "value": 149.6
+        },
+        "share_of_net_income_pct": {
+          "value": 0.26
+        },
+        "change_after_support_gbp": {
+          "value": -50.9
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 6,
+        "gross_change_gbp": {
+          "value": 147.44
+        },
+        "share_of_net_income_pct": {
+          "value": 0.21
+        },
+        "change_after_support_gbp": {
+          "value": -32.89
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 7,
+        "gross_change_gbp": {
+          "value": 151.19
+        },
+        "share_of_net_income_pct": {
+          "value": 0.18
+        },
+        "change_after_support_gbp": {
+          "value": -26.48
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 8,
+        "gross_change_gbp": {
+          "value": 153.49
+        },
+        "share_of_net_income_pct": {
+          "value": 0.16
+        },
+        "change_after_support_gbp": {
+          "value": -13.84
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 9,
+        "gross_change_gbp": {
+          "value": 154.26
+        },
+        "share_of_net_income_pct": {
+          "value": 0.14
+        },
+        "change_after_support_gbp": {
+          "value": -11.58
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "decile": 10,
+        "gross_change_gbp": {
+          "value": 158.61
+        },
+        "share_of_net_income_pct": {
+          "value": 0.13
+        },
+        "change_after_support_gbp": {
+          "value": -15.39
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 1,
+        "gross_change_gbp": {
+          "value": 214.56
+        },
+        "share_of_net_income_pct": {
+          "value": 2.42
+        },
+        "change_after_support_gbp": {
+          "value": -23.27
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 2,
+        "gross_change_gbp": {
+          "value": 206.92
+        },
+        "share_of_net_income_pct": {
+          "value": 1.05
+        },
+        "change_after_support_gbp": {
+          "value": -20.08
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 3,
+        "gross_change_gbp": {
+          "value": 210.73
+        },
+        "share_of_net_income_pct": {
+          "value": 0.66
+        },
+        "change_after_support_gbp": {
+          "value": -14.27
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 4,
+        "gross_change_gbp": {
+          "value": 219.52
+        },
+        "share_of_net_income_pct": {
+          "value": 0.5
+        },
+        "change_after_support_gbp": {
+          "value": 4.85
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 5,
+        "gross_change_gbp": {
+          "value": 223.41
+        },
+        "share_of_net_income_pct": {
+          "value": 0.39
+        },
+        "change_after_support_gbp": {
+          "value": 22.91
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 6,
+        "gross_change_gbp": {
+          "value": 220.19
+        },
+        "share_of_net_income_pct": {
+          "value": 0.31
+        },
+        "change_after_support_gbp": {
+          "value": 39.86
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 7,
+        "gross_change_gbp": {
+          "value": 225.79
+        },
+        "share_of_net_income_pct": {
+          "value": 0.27
+        },
+        "change_after_support_gbp": {
+          "value": 48.12
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 8,
+        "gross_change_gbp": {
+          "value": 229.23
+        },
+        "share_of_net_income_pct": {
+          "value": 0.23
+        },
+        "change_after_support_gbp": {
+          "value": 61.9
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 9,
+        "gross_change_gbp": {
+          "value": 230.37
+        },
+        "share_of_net_income_pct": {
+          "value": 0.21
+        },
+        "change_after_support_gbp": {
+          "value": 64.54
+        }
+      },
+      {
+        "scenario_id": "low",
+        "decile": 10,
+        "gross_change_gbp": {
+          "value": 236.88
+        },
+        "share_of_net_income_pct": {
+          "value": 0.19
+        },
+        "change_after_support_gbp": {
+          "value": 62.88
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 1,
+        "gross_change_gbp": {
+          "value": 431.96
+        },
+        "share_of_net_income_pct": {
+          "value": 4.87
+        },
+        "change_after_support_gbp": {
+          "value": 194.13
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 2,
+        "gross_change_gbp": {
+          "value": 416.58
+        },
+        "share_of_net_income_pct": {
+          "value": 2.11
+        },
+        "change_after_support_gbp": {
+          "value": 189.58
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 3,
+        "gross_change_gbp": {
+          "value": 424.25
+        },
+        "share_of_net_income_pct": {
+          "value": 1.34
+        },
+        "change_after_support_gbp": {
+          "value": 199.25
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 4,
+        "gross_change_gbp": {
+          "value": 441.94
+        },
+        "share_of_net_income_pct": {
+          "value": 1.01
+        },
+        "change_after_support_gbp": {
+          "value": 227.27
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 5,
+        "gross_change_gbp": {
+          "value": 449.77
+        },
+        "share_of_net_income_pct": {
+          "value": 0.79
+        },
+        "change_after_support_gbp": {
+          "value": 249.27
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 6,
+        "gross_change_gbp": {
+          "value": 443.29
+        },
+        "share_of_net_income_pct": {
+          "value": 0.63
+        },
+        "change_after_support_gbp": {
+          "value": 262.96
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 7,
+        "gross_change_gbp": {
+          "value": 454.56
+        },
+        "share_of_net_income_pct": {
+          "value": 0.54
+        },
+        "change_after_support_gbp": {
+          "value": 276.89
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 8,
+        "gross_change_gbp": {
+          "value": 461.49
+        },
+        "share_of_net_income_pct": {
+          "value": 0.47
+        },
+        "change_after_support_gbp": {
+          "value": 294.16
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 9,
+        "gross_change_gbp": {
+          "value": 463.78
+        },
+        "share_of_net_income_pct": {
+          "value": 0.42
+        },
+        "change_after_support_gbp": {
+          "value": 297.95
+        }
+      },
+      {
+        "scenario_id": "central",
+        "decile": 10,
+        "gross_change_gbp": {
+          "value": 476.89
+        },
+        "share_of_net_income_pct": {
+          "value": 0.38
+        },
+        "change_after_support_gbp": {
+          "value": 302.89
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 1,
+        "gross_change_gbp": {
+          "value": 545.39
+        },
+        "share_of_net_income_pct": {
+          "value": 6.15
+        },
+        "change_after_support_gbp": {
+          "value": 307.55
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 2,
+        "gross_change_gbp": {
+          "value": 525.96
+        },
+        "share_of_net_income_pct": {
+          "value": 2.67
+        },
+        "change_after_support_gbp": {
+          "value": 298.96
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 3,
+        "gross_change_gbp": {
+          "value": 535.65
+        },
+        "share_of_net_income_pct": {
+          "value": 1.69
+        },
+        "change_after_support_gbp": {
+          "value": 310.65
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 4,
+        "gross_change_gbp": {
+          "value": 557.99
+        },
+        "share_of_net_income_pct": {
+          "value": 1.27
+        },
+        "change_after_support_gbp": {
+          "value": 343.32
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 5,
+        "gross_change_gbp": {
+          "value": 567.87
+        },
+        "share_of_net_income_pct": {
+          "value": 1.0
+        },
+        "change_after_support_gbp": {
+          "value": 367.37
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 6,
+        "gross_change_gbp": {
+          "value": 559.69
+        },
+        "share_of_net_income_pct": {
+          "value": 0.8
+        },
+        "change_after_support_gbp": {
+          "value": 379.36
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 7,
+        "gross_change_gbp": {
+          "value": 573.92
+        },
+        "share_of_net_income_pct": {
+          "value": 0.69
+        },
+        "change_after_support_gbp": {
+          "value": 396.25
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 8,
+        "gross_change_gbp": {
+          "value": 582.67
+        },
+        "share_of_net_income_pct": {
+          "value": 0.6
+        },
+        "change_after_support_gbp": {
+          "value": 415.34
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 9,
+        "gross_change_gbp": {
+          "value": 585.57
+        },
+        "share_of_net_income_pct": {
+          "value": 0.52
+        },
+        "change_after_support_gbp": {
+          "value": 419.73
+        }
+      },
+      {
+        "scenario_id": "high",
+        "decile": 10,
+        "gross_change_gbp": {
+          "value": 602.11
+        },
+        "share_of_net_income_pct": {
+          "value": 0.48
+        },
+        "change_after_support_gbp": {
+          "value": 428.11
+        }
+      }
+    ],
+    "by_group": [
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "EAST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 151.78
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "EAST_OF_ENGLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 152.39
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "LONDON",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 152.5
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "NORTHERN_IRELAND",
+        "outside_cap": true,
+        "gross_change_gbp": {
+          "value": 0.0
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "NORTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 153.3
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "NORTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 152.05
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "SCOTLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 153.8
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "SOUTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 151.61
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "SOUTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 153.73
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "WALES",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 152.85
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "WEST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 152.72
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "region",
+        "group": "YORKSHIRE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 151.3
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "tenure",
+        "group": "OWNED_OUTRIGHT",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 148.97
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "tenure",
+        "group": "OWNED_WITH_MORTGAGE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 147.49
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "tenure",
+        "group": "RENT_FROM_COUNCIL",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 149.78
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "tenure",
+        "group": "RENT_FROM_HA",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 151.19
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "tenure",
+        "group": "RENT_PRIVATELY",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 147.09
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "A",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 148.78
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "B",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 150.07
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "C",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 148.5
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "D",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 144.06
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "E",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 150.81
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "F",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 149.79
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "G",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 148.89
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "H",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 150.31
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "council_tax_band",
+        "group": "I",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "withheld": true
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "fuel",
+        "group": "dual_fuel",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 151.21
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "fuel",
+        "group": "electric_only",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 133.68
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "payment",
+        "group": "other",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 149.06
+        }
+      },
+      {
+        "scenario_id": "obr_path",
+        "dimension": "payment",
+        "group": "prepayment",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 144.31
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "EAST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 226.67
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "EAST_OF_ENGLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 227.58
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "LONDON",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 227.75
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "NORTHERN_IRELAND",
+        "outside_cap": true,
+        "gross_change_gbp": {
+          "value": 0.0
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "NORTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 228.95
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "NORTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 227.07
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "SCOTLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 229.69
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "SOUTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 226.41
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "SOUTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 229.58
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "WALES",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 228.27
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "WEST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 228.07
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "region",
+        "group": "YORKSHIRE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 225.95
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "tenure",
+        "group": "OWNED_OUTRIGHT",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 222.48
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "tenure",
+        "group": "OWNED_WITH_MORTGAGE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 220.27
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "tenure",
+        "group": "RENT_FROM_COUNCIL",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 223.68
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "tenure",
+        "group": "RENT_FROM_HA",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 225.79
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "tenure",
+        "group": "RENT_PRIVATELY",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 219.67
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "A",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 222.18
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "B",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 224.12
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "C",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 221.77
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "D",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 215.14
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "E",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 225.23
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "F",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 223.69
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "G",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 222.36
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "H",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 224.48
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "council_tax_band",
+        "group": "I",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "withheld": true
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "fuel",
+        "group": "dual_fuel",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 225.82
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "fuel",
+        "group": "electric_only",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 199.65
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "payment",
+        "group": "other",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 222.61
+        }
+      },
+      {
+        "scenario_id": "low",
+        "dimension": "payment",
+        "group": "prepayment",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 215.52
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "EAST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 456.33
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "EAST_OF_ENGLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 458.16
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "LONDON",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 458.51
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "NORTHERN_IRELAND",
+        "outside_cap": true,
+        "gross_change_gbp": {
+          "value": 0.0
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "NORTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 460.92
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "NORTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 457.14
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "SCOTLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 462.42
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "SOUTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 455.81
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "SOUTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 462.19
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "WALES",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 459.56
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "WEST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 459.15
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "region",
+        "group": "YORKSHIRE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 454.89
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "tenure",
+        "group": "OWNED_OUTRIGHT",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 447.9
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "tenure",
+        "group": "OWNED_WITH_MORTGAGE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 443.45
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "tenure",
+        "group": "RENT_FROM_COUNCIL",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 450.32
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "tenure",
+        "group": "RENT_FROM_HA",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 454.56
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "tenure",
+        "group": "RENT_PRIVATELY",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 442.25
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "A",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 447.3
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "B",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 451.21
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "C",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 446.47
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "D",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 433.13
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "E",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 453.43
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "F",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 450.34
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "G",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 447.66
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "H",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 451.92
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "council_tax_band",
+        "group": "I",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "withheld": true
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "fuel",
+        "group": "dual_fuel",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 454.62
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "fuel",
+        "group": "electric_only",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 401.93
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "payment",
+        "group": "other",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 448.15
+        }
+      },
+      {
+        "scenario_id": "central",
+        "dimension": "payment",
+        "group": "prepayment",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 433.89
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "EAST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 576.15
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "EAST_OF_ENGLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 578.47
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "LONDON",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 578.91
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "NORTHERN_IRELAND",
+        "outside_cap": true,
+        "gross_change_gbp": {
+          "value": 0.0
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "NORTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 581.95
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "NORTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 577.18
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "SCOTLAND",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 583.84
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "SOUTH_EAST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 575.5
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "SOUTH_WEST",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 583.55
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "WALES",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 580.23
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "WEST_MIDLANDS",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 579.72
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "region",
+        "group": "YORKSHIRE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 574.34
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "tenure",
+        "group": "OWNED_OUTRIGHT",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 565.51
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "tenure",
+        "group": "OWNED_WITH_MORTGAGE",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 559.89
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "tenure",
+        "group": "RENT_FROM_COUNCIL",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 568.57
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "tenure",
+        "group": "RENT_FROM_HA",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 573.92
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "tenure",
+        "group": "RENT_PRIVATELY",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 558.37
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "A",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 564.76
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "B",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 569.69
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "C",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 563.71
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "D",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 546.87
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "E",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 572.49
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "F",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 568.59
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "G",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 565.21
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "H",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 570.58
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "council_tax_band",
+        "group": "I",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "withheld": true
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "fuel",
+        "group": "dual_fuel",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 573.99
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "fuel",
+        "group": "electric_only",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 507.47
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "payment",
+        "group": "other",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 565.83
+        }
+      },
+      {
+        "scenario_id": "high",
+        "dimension": "payment",
+        "group": "prepayment",
+        "outside_cap": false,
+        "gross_change_gbp": {
+          "value": 547.82
+        }
+      }
+    ]
+  },
+  "decile_impact": [
+    {
+      "measure_id": "hep_top_up",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 67.0
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 65.67
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 65.33
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 62.33
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 69.67
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 60.33
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 65.33
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 66.33
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 63.33
+      }
+    },
+    {
+      "measure_id": "hep_top_up",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 67.33
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 8.67
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 7.0
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 8.67
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 7.33
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 5.33
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 11.0
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 9.33
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 7.67
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 6.0
+      }
+    },
+    {
+      "measure_id": "hep_band_e",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 9.67
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 7.0
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.0
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 12.33
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 12.0
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 8.67
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 13.33
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 11.33
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.33
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.67
+      }
+    },
+    {
+      "measure_id": "hep_great_britain",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 11.33
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 70.5
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 63.0
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 52.0
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 49.0
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 33.5
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 26.0
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.0
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 6.0
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 7.5
+      }
+    },
+    {
+      "measure_id": "whd_uplift",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 8.0
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 5.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.0
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 7.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 14.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 13.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 14.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 13.5
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 10.0
+      }
+    },
+    {
+      "measure_id": "whd_disability_benefits",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 13.0
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 1,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 35.28
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 2,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 34.69
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 3,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 37.09
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 4,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 37.19
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 5,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 38.31
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 6,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 38.71
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 7,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 38.38
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 8,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 40.88
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 9,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 40.55
+      }
+    },
+    {
+      "measure_id": "electricity_vat_to_march_2028",
+      "decile": 10,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 42.92
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 147.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 145.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 145.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 147.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 147.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 144.5
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 146.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 146.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 146.0
+      }
+    },
+    {
+      "measure_id": "universal_bill_credit",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 147.5
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 1,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 43.0
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 2,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 42.67
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 3,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 45.67
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 4,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 43.67
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 5,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 42.33
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 6,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 42.0
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 7,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 44.0
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 8,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 41.0
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 9,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 40.33
+      }
+    },
+    {
+      "measure_id": "wfp_top_up",
+      "decile": 10,
+      "year": 2026,
+      "avg_change_gbp": {
+        "value": 42.33
+      }
+    }
+  ],
+  "households": [
+    {
+      "id": "typical_dd",
+      "label": "Typical use, Direct Debit, dual fuel",
+      "inputs": {
+        "id": "typical_dd",
+        "label": "Typical use, Direct Debit, dual fuel",
+        "electricity_kwh": 2500,
+        "gas_kwh": 9500,
+        "payment_method": "direct_debit",
+        "country": "ENGLAND",
+        "council_tax_band": "D",
+        "qualifying_benefit": false,
+        "oldest_age": 45
+      },
+      "bill_oct_dec_2026": 1723.61,
+      "support": {
+        "household_energy_payment": 100.0,
+        "warm_home_discount": 0.0,
+        "winter_fuel_payment": 0.0,
+        "total": 100.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 1875.67,
+        "low": 1950.69,
+        "central": 2180.77,
+        "high": 2300.82
+      }
+    },
+    {
+      "id": "low_use_prepay_flat",
+      "label": "Low use flat on prepayment",
+      "inputs": {
+        "id": "low_use_prepay_flat",
+        "label": "Low use flat on prepayment",
+        "electricity_kwh": 1800,
+        "gas_kwh": 5000,
+        "payment_method": "prepayment",
+        "country": "ENGLAND",
+        "council_tax_band": "A",
+        "qualifying_benefit": true,
+        "oldest_age": 32
+      },
+      "bill_oct_dec_2026": 1149.88,
+      "support": {
+        "household_energy_payment": 100.0,
+        "warm_home_discount": 150.0,
+        "winter_fuel_payment": 0.0,
+        "total": 250.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 1251.33,
+        "low": 1301.38,
+        "central": 1454.87,
+        "high": 1534.96
+      }
+    },
+    {
+      "id": "high_use_family",
+      "label": "High-use family home",
+      "inputs": {
+        "id": "high_use_family",
+        "label": "High-use family home",
+        "electricity_kwh": 3600,
+        "gas_kwh": 14000,
+        "payment_method": "direct_debit",
+        "country": "ENGLAND",
+        "council_tax_band": "E",
+        "qualifying_benefit": false,
+        "oldest_age": 44
+      },
+      "bill_oct_dec_2026": 2371.78,
+      "support": {
+        "household_energy_payment": 0.0,
+        "warm_home_discount": 0.0,
+        "winter_fuel_payment": 0.0,
+        "total": 0.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 2581.02,
+        "low": 2684.26,
+        "central": 3000.86,
+        "high": 3166.05
+      }
+    },
+    {
+      "id": "electric_only_e7",
+      "label": "Electric-only flat on Economy 7",
+      "inputs": {
+        "id": "electric_only_e7",
+        "label": "Electric-only flat on Economy 7",
+        "electricity_kwh": 3400,
+        "gas_kwh": 0,
+        "payment_method": "economy_7_direct_debit",
+        "country": "ENGLAND",
+        "council_tax_band": "B",
+        "qualifying_benefit": false,
+        "oldest_age": 58
+      },
+      "bill_oct_dec_2026": 1046.0,
+      "support": {
+        "household_energy_payment": 100.0,
+        "warm_home_discount": 0.0,
+        "winter_fuel_payment": 0.0,
+        "total": 100.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 1138.28,
+        "low": 1183.81,
+        "central": 1323.44,
+        "high": 1396.29
+      }
+    },
+    {
+      "id": "pensioner_couple_band_b",
+      "label": "Pensioner couple on Pension Credit, band B",
+      "inputs": {
+        "id": "pensioner_couple_band_b",
+        "label": "Pensioner couple on Pension Credit, band B",
+        "electricity_kwh": 2700,
+        "gas_kwh": 11000,
+        "payment_method": "direct_debit",
+        "country": "ENGLAND",
+        "council_tax_band": "B",
+        "qualifying_benefit": true,
+        "oldest_age": 81
+      },
+      "bill_oct_dec_2026": 1895.8,
+      "support": {
+        "household_energy_payment": 100.0,
+        "warm_home_discount": 150.0,
+        "winter_fuel_payment": 300.0,
+        "total": 550.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 2063.05,
+        "low": 2145.57,
+        "central": 2398.63,
+        "high": 2530.67
+      }
+    },
+    {
+      "id": "working_family_band_e",
+      "label": "Working family in band E",
+      "inputs": {
+        "id": "working_family_band_e",
+        "label": "Working family in band E",
+        "electricity_kwh": 2900,
+        "gas_kwh": 10500,
+        "payment_method": "direct_debit",
+        "country": "ENGLAND",
+        "council_tax_band": "E",
+        "qualifying_benefit": false,
+        "oldest_age": 40
+      },
+      "bill_oct_dec_2026": 1908.59,
+      "support": {
+        "household_energy_payment": 0.0,
+        "warm_home_discount": 0.0,
+        "winter_fuel_payment": 0.0,
+        "total": 0.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 2076.96,
+        "low": 2160.04,
+        "central": 2414.82,
+        "high": 2547.74
+      }
+    },
+    {
+      "id": "scotland_band_c",
+      "label": "Pensioner in Scotland, band C",
+      "inputs": {
+        "id": "scotland_band_c",
+        "label": "Pensioner in Scotland, band C",
+        "electricity_kwh": 2500,
+        "gas_kwh": 9500,
+        "payment_method": "direct_debit",
+        "country": "SCOTLAND",
+        "council_tax_band": "C",
+        "qualifying_benefit": true,
+        "oldest_age": 70
+      },
+      "bill_oct_dec_2026": 1723.61,
+      "support": {
+        "household_energy_payment": 0.0,
+        "warm_home_discount": 0.0,
+        "winter_fuel_payment": 200.0,
+        "total": 200.0
+      },
+      "bill_jan_mar_2027": {
+        "obr_path": 1875.67,
+        "low": 1950.69,
+        "central": 2180.77,
+        "high": 2300.82
+      }
+    }
+  ]
+}

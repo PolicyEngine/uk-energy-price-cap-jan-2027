@@ -26,6 +26,38 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 
 These versions are provisional. The certified bundle in policyengine 6.14.0 pins policyengine-uk 2.151.0, which lacks the energy measures above. Until a certified pair exists, every figure is labelled as unvalidated under this engine. The README will record the final engine and data pair used on the day.
 
+## Results
+
+No results yet. The file in `dashboard/public/data/results.json` comes from synthetic households and placeholder settings, and says so in `meta`.
+
+## How to run
+
+```
+uv sync --extra dev
+uv run pytest
+uv run uk-energy-price-cap ledger      # coverage ledger as CSV
+uv run uk-energy-price-cap generate    # placeholder results.json
+uv run python scripts/check_public_data.py
+cd dashboard && bun install && bun run dev
+```
+
+A model run (`--source model`) needs `uv sync --extra model` and a certified engine and data pair; it is not wired yet (issue #1).
+
+## Layout
+
+| Path | Content |
+|---|---|
+| `src/uk_energy_price_cap/reforms.py` | Measure registry: every candidate lever, its route and status (all placeholders) |
+| `src/uk_energy_price_cap/measure_templates.py` | Parameter-change templates |
+| `src/uk_energy_price_cap/cap.py`, `cap_levels.json` | Ofgem levels, rates, scenarios and bill arithmetic |
+| `src/uk_energy_price_cap/household.py` | Example households and support rules |
+| `src/uk_energy_price_cap/pipeline.py` | Generates `results.json` |
+| `src/uk_energy_price_cap/publication.py`, `sign_off.py` | Publication gate and disclosure floor |
+| `src/uk_energy_price_cap/data_limits.py`, `model_limits.py` | What the data and the engine cannot carry |
+| `data_inputs/` | Expected effects, official figures, drill packet hashes |
+| `docs/` | Method, schema, data contract, colours, runbook, drill, candidate reforms, risk register |
+| `dashboard/` | Next.js page |
+
 ## Licence
 
 [GNU Affero General Public License v3.0](LICENSE), like other PolicyEngine repositories.

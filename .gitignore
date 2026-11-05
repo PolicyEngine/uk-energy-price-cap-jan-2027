@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Microdata and model caches: never commit survey data
+*.h5
+*.h5ad
+data/private/
+.cache/
+
+# Dashboard
+node_modules/
+.next/
+out/
+build/
+coverage/
+next-env.d.ts
+
+# Local and deployment config
+.env*
+.vercel
+.DS_Store

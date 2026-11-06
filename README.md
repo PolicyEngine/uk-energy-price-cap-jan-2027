@@ -41,7 +41,7 @@ uv run python scripts/check_public_data.py
 cd dashboard && bun install && bun run dev
 ```
 
-A model run (`--source model`) needs `uv sync --extra model` and a certified engine and data pair; it is not wired yet (issue #1).
+A model run needs `uv sync --extra model` and the frozen Microcosm file. No certified engine and data pair exists yet (issue #1), so it runs unmanaged and labels every figure: `uv run uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>`. `make` has one target per gate (`make freeze`, `make generate`, `make check`, `make build`).
 
 ## Layout
 

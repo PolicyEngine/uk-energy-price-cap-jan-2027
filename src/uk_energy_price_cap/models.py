@@ -16,7 +16,7 @@ from pydantic import BaseModel, Field, model_validator
 
 
 class Route(StrEnum):
-    """Route class of a ledger line (docs/DRILL.md)."""
+    """Route class of a ledger line (docs/RUNBOOK.md, G1)."""
 
     DASHBOARD_PARAM = "dashboard-param"
     DASHBOARD_STRUCTURAL = "dashboard-structural"

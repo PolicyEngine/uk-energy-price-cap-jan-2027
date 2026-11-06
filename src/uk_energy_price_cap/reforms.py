@@ -7,7 +7,7 @@ docs/candidate-reforms.md, not announced policy. The publication gate
 results file. On the day the integrator replaces each value with the
 announced one, sets ``status`` to ``announced`` and records the source in
 docs/candidate-reforms.md, in waves: parameters, then modifiers, then new
-variables (docs/DRILL.md).
+variables (docs/RUNBOOK.md).
 
 Charts, the household calculator and the ledger read the measure list from
 here. No component keeps a list of its own.
@@ -377,7 +377,7 @@ def computable() -> list[Reform]:
 
 
 def ledger_rows() -> list[dict[str, str]]:
-    """One coverage-ledger line per measure (docs/DRILL.md, G1)."""
+    """One coverage-ledger line per measure (docs/RUNBOOK.md, G1)."""
     return [
         {
             "id": r.id,

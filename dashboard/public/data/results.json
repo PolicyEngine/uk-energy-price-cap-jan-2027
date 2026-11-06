@@ -122,10 +122,22 @@
       }
     ],
     "sources": {
-      "levels": "Ofgem, summary of changes to the energy price cap, 1 October to 31 December 2026 (26 August 2026) and 1 July to 30 September 2026 (revised TDCV)",
-      "rates": "Ofgem, energy price cap unit rates and standing charges (GB average, Direct Debit, October to December 2026)",
-      "obr_path": "OBR, Economic and fiscal outlook, October 2026, para 2.22",
-      "range": "Supplier and market forecasts, 30 September to 4 November 2026 (placeholder range only)"
+      "levels": {
+        "label": "Ofgem, summary of changes to the energy price cap, 1 October to 31 December 2026 (26 August 2026), and 1 July to 30 September 2026 (revised typical consumption values)",
+        "url": "https://www.ofgem.gov.uk/sites/default/files/2026-08/Summary-of-changes-to-energy-price-cap-1-October-to-31-December-2026.pdf"
+      },
+      "rates": {
+        "label": "Ofgem, energy price cap unit rates and standing charges (GB average, Direct Debit, October to December 2026)",
+        "url": "https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges"
+      },
+      "obr_path": {
+        "label": "OBR, Economic and fiscal outlook, October 2026, para 2.22",
+        "url": "https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/"
+      },
+      "range": {
+        "label": "Supplier and market forecasts, 30 September to 4 November 2026 (placeholder range only)",
+        "url": null
+      }
     }
   },
   "measures": [
@@ -243,7 +255,7 @@
       "lever": "support",
       "likelihood": "low",
       "computable": false,
-      "reason": "Gas has no VAT rate of its own in the model; it reads the reduced rate that every reduced-rate good shares (issue #6).",
+      "reason": "The model has no VAT rate for gas alone: gas shares the reduced rate with other goods, so cutting it would cut theirs too (issue #6).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -288,7 +300,7 @@
       "lever": "support",
       "likelihood": "medium",
       "computable": false,
-      "reason": "The reform exists as contributed code in PolicyEngine's earlier energy reforms analysis, outside policyengine-uk; it must be ported here as one modifier module (measures/) and checked against the engine pinned at the freeze.",
+      "reason": "The model has no rule for this discount yet: it exists in an earlier PolicyEngine analysis and must be added and checked before it can be estimated.",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -303,7 +315,7 @@
       "lever": "bills",
       "likelihood": "announced",
       "computable": false,
-      "reason": "Needs gas kWh and a mains gas flag; the data hold spend in pounds only, and the model has no unit rate or standing charge parameters (issue #4).",
+      "reason": "The data hold gas spending in pounds, not kWh, and do not say which homes are on mains gas, so moving the standing charge into the unit rate cannot be estimated (issue #4).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -318,7 +330,7 @@
       "lever": "bills",
       "likelihood": "low",
       "computable": false,
-      "reason": "Needs electricity kWh and tariff type; neither is in the data (issue #4).",
+      "reason": "The data hold electricity spending in pounds, not kWh or tariff type, so a change to the standing charge cannot be estimated (issue #4).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -333,7 +345,7 @@
       "lever": "support",
       "likelihood": "low",
       "computable": false,
-      "reason": "The cap parameter mixes typical-consumption bases across July 2026, and the subsidy scales by its ratio (issue #3).",
+      "reason": "The model's record of past cap levels changes how it measures typical use in July 2026, so a subsidy based on it would be about 11% out (issue #3).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -348,7 +360,7 @@
       "lever": "bills",
       "likelihood": "low",
       "computable": false,
-      "reason": "Electricity and gas share one price growth rate in the model, so electricity cannot move alone (issue #2).",
+      "reason": "The model moves electricity and gas prices together, so a change to electricity bills alone cannot be estimated (issue #2).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -363,7 +375,7 @@
       "lever": "support",
       "likelihood": "low",
       "computable": false,
-      "reason": "No Cold Weather Payment variable (issue #8).",
+      "reason": "The model does not include the Cold Weather Payment (issue #8).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -378,7 +390,7 @@
       "lever": "support",
       "likelihood": "announced",
       "computable": false,
-      "reason": "No energy arrears in the data; the official figure is recorded in the ledger, not modelled.",
+      "reason": "The data do not record energy debt, so the official figure is recorded, not estimated.",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -393,7 +405,7 @@
       "lever": "bills",
       "likelihood": "low",
       "computable": false,
-      "reason": "The data flag prepayment meters, but the model has no rates by payment method (issue #4).",
+      "reason": "The data show which homes use prepayment meters, but the model has no prices by payment method (issue #4).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,

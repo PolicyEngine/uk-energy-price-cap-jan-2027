@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { chartedMeasures } from "../utils/calculatorOnlyMeasures";
 import { scenarioById } from "../utils/dataHelpers";
+import { pageTitle } from "../utils/releaseMode";
 import BillChangeChart from "./BillChangeChart";
+import BillsSummary from "./BillsSummary";
 import CapHistoryChart from "./CapHistoryChart";
 import CapTiles from "./CapTiles";
 import GroupChart from "./GroupChart";
 import HouseholdCalculator from "./HouseholdCalculator";
 import MethodologyTab from "./MethodologyTab";
+import OfficialCostings from "./OfficialCostings";
 import PolicyCards from "./PolicyCards";
 import PolicySelector from "./PolicySelector";
 import SupportCostChart from "./SupportCostChart";
@@ -29,15 +32,35 @@ export const VIEWS = [
 const SUB_LABELS = { deciles: "By income decile", groups: "By household group" };
 const DEFAULT_VIEW = "cap";
 
+/** Arrow keys, Home and End move between tabs (roving tabindex). */
+function onTabKey(event, values, current, select, refs) {
+  const keys = { ArrowRight: 1, ArrowLeft: -1 };
+  let next;
+  if (event.key in keys) {
+    next = (values.indexOf(current) + keys[event.key] + values.length) % values.length;
+  } else if (event.key === "Home") {
+    next = 0;
+  } else if (event.key === "End") {
+    next = values.length - 1;
+  } else {
+    return;
+  }
+  event.preventDefault();
+  select(values[next]);
+  refs.current[values[next]]?.focus();
+}
+
 function readAddress(charted, scenarios, fallbackScenario) {
-  const base = { tab: DEFAULT_VIEW, sub: "deciles", scenario: fallbackScenario, policies: charted };
+  // One measure by default: gains from several measures add up as if all
+  // were introduced together, and alternatives rarely are.
+  const base = { tab: DEFAULT_VIEW, sub: "deciles", scenario: fallbackScenario, policies: charted.slice(0, 1) };
   if (typeof window === "undefined") return base;
   const params = new URLSearchParams(window.location.search);
   const tab = VIEWS.some((v) => v.value === params.get("tab")) ? params.get("tab") : DEFAULT_VIEW;
   const sub = SUB_LABELS[params.get("sub")] ? params.get("sub") : "deciles";
   const scenario = scenarios.includes(params.get("scenario")) ? params.get("scenario") : fallbackScenario;
   const listed = params.get("policies")?.split(",").filter((id) => charted.includes(id));
-  return { tab, sub, scenario, policies: listed?.length ? listed : charted };
+  return { tab, sub, scenario, policies: listed?.length ? listed : base.policies };
 }
 
 export default function Dashboard({ data }) {
@@ -52,34 +75,61 @@ export default function Dashboard({ data }) {
     params.set("tab", state.tab);
     if (state.tab === "bills") params.set("sub", state.sub);
     if (state.scenario !== meta.default_scenario) params.set("scenario", state.scenario);
-    if (state.policies.length !== chartedIds.length) params.set("policies", state.policies.join(","));
+    if (state.tab === "support") params.set("policies", state.policies.join(","));
     window.history.replaceState(null, "", `${window.location.pathname}?${params}`);
   }, [state, chartedIds, meta.default_scenario]);
 
   const set = (patch) => setState((s) => ({ ...s, ...patch }));
+  const tabRefs = useRef({});
+  const subRefs = useRef({});
   const scenario = scenarioById(cap, state.scenario);
   const selected = charted.filter((m) => state.policies.includes(m.id));
+  const summary = data.bills.summary?.find((r) => r.scenario_id === state.scenario);
+  const selectedYear = selected[0]?.year;
+  const yearLabel = meta.years.find((y) => y.year === selectedYear)?.label ?? "";
 
   return (
     <div className="app-shell min-h-screen">
       <div className="title-row">
         <div className="mx-auto max-w-[1200px] px-6 py-3">
-          <h1>{meta.title}</h1>
+          <h1>{pageTitle(meta.title)}</h1>
         </div>
       </div>
       <main className="relative z-[1] mx-auto max-w-[1200px] space-y-6 px-6 py-8">
-        <p className="note-card rounded-xl p-4 text-sm" data-testid="placeholder-note">
-          {meta.notice}
-        </p>
-        <nav role="tablist" aria-label="Views" className="flex flex-wrap border-b border-slate-200">
+        {/* While every figure is a placeholder the banner says so; this slot
+            carries the run's own notice (for example "unvalidated") once it
+            is not. */}
+        {!meta.placeholder && (
+          <p className="note-card rounded-xl p-4 text-sm" data-testid="run-note">
+            {meta.notice}
+          </p>
+        )}
+        <nav
+          role="tablist"
+          aria-label="Views"
+          className="flex flex-wrap border-b border-slate-200"
+          onKeyDown={(e) =>
+            onTabKey(
+              e,
+              VIEWS.map((v) => v.value),
+              state.tab,
+              (tab) => set({ tab }),
+              tabRefs,
+            )
+          }
+        >
           {VIEWS.map((v) => (
             <button
               key={v.value}
+              ref={(el) => {
+                tabRefs.current[v.value] = el;
+              }}
               type="button"
               role="tab"
               id={`tab-${v.value}`}
               aria-selected={state.tab === v.value}
               aria-controls={`panel-${v.value}`}
+              tabIndex={state.tab === v.value ? 0 : -1}
               className={`tab-button${state.tab === v.value ? " active" : ""}`}
               onClick={() => set({ tab: v.value })}
             >
@@ -109,18 +159,30 @@ export default function Dashboard({ data }) {
         <div role="tabpanel" id={`panel-${state.tab}`} aria-labelledby={`tab-${state.tab}`} className="tab-body space-y-6">
           {state.tab === "cap" && (
             <>
-              <CapTiles cap={cap} scenario={scenario} />
+              <CapTiles cap={cap} scenario={scenario} summary={summary} />
               <CapHistoryChart cap={cap} scenario={scenario} />
             </>
           )}
           {state.tab === "bills" && (
             <>
-              <div role="tablist" aria-label="Household bills" className="flex gap-2">
+              <BillsSummary summary={summary} />
+              <div
+                role="tablist"
+                aria-label="Household bills"
+                className="flex gap-2"
+                onKeyDown={(e) => onTabKey(e, VIEWS[1].subs, state.sub, (sub) => set({ sub }), subRefs)}
+              >
                 {VIEWS[1].subs.map((s) => (
                   <button
                     key={s}
+                    ref={(el) => {
+                      subRefs.current[s] = el;
+                    }}
                     type="button"
                     role="tab"
+                    id={`subtab-${s}`}
+                    aria-controls={`subpanel-${s}`}
+                    tabIndex={state.sub === s ? 0 : -1}
                     aria-selected={state.sub === s}
                     className={`tab-button sub-tab-button${state.sub === s ? " active" : ""}`}
                     onClick={() => set({ sub: s })}
@@ -129,15 +191,22 @@ export default function Dashboard({ data }) {
                   </button>
                 ))}
               </div>
-              {state.sub === "deciles" && <BillChangeChart bills={data.bills} scenarioId={state.scenario} />}
-              {state.sub === "groups" && <GroupChart bills={data.bills} scenarioId={state.scenario} />}
+              <div role="tabpanel" id={`subpanel-${state.sub}`} aria-labelledby={`subtab-${state.sub}`}>
+                {state.sub === "deciles" && <BillChangeChart bills={data.bills} scenarioId={state.scenario} />}
+                {state.sub === "groups" && <GroupChart bills={data.bills} scenarioId={state.scenario} />}
+              </div>
             </>
           )}
           {state.tab === "support" && (
             <>
               <PolicySelector measures={charted} selected={state.policies} onChange={(policies) => set({ policies })} />
               <SupportCostChart measures={selected} years={meta.years} />
-              <SupportDecileChart cells={data.decile_impact} selectedIds={selected.map((m) => m.id)} />
+              <SupportDecileChart
+                cells={data.decile_impact}
+                selectedIds={selected.map((m) => m.id)}
+                yearLabel={yearLabel}
+              />
+              <OfficialCostings official={data.official} years={meta.years} />
               <p className="text-sm text-slate-600">
                 Measures with no figures are listed on the <a href="?tab=policies">Policies</a> tab with the reason.
               </p>
@@ -147,7 +216,9 @@ export default function Dashboard({ data }) {
             <HouseholdCalculator households={data.households} scenarioId={state.scenario} placeholder={meta.placeholder} />
           )}
           {state.tab === "policies" && <PolicyCards measures={measures} repoUrl={REPO_URL} />}
-          {state.tab === "methodology" && <MethodologyTab meta={meta} measures={measures} repoUrl={REPO_URL} />}
+          {state.tab === "methodology" && (
+            <MethodologyTab meta={meta} cap={cap} measures={measures} repoUrl={REPO_URL} />
+          )}
         </div>
       </main>
     </div>

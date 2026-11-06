@@ -192,8 +192,9 @@ REFORMS: list[Reform] = [
         lever="support",
         likelihood="low",
         limit_reason=(
-            "Gas has no VAT rate of its own in the model; it reads the "
-            "reduced rate that every reduced-rate good shares (issue #6)."
+            "The model has no VAT rate for gas alone: gas shares the "
+            "reduced rate with other goods, so cutting it would cut theirs "
+            "too (issue #6)."
         ),
     ),
     Reform(
@@ -249,10 +250,9 @@ REFORMS: list[Reform] = [
         lever="support",
         likelihood="medium",
         limit_reason=(
-            "The reform exists as contributed code in PolicyEngine's earlier "
-            "energy reforms analysis, outside policyengine-uk; it must be "
-            "ported here as one modifier module (measures/) and checked "
-            "against the engine pinned at the freeze."
+            "The model has no rule for this discount yet: it exists in an "
+            "earlier PolicyEngine analysis and must be added and checked "
+            "before it can be estimated."
         ),
     ),
     Reform(
@@ -268,9 +268,9 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="announced",
         limit_reason=(
-            "Needs gas kWh and a mains gas flag; the data hold spend in "
-            "pounds only, and the model has no unit rate or standing charge "
-            "parameters (issue #4)."
+            "The data hold gas spending in pounds, not kWh, and do not say "
+            "which homes are on mains gas, so moving the standing charge "
+            "into the unit rate cannot be estimated (issue #4)."
         ),
     ),
     Reform(
@@ -285,8 +285,9 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="low",
         limit_reason=(
-            "Needs electricity kWh and tariff type; neither is in the data "
-            "(issue #4)."
+            "The data hold electricity spending in pounds, not kWh or "
+            "tariff type, so a change to the standing charge cannot be "
+            "estimated (issue #4)."
         ),
     ),
     Reform(
@@ -301,8 +302,9 @@ REFORMS: list[Reform] = [
         lever="support",
         likelihood="low",
         limit_reason=(
-            "The cap parameter mixes typical-consumption bases across July "
-            "2026, and the subsidy scales by its ratio (issue #3)."
+            "The model's record of past cap levels changes how it measures "
+            "typical use in July 2026, so a subsidy based on it would be "
+            "about 11% out (issue #3)."
         ),
     ),
     Reform(
@@ -317,8 +319,9 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="low",
         limit_reason=(
-            "Electricity and gas share one price growth rate in the model, "
-            "so electricity cannot move alone (issue #2)."
+            "The model moves electricity and gas prices together, so a "
+            "change to electricity bills alone cannot be estimated "
+            "(issue #2)."
         ),
     ),
     Reform(
@@ -329,7 +332,9 @@ REFORMS: list[Reform] = [
         status=PH,
         lever="support",
         likelihood="low",
-        limit_reason="No Cold Weather Payment variable (issue #8).",
+        limit_reason=(
+            "The model does not include the Cold Weather Payment (issue #8)."
+        ),
     ),
     Reform(
         id="energy_debt_relief",
@@ -343,8 +348,8 @@ REFORMS: list[Reform] = [
         lever="support",
         likelihood="announced",
         limit_reason=(
-            "No energy arrears in the data; the official figure is recorded "
-            "in the ledger, not modelled."
+            "The data do not record energy debt, so the official figure is "
+            "recorded, not estimated."
         ),
     ),
     Reform(
@@ -359,8 +364,8 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="low",
         limit_reason=(
-            "The data flag prepayment meters, but the model has no rates by "
-            "payment method (issue #4)."
+            "The data show which homes use prepayment meters, but the model "
+            "has no prices by payment method (issue #4)."
         ),
     ),
 ]

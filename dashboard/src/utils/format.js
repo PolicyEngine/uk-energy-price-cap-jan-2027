@@ -4,6 +4,23 @@ export function formatGbp(value, { sign = false } = {}) {
   return `${s}£${Math.abs(Math.round(value)).toLocaleString("en-GB")}`;
 }
 
+/** Pounds to the penny, as on a bill. */
+export function formatGbpPence(value, { sign = false } = {}) {
+  if (value === null || value === undefined) return "withheld";
+  const s = value < 0 ? "−" : sign && value > 0 ? "+" : "";
+  return `${s}£${Math.abs(value).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+/** Axis tick in pounds: £0, £550, £1,100. */
+export function formatGbpTick(value) {
+  return formatGbp(value);
+}
+
+export function formatPctTick(value) {
+  if (value === null || value === undefined) return "";
+  return `${value}%`;
+}
+
 export function formatMillions(value) {
   if (value === null || value === undefined) return "not computable";
   if (Math.abs(value) >= 1000) return `£${(value / 1000).toFixed(1)}bn`;

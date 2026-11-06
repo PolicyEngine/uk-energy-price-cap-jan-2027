@@ -38,10 +38,13 @@ for (const file of files(dir)) {
     const data = JSON.parse(text);
     walk(data, file);
     if (file.endsWith("results.json")) {
-      const anyPlaceholder = (data.measures ?? []).some((m) => m.status !== "announced");
+      const anyPlaceholder = (data.measures ?? []).some((m) => m.status !== "announced" && m.status !== "withdrawn");
       if (anyPlaceholder && !(data.meta?.placeholder === true && /placeholder/i.test(data.meta?.notice ?? ""))) {
         problems.push(`${file}: placeholder measures without the placeholder flag and notice`);
       }
+    }
+    if (file.endsWith("manifest.json") && data.results?.sha256 === undefined) {
+      problems.push(`${file}: manifest without the results SHA-256`);
     }
   } else if (!file.endsWith(".csv") && !file.endsWith(".gitkeep")) {
     problems.push(`${file}: only .json and .csv are allowed`);

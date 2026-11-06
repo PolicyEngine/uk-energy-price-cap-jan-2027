@@ -1,19 +1,63 @@
 {
   "_note": "Ofgem typical dual-fuel bills (GBP a year). Published levels only; the 2027Q1 scenarios are placeholders until Ofgem announces the cap.",
   "tdcv_bases": {
-    "2023": {"electricity_kwh": 2700, "gas_kwh": 11500, "multi_register_kwh": 3900},
-    "2026": {"electricity_kwh": 2500, "gas_kwh": 9500, "multi_register_kwh": 3400}
+    "2023": {
+      "electricity_kwh": 2700,
+      "gas_kwh": 11500,
+      "multi_register_kwh": 3900
+    },
+    "2026": {
+      "electricity_kwh": 2500,
+      "gas_kwh": 9500,
+      "multi_register_kwh": 3400
+    }
   },
   "history": [
-    {"period": "2026Q1", "label": "Jan to Mar 2026", "direct_debit": 1758, "tdcv_basis": "2023"},
-    {"period": "2026Q2", "label": "Apr to Jun 2026", "direct_debit": 1641, "tdcv_basis": "2023"},
-    {"period": "2026Q3", "label": "Jul to Sep 2026", "direct_debit": 1862, "tdcv_basis": "2023", "restated": true},
-    {"period": "2026Q3", "label": "Jul to Sep 2026", "direct_debit": 1663, "tdcv_basis": "2026"},
-    {"period": "2026Q4", "label": "Oct to Dec 2026", "direct_debit": 1723, "tdcv_basis": "2026"}
+    {
+      "period": "2026Q1",
+      "label": "Jan to Mar 2026",
+      "direct_debit": 1758,
+      "tdcv_basis": "2023"
+    },
+    {
+      "period": "2026Q2",
+      "label": "Apr to Jun 2026",
+      "direct_debit": 1641,
+      "tdcv_basis": "2023"
+    },
+    {
+      "period": "2026Q3",
+      "label": "Jul to Sep 2026",
+      "direct_debit": 1862,
+      "tdcv_basis": "2023",
+      "restated": true
+    },
+    {
+      "period": "2026Q3",
+      "label": "Jul to Sep 2026",
+      "direct_debit": 1663,
+      "tdcv_basis": "2026"
+    },
+    {
+      "period": "2026Q4",
+      "label": "Oct to Dec 2026",
+      "direct_debit": 1723,
+      "tdcv_basis": "2026"
+    }
   ],
   "payment_methods": {
-    "2026Q3": {"direct_debit": 1663, "standard_credit": 1796, "prepayment": 1620, "economy_7_direct_debit": 1039},
-    "2026Q4": {"direct_debit": 1723, "standard_credit": 1861, "prepayment": 1678, "economy_7_direct_debit": 1046}
+    "2026Q3": {
+      "direct_debit": 1663,
+      "standard_credit": 1796,
+      "prepayment": 1620,
+      "economy_7_direct_debit": 1039
+    },
+    "2026Q4": {
+      "direct_debit": 1723,
+      "standard_credit": 1861,
+      "prepayment": 1678,
+      "economy_7_direct_debit": 1046
+    }
   },
   "gb_average_direct_debit_rates": {
     "2026Q4": {
@@ -21,19 +65,55 @@
       "electricity_standing_p_per_day": 54.83,
       "gas_unit_p_per_kwh": 7.97,
       "gas_standing_p_per_day": 29.68,
-      "vat": {"electricity": 0.0, "gas": 0.05, "included": true}
+      "vat": {
+        "electricity": 0.0,
+        "gas": 0.05,
+        "included": true
+      }
     }
   },
   "scenarios_2027q1": [
-    {"id": "obr_path", "label": "Forecast path in the model (OBR, October 2026)", "direct_debit": 1875, "placeholder": true},
-    {"id": "low", "label": "Low (placeholder)", "direct_debit": 1950, "placeholder": true},
-    {"id": "central", "label": "Central (placeholder)", "direct_debit": 2180, "placeholder": true},
-    {"id": "high", "label": "High (placeholder)", "direct_debit": 2300, "placeholder": true}
+    {
+      "id": "obr_path",
+      "label": "Forecast path in the model (OBR, October 2026)",
+      "direct_debit": 1875,
+      "placeholder": true
+    },
+    {
+      "id": "low",
+      "label": "Low (placeholder)",
+      "direct_debit": 1950,
+      "placeholder": true
+    },
+    {
+      "id": "central",
+      "label": "Central (placeholder)",
+      "direct_debit": 2180,
+      "placeholder": true
+    },
+    {
+      "id": "high",
+      "label": "High (placeholder)",
+      "direct_debit": 2300,
+      "placeholder": true
+    }
   ],
   "sources": {
-    "levels": "Ofgem, summary of changes to the energy price cap, 1 October to 31 December 2026 (26 August 2026) and 1 July to 30 September 2026 (revised TDCV)",
-    "rates": "Ofgem, energy price cap unit rates and standing charges (GB average, Direct Debit, October to December 2026)",
-    "obr_path": "OBR, Economic and fiscal outlook, October 2026, para 2.22",
-    "range": "Supplier and market forecasts, 30 September to 4 November 2026 (placeholder range only)"
+    "levels": {
+      "label": "Ofgem, summary of changes to the energy price cap, 1 October to 31 December 2026 (26 August 2026), and 1 July to 30 September 2026 (revised typical consumption values)",
+      "url": "https://www.ofgem.gov.uk/sites/default/files/2026-08/Summary-of-changes-to-energy-price-cap-1-October-to-31-December-2026.pdf"
+    },
+    "rates": {
+      "label": "Ofgem, energy price cap unit rates and standing charges (GB average, Direct Debit, October to December 2026)",
+      "url": "https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges"
+    },
+    "obr_path": {
+      "label": "OBR, Economic and fiscal outlook, October 2026, para 2.22",
+      "url": "https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/"
+    },
+    "range": {
+      "label": "Supplier and market forecasts, 30 September to 4 November 2026 (placeholder range only)",
+      "url": null
+    }
   }
 }

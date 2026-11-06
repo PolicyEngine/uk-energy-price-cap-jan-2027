@@ -9,6 +9,7 @@ export const chartColours = {
   grid: "#E2E8F0", // border-light
   axis: "#4B5563", // gray-600
   series: ["#285E61", "#4FD1C5"], // primary-700, primary-300
+  scenario: "#B2F5EA", // primary-100: a level not yet published (outlined)
 };
 
 export const axisStyle = { fontSize: 12, fill: chartColours.axis };

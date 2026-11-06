@@ -1,10 +1,20 @@
 "use client";
 
-/** Chips for the support measures that have figures; the list comes from results.json. */
+/**
+ * Chips for the support measures that have figures; the list comes from
+ * results.json. Measures from different fiscal years are never added
+ * together: choosing one from another year starts a new selection.
+ */
 export default function PolicySelector({ measures, selected, onChange }) {
+  const yearOf = (id) => measures.find((m) => m.id === id)?.year;
   const toggle = (id) => {
-    const next = selected.includes(id) ? selected.filter((s) => s !== id) : [...selected, id];
-    onChange(next);
+    if (selected.includes(id)) {
+      const next = selected.filter((s) => s !== id);
+      onChange(next.length ? next : [id]);
+      return;
+    }
+    const sameYear = selected.every((s) => yearOf(s) === yearOf(id));
+    onChange(sameYear ? [...selected, id] : [id]);
   };
   return (
     <div className="flex flex-wrap gap-2" role="group" aria-label="Measures">

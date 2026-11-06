@@ -7,6 +7,9 @@ import { calculatorOnlyMeasures, chartedMeasures, notComputableMeasures } from "
 import { seriesColour } from "./chartTheme";
 import { cellValue, supportDecileRows } from "./dataHelpers";
 import { formatGbp, formatMillions, formatPct, toCsv } from "./format";
+import { orderGroups, groupLabel } from "../components/GroupChart";
+import { wrapLabel, categoryAxisWidth } from "../components/ChartParts";
+import { splitReason, statusLabel, definitionUrl } from "./measureText";
 import { policyDetail } from "./policyDetails";
 
 describe("utils", () => {
@@ -42,6 +45,41 @@ describe("utils", () => {
     const rows = historyRows(results.cap, results.cap.scenarios[0]);
     for (const r of rows.filter((x) => x.basis === "2023")) expect(r.label).toContain("2023 basis");
     expect(rows.at(-1).label).toMatch(/placeholder/);
+    expect(rows.at(-1).scenario).toBe(true);
+    const announced = historyRows(results.cap, { ...results.cap.scenarios[0], placeholder: false });
+    expect(announced.at(-1).label).toMatch(/announced/);
+  });
+
+  it("reasons drop the issue number into a link; statuses read in sentence case", () => {
+    expect(splitReason("Cannot be estimated (issue #4).")).toEqual({ text: "Cannot be estimated.", issues: [4] });
+    expect(splitReason(null)).toEqual({ text: "", issues: [] });
+    expect(statusLabel("placeholder")).toBe("Placeholder");
+    expect(definitionUrl("https://x", "abc")).toBe("https://x/blob/abc/src/uk_energy_price_cap/reforms.py");
+    expect(definitionUrl("https://x", "")).toBe("https://x");
+  });
+
+  it("regions read in ONS order with Northern Ireland last; band I is labelled", () => {
+    const rows = ["SCOTLAND", "NORTHERN_IRELAND", "EAST_MIDLANDS", "NORTH_EAST"].map((group) => ({ group }));
+    expect(orderGroups("region", rows).map((r) => r.group)).toEqual([
+      "NORTH_EAST",
+      "EAST_MIDLANDS",
+      "SCOTLAND",
+      "NORTHERN_IRELAND",
+    ]);
+    expect(groupLabel("council_tax_band", "I")).toBe("Band I (Wales only)");
+    const groups = results.bills.by_group.filter((r) => r.dimension === "council_tax_band");
+    expect(groups.some((r) => r.group === "NORTHERN_IRELAND")).toBe(false);
+  });
+
+  it("axis labels wrap and the axis never takes the plot on a phone", () => {
+    expect(wrapLabel("Household Energy Payment in Scotland and Wales", 16)).toEqual([
+      "Household Energy",
+      "Payment in",
+      "Scotland and",
+      "Wales",
+    ]);
+    const long = ["Household Energy Payment in Scotland and Wales (2026-27)"];
+    expect(categoryAxisWidth(long, true)).toBeLessThanOrEqual(140);
   });
 
   it("formats and exports", () => {

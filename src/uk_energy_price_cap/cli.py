@@ -15,7 +15,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="uk-energy-price-cap")
     sub = parser.add_subparsers(dest="command", required=True)
     frz = sub.add_parser(
-        "freeze", help="print the G0 freeze record (versions, dataset SHA)"
+        "freeze",
+        help="print the G0 freeze record (versions, dataset SHA); fails without the dataset",
     )
     frz.add_argument("--dataset", type=Path, default=None)
     gen = sub.add_parser("generate", help="write results.json and manifest")
@@ -37,7 +38,16 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "freeze":
         from uk_energy_price_cap import model_run
 
-        print(json.dumps(model_run.freeze_record(args.dataset), indent=2))
+        if args.dataset is None:
+            print(
+                "Name the frozen dataset file with --dataset.", file=sys.stderr
+            )
+            return 1
+        path = args.dataset.expanduser()
+        if not path.is_file():
+            print(f"{path}: no such dataset file", file=sys.stderr)
+            return 1
+        print(json.dumps(model_run.freeze_record(path), indent=2))
         return 0
     if args.command == "generate":
         pipeline.generate(

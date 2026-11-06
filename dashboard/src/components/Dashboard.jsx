@@ -68,16 +68,33 @@ export default function Dashboard({ data }) {
   const charted = useMemo(() => chartedMeasures(measures), [measures]);
   const chartedIds = useMemo(() => charted.map((m) => m.id), [charted]);
   const scenarioIds = useMemo(() => cap.scenarios.map((s) => s.id), [cap]);
-  const [state, setState] = useState(() => readAddress(chartedIds, scenarioIds, meta.default_scenario));
+  // The prerendered page is the default view; the address is read after
+  // hydration, so the server and client render the same first frame (a
+  // deep link read during hydration was React error 418).
+  const [state, setState] = useState(() => ({
+    tab: DEFAULT_VIEW,
+    sub: "deciles",
+    scenario: meta.default_scenario,
+    policies: chartedIds.slice(0, 1),
+  }));
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    // Read once, on mount: syncing from an external source (the address).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setState(readAddress(chartedIds, scenarioIds, meta.default_scenario));
+    setReady(true);
+  }, [chartedIds, scenarioIds, meta.default_scenario]);
+
+  useEffect(() => {
+    if (!ready) return;
     const params = new URLSearchParams();
     params.set("tab", state.tab);
     if (state.tab === "bills") params.set("sub", state.sub);
     if (state.scenario !== meta.default_scenario) params.set("scenario", state.scenario);
     if (state.tab === "support") params.set("policies", state.policies.join(","));
     window.history.replaceState(null, "", `${window.location.pathname}?${params}`);
-  }, [state, chartedIds, meta.default_scenario]);
+  }, [state, ready, chartedIds, meta.default_scenario]);
 
   const set = (patch) => setState((s) => ({ ...s, ...patch }));
   const tabRefs = useRef({});

@@ -24,8 +24,8 @@ fetch() {
 }
 
 for tab in "${TABS[@]}"; do
-  url="$SITE/$tab"
-  [ -z "$tab" ] && url="$SITE"
+  # The page address has no trailing slash; a slash before ?tab= redirects.
+  url="$SITE$tab"
   code=$(fetch "$url")
   if [ "$code" != 200 ]; then
     echo "FAIL $url: HTTP $code"; failures=$((failures + 1)); continue

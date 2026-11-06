@@ -4,12 +4,13 @@ This is a timed rehearsal of the announcement day for the Ofgem energy price cap
 
 This file is the plan only. The mock release, documents, correction notice and answer key are held outside this repository by the drill owner. Only their SHA-256 hashes appear below. No file in this repository describes the mock content. Nothing from the packet is committed, before or after the drill.
 
-This root `DRILL.md` is the only drill plan. On PR #9, `docs/DRILL.md` is a pointer to it and the empty hash table is gone, so a drill branch cut from either base carries one plan.
+This root `DRILL.md` is the only drill plan. On PR #9, `docs/DRILL.md` is a pointer to it with no hashes. A drill branch cut from the PR #9 head or from `main` does not carry this file until its first commit brings it in (Preconditions).
 
 ## Preconditions
 
 - The template dashboard in PR #9 is merged by Thursday 12 November 2026, 17:00. If it is not, the drill branch is cut from the PR #9 head SHA, which is recorded in G0, and the deviation is logged.
 - The drill branch is opened as a draft PR labelled `not for merge`. It is never stacked on another unmerged PR.
+- The first commit on the drill branch is `git checkout origin/drill-plan -- DRILL.md`. The integrator then runs `uv run python scripts/check_packet_not_committed.py` and confirms it reports 8 packet hashes read. On a branch whose name contains `drill`, the script fails if the root `DRILL.md` is missing or lists no hashes, so name the branch `drill-...`.
 - If G0 cannot name a certified engine and data pair (issue #1), the drill runs on the household calculator and the synthetic `results.json`. Every figure is then labelled "unvalidated under this engine", and national rows are scored on basis and gap class only.
 
 ## Roles (one person each)
@@ -27,7 +28,7 @@ Only the integrator pushes. The drill owner copies each file to the release fold
 
 | Time | Release | Gate |
 |---|---|---|
-| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it): start SHA, policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated" |
+| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it): start SHA, the packet-guard line (8 hashes read), policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated" |
 | 10:00 (T+0) | mock release (statement) | G1, 10:00 to 10:10: coverage ledger, each line routed |
 | 10:30 (T+30) | none | G2: provisional numbers against the release figures, and one hand-checked household per coded measure |
 | 10:40 (T+40) | documents: rates, costings, specimen households, blank scoring sheet | G3, to 11:10: re-base and reconcile; each gap over 10% has a written reason; update ledger causes |

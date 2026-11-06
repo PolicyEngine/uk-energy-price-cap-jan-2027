@@ -1020,7 +1020,7 @@ wheels = [
 
 [[package]]
 name = "policyengine-uk"
-version = "2.175.4"
+version = "2.175.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "microdf-python" },
@@ -1028,9 +1028,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "tables" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c5/8f/4acf3659406bab8d9d0adfe26ccc270714036f3bfe18f0269e18d237beeb/policyengine_uk-2.175.4.tar.gz", hash = "sha256:fdfdd9d93050ce9c96c2870ede9d933f4ac30bdb5874f2db96bd39ad8d1777c6", size = 4575551, upload-time = "2026-11-05T12:07:15.499Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/eb/6371a5332160b4c40242ac64e13827b639a08bdc035ed5e5b60a9b209ea4/policyengine_uk-2.175.7.tar.gz", hash = "sha256:da77edbfbd370e26ccf1750102ae274a4422319445b299212410f8423254ef26", size = 4674611, upload-time = "2026-11-05T17:10:01.781Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/30/80c55b801b1d45f8d24489bc761b3dd8ff4c1936bde30dbd7a1eddb36e4f/policyengine_uk-2.175.4-py3-none-any.whl", hash = "sha256:84af486f3de0d3ee1cdf69aa69211a627ccf6fca48d3e875dd4cf3b94be2b93c", size = 6489789, upload-time = "2026-11-05T12:07:13.016Z" },
+    { url = "https://files.pythonhosted.org/packages/0d/d0/eaee4813337e4be071cafef8e7c2bda49151a89ab7f6ada9e630c9fabed4/policyengine_uk-2.175.7-py3-none-any.whl", hash = "sha256:69d7e6d4b88153d8cd3f333bc5e2950eb114353a9509e8e45d9076865157cb06", size = 6599223, upload-time = "2026-11-05T17:09:59.155Z" },
 ]
 
 [[package]]
@@ -1490,7 +1490,7 @@ model = [
 requires-dist = [
     { name = "h5py", marker = "extra == 'model'", specifier = ">=3.0.0" },
     { name = "numpy", marker = "extra == 'model'", specifier = ">=1.24.0" },
-    { name = "policyengine-uk", marker = "extra == 'model'", specifier = "==2.175.4" },
+    { name = "policyengine-uk", marker = "extra == 'model'", specifier = "==2.175.7" },
     { name = "pydantic", specifier = ">=2.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6.0" },

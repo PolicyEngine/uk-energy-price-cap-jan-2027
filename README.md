@@ -21,7 +21,7 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 
 | Component | Version |
 |---|---|
-| policyengine-uk | 2.175.4 (provisional; holds the Household Energy Payment, Warm Home Discount, electricity VAT rate and energy price index) |
+| policyengine-uk | 2.175.7 (provisional, unmanaged; 2.170.2 or later holds the Household Energy Payment, the energy price indices and the July 2027 VAT end date) |
 | Microcosm | to be fixed at the freeze; no certified build pairs with policyengine-uk 2.175 yet |
 
 These versions are provisional. The certified bundle in policyengine 6.14.0 pins policyengine-uk 2.151.0, which lacks the energy measures above. Until a certified pair exists, every figure is labelled as unvalidated under this engine. The README will record the final engine and data pair used on the day.

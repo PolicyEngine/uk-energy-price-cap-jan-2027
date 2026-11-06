@@ -4,7 +4,7 @@ This is a timed rehearsal of the announcement day for the Ofgem energy price cap
 
 This file is the plan only. The mock release, documents, correction notice and answer key are held outside this repository by the drill owner. Only their SHA-256 hashes appear below. No file in this repository describes the mock content. Nothing from the packet is committed, before or after the drill.
 
-This root `DRILL.md` is the authoritative drill plan. `docs/DRILL.md` in PR #9 becomes a one-line pointer to it when that branch is rebased.
+This root `DRILL.md` is the only drill plan. On PR #9, `docs/DRILL.md` is a pointer to it and the empty hash table is gone, so a drill branch cut from either base carries one plan.
 
 ## Preconditions
 
@@ -21,23 +21,23 @@ This root `DRILL.md` is the authoritative drill plan. `docs/DRILL.md` in PR #9 b
 | Reconciler | the coverage ledger, the reconciliation CSV, defects posted as PR comments within 5 minutes | push code |
 | Scorer (the reconciler, after the documents) | specimen households, one commit SHA per scoring run | edit reform code |
 
-Only the integrator pushes. The drill owner copies each file to the release folder at its slot and posts the file name, hash and time on the drill issue. The post never includes file contents.
+Only the integrator pushes. The drill owner copies each file to the release folder, `~/drill7-release/`, at its slot and posts the file name, hash and time on the drill issue. The post never includes file contents. The release folder is outside the clone; nothing in it is copied into the repository. CI on the drill branch fails if any tracked file has the SHA-256 of a packet file (`scripts/check_packet_not_committed.py`).
 
 ## Clock (London time)
 
 | Time | Release | Gate |
 |---|---|---|
-| by 09:00 | none | G0: freeze record in the drill PR: start SHA, policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated" |
+| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it): start SHA, policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated" |
 | 10:00 (T+0) | mock release (statement) | G1, 10:00 to 10:10: coverage ledger, each line routed |
 | 10:30 (T+30) | none | G2: provisional numbers against the release figures, and one hand-checked household per coded measure |
-| 10:40 (T+40) | documents: rates, costings, specimen households, blank scoring sheet | G3, to 11:10: re-base and reconcile; each gap over 10% has a written reason |
+| 10:40 (T+40) | documents: rates, costings, specimen households, blank scoring sheet | G3, to 11:10: re-base and reconcile; each gap over 10% has a written reason; update ledger causes |
 | 11:15 (T+75) | inject: a correction notice | G5: rerun, re-score every hand-computed row, update ledger causes, new scoring SHA |
-| 11:40 (T+100) | none | G4: local production build (`bun run build && bun run start`) checked for the MOCK banner and `noindex` |
+| 11:40 (T+100) | none | G4: local production build checked for the MOCK banner and `noindex` (command below) |
 | 11:50 (T+110) | none | stop; log the stop commit |
 | 12:00 (T+120) | answer key | scoring, to 12:15; the scorer checks the key's hash first |
 | 12:15 | none | retro, to 12:30; filed on the drill issue the same day |
 
-G0 is shared with the other Friday drill, so it is posted by 09:00.
+G0 is posted by 09:00, an hour before the release (T−60, as in `docs/RUNBOOK.md`), so the freeze is settled before anyone reads the packet.
 
 ## Route and cause classes (every ledger line gets one of each)
 
@@ -82,7 +82,15 @@ Log these:
 
 ## MOCK and noindex rules
 
-- Every page built in the drill shows a MOCK banner and carries `noindex`, in both the meta tag and the `X-Robots-Tag` header. Both are checked on the running production build, not on the dev server.
+- Every page built in the drill shows a MOCK banner and carries `noindex`, in both the meta tag and the `X-Robots-Tag` header. Both are checked on the running production build, not on the dev server. The G4 build, from the repository root (pick a free port; `bun` runs `next`, which needs no `node` on the path):
+
+  ```
+  cd dashboard && NEXT_PUBLIC_MOCK=1 bun run build && bun run start -p 4873
+  curl -sI http://localhost:4873/uk/energy-price-cap-jan-2027 | grep -i x-robots-tag
+  MOCK=1 ../scripts/smoke-built-site.sh http://localhost:4873/uk/energy-price-cap-jan-2027
+  ```
+
+  The page lives under the base path; `/` alone is not the page. Stop the server by its PID afterwards.
 - Nothing is deployed. There is no preview URL, Vercel, Modal or Cloud Run in this drill.
 - `scripts/check_public_data.py` and `dashboard/scripts/check-public-files.mjs` pass on the stop commit.
 - Registry measures keep their `placeholder` flag. No public file drops it.
@@ -94,9 +102,18 @@ Log these:
 |---|---|
 | Specimen households within ±1p of the key | 20 |
 | National figures: basis and gap class | 30 |
-| Ledger: route, cause and trap rows per line | 25 |
+| Ledger: route, cause and trap rows per line (scored on the final ledger at stop) | 25 |
 | Publication path: banner, `noindex`, public-data checks, placeholder flag | 10 |
 | Process: gates on time, one SHA per scoring run, inject logged, stop commit logged | 15 |
+
+Rulings, so scoring is the same whoever scores:
+- A `not-computable` line is scored on its route and its basis token (the data limit it names), not on a figure.
+- The ledger is scored on the final ledger at the stop commit, so causes set at G1 and changed after G3 or the inject count as changed.
+- Each trap row is scored yes or no: marked as already in the baseline (or inside another line), or not.
+
+## Lessons carried from the Autumn Budget drills
+
+1. One integrator. 2. Reviews as PR comments, read at once. 3. No stacking on unmerged PRs. 4. Reconciliation is a hard gate. 5. Declare the basis once. 6. Re-run hand-computed rows after an inject. 7. Statutory rounding (bills to the penny, half up). 8. Day-of measures go in this repository. 9. G0 names a certified pair or labels every figure unvalidated. 10. Charts read the measure list from the registry. 11. Check the banner and `noindex` on the built page, not on a dev server. 12. Data gaps go in the ledger first. 13. Time every step. 14. Update ledger causes after G3 and after the inject.
 
 ## Packet hashes (SHA-256)
 

@@ -41,20 +41,83 @@ class Preset:
 
 
 PRESETS: tuple[Preset, ...] = (
-    Preset("typical_dd", "Typical use, Direct Debit, dual fuel",
-           2500, 9500, "direct_debit", "ENGLAND", "D", False, 45),
-    Preset("low_use_prepay_flat", "Low use flat on prepayment",
-           1800, 5000, "prepayment", "ENGLAND", "A", True, 32),
-    Preset("high_use_family", "High-use family home",
-           3600, 14000, "direct_debit", "ENGLAND", "E", False, 44),
-    Preset("electric_only_e7", "Electric-only flat on Economy 7",
-           3400, 0, "economy_7_direct_debit", "ENGLAND", "B", False, 58),
-    Preset("pensioner_couple_band_b", "Pensioner couple on Pension Credit, band B",
-           2700, 11000, "direct_debit", "ENGLAND", "B", True, 81),
-    Preset("working_family_band_e", "Working family in band E",
-           2900, 10500, "direct_debit", "ENGLAND", "E", False, 40),
-    Preset("scotland_band_c", "Pensioner in Scotland, band C",
-           2500, 9500, "direct_debit", "SCOTLAND", "C", True, 70),
+    Preset(
+        "typical_dd",
+        "Typical use, Direct Debit, dual fuel",
+        2500,
+        9500,
+        "direct_debit",
+        "ENGLAND",
+        "D",
+        False,
+        45,
+    ),
+    Preset(
+        "low_use_prepay_flat",
+        "Low use flat on prepayment",
+        1800,
+        5000,
+        "prepayment",
+        "ENGLAND",
+        "A",
+        True,
+        32,
+    ),
+    Preset(
+        "high_use_family",
+        "High-use family home",
+        3600,
+        14000,
+        "direct_debit",
+        "ENGLAND",
+        "E",
+        False,
+        44,
+    ),
+    Preset(
+        "electric_only_e7",
+        "Electric-only flat on Economy 7",
+        3400,
+        0,
+        "economy_7_direct_debit",
+        "ENGLAND",
+        "B",
+        False,
+        58,
+    ),
+    Preset(
+        "pensioner_couple_band_b",
+        "Pensioner couple on Pension Credit, band B",
+        2700,
+        11000,
+        "direct_debit",
+        "ENGLAND",
+        "B",
+        True,
+        81,
+    ),
+    Preset(
+        "working_family_band_e",
+        "Working family in band E",
+        2900,
+        10500,
+        "direct_debit",
+        "ENGLAND",
+        "E",
+        False,
+        40,
+    ),
+    Preset(
+        "scotland_band_c",
+        "Pensioner in Scotland, band C",
+        2500,
+        9500,
+        "direct_debit",
+        "SCOTLAND",
+        "C",
+        True,
+        70,
+    ),
 )
 
 BY_ID = {p.id: p for p in PRESETS}
@@ -77,7 +140,9 @@ def bill(preset: Preset, factor: float = 1.0) -> dict[str, float]:
     if preset.payment_method == "economy_7_direct_debit":
         levels = cap.CAP["payment_methods"][cap.CURRENT_PERIOD]
         multi = cap.CAP["tdcv_bases"][cap.CURRENT_BASIS]["multi_register_kwh"]
-        total = levels["economy_7_direct_debit"] * preset.electricity_kwh / multi
+        total = (
+            levels["economy_7_direct_debit"] * preset.electricity_kwh / multi
+        )
         total = cap.pence_to_pounds(total * factor)
         return {"electricity": total, "gas": 0.0, "total": total}
     rates = cap.scaled_rates(factor * _method_factor(preset.payment_method))
@@ -149,7 +214,8 @@ def all_presets(scenarios: list[str] | None = None) -> list[dict]:
             "bill_oct_dec_2026": bill(preset)["total"],
             "support": support(preset),
             "bill_jan_mar_2027": {
-                s: bill(preset, cap.price_factor(s))["total"] for s in scenarios
+                s: bill(preset, cap.price_factor(s))["total"]
+                for s in scenarios
             },
         }
         rows.append(row)

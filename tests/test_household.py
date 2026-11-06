@@ -28,9 +28,16 @@ def test_scenario_scales_the_typical_bill():
 
 def test_support_rules():
     s = household.support(household.BY_ID["pensioner_couple_band_b"])
-    assert s == {"household_energy_payment": 100.0, "warm_home_discount": 150.0,
-                 "winter_fuel_payment": 300.0, "total": 550.0}
-    assert household.support(household.BY_ID["working_family_band_e"])["total"] == 0
+    assert s == {
+        "household_energy_payment": 100.0,
+        "warm_home_discount": 150.0,
+        "winter_fuel_payment": 300.0,
+        "total": 550.0,
+    }
+    assert (
+        household.support(household.BY_ID["working_family_band_e"])["total"]
+        == 0
+    )
     # Scotland: no £100 under current law, no Warm Home Discount (England and Wales only)
     scot = household.support(household.BY_ID["scotland_band_c"])
     assert scot["household_energy_payment"] == 0
@@ -41,7 +48,8 @@ def test_support_rules():
 def test_override_reaches_scotland():
     scot = household.BY_ID["scotland_band_c"]
     out = household.support(
-        scot, {"hep_countries": ("ENGLAND", "SCOTLAND", "WALES")})
+        scot, {"hep_countries": ("ENGLAND", "SCOTLAND", "WALES")}
+    )
     assert out["household_energy_payment"] == 100
 
 
@@ -49,7 +57,8 @@ def test_calculate_shape():
     out = household.calculate("typical_dd", "central")
     assert out["annual_change"] > 0
     assert out["change_after_support"] == pytest.approx(
-        out["annual_change"] - out["support"]["total"], abs=0.01)
+        out["annual_change"] - out["support"]["total"], abs=0.01
+    )
 
 
 def test_presets_cover_every_payment_method_shown():

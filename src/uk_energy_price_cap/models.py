@@ -71,7 +71,8 @@ class Reform(BaseModel):
         description="Why the measure is not computable, or what must land first",
     )
     likelihood: str = Field(
-        ..., description="certain, announced, medium, low (docs/candidate-reforms.md)"
+        ...,
+        description="certain, announced, medium, low (docs/candidate-reforms.md)",
     )
     calculator_only: bool = Field(
         default=False,

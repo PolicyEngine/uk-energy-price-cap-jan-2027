@@ -30,8 +30,7 @@ DATA_LIMITS: dict[str, str] = {
         "Economy 7 are not distinguished (issue #4)."
     ),
     "has_mains_gas": (
-        "No mains gas flag; gas spend above zero is the only proxy "
-        "(issue #4)."
+        "No mains gas flag; gas spend above zero is the only proxy (issue #4)."
     ),
     "main_heating_fuel": "No heating fuel variable (issue #4).",
     "energy_debt": "No energy arrears in the survey data.",

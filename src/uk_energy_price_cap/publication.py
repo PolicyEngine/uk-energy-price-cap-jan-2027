@@ -57,7 +57,8 @@ def validate(results: dict) -> list[str]:
             numeric = [
                 k
                 for k, v in value.items()
-                if k != "withheld" and isinstance(v, (int, float))
+                if k != "withheld"
+                and isinstance(v, (int, float))
                 and not isinstance(v, bool)
             ]
             if numeric:
@@ -68,7 +69,8 @@ def validate(results: dict) -> list[str]:
     if sorted(ids) != sorted(r.id for r in reforms.REFORMS):
         problems.append("measures: list differs from the registry")
     placeholders = [
-        m["id"] for m in results.get("measures", [])
+        m["id"]
+        for m in results.get("measures", [])
         if m.get("status") != "announced"
     ]
     if placeholders and meta.get("placeholder") is not True:

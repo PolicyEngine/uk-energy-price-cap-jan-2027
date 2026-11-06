@@ -12,7 +12,9 @@ from uk_energy_price_cap.measure_templates import (
 
 
 def test_amount_change():
-    assert amount_change("gov.a.b", {2027: 200}) == {"gov.a.b": {"2027-01-01": 200.0}}
+    assert amount_change("gov.a.b", {2027: 200}) == {
+        "gov.a.b": {"2027-01-01": 200.0}
+    }
     with pytest.raises(TemplateError):
         amount_change("gov.a.b", {2027: -1})
 
@@ -51,4 +53,6 @@ def test_merge_refuses_duplicates():
     a = amount_change("gov.a", {2027: 1})
     with pytest.raises(TemplateError):
         merge(a, amount_change("gov.a", {2027: 2}))
-    assert merge(a, amount_change("gov.a", {2028: 2}))["gov.a"]["2028-01-01"] == 2
+    assert (
+        merge(a, amount_change("gov.a", {2028: 2}))["gov.a"]["2028-01-01"] == 2
+    )

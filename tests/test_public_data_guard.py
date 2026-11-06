@@ -19,7 +19,9 @@ def test_floor():
     assert publication.apply_floor(5.0, 10) == 5.0
 
 
-@pytest.mark.parametrize("key", ["household_weight", "household_id", "weight", "n_records"])
+@pytest.mark.parametrize(
+    "key", ["household_weight", "household_id", "weight", "n_records"]
+)
 def test_identifiers_and_weights_refused(results, key):
     bad = copy.deepcopy(results)
     bad["bills"]["by_decile"][0][key] = 1
@@ -34,7 +36,10 @@ def test_area_codes_refused(results):
 
 def test_withheld_cell_with_value_refused(results):
     bad = copy.deepcopy(results)
-    bad["bills"]["by_decile"][0]["gross_change_gbp"] = {"withheld": True, "value": 3.0}
+    bad["bills"]["by_decile"][0]["gross_change_gbp"] = {
+        "withheld": True,
+        "value": 3.0,
+    }
     assert publication.validate(bad)
 
 
@@ -55,7 +60,8 @@ def test_public_folder_is_clean():
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
-        "check_public_data", ROOT / "scripts" / "check_public_data.py")
+        "check_public_data", ROOT / "scripts" / "check_public_data.py"
+    )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     assert module.check() == []
@@ -64,4 +70,6 @@ def test_public_folder_is_clean():
 def test_no_microdata_committed():
     tracked = [p for p in ROOT.rglob("*.h5") if ".venv" not in p.parts]
     assert tracked == []
-    json.loads((ROOT / "src" / "uk_energy_price_cap" / "cap_levels.json").read_text())
+    json.loads(
+        (ROOT / "src" / "uk_energy_price_cap" / "cap_levels.json").read_text()
+    )

@@ -16,7 +16,9 @@ def test_ids_unique():
 
 def test_every_entry_is_a_placeholder_before_the_event():
     assert all(r.status == Status.PLACEHOLDER for r in reforms.REFORMS)
-    assert all(r.description.startswith("Placeholder.") for r in reforms.REFORMS)
+    assert all(
+        r.description.startswith("Placeholder.") for r in reforms.REFORMS
+    )
 
 
 def test_not_computable_entries_have_reasons_and_no_changes():
@@ -46,11 +48,23 @@ def test_cap_reform_growth_matches_placeholder_level():
 
 def test_route_validation():
     with pytest.raises(ValueError):
-        Reform(id="x", name="x", route=Route.DASHBOARD_PARAM,
-               status=Status.PLACEHOLDER, lever="support", likelihood="low")
+        Reform(
+            id="x",
+            name="x",
+            route=Route.DASHBOARD_PARAM,
+            status=Status.PLACEHOLDER,
+            lever="support",
+            likelihood="low",
+        )
     with pytest.raises(ValueError):
-        Reform(id="x", name="x", route=Route.NOT_COMPUTABLE,
-               status=Status.PLACEHOLDER, lever="support", likelihood="low")
+        Reform(
+            id="x",
+            name="x",
+            route=Route.NOT_COMPUTABLE,
+            status=Status.PLACEHOLDER,
+            lever="support",
+            likelihood="low",
+        )
 
 
 def test_ledger_has_one_line_per_measure():

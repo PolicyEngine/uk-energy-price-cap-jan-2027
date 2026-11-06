@@ -16,7 +16,15 @@ from uk_energy_price_cap import publication
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "dashboard" / "public"
-BANNED_SUFFIXES = {".h5", ".h5ad", ".parquet", ".feather", ".pkl", ".sav", ".dta"}
+BANNED_SUFFIXES = {
+    ".h5",
+    ".h5ad",
+    ".parquet",
+    ".feather",
+    ".pkl",
+    ".sav",
+    ".dta",
+}
 
 
 def check(public: Path = PUBLIC) -> list[str]:

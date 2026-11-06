@@ -26,20 +26,37 @@ HOUSEHOLDS_UK = 28_900_000
 # Fixed so the committed placeholder file is reproducible byte for byte.
 TEMPLATE_DATE = "2026-11-05"
 REGIONS = [
-    ("NORTH_EAST", "ENGLAND", 0.042), ("NORTH_WEST", "ENGLAND", 0.112),
-    ("YORKSHIRE", "ENGLAND", 0.083), ("EAST_MIDLANDS", "ENGLAND", 0.072),
-    ("WEST_MIDLANDS", "ENGLAND", 0.086), ("EAST_OF_ENGLAND", "ENGLAND", 0.094),
-    ("LONDON", "ENGLAND", 0.124), ("SOUTH_EAST", "ENGLAND", 0.138),
-    ("SOUTH_WEST", "ENGLAND", 0.088), ("WALES", "WALES", 0.049),
-    ("SCOTLAND", "SCOTLAND", 0.084), ("NORTHERN_IRELAND", "NORTHERN_IRELAND", 0.028),
+    ("NORTH_EAST", "ENGLAND", 0.042),
+    ("NORTH_WEST", "ENGLAND", 0.112),
+    ("YORKSHIRE", "ENGLAND", 0.083),
+    ("EAST_MIDLANDS", "ENGLAND", 0.072),
+    ("WEST_MIDLANDS", "ENGLAND", 0.086),
+    ("EAST_OF_ENGLAND", "ENGLAND", 0.094),
+    ("LONDON", "ENGLAND", 0.124),
+    ("SOUTH_EAST", "ENGLAND", 0.138),
+    ("SOUTH_WEST", "ENGLAND", 0.088),
+    ("WALES", "WALES", 0.049),
+    ("SCOTLAND", "SCOTLAND", 0.084),
+    ("NORTHERN_IRELAND", "NORTHERN_IRELAND", 0.028),
 ]
 TENURES = [
-    ("OWNED_OUTRIGHT", 0.37), ("OWNED_WITH_MORTGAGE", 0.26),
-    ("RENT_FROM_COUNCIL", 0.09), ("RENT_FROM_HA", 0.09),
+    ("OWNED_OUTRIGHT", 0.37),
+    ("OWNED_WITH_MORTGAGE", 0.26),
+    ("RENT_FROM_COUNCIL", 0.09),
+    ("RENT_FROM_HA", 0.09),
     ("RENT_PRIVATELY", 0.19),
 ]
-BANDS = [("A", 0.22), ("B", 0.19), ("C", 0.21), ("D", 0.16), ("E", 0.10),
-         ("F", 0.06), ("G", 0.05), ("H", 0.01), ("I", 0.002)]
+BANDS = [
+    ("A", 0.22),
+    ("B", 0.19),
+    ("C", 0.21),
+    ("D", 0.16),
+    ("E", 0.10),
+    ("F", 0.06),
+    ("G", 0.05),
+    ("H", 0.01),
+    ("I", 0.002),
+]
 DIMENSIONS = ("region", "tenure", "council_tax_band", "fuel", "payment")
 
 
@@ -84,7 +101,7 @@ def synthetic_households(n: int = 3000, seed: int = 20270101):
         region, country, _share = REGIONS[r]
         t, tenures = _pick(rng, TENURES)
         b, bands = _pick(rng, BANDS)
-        income = 9_000 * decile ** 1.15 * rng.uniform(0.85, 1.15)
+        income = 9_000 * decile**1.15 * rng.uniform(0.85, 1.15)
         electric_only = rng.random() < 0.16
         electricity = rng.uniform(650, 1_250) * (1.6 if electric_only else 1)
         electricity *= 0.9 + 0.02 * decile
@@ -100,7 +117,8 @@ def synthetic_households(n: int = 3000, seed: int = 20270101):
                 electricity=round(electricity, 2),
                 gas=round(gas, 2),
                 prepayment=rng.random() < (0.25 if decile <= 3 else 0.08),
-                qualifying_benefit=rng.random() < max(0.05, 0.6 - 0.07 * decile),
+                qualifying_benefit=rng.random()
+                < max(0.05, 0.6 - 0.07 * decile),
                 disability_benefit=rng.random() < 0.12,
                 oldest_age=rng.choice([30, 40, 50, 60, 68, 75, 82]),
                 weight=HOUSEHOLDS_UK / n,
@@ -117,8 +135,15 @@ def _bill_change(h: SyntheticHousehold, factor: float) -> float:
 
 def _current_support(h: SyntheticHousehold) -> float:
     preset = household.Preset(
-        "x", "x", 0, 0, "direct_debit", h.country, h.council_tax_band,
-        h.qualifying_benefit, h.oldest_age,
+        "x",
+        "x",
+        0,
+        0,
+        "direct_debit",
+        h.country,
+        h.council_tax_band,
+        h.qualifying_benefit,
+        h.oldest_age,
     )
     return household.support(preset)["total"]
 
@@ -145,7 +170,12 @@ def _measure_gain(measure_id: str, h: SyntheticHousehold) -> tuple[int, float]:
         ) else 0.0
     if measure_id == "electricity_vat_to_march_2028":
         months = 9 / 12  # July 2027 to March 2028
-        return 2027, h.electricity * 0.05 * months if h.country != "NORTHERN_IRELAND" else 0.0
+        return (
+            2027,
+            h.electricity * 0.05 * months
+            if h.country != "NORTHERN_IRELAND"
+            else 0.0,
+        )
     if measure_id == "universal_bill_credit":
         return 2026, 150.0 if h.country != "NORTHERN_IRELAND" else 0.0
     if measure_id == "wfp_top_up":
@@ -184,34 +214,52 @@ def build_placeholder(n: int = 3000, seed: int = 20270101) -> dict:
             net = _mean_cell(
                 rows, lambda h: _bill_change(h, factor) - _current_support(h)
             )
-            bills_by_decile.append({
-                "scenario_id": s, "decile": d,
-                "gross_change_gbp": _cell(gross),
-                "share_of_net_income_pct": _cell(share),
-                "change_after_support_gbp": _cell(net),
-            })
+            bills_by_decile.append(
+                {
+                    "scenario_id": s,
+                    "decile": d,
+                    "gross_change_gbp": _cell(gross),
+                    "share_of_net_income_pct": _cell(share),
+                    "change_after_support_gbp": _cell(net),
+                }
+            )
         for dim in DIMENSIONS:
             groups = defaultdict(list)
             for h in hh:
                 groups[getattr(h, dim)].append(h)
             for group in sorted(groups):
-                bills_by_group.append({
-                    "scenario_id": s, "dimension": dim, "group": group,
-                    "outside_cap": group == "NORTHERN_IRELAND",
-                    "gross_change_gbp": _cell(_mean_cell(
-                        groups[group], lambda h: _bill_change(h, factor))),
-                })
+                bills_by_group.append(
+                    {
+                        "scenario_id": s,
+                        "dimension": dim,
+                        "group": group,
+                        "outside_cap": group == "NORTHERN_IRELAND",
+                        "gross_change_gbp": _cell(
+                            _mean_cell(
+                                groups[group],
+                                lambda h: _bill_change(h, factor),
+                            )
+                        ),
+                    }
+                )
 
     measures = []
     decile_impact = []
     for r in reforms.REFORMS:
         entry = {
-            "id": r.id, "name": r.name, "description": r.description,
-            "route": r.route.value, "status": r.status.value,
-            "lever": r.lever, "likelihood": r.likelihood,
-            "computable": r.is_computable, "reason": r.limit_reason,
+            "id": r.id,
+            "name": r.name,
+            "description": r.description,
+            "route": r.route.value,
+            "status": r.status.value,
+            "lever": r.lever,
+            "likelihood": r.likelihood,
+            "computable": r.is_computable,
+            "reason": r.limit_reason,
             "calculator_only": r.calculator_only,
-            "year": None, "cost_gbp_m": None, "households_reached_m": None,
+            "year": None,
+            "cost_gbp_m": None,
+            "households_reached_m": None,
         }
         if r.is_computable and r.lever == "support":
             year = None
@@ -230,10 +278,14 @@ def build_placeholder(n: int = 3000, seed: int = 20270101) -> dict:
                 mean = _mean_cell(
                     by_decile[d], lambda h, i=r.id: _measure_gain(i, h)[1]
                 )
-                decile_impact.append({
-                    "measure_id": r.id, "decile": d, "year": year,
-                    "avg_change_gbp": _cell(mean),
-                })
+                decile_impact.append(
+                    {
+                        "measure_id": r.id,
+                        "decile": d,
+                        "year": year,
+                        "avg_change_gbp": _cell(mean),
+                    }
+                )
         measures.append(entry)
 
     return {
@@ -267,8 +319,12 @@ def build_placeholder(n: int = 3000, seed: int = 20270101) -> dict:
             "payment_methods": cap.CAP["payment_methods"],
             "rates": cap.current_rates(),
             "scenarios": [
-                {**row, "change_pct": round(
-                    100 * (cap.price_factor(row["id"]) - 1), 1)}
+                {
+                    **row,
+                    "change_pct": round(
+                        100 * (cap.price_factor(row["id"]) - 1), 1
+                    ),
+                }
                 for row in cap.CAP["scenarios_2027q1"]
             ],
             "sources": cap.CAP["sources"],

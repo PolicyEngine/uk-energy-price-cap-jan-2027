@@ -67,6 +67,32 @@ def test_public_folder_is_clean():
     assert module.check() == []
 
 
+def _checker():
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "check_public_data", ROOT / "scripts" / "check_public_data.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_area_code_in_any_public_file_refused(tmp_path):
+    (tmp_path / "extra.json").write_text('{"note": "S12000036"}')
+    (tmp_path / "table.csv").write_text("group,value\nE09000001,3\n")
+    problems = _checker().check(tmp_path)
+    assert any("extra.json: area code" in p for p in problems)
+    assert any("table.csv: area code" in p for p in problems)
+
+
+def test_empty_files_do_not_crash_the_check(tmp_path):
+    (tmp_path / "empty.csv").write_text("")
+    (tmp_path / "empty.json").write_text("")
+    problems = _checker().check(tmp_path)
+    assert problems == ["empty.json: empty JSON file"]
+
+
 def test_no_microdata_committed():
     tracked = [p for p in ROOT.rglob("*.h5") if ".venv" not in p.parts]
     assert tracked == []

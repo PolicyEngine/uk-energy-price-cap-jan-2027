@@ -27,6 +27,9 @@ BANNED_SUFFIXES = {
 }
 
 
+TEXT_SUFFIXES = {".json", ".csv", ".txt", ".md", ".svg", ".html"}
+
+
 def check(public: Path = PUBLIC) -> list[str]:
     problems = []
     for path in sorted(public.rglob("*")):
@@ -36,16 +39,25 @@ def check(public: Path = PUBLIC) -> list[str]:
         if path.suffix.lower() in BANNED_SUFFIXES:
             problems.append(f"{rel}: microdata file type")
             continue
+        if path.suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        text = path.read_text()
+        # Area codes in any public text file, as the JS checker does.
+        if publication.AREA_CODE.search(text):
+            problems.append(f"{rel}: area code")
         if path.suffix == ".json":
-            data = json.loads(path.read_text())
-            if rel.name == "results.json":
+            data = json.loads(text) if text.strip() else None
+            if data is None:
+                problems.append(f"{rel}: empty JSON file")
+            elif rel.name == "results.json":
                 problems += [f"{rel}: {p}" for p in publication.validate(data)]
             else:
                 for where, key, value in publication._walk(data):
                     if publication.FORBIDDEN_KEYS.search(str(key)):
                         problems.append(f"{rel} {where}.{key}: forbidden key")
         if path.suffix == ".csv":
-            header = path.read_text().splitlines()[0].split(",")
+            lines = text.splitlines()
+            header = lines[0].split(",") if lines else []
             for column in header:
                 if publication.FORBIDDEN_KEYS.search(column.strip()):
                     problems.append(f"{rel}: forbidden column {column}")

@@ -28,7 +28,7 @@ Only the integrator pushes. The drill owner copies each file to the release fold
 
 | Time | Release | Gate |
 |---|---|---|
-| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it): start SHA, the packet-guard line (8 hashes read), policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated" |
+| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it, and the integrator adds the packet-guard output line showing 8 hashes read): start SHA, policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated" |
 | 10:00 (T+0) | mock release (statement) | G1, 10:00 to 10:10: coverage ledger, each line routed |
 | 10:30 (T+30) | none | G2: provisional numbers against the release figures, and one hand-checked household per coded measure |
 | 10:40 (T+40) | documents: rates, costings, specimen households, blank scoring sheet | G3, to 11:10: re-base and reconcile; each gap over 10% has a written reason; update ledger causes |

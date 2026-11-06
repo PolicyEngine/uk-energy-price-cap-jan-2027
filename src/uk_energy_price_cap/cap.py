@@ -18,6 +18,10 @@ CAP = json.loads(
 CURRENT_PERIOD = "2026Q4"
 CURRENT_BASIS = "2026"
 DAYS = 365
+# Shares of a year's domestic consumption used in January to March
+# (policyengine-uk 2.175.7 energy_prices/consumption_shares.yaml, DESNZ
+# Energy Trends, mean of 2015 to 2025): the change over the quarter alone.
+Q1_CONSUMPTION_SHARE = {"electricity": 0.2929, "gas": 0.4250}
 
 
 def pence_to_pounds(value: float) -> float:

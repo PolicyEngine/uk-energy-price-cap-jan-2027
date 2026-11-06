@@ -1,0 +1,13 @@
+{
+  "results": {
+    "path": "results.json",
+    "sha256": "63cdb061ec92014eac28cce67c12cb6b38fd0437f1deae45f76ef0e036ccb29e"
+  },
+  "source": "synthetic",
+  "placeholder": true,
+  "engine": {
+    "policyengine_uk": "not run (placeholder)",
+    "dataset": "none (synthetic households)",
+    "validated": false
+  }
+}

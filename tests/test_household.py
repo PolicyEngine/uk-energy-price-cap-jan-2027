@@ -32,17 +32,33 @@ def test_support_rules():
         "household_energy_payment": 100.0,
         "warm_home_discount": 150.0,
         "winter_fuel_payment": 300.0,
+        "pension_age_winter_heating_payment": 0.0,
         "total": 550.0,
     }
     assert (
         household.support(household.BY_ID["working_family_band_e"])["total"]
         == 0
     )
-    # Scotland: no £100 under current law, no Warm Home Discount (England and Wales only)
+    # Scotland: no £100 under current law; the Warm Home Discount through
+    # Core Group 1 (Pension Credit); the Pension Age Winter Heating Payment
+    # in place of the Winter Fuel Payment.
     scot = household.support(household.BY_ID["scotland_band_c"])
-    assert scot["household_energy_payment"] == 0
-    assert scot["warm_home_discount"] == 0
-    assert scot["winter_fuel_payment"] == 200
+    assert scot == {
+        "household_energy_payment": 0.0,
+        "warm_home_discount": 150.0,
+        "winter_fuel_payment": 0.0,
+        "pension_age_winter_heating_payment": 211.15,
+        "total": 361.15,
+    }
+
+
+def test_scotland_without_pension_credit_gets_no_core_group_discount():
+    import dataclasses
+
+    scot = dataclasses.replace(
+        household.BY_ID["scotland_band_c"], pension_credit=False
+    )
+    assert household.support(scot)["warm_home_discount"] == 0
 
 
 def test_override_reaches_scotland():

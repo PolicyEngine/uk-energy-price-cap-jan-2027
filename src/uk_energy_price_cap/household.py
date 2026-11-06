@@ -7,11 +7,20 @@ agree on support amounts (tests/test_household.py).
 
 Support rules (2026-27, current law):
 - Household Energy Payment: £100, England, council tax bands A to D.
-- Warm Home Discount: £150, England and Wales, a qualifying benefit
+- Warm Home Discount: £150. England and Wales: a qualifying benefit
   (Pension Credit, Universal Credit, Housing Benefit, income-related ESA).
-- Winter Fuel Payment: £200 per household with someone of State Pension
-  age, £300 with someone aged 80 or over; recovered through income tax
-  above £35,000 taxable income (not shown in this calculator).
+  Scotland runs its own scheme: Core Group 1 (Pension Credit Guarantee
+  Credit) is paid automatically; the Broader Group depends on the
+  supplier and is not shown. policyengine-uk does not compute the Scottish
+  scheme, so the model and this calculator differ there by design.
+- Winter Fuel Payment (England and Wales): £200 per household with
+  someone of State Pension age, £300 with someone aged 80 or over;
+  recovered through income tax above £35,000 taxable income (not shown).
+- Pension Age Winter Heating Payment (Scotland, in place of the Winter
+  Fuel Payment): £211.15 under 80 and £316.70 at 80 or over in 2026-27
+  (policyengine-uk 2.175.7 gov.social_security_scotland.pawhp, from the
+  Scottish statutory instruments; check against mygov.scot before the
+  day).
 """
 
 from dataclasses import asdict, dataclass
@@ -25,6 +34,8 @@ WHD_AMOUNT = 150
 WHD_COUNTRIES = ("ENGLAND", "WALES")
 WFP_LOWER = 200
 WFP_HIGHER = 300
+PAWHP_LOWER = 211.15
+PAWHP_HIGHER = 316.70
 
 
 @dataclass(frozen=True)
@@ -38,6 +49,7 @@ class Preset:
     council_tax_band: str
     qualifying_benefit: bool
     oldest_age: int
+    pension_credit: bool = False
 
 
 PRESETS: tuple[Preset, ...] = (
@@ -95,6 +107,7 @@ PRESETS: tuple[Preset, ...] = (
         "B",
         True,
         81,
+        pension_credit=True,
     ),
     Preset(
         "working_family_band_e",
@@ -109,7 +122,7 @@ PRESETS: tuple[Preset, ...] = (
     ),
     Preset(
         "scotland_band_c",
-        "Pensioner in Scotland, band C",
+        "Pensioner on Pension Credit in Scotland, band C",
         2500,
         9500,
         "direct_debit",
@@ -117,6 +130,7 @@ PRESETS: tuple[Preset, ...] = (
         "C",
         True,
         70,
+        pension_credit=True,
     ),
 )
 
@@ -166,22 +180,28 @@ def support(preset: Preset, overrides: dict | None = None) -> dict[str, float]:
         and preset.council_tax_band in o["hep_bands"]
         else 0
     )
-    whd = (
-        o["whd_amount"]
-        if preset.country in WHD_COUNTRIES and preset.qualifying_benefit
-        else 0
-    )
-    if preset.oldest_age >= 80:
-        wfp = o["wfp_higher"]
-    elif preset.oldest_age >= 66:
-        wfp = o["wfp_lower"]
+    if preset.country in WHD_COUNTRIES:
+        gets_whd = preset.qualifying_benefit
+    elif preset.country == "SCOTLAND":
+        gets_whd = preset.pension_credit  # Core Group 1 only
     else:
-        wfp = 0
+        gets_whd = False
+    whd = o["whd_amount"] if gets_whd else 0
+    scotland = preset.country == "SCOTLAND"
+    if preset.oldest_age >= 80:
+        winter = PAWHP_HIGHER if scotland else o["wfp_higher"]
+    elif preset.oldest_age >= 66:
+        winter = PAWHP_LOWER if scotland else o["wfp_lower"]
+    else:
+        winter = 0
+    wfp = 0 if scotland else winter
+    pawhp = winter if scotland else 0
     return {
         "household_energy_payment": float(hep),
         "warm_home_discount": float(whd),
         "winter_fuel_payment": float(wfp),
-        "total": float(hep + whd + wfp),
+        "pension_age_winter_heating_payment": float(pawhp),
+        "total": round(float(hep + whd + wfp + pawhp), 2),
     }
 
 

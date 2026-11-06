@@ -26,10 +26,18 @@ class Route(StrEnum):
 
 
 class Status(StrEnum):
-    """Where a measure stands. Only ``announced`` can be published."""
+    """Where a measure stands.
+
+    ``announced`` is published with figures. ``withdrawn`` keeps the
+    ledger line (and its card) with no figures, for a candidate lever that
+    was not announced on the day, so no registry entry needs deleting
+    under time pressure. ``placeholder`` holds the file back as a
+    placeholder.
+    """
 
     PLACEHOLDER = "placeholder"
     ANNOUNCED = "announced"
+    WITHDRAWN = "withdrawn"
 
 
 class Reform(BaseModel):

@@ -71,7 +71,7 @@ def validate(results: dict) -> list[str]:
     placeholders = [
         m["id"]
         for m in results.get("measures", [])
-        if m.get("status") != "announced"
+        if m.get("status") not in ("announced", "withdrawn")
     ]
     if placeholders and meta.get("placeholder") is not True:
         problems.append(
@@ -89,6 +89,10 @@ def validate(results: dict) -> list[str]:
             )
         if m.get("computable") is False and not m.get("reason"):
             problems.append(f"measures.{m['id']}: not computable, no reason")
+        if m.get("status") == "withdrawn" and m.get("cost_gbp_m") is not None:
+            problems.append(
+                f"measures.{m['id']}: withdrawn but carries a cost"
+            )
     return problems
 
 
@@ -102,12 +106,92 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def manifest(results_path: Path, inputs: dict[str, str]) -> dict:
-    """Receipt for one generation: the results digest and what made it."""
-    return {
-        "results": {"path": str(results_path), "sha256": sha256(results_path)},
-        "inputs": dict(sorted(inputs.items())),
+MANIFEST_NAME = "manifest.json"
+
+
+def _git(*args: str) -> str | None:
+    import subprocess
+
+    try:
+        out = subprocess.run(
+            ["git", *args],
+            cwd=Path(__file__).resolve().parent,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return out.stdout.strip()
+
+
+def git_state() -> dict:
+    """HEAD and whether the tracked tree is clean (untracked files ignored)."""
+    head = _git("rev-parse", "HEAD")
+    status = _git("status", "--porcelain", "--untracked-files=no")
+    return {"commit": head, "clean": status == ""}
+
+
+def installed_versions() -> dict:
+    """Versions read from the installed packages, not from constants."""
+    from importlib import metadata
+
+    out = {}
+    for name in ("policyengine", "policyengine-uk", "policyengine-core"):
+        try:
+            out[name] = metadata.version(name)
+        except metadata.PackageNotFoundError:
+            out[name] = None
+    return out
+
+
+def manifest(results_path: Path, results: dict, run: dict | None = None):
+    """Receipt for one generation: the results digest and what made it.
+
+    A placeholder generation records only what is fixed by the code (so the
+    committed file is reproducible); a model run adds the commit, the
+    clean-tree flag, installed versions and the dataset (``run``).
+    """
+    meta = results.get("meta", {})
+    out = {
+        "results": {
+            "path": Path(results_path).name,
+            "sha256": sha256(results_path),
+        },
+        "source": meta.get("source"),
+        "placeholder": meta.get("placeholder"),
+        "engine": meta.get("engine"),
     }
+    if run:
+        out["run"] = run
+    return out
+
+
+def write_manifest(results_path: Path, results: dict, run=None) -> Path:
+    path = Path(results_path).with_name(MANIFEST_NAME)
+    if run is None:
+        run = results.get("meta", {}).get("run")
+    write_json(path, manifest(results_path, results, run))
+    return path
+
+
+def check_manifest(results_path: Path) -> list[str]:
+    """Problems with the manifest beside a results file."""
+    path = Path(results_path).with_name(MANIFEST_NAME)
+    if not path.exists():
+        return [f"{path.name}: missing"]
+    data = json.loads(path.read_text())
+    problems = []
+    if data.get("results", {}).get("sha256") != sha256(results_path):
+        problems.append(f"{path.name}: results SHA-256 does not match")
+    if data.get("source") == "model":
+        run = data.get("run") or {}
+        for key in ("commit", "clean", "versions", "dataset"):
+            if key not in run:
+                problems.append(f"{path.name}: model run without {key}")
+        if run.get("clean") is False:
+            problems.append(f"{path.name}: model run on a dirty tree")
+    return problems
 
 
 def write_json(path: Path, data: dict) -> None:

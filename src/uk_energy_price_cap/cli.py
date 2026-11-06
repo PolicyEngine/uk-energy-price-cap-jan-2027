@@ -1,4 +1,4 @@
-"""Command line: generate results, print the ledger, validate a file."""
+"""Command line: freeze, generate results, print the ledger, validate."""
 
 import argparse
 import csv
@@ -14,18 +14,35 @@ DEFAULT_OUT = Path("dashboard/public/data/results.json")
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="uk-energy-price-cap")
     sub = parser.add_subparsers(dest="command", required=True)
-    gen = sub.add_parser("generate", help="write results.json")
+    frz = sub.add_parser(
+        "freeze", help="print the G0 freeze record (versions, dataset SHA)"
+    )
+    frz.add_argument("--dataset", type=Path, default=None)
+    gen = sub.add_parser("generate", help="write results.json and manifest")
     gen.add_argument("--out", type=Path, default=DEFAULT_OUT)
     gen.add_argument(
         "--source", choices=["placeholder", "model"], default="placeholder"
     )
+    gen.add_argument("--dataset", type=Path, default=None)
+    gen.add_argument(
+        "--allow-unmanaged",
+        action="store_true",
+        help='run on an uncertified pair; figures are labelled "unvalidated"',
+    )
     sub.add_parser("ledger", help="print the coverage ledger as CSV")
-    val = sub.add_parser("validate", help="check a results file")
+    val = sub.add_parser("validate", help="check a results file and manifest")
     val.add_argument("path", type=Path, nargs="?", default=DEFAULT_OUT)
     args = parser.parse_args(argv)
 
+    if args.command == "freeze":
+        from uk_energy_price_cap import model_run
+
+        print(json.dumps(model_run.freeze_record(args.dataset), indent=2))
+        return 0
     if args.command == "generate":
-        pipeline.generate(args.out, args.source)
+        pipeline.generate(
+            args.out, args.source, args.dataset, args.allow_unmanaged
+        )
         print(f"wrote {args.out} ({publication.sha256(args.out)[:12]})")
         return 0
     if args.command == "ledger":
@@ -35,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
         writer.writerows(rows)
         return 0
     problems = publication.validate(json.loads(args.path.read_text()))
+    problems += publication.check_manifest(args.path)
     for problem in problems:
         print(problem, file=sys.stderr)
     return 1 if problems else 0

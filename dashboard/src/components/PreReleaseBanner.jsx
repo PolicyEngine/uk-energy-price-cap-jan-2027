@@ -1,10 +1,11 @@
-export const BANNER_TEXT =
-  "Pre-release template — placeholder figures. Not an estimate of the January to March 2027 energy price cap.";
+import { bannerText } from "../utils/releaseMode";
 
-export default function PreReleaseBanner() {
+export const BANNER_TEXT = bannerText(false);
+
+export default function PreReleaseBanner({ text = bannerText() }) {
   return (
     <div className="pre-release-banner" role="status" data-testid="pre-release-banner">
-      {BANNER_TEXT}
+      {text}
     </div>
   );
 }

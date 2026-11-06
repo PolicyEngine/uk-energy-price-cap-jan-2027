@@ -36,14 +36,35 @@ def test_computable_entries_avoid_limited_paths():
 
 
 def test_energy_paths_need_the_newer_engine():
-    # policyengine 6.14.0 pins policyengine-uk 2.151.0 (issue #1)
-    assert needs_newer_engine(reforms.ENERGY_PRICE_PATH) == "2.175.0"
+    # policyengine 6.14.0 pins policyengine-uk 2.151.0 (issue #1); the
+    # Budget-era baseline needs 2.170.2 (model_limits.MIN_ENGINE).
+    assert needs_newer_engine(reforms.ENERGY_PRICE_PATH) == "2.170.2"
+    assert needs_newer_engine(reforms.ELEC_VAT_GB) == "2.165.1"
 
 
-def test_cap_reform_growth_matches_placeholder_level():
+def test_cap_reform_moves_one_quarter_to_the_placeholder_level():
     change = reforms.get("cap_q1_2027").parameter_changes
-    growth = change[reforms.ENERGY_PRICE_PATH]["2027-01-01"]
-    assert growth == pytest.approx(2180 / 1723 - 1, abs=1e-6)
+    rates = change[reforms.ENERGY_PRICE_PATH]
+    assert set(rates) == {"2027-01-01.2027-03-31", "2028-01-01.2028-03-31"}
+    ratio = reforms.PLACEHOLDER_Q1_CAP / reforms.OBR_Q1_2027_CAP
+    q1 = 1 + rates["2027-01-01.2027-03-31"]
+    assert q1 / (1 + reforms.OBR_UTILITIES["2027Q1"]) == pytest.approx(
+        ratio, abs=1e-6
+    )
+    q1_next = 1 + rates["2028-01-01.2028-03-31"]
+    assert q1_next * ratio == pytest.approx(
+        1 + reforms.OBR_UTILITIES["2028Q1"], abs=1e-6
+    )
+
+
+def test_every_registered_key_is_a_bare_year_or_an_interval():
+    import re
+
+    form = re.compile(r"[1-9][0-9]{3}|\d{4}-\d{2}-\d{2}\.\d{4}-\d{2}-\d{2}")
+    for r in reforms.REFORMS:
+        for path, values in (r.parameter_changes or {}).items():
+            for key in values:
+                assert form.fullmatch(key), (r.id, path, key)
 
 
 def test_route_validation():

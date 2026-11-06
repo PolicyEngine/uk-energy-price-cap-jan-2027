@@ -131,7 +131,7 @@
     {
       "id": "cap_q1_2027",
       "name": "Energy price cap, January to March 2027",
-      "description": "Placeholder. Moves household electricity and gas spend from the forecast path in the model to the announced cap, as one percentage change on both fuels.",
+      "description": "Placeholder. Moves household electricity and gas prices for January to March 2027 from the forecast path in the model to the announced cap, as one percentage change on both fuels. Prices return to the forecast path from April 2027.",
       "route": "dashboard-param",
       "status": "placeholder",
       "lever": "bills",
@@ -266,7 +266,7 @@
     {
       "id": "wfp_top_up",
       "name": "Larger Winter Fuel Payment",
-      "description": "Placeholder. Adds £100 to the Winter Fuel Payment for 2026-27: £300 to £400 for the higher rate, £200 to £300 for the lower.",
+      "description": "Placeholder. Adds £100 a household to the Winter Fuel Payment for 2026-27: £300 to £400 for the higher rate and £200 to £300 for the lower, with each shared rate (two eligible people in one household) raised by £50. Scotland pays its own Pension Age Winter Heating Payment instead, which this lever does not change.",
       "route": "dashboard-param",
       "status": "placeholder",
       "lever": "support",

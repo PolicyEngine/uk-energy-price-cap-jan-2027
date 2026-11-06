@@ -13,9 +13,10 @@ Charts, the household calculator and the ledger read the measure list from
 here. No component keeps a list of its own.
 """
 
+from uk_energy_price_cap import cap
 from uk_energy_price_cap.measure_templates import (
     amount_change,
-    growth_for_cap,
+    cap_shock,
     list_change,
     quarterly_growth_change,
     rate_change,
@@ -26,6 +27,33 @@ from uk_energy_price_cap.models import Reform, Route, Status
 # planning range, docs/candidate-reforms.md). Replace with Ofgem's figure.
 PLACEHOLDER_Q1_CAP = 2180
 OCT_DEC_2026_CAP = 1723  # Ofgem, 2026 typical consumption basis
+# The typical bill the OBR's path implies for January to March 2027 (EFO
+# October 2026, para 2.22), on the 2026 basis: the baseline the lever moves.
+OBR_Q1_2027_CAP = cap.scenario("obr_path")["direct_debit"]
+# The OBR's year-on-year CPI utilities rates the lever replaces, as in
+# policyengine-uk 2.175.7 energy_prices/obr.yaml (tests/engine checks them
+# against the installed engine).
+OBR_UTILITIES = {"2027Q1": 0.113241, "2028Q1": -0.105705}
+
+
+def cap_q1_2027_changes(q1_cap: float = PLACEHOLDER_Q1_CAP) -> dict:
+    """The cap lever for a January to March 2027 level (2026 basis).
+
+    Raises the 2027Q1 index level by ``q1_cap / OBR_Q1_2027_CAP`` against
+    the baseline and offsets 2028Q1, so prices return to the OBR path from
+    April 2027 and fiscal 2027-28 is unchanged (docs/METHOD.md; the choice
+    is open on the readiness issue).
+    """
+    g, g_next = cap_shock(
+        q1_cap,
+        OBR_Q1_2027_CAP,
+        OBR_UTILITIES["2027Q1"],
+        OBR_UTILITIES["2028Q1"],
+    )
+    return quarterly_growth_change(
+        ENERGY_PRICE_PATH, {"2027Q1": g, "2028Q1": g_next}
+    )
+
 
 ENERGY_PRICE_PATH = "gov.economic_assumptions.energy_prices.obr.utilities"
 HEP = "gov.treasury.household_energy_payment"
@@ -41,14 +69,12 @@ REFORMS: list[Reform] = [
         id="cap_q1_2027",
         name="Energy price cap, January to March 2027",
         description=(
-            "Placeholder. Moves household electricity and gas spend from the "
-            "forecast path in the model to the announced cap, as one "
-            "percentage change on both fuels."
+            "Placeholder. Moves household electricity and gas prices for "
+            "January to March 2027 from the forecast path in the model to "
+            "the announced cap, as one percentage change on both fuels. "
+            "Prices return to the forecast path from April 2027."
         ),
-        parameter_changes=quarterly_growth_change(
-            ENERGY_PRICE_PATH,
-            {"2027Q1": growth_for_cap(PLACEHOLDER_Q1_CAP, OCT_DEC_2026_CAP)},
-        ),
+        parameter_changes=cap_q1_2027_changes(),
         route=Route.DASHBOARD_PARAM,
         status=PH,
         lever="bills",
@@ -62,7 +88,7 @@ REFORMS: list[Reform] = [
             "households in council tax bands A to D in England from £100 "
             "to £200 in 2026-27."
         ),
-        parameter_changes=amount_change(f"{HEP}.amount", {"2026-04-06": 200}),
+        parameter_changes=amount_change(f"{HEP}.amount", {"2026": 200}),
         route=Route.DASHBOARD_PARAM,
         status=PH,
         lever="support",
@@ -76,7 +102,7 @@ REFORMS: list[Reform] = [
             "households in council tax bands A to E in England."
         ),
         parameter_changes=list_change(
-            f"{HEP}.bands", {"2026-04-06": ["A", "B", "C", "D", "E"]}
+            f"{HEP}.bands", {"2026": ["A", "B", "C", "D", "E"]}
         ),
         route=Route.DASHBOARD_PARAM,
         status=PH,
@@ -95,7 +121,7 @@ REFORMS: list[Reform] = [
         ),
         parameter_changes=list_change(
             f"{HEP}.countries",
-            {"2026-04-06": ["ENGLAND", "SCOTLAND", "WALES"]},
+            {"2026": ["ENGLAND", "SCOTLAND", "WALES"]},
         ),
         route=Route.DASHBOARD_PARAM,
         status=PH,
@@ -109,7 +135,7 @@ REFORMS: list[Reform] = [
             "Placeholder. Raises the Warm Home Discount from £150 to £300 "
             "for the 2026-27 scheme year (England and Wales)."
         ),
-        parameter_changes=amount_change(f"{WHD}.amount", {"2026-04-06": 300}),
+        parameter_changes=amount_change(f"{WHD}.amount", {"2026": 300}),
         route=Route.DASHBOARD_PARAM,
         status=PH,
         lever="support",
@@ -126,7 +152,7 @@ REFORMS: list[Reform] = [
         parameter_changes=list_change(
             f"{WHD}.qualifying_benefits",
             {
-                "2026-04-06": [
+                "2026": [
                     "pension_credit",
                     "universal_credit",
                     "housing_benefit",
@@ -150,7 +176,7 @@ REFORMS: list[Reform] = [
             "5%, to 31 March 2028."
         ),
         parameter_changes=rate_change(
-            ELEC_VAT_GB, {"2027-07-01": 0.0, "2028-04-01": 0.05}
+            ELEC_VAT_GB, {"2027-07-01.2028-03-31": 0.0}
         ),
         route=Route.DASHBOARD_PARAM,
         status=PH,
@@ -177,7 +203,7 @@ REFORMS: list[Reform] = [
             "Placeholder. A £150 credit to every household with an "
             "electricity account in 2026-27."
         ),
-        parameter_changes=amount_change(BILL_CREDIT, {"2026-04-06": 150}),
+        parameter_changes=amount_change(BILL_CREDIT, {"2026": 150}),
         route=Route.DASHBOARD_PARAM,
         status=PH,
         lever="support",
@@ -187,12 +213,23 @@ REFORMS: list[Reform] = [
         id="wfp_top_up",
         name="Larger Winter Fuel Payment",
         description=(
-            "Placeholder. Adds £100 to the Winter Fuel Payment for 2026-27: "
-            "£300 to £400 for the higher rate, £200 to £300 for the lower."
+            "Placeholder. Adds £100 a household to the Winter Fuel Payment "
+            "for 2026-27: £300 to £400 for the higher rate and £200 to £300 "
+            "for the lower, with each shared rate (two eligible people in "
+            "one household) raised by £50. Scotland pays its own Pension "
+            "Age Winter Heating Payment instead, which this lever does not "
+            "change."
         ),
         parameter_changes={
-            **amount_change(f"{WFP}.higher", {"2026-04-06": 400}),
-            **amount_change(f"{WFP}.lower", {"2026-04-06": 300}),
+            **amount_change(f"{WFP}.higher", {"2026": 400}),
+            **amount_change(f"{WFP}.lower", {"2026": 300}),
+            **amount_change(
+                f"{WFP}.higher_shared_with_80_or_over", {"2026": 200}
+            ),
+            **amount_change(
+                f"{WFP}.higher_shared_with_under_80", {"2026": 250}
+            ),
+            **amount_change(f"{WFP}.lower_shared", {"2026": 150}),
         },
         route=Route.DASHBOARD_PARAM,
         status=PH,

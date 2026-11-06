@@ -4,7 +4,8 @@
 policyengine-uk. ``MIN_ENGINE`` names parameters that exist only from a
 given policyengine-uk version. The certified bundle in policyengine 6.14.0
 pins policyengine-uk 2.151.0, which has none of the energy parameters
-below (issue #1).
+below, and policyengine.py PR #731 moves it only to 2.165.1, which lacks
+the Household Energy Payment and the price indices (issue #1).
 """
 
 import warnings
@@ -34,15 +35,24 @@ MODEL_LIMITS: dict[str, str] = {
     "cold_weather_payment": "No Cold Weather Payment variable (issue #8).",
 }
 
+# The first policyengine-uk release on PyPI with each path in the form this
+# dashboard reads it (path matrix on issue #1). The Warm Home Discount and
+# the Great Britain electricity VAT rate exist from 2.165.1, but 2.165.1
+# ends the zero VAT rate on 1 April 2027 (before the Budget); the
+# Household Energy Payment, the energy price indices and the 1 July 2027
+# end date arrive in 2.170.2. A Budget-era baseline needs 2.170.2 or later
+# for every path (BUDGET_ERA_ENGINE).
 MIN_ENGINE: dict[str, str] = {
-    "gov.economic_assumptions.energy_prices.obr.utilities": "2.175.0",
-    "gov.treasury.household_energy_payment.amount": "2.175.0",
-    "gov.treasury.household_energy_payment.bands": "2.175.0",
-    "gov.treasury.household_energy_payment.countries": "2.175.0",
-    "gov.ofgem.warm_home_discount.amount": "2.175.0",
-    "gov.ofgem.warm_home_discount.qualifying_benefits": "2.175.0",
-    "gov.hmrc.vat.domestic_electricity_rate.great_britain": "2.175.0",
+    "gov.economic_assumptions.energy_prices.obr.utilities": "2.170.2",
+    "gov.treasury.household_energy_payment.amount": "2.170.2",
+    "gov.treasury.household_energy_payment.bands": "2.170.2",
+    "gov.treasury.household_energy_payment.countries": "2.170.2",
+    "gov.ofgem.warm_home_discount.amount": "2.165.1",
+    "gov.ofgem.warm_home_discount.qualifying_benefits": "2.165.1",
+    "gov.hmrc.vat.domestic_electricity_rate.great_britain": "2.165.1",
 }
+
+BUDGET_ERA_ENGINE = "2.170.2"
 
 CERTIFIED_ENGINE = "2.151.0"
 

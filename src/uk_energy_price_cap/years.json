@@ -1,0 +1,12 @@
+{
+  "base_year": 2026,
+  "policy_years": [2026, 2027],
+  "event_quarter": "2027Q1",
+  "basis": {
+    "bills": "annualised: a full year at January to March 2027 prices against a full year at October to December 2026 prices",
+    "year": "support costs and gains: fiscal year (April to March); the model year 2026 is 2026-27",
+    "flow": "household spending, VAT included, cash",
+    "behaviour": "static: energy use does not respond to price",
+    "support": "gross of clawback unless the measure says otherwise"
+  }
+}

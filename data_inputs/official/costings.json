@@ -1,0 +1,29 @@
+{
+  "_note": "Official costings of energy support already in place, as published. Each row names its source; figures are the source's, not PolicyEngine estimates.",
+  "costings": [
+    {
+      "id": "household_energy_payment",
+      "name": "£100 Household Energy Payment (council tax rebate, England)",
+      "year": 2026,
+      "cost_gbp_bn": 2.6,
+      "source": "OBR, Economic and fiscal outlook, October 2026, Table 3.1 (Council tax rebate)",
+      "url": "https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/"
+    },
+    {
+      "id": "electricity_vat_zero",
+      "name": "0% VAT on domestic electricity to 1 July 2027",
+      "year": 2026,
+      "cost_gbp_bn": 0.7,
+      "source": "OBR, Economic and fiscal outlook, October 2026, policy measures (VAT on domestic electricity)",
+      "url": "https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/"
+    },
+    {
+      "id": "electricity_vat_zero",
+      "name": "0% VAT on domestic electricity to 1 July 2027",
+      "year": 2027,
+      "cost_gbp_bn": 0.3,
+      "source": "OBR, Economic and fiscal outlook, October 2026, policy measures (VAT on domestic electricity)",
+      "url": "https://obr.uk/efo/economic-and-fiscal-outlook-october-2026/"
+    }
+  ]
+}

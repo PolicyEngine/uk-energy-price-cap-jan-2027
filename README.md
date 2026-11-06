@@ -24,7 +24,7 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 | policyengine-uk | 2.175.7 (provisional, unmanaged; 2.170.2 or later holds the Household Energy Payment, the energy price indices and the July 2027 VAT end date) |
 | Microcosm | to be fixed at the freeze; no certified build pairs with policyengine-uk 2.175 yet |
 
-These versions are provisional. The certified bundle in policyengine 6.14.0 pins policyengine-uk 2.151.0, which lacks the energy measures above. Until a certified pair exists, every figure is labelled as unvalidated under this engine. The README will record the final engine and data pair used on the day.
+These versions are provisional. The certified bundles in policyengine 6.14.0 and 6.15.0 pin policyengine-uk 2.151.0, which lacks the energy measures above. Until a certified pair exists, every figure is labelled as unvalidated under this engine. The README will record the final engine and data pair used on the day.
 
 ## Results
 
@@ -33,15 +33,15 @@ No results yet. The file in `dashboard/public/data/results.json` comes from synt
 ## How to run
 
 ```
-uv sync --extra dev
+uv sync --locked --extra dev
 uv run pytest
 uv run uk-energy-price-cap ledger      # coverage ledger as CSV
 uv run uk-energy-price-cap generate    # placeholder results.json
 uv run python scripts/check_public_data.py
-cd dashboard && bun install && bun run dev
+cd dashboard && bun install --frozen-lockfile && bun run dev
 ```
 
-A model run needs `uv sync --extra model` and the frozen Microcosm file. No certified engine and data pair exists yet (issue #1), so it runs unmanaged and labels every figure: `uv run uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>`. `make` has one target per gate (`make freeze`, `make generate`, `make check`, `make build`).
+A model run needs `uv sync --locked --extra dev --extra model` (`make install-model`) and the frozen Microcosm file. No certified engine and data pair exists yet (issue #1), so it runs unmanaged and labels every figure: `uv run uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>`. `make` has one target per gate (`make freeze DATASET=<file>`, `make generate DATASET=<file>`, `make check`, `make build`); `make freeze` exits non-zero if the dataset is not named or the file is missing.
 
 ## Layout
 
@@ -51,11 +51,13 @@ A model run needs `uv sync --extra model` and the frozen Microcosm file. No cert
 | `src/uk_energy_price_cap/measure_templates.py` | Parameter-change templates |
 | `src/uk_energy_price_cap/cap.py`, `cap_levels.json` | Ofgem levels, rates, scenarios and bill arithmetic |
 | `src/uk_energy_price_cap/household.py` | Example households and support rules |
-| `src/uk_energy_price_cap/pipeline.py` | Generates `results.json` |
+| `src/uk_energy_price_cap/pipeline.py`, `model_run.py` | Generates `results.json`; the model run and the G0 freeze record |
+| `src/uk_energy_price_cap/cli.py` | Command line: `freeze`, `generate`, `ledger`, `validate` |
 | `src/uk_energy_price_cap/publication.py`, `sign_off.py` | Publication gate and disclosure floor |
 | `src/uk_energy_price_cap/data_limits.py`, `model_limits.py` | What the data and the engine cannot carry |
-| `data_inputs/` | Expected effects, official figures, drill packet hashes |
-| `docs/` | Method, schema, data contract, colours, runbook, drill, candidate reforms, risk register |
+| `data_inputs/` | Expected effects and official figures |
+| `scripts/` | Public-data guard, drill packet guard, built-site smoke check |
+| `docs/` | Method, schema, data contract, colours, runbook, drill pointer, candidate reforms, risk register. The drill plan and its packet hashes live in `DRILL.md` on the `drill-plan` branch (PR #12) |
 | `dashboard/` | Next.js page |
 
 ## Licence

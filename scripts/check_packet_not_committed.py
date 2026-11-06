@@ -1,14 +1,21 @@
 """Fail if any tracked file is a drill packet file.
 
-The drill plan (root DRILL.md on a drill branch) lists the SHA-256 of each
-packet file. This hashes every file git tracks and fails on a match, so a
-released file copied into the clone cannot be committed by accident. With
-no DRILL.md (this branch, or main), there is nothing to check.
+The drill plan (root DRILL.md, brought onto the drill branch from the
+`drill-plan` branch) lists the SHA-256 of each packet file. This hashes
+every file git tracks and fails on a match, so a released file copied into
+the clone cannot be committed by accident.
+
+On a branch whose name contains "drill" (GITHUB_HEAD_REF, then
+GITHUB_REF_NAME, then the local branch), a missing root DRILL.md, or one
+with no hashes, is itself a failure: the guard would otherwise pass without
+checking anything. On other branches (this template, or main), there is no
+plan and nothing to check.
 
     uv run python scripts/check_packet_not_committed.py [DRILL.md]
 """
 
 import hashlib
+import os
 import re
 import subprocess
 import sys
@@ -32,9 +39,32 @@ def tracked_files(root: Path = ROOT) -> list[Path]:
     return [root / name for name in out.split("\0") if name]
 
 
-def check(plan: Path, files: list[Path]) -> list[str]:
+def branch_name(env=os.environ, root: Path = ROOT) -> str:
+    for key in ("GITHUB_HEAD_REF", "GITHUB_REF_NAME"):
+        if env.get(key):
+            return env[key]
+    out = subprocess.run(
+        ["git", "branch", "--show-current"],
+        cwd=root,
+        capture_output=True,
+    )
+    return out.stdout.decode().strip() if out.returncode == 0 else ""
+
+
+def is_drill_branch(name: str) -> bool:
+    return "drill" in name.lower()
+
+
+def check(
+    plan: Path, files: list[Path], drill_branch: bool = False
+) -> list[str]:
     hashes = packet_hashes(plan)
     if not hashes:
+        if drill_branch:
+            return [
+                f"{plan.name}: no packet hashes found on a drill branch; "
+                "run `git checkout origin/drill-plan -- DRILL.md` and commit it"
+            ]
         return []
     problems = []
     for path in files:
@@ -48,8 +78,13 @@ def check(plan: Path, files: list[Path]) -> list[str]:
 
 if __name__ == "__main__":
     plan = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "DRILL.md"
-    found = check(plan, tracked_files())
+    branch = branch_name()
+    drill = is_drill_branch(branch)
+    found = check(plan, tracked_files(), drill_branch=drill)
     for problem in found:
         print(problem, file=sys.stderr)
-    print(f"{len(found)} packet file(s) tracked")
+    print(
+        f"branch {branch or '(none)'}: {len(packet_hashes(plan))} packet hash(es) "
+        f"read, {len(found)} problem(s)"
+    )
     sys.exit(1 if found else 0)

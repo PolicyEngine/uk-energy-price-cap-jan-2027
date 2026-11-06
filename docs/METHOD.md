@@ -18,7 +18,7 @@ Status: pre-release template. This note describes the method planned for the day
 | Behaviour | Static: households do not change how much energy they use. |
 | Support | Gross: the change in the payments a measure acts on (Household Energy Payment, Warm Home Discount, Winter Fuel Payment, bill credit) or in electricity VAT. Winter Fuel Payment recovery through income tax above £35,000 is not netted off. The Warm Home Discount counts as support here although suppliers fund it and `household_net_income` leaves it out (issue #5). |
 | Income | Shares of income use `household_net_income`. |
-| Spend level | Microcosm sets electricity and gas spend at DESNZ volumes times DESNZ prices, above ONS household spending. The gap depends on the build (issue #7); the G0 freeze names the build and its gap. |
+| Spend level | One spending level. Builds from Microcosm main after PolicyEngine/microcosm#1420 set electricity spend to ONS household spending (Consumer Trends, September 2026 edition, 04.5.1). Gas spend stays at DESNZ volumes times DESNZ prices, close to ONS 04.5.2; that line also counts bottled gas, and netting it out is open as PolicyEngine/microcosm#1095. Older builds sit above ONS on both fuels (issue #7). The G0 freeze names the build and its gap, from the build's `calibration_diagnostics.json`. |
 | Fuel stress | Energy spend above 10% of net income, a proxy, not the official fuel poverty measure. |
 
 ## The cap shock

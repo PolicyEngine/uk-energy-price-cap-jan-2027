@@ -31,10 +31,10 @@ export default function MethodologyTab({ meta, cap, measures, repoUrl }) {
           PolicyEngine&apos;s calibrated survey-based dataset. Microcosm holds household spending on electricity and gas
           in pounds. Bill changes apply the ratio of Ofgem&apos;s January to March 2027 level to its October to
           December 2026 level to that spending; support measures are changes to model parameters. Households do not
-          change how much energy they use. Northern Ireland is outside the Ofgem cap. Microcosm sets energy spend above
-          ONS household spending; the size of the gap depends on the data build (
-          <a href={`${repoUrl}/issues/7`}>details</a>). Ofgem&apos;s Market Stabilisation Charge, if activated, does not
-          change the cap level.
+          change how much energy they use. Northern Ireland is outside the Ofgem cap. On the rebuilt Microcosm data,
+          electricity spending is set to ONS household spending and gas spending is close to it; the ONS gas figure also
+          counts bottled gas, which is not yet taken out (<a href={`${repoUrl}/issues/7`}>details</a>). Ofgem&apos;s Market
+          Stabilisation Charge, if activated, does not change the cap level.
         </p>
       </section>
       <section className="panel">

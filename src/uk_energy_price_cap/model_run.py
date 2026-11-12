@@ -1,7 +1,8 @@
 """The model run: Microcosm through policyengine-uk, unmanaged.
 
-No certified Microcosm build pairs with policyengine-uk 2.170.2 or later
-(issue #1), so this run is unmanaged: it loads a dataset file named at the
+policyengine 6.17.2 certifies a Microcosm build for policyengine-uk 2.174.1,
+but this run does not go through the bundle (issue #1), so it is unmanaged:
+it loads a dataset file named at the
 freeze, records its SHA-256 and the installed versions, and labels every
 figure "unvalidated under this engine". It refuses to start without
 ``allow_unmanaged`` or on a dirty tree.
@@ -83,8 +84,8 @@ def freeze_record(dataset: Path | str | None = None) -> dict:
         "certified": False,
         "label": UNVALIDATED,
         "reason": (
-            "No certified Microcosm build pairs with policyengine-uk "
-            f"{BUDGET_ERA_ENGINE} or later (issue #1)."
+            "The run loads the dataset file directly, not through the "
+            "certified bundle (issue #1)."
         ),
     }
     uk = versions.get("policyengine-uk")
@@ -185,8 +186,8 @@ def build(
 
     if not allow_unmanaged:
         raise ModelRunError(
-            "No certified engine and data pair exists (issue #1). Pass "
-            "--allow-unmanaged to run on the frozen pair; every figure is "
+            "The run does not go through the certified bundle (issue #1). "
+            "Pass --allow-unmanaged to run on the frozen pair; every figure is "
             f'then labelled "{UNVALIDATED}".'
         )
     if dataset is None:

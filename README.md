@@ -21,10 +21,12 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 
 | Component | Version |
 |---|---|
-| policyengine-uk | 2.175.7 (provisional, unmanaged; 2.170.2 or later holds the Household Energy Payment, the energy price indices and the July 2027 VAT end date) |
-| Microcosm | to be fixed at the freeze; no certified build pairs with policyengine-uk 2.175 yet |
+| policyengine | 6.17.2 (`policyengine[uk]`) |
+| policyengine-uk | 2.174.1 (pinned by policyengine 6.17.2; 2.170.2 or later holds the Household Energy Payment, the energy price indices and the July 2027 VAT end date) |
+| policyengine-core | 3.33.3 |
+| Microcosm | certified by policyengine 6.17.2: `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`, SHA-256 `0a9b77db1c0dee2693cb2d47bad68da34cb662916eee4829942bcd45de581f25`; the file is fixed at the freeze |
 
-These versions are provisional. The certified bundles in policyengine 6.14.0 and 6.15.0 pin policyengine-uk 2.151.0, which lacks the energy measures above. Until a certified pair exists, every figure is labelled as unvalidated under this engine. The README will record the final engine and data pair used on the day.
+policyengine 6.17.2 is a certified bundle whose policyengine-uk (2.174.1) has the energy measures above (6.16.1 was the first to pin 2.174.1). The model run still loads the dataset file directly rather than through the bundle, so every figure stays labelled as unvalidated under this engine until that changes (issue #1). The README will record the final engine and data pair used on the day.
 
 ## Results
 

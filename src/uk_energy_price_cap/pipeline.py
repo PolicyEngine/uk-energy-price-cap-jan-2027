@@ -6,8 +6,8 @@ Two sources, one output schema (docs/RESULTS_SCHEMA.md):
   from a fixed seed. No microdata, no model. Every figure is a placeholder
   and the file says so in ``meta``.
 - ``model`` (the day): Microcosm through policyengine-uk, unmanaged
-  (``model_run.py``). No certified Microcosm build pairs with
-  policyengine-uk 2.170.2 or later (issue #1), so it runs only with
+  (``model_run.py``). It loads the dataset file directly, not through
+  the certified bundle (issue #1), so it runs only with
   ``--allow-unmanaged`` and labels every figure "unvalidated under this
   engine".
 

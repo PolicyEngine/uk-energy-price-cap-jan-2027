@@ -2,7 +2,7 @@
 
 | # | Risk | Effect on the day | Likelihood | Mitigation | Issue |
 |---|---|---|---|---|---|
-| 1 | No certified engine and data pair for policyengine-uk 2.175+ | Run on an unvalidated pair; every figure labelled | high | Certify a build and bump policyengine.py before 20 November | #1 |
+| 1 | The model run loads the dataset file directly, not through the certified bundle (policyengine 6.17.2, policyengine-uk 2.174.1, `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`) | Run is unmanaged; every figure labelled | medium | Freeze the certified file and check its SHA-256 at G0, or move the run onto the bundle | #1 |
 | 2 | One growth rate moves electricity and gas together | Fuel split of the change is wrong if Ofgem moves them apart | high | Separate electricity and gas growth, or an Ofgem index by fuel | #2 |
 | 3 | Cap parameter mixes typical-consumption bases | About 11% error in any ratio across July 2026; price guarantee mis-scaled | certain if used | Restate on one basis | #3 |
 | 4 | No kWh, rates or tariff type | Standing charge, per-unit and payment-method reforms not computable | certain | Export kWh from the data build; add rate parameters | #4 |

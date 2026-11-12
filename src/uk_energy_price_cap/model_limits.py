@@ -2,10 +2,8 @@
 
 ``MODEL_LIMITS`` names levers with no parameter or variable in
 policyengine-uk. ``MIN_ENGINE`` names parameters that exist only from a
-given policyengine-uk version. The certified bundle in policyengine 6.14.0
-pins policyengine-uk 2.151.0, which has none of the energy parameters
-below, and policyengine.py PR #731 moves it only to 2.165.1, which lacks
-the Household Energy Payment and the price indices (issue #1).
+given policyengine-uk version. The certified bundle in policyengine 6.17.2
+pins policyengine-uk 2.174.1, which has all of them (issue #1).
 """
 
 import warnings
@@ -54,7 +52,7 @@ MIN_ENGINE: dict[str, str] = {
 
 BUDGET_ERA_ENGINE = "2.170.2"
 
-CERTIFIED_ENGINE = "2.151.0"
+CERTIFIED_ENGINE = "2.174.1"
 
 
 def model_limit_reason(path: str) -> str | None:
@@ -65,7 +63,7 @@ def model_limit_reason(path: str) -> str | None:
 
 
 def needs_newer_engine(path: str) -> str | None:
-    """Minimum policyengine-uk version for a path, if above the certified one."""
+    """Minimum policyengine-uk version for a path, if it has one."""
     return MIN_ENGINE.get(path)
 
 

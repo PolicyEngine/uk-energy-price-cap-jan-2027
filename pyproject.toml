@@ -18,16 +18,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# The engine for real runs, unmanaged. policyengine 6.14.0 and 6.15.0 pin
-# policyengine-uk 2.151.0, and policyengine.py PR #731 moves the pin to
-# 2.165.1; neither has the Household Energy Payment or the energy price
-# indices (2.170.2 and later). No certified Microcosm build pairs with
-# 2.170.2 or later yet (issue #1), so a model run is unmanaged and every
-# figure is labelled "unvalidated under this engine". Pin this to the
-# engine the G0 freeze names; switch to policyengine[uk] once a certified
-# release covers 2.170.2 or later.
+# The engine for real runs. policyengine 6.17.2 pins policyengine-uk 2.174.1
+# (which has the Household Energy Payment and the energy price indices, from
+# 2.170.2) and policyengine-core 3.33.3, and certifies Microcosm build
+# microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e. The model run
+# still loads the frozen dataset file directly (unmanaged) and labels every
+# figure "unvalidated under this engine" (issue #1).
 model = [
-    "policyengine-uk==2.175.7",
+    "policyengine[uk]==6.17.2",
     "numpy>=1.24.0",
     "h5py>=3.0.0",
 ]

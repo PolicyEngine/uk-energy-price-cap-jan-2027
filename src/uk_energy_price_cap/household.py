@@ -18,7 +18,7 @@ Support rules (2026-27, current law):
   recovered through income tax above £35,000 taxable income (not shown).
 - Pension Age Winter Heating Payment (Scotland, in place of the Winter
   Fuel Payment): £211.15 under 80 and £316.70 at 80 or over in 2026-27
-  (policyengine-uk 2.175.7 gov.social_security_scotland.pawhp, from the
+  (policyengine-uk 2.174.1 gov.social_security_scotland.pawhp, from the
   Scottish statutory instruments; check against mygov.scot before the
   day).
 """

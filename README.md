@@ -26,7 +26,7 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 | policyengine-core | 3.33.3 |
 | Microcosm | certified by policyengine 6.17.2: `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`, SHA-256 `0a9b77db1c0dee2693cb2d47bad68da34cb662916eee4829942bcd45de581f25`; the file is fixed at the freeze |
 
-policyengine 6.17.2 is the first certified bundle whose policyengine-uk (2.174.1) has the energy measures above. The model run still loads the dataset file directly rather than through the bundle, so every figure stays labelled as unvalidated under this engine until that changes (issue #1). The README will record the final engine and data pair used on the day.
+policyengine 6.17.2 is a certified bundle whose policyengine-uk (2.174.1) has the energy measures above (6.16.1 was the first to pin 2.174.1). The model run still loads the dataset file directly rather than through the bundle, so every figure stays labelled as unvalidated under this engine until that changes (issue #1). The README will record the final engine and data pair used on the day.
 
 ## Results
 

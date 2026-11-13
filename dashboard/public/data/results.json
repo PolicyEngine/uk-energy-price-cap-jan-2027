@@ -1,7 +1,7 @@
 {
   "meta": {
     "placeholder": true,
-    "notice": "Pre-release template: every figure on this page comes from synthetic households and placeholder settings. It is not an estimate of the January to March 2027 cap or its effects.",
+    "notice": "Provisional: measures still carry the placeholder flag. Every figure: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policyengine-uk 2.177.7, not in a policyengine.py release.",
     "title": "Energy price cap, January to March 2027",
     "event_quarter": "2027Q1",
     "source": "model",
@@ -35,7 +35,7 @@
     "default_scenario": "central",
     "disclosure_floor": 10,
     "run": {
-      "commit": "08e0b8b49a56ac10ff9c2e3a9c8de35ae4e1d7b3",
+      "commit": "ef6415993d7dcc703d9b82470f2280474131d26a",
       "clean": true,
       "versions": {
         "policyengine": null,
@@ -50,7 +50,7 @@
       "checks": {
         "cap_lever_fiscal_2026_27_gbp_bn": {
           "obr_path": 0.0,
-          "central": 1.525
+          "central": 1.385
         }
       }
     }
@@ -125,10 +125,10 @@
       },
       {
         "id": "central",
-        "label": "Announced cap (MOCK, drill 7)",
-        "direct_debit": 2027,
+        "label": "Announced cap, corrected 11:15 (MOCK, drill 7)",
+        "direct_debit": 2013,
         "placeholder": true,
-        "change_pct": 17.6
+        "change_pct": 16.8
       }
     ],
     "sources": {
@@ -463,22 +463,22 @@
       {
         "scenario_id": "central",
         "total_change_gbp_bn": {
-          "value": 8.76
+          "value": 8.36
         },
         "households_in_cap_m": {
           "value": 28.35
         },
         "avg_change_gbp": {
-          "value": 309.2
+          "value": 294.96
         },
         "energy_over_10pct_now_pct": {
           "value": 4.76
         },
         "energy_over_10pct_then_pct": {
-          "value": 7.12
+          "value": 6.98
         },
         "hep_covers_quarter_rise_pct": {
-          "value": 61.98
+          "value": 65.36
         }
       }
     ],
@@ -617,130 +617,130 @@
         "scenario_id": "central",
         "decile": 1,
         "gross_change_gbp": {
-          "value": 266.56
+          "value": 254.28
         },
         "share_of_net_income_pct": {
-          "value": 1.79
+          "value": 1.71
         },
         "change_after_support_gbp": {
-          "value": 85.5
+          "value": 73.22
         }
       },
       {
         "scenario_id": "central",
         "decile": 2,
         "gross_change_gbp": {
-          "value": 277.45
+          "value": 264.68
         },
         "share_of_net_income_pct": {
-          "value": 0.81
+          "value": 0.77
         },
         "change_after_support_gbp": {
-          "value": 76.22
+          "value": 63.44
         }
       },
       {
         "scenario_id": "central",
         "decile": 3,
         "gross_change_gbp": {
-          "value": 275.03
+          "value": 262.36
         },
         "share_of_net_income_pct": {
-          "value": 0.75
+          "value": 0.71
         },
         "change_after_support_gbp": {
-          "value": 73.09
+          "value": 60.42
         }
       },
       {
         "scenario_id": "central",
         "decile": 4,
         "gross_change_gbp": {
-          "value": 281.79
+          "value": 268.81
         },
         "share_of_net_income_pct": {
-          "value": 0.67
+          "value": 0.64
         },
         "change_after_support_gbp": {
-          "value": 88.54
+          "value": 75.56
         }
       },
       {
         "scenario_id": "central",
         "decile": 5,
         "gross_change_gbp": {
-          "value": 291.19
+          "value": 277.78
         },
         "share_of_net_income_pct": {
-          "value": 0.62
+          "value": 0.59
         },
         "change_after_support_gbp": {
-          "value": 105.77
+          "value": 92.36
         }
       },
       {
         "scenario_id": "central",
         "decile": 6,
         "gross_change_gbp": {
-          "value": 289.92
+          "value": 276.56
         },
         "share_of_net_income_pct": {
-          "value": 0.54
+          "value": 0.51
         },
         "change_after_support_gbp": {
-          "value": 129.79
+          "value": 116.44
         }
       },
       {
         "scenario_id": "central",
         "decile": 7,
         "gross_change_gbp": {
-          "value": 300.89
+          "value": 287.04
         },
         "share_of_net_income_pct": {
-          "value": 0.5
+          "value": 0.48
         },
         "change_after_support_gbp": {
-          "value": 150.69
+          "value": 136.83
         }
       },
       {
         "scenario_id": "central",
         "decile": 8,
         "gross_change_gbp": {
-          "value": 310.53
+          "value": 296.23
         },
         "share_of_net_income_pct": {
-          "value": 0.47
+          "value": 0.45
         },
         "change_after_support_gbp": {
-          "value": 186.03
+          "value": 171.73
         }
       },
       {
         "scenario_id": "central",
         "decile": 9,
         "gross_change_gbp": {
-          "value": 334.03
+          "value": 318.64
         },
         "share_of_net_income_pct": {
-          "value": 0.43
+          "value": 0.41
         },
         "change_after_support_gbp": {
-          "value": 228.03
+          "value": 212.65
         }
       },
       {
         "scenario_id": "central",
         "decile": 10,
         "gross_change_gbp": {
-          "value": 383.5
+          "value": 365.84
         },
         "share_of_net_income_pct": {
-          "value": 0.35
+          "value": 0.34
         },
         "change_after_support_gbp": {
-          "value": 294.48
+          "value": 276.82
         }
       }
     ],
@@ -1021,7 +1021,7 @@
         "group": "EAST_MIDLANDS",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 315.22
+          "value": 300.7
         }
       },
       {
@@ -1030,7 +1030,7 @@
         "group": "EAST_OF_ENGLAND",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 315.54
+          "value": 301.0
         }
       },
       {
@@ -1039,7 +1039,7 @@
         "group": "LONDON",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 308.03
+          "value": 293.84
         }
       },
       {
@@ -1057,7 +1057,7 @@
         "group": "NORTH_EAST",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 303.51
+          "value": 289.53
         }
       },
       {
@@ -1066,7 +1066,7 @@
         "group": "NORTH_WEST",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 304.85
+          "value": 290.81
         }
       },
       {
@@ -1075,7 +1075,7 @@
         "group": "SCOTLAND",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 305.44
+          "value": 291.37
         }
       },
       {
@@ -1084,7 +1084,7 @@
         "group": "SOUTH_EAST",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 325.38
+          "value": 310.39
         }
       },
       {
@@ -1093,7 +1093,7 @@
         "group": "SOUTH_WEST",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 293.3
+          "value": 279.79
         }
       },
       {
@@ -1102,7 +1102,7 @@
         "group": "WALES",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 293.95
+          "value": 280.41
         }
       },
       {
@@ -1111,7 +1111,7 @@
         "group": "WEST_MIDLANDS",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 310.16
+          "value": 295.87
         }
       },
       {
@@ -1120,7 +1120,7 @@
         "group": "YORKSHIRE",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 309.56
+          "value": 295.31
         }
       },
       {
@@ -1129,7 +1129,7 @@
         "group": "OWNED_OUTRIGHT",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 310.2
+          "value": 295.91
         }
       },
       {
@@ -1138,7 +1138,7 @@
         "group": "OWNED_WITH_MORTGAGE",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 332.41
+          "value": 317.1
         }
       },
       {
@@ -1147,7 +1147,7 @@
         "group": "RENT_FROM_COUNCIL",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 267.2
+          "value": 254.9
         }
       },
       {
@@ -1156,7 +1156,7 @@
         "group": "RENT_FROM_HA",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 252.36
+          "value": 240.74
         }
       },
       {
@@ -1165,7 +1165,7 @@
         "group": "RENT_PRIVATELY",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 275.91
+          "value": 263.2
         }
       },
       {
@@ -1174,7 +1174,7 @@
         "group": "A",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 258.04
+          "value": 246.16
         }
       },
       {
@@ -1183,7 +1183,7 @@
         "group": "B",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 285.38
+          "value": 272.24
         }
       },
       {
@@ -1192,7 +1192,7 @@
         "group": "C",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 292.72
+          "value": 279.24
         }
       },
       {
@@ -1201,7 +1201,7 @@
         "group": "D",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 331.64
+          "value": 316.37
         }
       },
       {
@@ -1210,7 +1210,7 @@
         "group": "E",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 371.47
+          "value": 354.36
         }
       },
       {
@@ -1219,7 +1219,7 @@
         "group": "F",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 394.78
+          "value": 376.6
         }
       },
       {
@@ -1228,7 +1228,7 @@
         "group": "G",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 417.07
+          "value": 397.87
         }
       },
       {
@@ -1237,7 +1237,7 @@
         "group": "H",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 408.83
+          "value": 390.0
         }
       },
       {
@@ -1246,7 +1246,7 @@
         "group": "I",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 492.69
+          "value": 470.0
         }
       },
       {
@@ -1255,7 +1255,7 @@
         "group": "dual_fuel",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 319.6
+          "value": 304.88
         }
       },
       {
@@ -1264,7 +1264,7 @@
         "group": "electric_only",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 202.05
+          "value": 192.74
         }
       },
       {
@@ -1273,7 +1273,7 @@
         "group": "other",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 305.33
+          "value": 291.26
         }
       },
       {
@@ -1282,7 +1282,7 @@
         "group": "prepayment",
         "outside_cap": false,
         "gross_change_gbp": {
-          "value": 269.22
+          "value": 256.83
         }
       }
     ]
@@ -1581,7 +1581,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 1875.67,
-        "central": 2027.72
+        "central": 2013.01
       }
     },
     {
@@ -1599,7 +1599,7 @@
         "oldest_age": 32,
         "pension_credit": false
       },
-      "bill_oct_dec_2026": 1149.88,
+      "bill_oct_dec_2026": 1152.82,
       "support": {
         "household_energy_payment": 100.0,
         "warm_home_discount": 150.0,
@@ -1609,7 +1609,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 1251.33,
-        "central": 1352.77
+        "central": 1326.0
       }
     },
     {
@@ -1637,7 +1637,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 2581.02,
-        "central": 2790.25
+        "central": 2790.8
       }
     },
     {
@@ -1655,7 +1655,7 @@
         "oldest_age": 58,
         "pension_credit": false
       },
-      "bill_oct_dec_2026": 1046.0,
+      "bill_oct_dec_2026": 1046.4,
       "support": {
         "household_energy_payment": 100.0,
         "warm_home_discount": 0.0,
@@ -1665,7 +1665,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 1138.28,
-        "central": 1230.55
+        "central": 1142.05
       }
     },
     {
@@ -1693,7 +1693,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 2063.05,
-        "central": 2230.29
+        "central": 2224.04
       }
     },
     {
@@ -1721,7 +1721,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 2076.96,
-        "central": 2245.34
+        "central": 2230.87
       }
     },
     {
@@ -1749,7 +1749,7 @@
       },
       "bill_jan_mar_2027": {
         "obr_path": 1875.67,
-        "central": 2027.72
+        "central": 2013.01
       }
     }
   ]

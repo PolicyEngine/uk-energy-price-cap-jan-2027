@@ -26,7 +26,7 @@ All figures: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policye
 | G0 freeze | 09:00 | 10:53:36 | MISSED (late 113 min) | start SHA 30f5a47 (PR #18 head, open, not merged); drill plan commit 5fe26ed; `make freeze` clean, managed false, certified false, no dataset_problem / engine_problem; policyengine-uk 2.177.7, core 3.34.10, policyengine none; dataset uk-frs-calibration-attempt-20261112T133744Z-6f918b81 sha256 e268e3af7932784ad4471f008097a5acc6c3c5bc15c4c54fbb5a489b2a0ac9ae; build_manifest engine policyengine-uk 2.177.7 / core 3.34.10 (pair matches); packet guard: "branch drill7-run: 9 packet hash(es) read, 0 problem(s)"; lock free; free+inactive about 26 GB |
 | G1 ledger | 10:10 | 11:04 | MISSED (late 54 min) | drill7/ledger.csv, 21 lines, each routed with route and cause; trap rows marked |
 | G2 provisional + hand checks | 10:30 | 11:02 | MISSED (late 32 min) | registry commit 808c8e7; typical bill from GB-average rates 2,027.26 vs level 2,027 (within £1); hand checks below |
-| G3 re-base and reconcile | 11:10 | 11:06 | MET | ledger + reconciliation commit c889c50; gaps over 10% with written reasons: N5 (timing), N6 (data_calibration), N10 (data_calibration), N11 (timing); cause vs gap scan done (only N7/L15 share `coverage`, justified in N7). Dashboard calculator presets not re-based (L02 note) |
+| G3 re-base and reconcile | 11:10 | 11:06 | MET | ledger + reconciliation commit c889c50; gaps over 10% with written reasons: N5 (timing), N6 (data_calibration), N10 (data_calibration), N11 (timing); cause vs gap scan done (only N7/L15 share `coverage`, justified in N7). calculator presets re-based to published rates by payment method at fa1aa35 (11:07; matches S1-S5 bills exactly) |
 
 ### G2 hand checks (one per coded measure)
 

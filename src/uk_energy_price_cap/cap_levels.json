@@ -81,8 +81,8 @@
     },
     {
       "id": "central",
-      "label": "Announced cap (MOCK, drill 7)",
-      "direct_debit": 2027,
+      "label": "Announced cap, corrected 11:15 (MOCK, drill 7)",
+      "direct_debit": 2013,
       "placeholder": true
     }
   ],
@@ -136,13 +136,13 @@
       "direct_debit": {
         "electricity_unit_p_per_kwh": 28.94,
         "electricity_standing_p_per_day": 56.4,
-        "gas_unit_p_per_kwh": 10.36,
+        "gas_unit_p_per_kwh": 10.21,
         "gas_standing_p_per_day": 31.15
       },
       "standard_credit": {
         "electricity_unit_p_per_kwh": 30.62,
         "electricity_standing_p_per_day": 61.9,
-        "gas_unit_p_per_kwh": 10.98,
+        "gas_unit_p_per_kwh": 10.82,
         "gas_standing_p_per_day": 34.85
       },
       "prepayment": {

@@ -1,6 +1,6 @@
 {
  "_note": "MOCK drill 7 packet inputs (T40_documents.md sections 2-4). Local branch only; never pushed.",
- "source": "T40_documents.md",
+ "source": "T40_documents.md, corrected by T75_inject.md (DD gas 10.21, SC gas 10.82)",
  "rates": {
   "oct_dec_2026": {
    "direct_debit": {
@@ -31,13 +31,13 @@
    "direct_debit": {
     "elec_unit": "28.94",
     "elec_sc": "56.40",
-    "gas_unit": "10.36",
+    "gas_unit": "10.21",
     "gas_sc": "31.15"
    },
    "standard_credit": {
     "elec_unit": "30.62",
     "elec_sc": "61.90",
-    "gas_unit": "10.98",
+    "gas_unit": "10.82",
     "gas_sc": "34.85"
    },
    "prepayment": {
@@ -189,7 +189,7 @@
    "band": "C",
    "benefit": true,
    "oldest": 70,
-   "note": "; Scotland: WHD rows in s3 are England and Wales only, so no WHD; WFP applied as s3 states (no country limit; real-world Scottish PAWHP not used); alternative if WFP were excluded in Scotland: support 100.00, net 203.65"
+   "note": "; Scotland: WHD rows in s3 are England and Wales only, so no WHD; WFP applied as s3 states (no country limit; real-world Scottish PAWHP not used); alternative if WFP were excluded in Scotland: support 100.00, net (see G5 row: annual change minus 100.00)"
   },
   {
    "id": "S8",

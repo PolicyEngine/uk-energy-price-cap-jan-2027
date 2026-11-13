@@ -25,7 +25,7 @@ from uk_energy_price_cap.models import Reform, Route, Status
 
 # Placeholder cap level for January to March 2027 (central of the
 # planning range, docs/candidate-reforms.md). Replace with Ofgem's figure.
-PLACEHOLDER_Q1_CAP = 2027  # drill 7 MOCK release, Direct Debit, 2026 basis
+PLACEHOLDER_Q1_CAP = 2013  # drill 7 MOCK release, corrected 11:15, Direct Debit, 2026 basis
 OCT_DEC_2026_CAP = 1723  # Ofgem, 2026 typical consumption basis
 # The typical bill the OBR's path implies for January to March 2027 (EFO
 # October 2026, para 2.22), on the 2026 basis: the baseline the lever moves.

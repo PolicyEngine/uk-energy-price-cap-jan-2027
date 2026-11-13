@@ -23,7 +23,7 @@ def test_rounding_is_half_up_to_the_penny():
 def test_scenario_scales_the_typical_bill():
     preset = household.BY_ID["typical_dd"]
     then = household.bill(preset, cap.price_factor("central"))["total"]
-    assert then == pytest.approx(2027, abs=1.0)  # drill 7 MOCK level
+    assert then == pytest.approx(2013, abs=1.0)  # drill 7 MOCK level, corrected
 
 
 def test_support_rules():

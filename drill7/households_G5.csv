@@ -1,0 +1,10 @@
+household_id,scoring_sha,in_scope,bill_oct_dec_2026,bill_jan_mar_2027,annual_change,winter_2026_27_support,net_change_after_winter_support,second_hep_apr_2027,notes
+S1,c136a00,yes,1723.61,2013.01,289.40,100.00,189.40,100.00,"support: HEP first Jan 2027 £100; GB average DD rates, typical consumption (matches release headline)"
+S2,c136a00,yes,1152.82,1326.00,173.18,350.00,-176.82,100.00,support: HEP first Jan 2027 £100 + WHD £150 + WHD top-up £100; prepayment rates
+S3,c136a00,yes,2371.78,2790.80,419.02,0.00,419.02,0.00,support: none; band E: no Household Energy Payment
+S4,c136a00,yes,1046.40,1142.05,95.65,100.00,-4.35,100.00,"support: HEP first Jan 2027 £100; Economy 7 DD, electricity only: no gas standing charge"
+S5,c136a00,yes,1895.80,2224.04,328.24,650.00,-321.76,100.00,support: HEP first Jan 2027 £100 + WHD £150 + WHD top-up £100 + WFP 80+ £300; WFP higher rate (oldest 81)
+S6,c136a00,yes,2059.02,2377.22,318.20,0.00,318.20,0.00,support: none; band E: no Household Energy Payment; standard credit rates
+S7,c136a00,yes,1723.61,2013.01,289.40,300.00,-10.60,0.00,"support: Scotland £100 Jan 2027 £100 + WFP 66-79 £200; Scotland: WHD rows in s3 are England and Wales only, so no WHD; WFP applied as s3 states (no country limit; real-world Scottish PAWHP not used); alternative if WFP were excluded in Scotland: support 100.00, net (see G5 row: annual change minus 100.00)"
+S8,c136a00,yes,1485.90,1738.92,253.02,350.00,-96.98,0.00,"support: Wales £100 Jan 2027 £100 + WHD £150 + WHD top-up £100; Wales band C: devolved £100, not the England HEP; second HEP is England only"
+S9,c136a00,no,,,,,,,"Northern Ireland: outside the GB cap and outside the GB payments in this drill (T40 s3); local supplier, heating oil. No cap bill or support computed; cells left blank, not £0."

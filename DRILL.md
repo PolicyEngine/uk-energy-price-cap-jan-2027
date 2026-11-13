@@ -8,10 +8,10 @@ This root `DRILL.md` is the only drill plan. On PR #9, `docs/DRILL.md` is a poin
 
 ## Preconditions
 
-- The drill branch is a local run branch cut from the head of `bump-policyengine-6.17.2` (PR #16, which branches from the template PR #9 and moves the engine to policyengine 6.17.2). Drills never merge, so cutting from that unmerged branch is allowed; the head SHA it was cut from is recorded in G0. If PR #16 has been merged into `template-dashboard` or `main` by then, cut from there and say which.
-- The drill branch is opened as a draft PR labelled `not for merge`. Apart from the bump branch above, it is never stacked on another unmerged PR.
+- The drill branch is a local run branch cut from the head of `engine-2.177.7-microcosm-9e18f010` (PR #18, stacked on `bump-policyengine-6.17.2`, PR #16, which branches from the template PR #9). PR #18 pins policyengine-uk 2.177.7 and policyengine-core 3.34.10 and Microcosm build `uk-frs-calibration-attempt-20261110T204756Z-9e18f010`. Drills never merge, so cutting from that unmerged branch is allowed; the head SHA it was cut from is recorded in G0. If PR #18 has been merged by then, cut from where it landed and say which. (Changed 13 November: the drill no longer runs on PR #16's policyengine 6.17.2 pair.)
+- The drill branch is opened as a draft PR labelled `not for merge`. Apart from the engine branch above and the PRs under it, it is never stacked on another unmerged PR.
 - The first commit on the drill branch is `git checkout origin/drill-plan -- DRILL.md`. The integrator then runs `uv run python scripts/check_packet_not_committed.py` and confirms it reports 8 packet hashes read. On a branch whose name contains `drill`, the script fails if the root `DRILL.md` is missing or lists no hashes, so name the branch `drill-...`.
-- If G0 cannot name a certified engine and data pair (issue #1), the drill runs on the household calculator and the synthetic `results.json`. Every figure is then labelled "unvalidated under this engine", and national rows are scored on basis and gap class only.
+- No policyengine.py release certifies the drill pair (issue #1 is open), so national rows are scored on basis and gap class only. The model run loads the dataset file directly with policyengine-uk 2.177.7, and every model figure carries the label "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release". This label replaces "unvalidated under this engine" (PR #18); wherever the answer key or this plan names "unvalidated under this engine" or "unvalidated", this label counts as that label. A national model run needs the heavy lock and at least 22 GB free; without it, the drill runs on the household calculator and the synthetic `results.json`.
 
 ## Roles (one person each)
 
@@ -28,7 +28,7 @@ Only the integrator pushes. The drill owner copies each file to the release fold
 
 | Time | Release | Gate |
 |---|---|---|
-| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it, and the integrator adds the packet-guard output line showing 8 hashes read): start SHA, policyengine and policyengine-uk versions, dataset name and SHA-256, and the certified pair or "unvalidated". Default pair: policyengine 6.17.2, policyengine-uk 2.174.1, policyengine-core 3.33.3, Microcosm `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e` (SHA-256 `0a9b77db1c0dee2693cb2d47bad68da34cb662916eee4829942bcd45de581f25`), the build 6.17.2 certifies. The model run still loads the file directly, so its figures carry the "unvalidated under this engine" label unless the owner rules otherwise |
+| by 09:00 | none | G0: freeze record in the drill PR (`make freeze DATASET=<file>` prints it, and the integrator adds the packet-guard output line showing 8 hashes read): start SHA, policyengine and policyengine-uk versions, dataset name and SHA-256, and the label. Drill pair: policyengine-uk 2.177.7, policyengine-core 3.34.10 (no policyengine.py), Microcosm build `uk-frs-calibration-attempt-20261110T204756Z-9e18f010` (SHA-256 `adb6204d0af5e08a42cccec81250ce116518687f964e31c654a17d658b3416e8`), the build made on 2.177.7. `freeze` must show neither `dataset_problem` nor `engine_problem`. Every figure carries the label "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release" |
 | 10:00 (T+0) | mock release (statement) | G1, 10:00 to 10:10: coverage ledger, each line routed |
 | 10:30 (T+30) | none | G2: provisional numbers against the release figures, and one hand-checked household per coded measure |
 | 10:40 (T+40) | documents: rates, costings, specimen households, blank scoring sheet | G3, to 11:10: re-base and reconcile; each gap over 10% has a written reason; update ledger causes |
@@ -111,6 +111,7 @@ Rulings, so scoring is the same whoever scores:
 - A `not-computable` line is scored on its route and its basis token (the data limit it names), not on a figure.
 - The ledger is scored on the final ledger at the stop commit, so causes set at G1 and changed after G3 or the inject count as changed.
 - Each trap row is scored yes or no: marked as already in the baseline (or inside another line), or not.
+- Engine label (13 November): on the PR #18 engine the label "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release" stands in for "unvalidated under this engine" in the publication-path and G0 points.
 
 ## Lessons carried from the Autumn Budget drills
 

@@ -189,7 +189,7 @@
    "band": "C",
    "benefit": true,
    "oldest": 70,
-   "note": "; Scotland: WHD rows in s3 are England and Wales only, so no WHD; WFP applied as s3 states (no country limit; real-world Scottish PAWHP not used); alternative if WFP were excluded in Scotland: support 100.00, net 204.65 (check)"
+   "note": "; Scotland: WHD rows in s3 are England and Wales only, so no WHD; WFP applied as s3 states (no country limit; real-world Scottish PAWHP not used); alternative if WFP were excluded in Scotland: support 100.00, net 203.65"
   },
   {
    "id": "S8",

@@ -34,13 +34,11 @@ def test_label_names_the_build_and_engine():
     from uk_energy_price_cap.data_build import DATA_BUILD, LABEL
 
     assert LABEL == (
-        "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, "
-        "policyengine-uk 2.177.7, not in a policyengine.py release"
+        f"build {DATA_BUILD.id}, policyengine-uk {DATA_BUILD.engine}, "
+        "not in a policyengine.py release"
     )
     assert DATA_BUILD.hf_path == (
-        "releases/microcosm-uk-2024-25-national/"
-        "uk-frs-calibration-attempt-20261110T204756Z-9e18f010/"
-        "microcosm_uk_2024_25.h5"
+        f"releases/microcosm-uk-2024-25-national/{DATA_BUILD.id}/microcosm_uk_2024_25.h5"
     )
 
 

@@ -5,11 +5,12 @@ Two sources, one output schema (docs/RESULTS_SCHEMA.md):
 - ``placeholder`` (default, what CI runs): synthetic households built here
   from a fixed seed. No microdata, no model. Every figure is a placeholder
   and the file says so in ``meta``.
-- ``model`` (the day): Microcosm through policyengine-uk, unmanaged
-  (``model_run.py``). It loads the dataset file directly, not through
-  the certified bundle (issue #1), so it runs only with
-  ``--allow-unmanaged`` and labels every figure "unvalidated under this
-  engine".
+- ``model`` (the day): Microcosm through policyengine-uk, loaded
+  directly (``model_run.py``). It uses the build in
+  ``data_build.DATA_BUILD`` with the policyengine-uk version it was built
+  on, a pair no policyengine.py release covers (issue #1), so it runs only
+  with ``--allow-unmanaged`` and labels every figure with
+  ``data_build.LABEL``.
 
 Basis (docs/METHOD.md, stated once there): household and decile bill
 changes are annualised, a full year at January to March 2027 prices
@@ -89,6 +90,9 @@ class HouseholdRecord:
     current_support: float
     hep: float
     weight: float
+    # Annual gas kWh: from the Microcosm file's gas_kwh column on the model
+    # path (household_kwh.py), derived from spend on the synthetic path.
+    gas_kwh: float = 0.0
     # Synthetic only: what the placeholder measure gains read.
     qualifying_benefit: bool = False
     disability_benefit: bool = False
@@ -105,6 +109,15 @@ class HouseholdRecord:
 
 
 SyntheticHousehold = HouseholdRecord
+
+
+def _synthetic_gas_kwh(gas: float) -> float:
+    """kWh implied by a synthetic gas spend at the current rates."""
+    if gas <= 0:
+        return 0.0
+    rates = cap.current_rates()
+    pence = gas * 100 - cap.DAYS * rates["gas_standing_p_per_day"]
+    return round(max(pence, 0.0) / rates["gas_unit_p_per_kwh"], 1)
 
 
 def _pick(rng: random.Random, options):
@@ -161,6 +174,7 @@ def synthetic_households(n: int = 3000, seed: int = 20270101):
                 current_support=support["total"],
                 hep=support["household_energy_payment"],
                 weight=HOUSEHOLDS_UK / n,
+                gas_kwh=_synthetic_gas_kwh(round(gas, 2)),
                 qualifying_benefit=qualifying,
                 disability_benefit=disability,
                 oldest_age=age,
@@ -256,8 +270,10 @@ def assemble(
 ) -> dict:
     """The results file from household records and measure gains.
 
-    ``gains`` maps each computable support measure to its policy year and
-    one annual gain per household (same order as ``hh``). One function for
+    ``gains`` maps each computable support measure, and each measure with
+    a household rule (such as the gas standing charge, a bills measure whose
+    gain is the fall in the bill), to its policy year and one annual gain
+    per household (same order as ``hh``). One function for
     both sources, so the schema cannot drift between them.
     """
     index = {id(h): i for i, h in enumerate(hh)}
@@ -370,7 +386,8 @@ def assemble(
             "households_reached_m": None,
         }
         withdrawn = r.status == Status.WITHDRAWN
-        if r.is_computable and r.lever == "support" and not withdrawn:
+        gains_line = r.lever == "support" or r.household_rule is not None
+        if r.is_computable and gains_line and not withdrawn:
             year, values = gains[r.id]
             total = sum(v * h.weight for v, h in zip(values, hh))
             reached = sum(h.weight for v, h in zip(values, hh) if v > 0)
@@ -461,6 +478,9 @@ def build_placeholder(n: int = 3000, seed: int = 20270101) -> dict:
     hh = synthetic_households(n, seed)
     gains = {}
     for r in reforms.computable():
+        if r.household_rule is not None:
+            gains[r.id] = r.household_rule(hh)
+            continue
         if r.lever != "support":
             continue
         values = [_measure_gain(r.id, h) for h in hh]

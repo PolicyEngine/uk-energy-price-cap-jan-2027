@@ -28,7 +28,15 @@ export default function PolicyCards({ measures, repoUrl }) {
             <p className="mt-1 text-sm text-slate-700">{m.description}</p>
             {detail && <p className="mt-2 text-sm">{detail}</p>}
             {m.computable ? (
-              m.cost_gbp_m !== null && <p className="mt-2 text-sm">Cost: {formatMillions(m.cost_gbp_m)}</p>
+              m.lever === "bills" ? (
+                m.households_reached_m !== null && (
+                  <p className="mt-2 text-sm" data-testid="bills-reach">
+                    Households paying less: {m.households_reached_m.toFixed(1)}m
+                  </p>
+                )
+              ) : (
+                m.cost_gbp_m !== null && <p className="mt-2 text-sm">Cost: {formatMillions(m.cost_gbp_m)}</p>
+              )
             ) : (
               <p className="mt-2 text-sm text-slate-600" data-testid="limit-reason">
                 {reason.text}

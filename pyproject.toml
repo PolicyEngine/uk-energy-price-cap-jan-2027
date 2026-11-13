@@ -18,20 +18,26 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# The engine for real runs. policyengine 6.17.2 pins policyengine-uk 2.174.1
-# (which has the Household Energy Payment and the energy price indices, from
-# 2.170.2) and policyengine-core 3.33.3, and certifies Microcosm build
-# microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e. The model run
-# still loads the frozen dataset file directly (unmanaged) and labels every
-# figure "unvalidated under this engine" (issue #1).
+# The engine for real runs: the policyengine-uk and policyengine-core
+# versions Microcosm build uk-frs-calibration-attempt-20261112T133744Z-6f918b81
+# was built and certified on (src/uk_energy_price_cap/data_build.py). No
+# policyengine.py release pins this pair, so the model run loads
+# policyengine_uk and the dataset file directly (it never imported
+# policyengine.py) and labels every figure "build ..., policyengine-uk
+# 2.177.7, not in a policyengine.py release" (issue #1). Keep these two pins
+# equal to DATA_BUILD.engine and DATA_BUILD.core; the run refuses any other.
 model = [
-    "policyengine[uk]==6.17.2",
+    "policyengine-uk==2.177.7",
+    "policyengine-core==3.34.10",
     "numpy>=1.24.0",
     "h5py>=3.0.0",
 ]
 dev = [
     "pytest>=8.0.0",
     "ruff>=0.6.0",
+    # tests/test_household_kwh.py writes a small Microcosm-shaped file.
+    "h5py>=3.0.0",
+    "numpy>=1.24.0",
 ]
 
 [project.scripts]

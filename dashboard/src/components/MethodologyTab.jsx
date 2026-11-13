@@ -70,7 +70,12 @@ export default function MethodologyTab({ meta, cap, measures, repoUrl }) {
         <p className="text-sm text-slate-700" data-testid="replication">
           policyengine-uk: {engine.policyengine_uk}. Dataset: {engine.dataset}
           {engine.dataset_sha256 ? ` (SHA-256 ${engine.dataset_sha256.slice(0, 12)})` : ""}.{" "}
-          {engine.validated ? "Certified engine and data pair." : "Unvalidated under this engine."} Code:{" "}
+          {engine.validated
+            ? "Certified engine and data pair."
+            : engine.label
+              ? `Engine and data: ${engine.label}.`
+              : "Not a model run."}{" "}
+          Code:{" "}
           <a href={commit ? `${repoUrl}/tree/${commit}` : repoUrl}>
             {repoUrl.replace("https://", "")}
             {commit ? ` at ${commit.slice(0, 7)}` : ""}

@@ -4,11 +4,11 @@ Ofgem announces the cap for 1 January to 31 March 2027 on or before 25 November 
 
 ## Before the day (by Friday 20 November)
 
-- [ ] Engine and data pair certified, or the "unvalidated under this engine" label agreed (issue #1).
+- [ ] Engine and data pair fixed in `data_build.DATA_BUILD` and labelled "build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policyengine-uk 2.177.7, not in a policyengine.py release" (issue #1); switch to build `…-6f918b81` if it is published first.
 - [ ] Income measure for support charts confirmed (issue #5; docs/METHOD.md states the current choice).
 - [ ] Spend level choice recorded in docs/METHOD.md (issue #7).
 - [ ] Northern Ireland treatment checked in the pipeline (issue #8).
-- [ ] `uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>` run once on the frozen pair, alone on the machine. The manifest's cap-lever check for the OBR path scenario must be about zero.
+- [ ] `uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>` run once on the frozen pair, alone on the machine. The run takes the machine-wide lock itself (`heavy.py`: the file `/tmp/pe-heavy.lock` holding "<pid> uk-energy-price-cap-generate", created with noclobber and removed only by its owner) and waits for 22 GB of free+inactive memory before the first simulation; it waits, without loading anything, while another job holds the lock. The manifest's cap-lever check for the OBR path scenario must be about zero.
 - [ ] Drill on Friday 13 November run and its retro filed (plan: https://github.com/PolicyEngine/uk-energy-price-cap-jan-2027/blob/drill-plan/DRILL.md).
 
 ## Ledger classes (G1)
@@ -21,7 +21,7 @@ Status: `announced` (published with figures), `withdrawn` (a candidate lever not
 
 ## G0: freeze (by T−60 minutes)
 
-`make freeze DATASET=<file>` prints the record. Post it in the PR: start commit SHA; installed policyengine, policyengine-uk and policyengine-core versions; dataset build id and SHA-256; certified pair or "unvalidated"; the declared basis (docs/METHOD.md).
+`make freeze DATASET=<file>` prints the record. Post it in the PR: start commit SHA; installed policyengine, policyengine-uk and policyengine-core versions; dataset build id and SHA-256 (the record shows `dataset_problem` or `engine_problem` if either differs from `DATA_BUILD`); the label; the declared basis (docs/METHOD.md).
 
 ## G1: coverage ledger (T to T+10)
 

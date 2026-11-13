@@ -31,7 +31,7 @@ OCT_DEC_2026_CAP = 1723  # Ofgem, 2026 typical consumption basis
 # October 2026, para 2.22), on the 2026 basis: the baseline the lever moves.
 OBR_Q1_2027_CAP = cap.scenario("obr_path")["direct_debit"]
 # The OBR's year-on-year CPI utilities rates the lever replaces, as in
-# policyengine-uk 2.174.1 energy_prices/obr.yaml (tests/engine checks them
+# policyengine-uk 2.177.7 energy_prices/obr.yaml (tests/engine checks them
 # against the installed engine).
 OBR_UTILITIES = {"2027Q1": 0.113241, "2028Q1": -0.105705}
 
@@ -63,6 +63,30 @@ BILL_CREDIT = "gov.treasury.energy_bills_rebate.energy_bills_credit"
 WFP = "gov.dwp.winter_fuel_payment.amount"
 
 PH = Status.PLACEHOLDER
+# The gas standing-charge move applies from April 2027 (fiscal 2027-28),
+# at October to December 2026 rates until Ofgem sets the 2027 ones.
+GAS_STANDING_CHARGE_YEAR = 2027
+
+
+def gas_standing_charge_gains(hh, share: float = 1.0):
+    """(year, gain in £ per household) when the gas standing charge moves.
+
+    Gas households are those with ``gas_kwh > 0`` in the Microcosm file
+    (household_kwh.py); Northern Ireland is outside the cap. A gain is the
+    fall in the bill, so a low-use home gains and a high-use home pays more;
+    the weighted total is zero.
+    """
+    from uk_energy_price_cap import household_kwh
+
+    change, _rise = household_kwh.standing_charge_to_unit_rate(
+        [h.gas_kwh for h in hh],
+        [h.weight for h in hh],
+        [h.country != "NORTHERN_IRELAND" for h in hh],
+        cap.current_rates()["gas_standing_p_per_day"],
+        share,
+    )
+    return GAS_STANDING_CHARGE_YEAR, [-c for c in change]
+
 
 REFORMS: list[Reform] = [
     Reform(
@@ -263,15 +287,11 @@ REFORMS: list[Reform] = [
             "cost through a higher unit rate, so that bills raise the same "
             "total."
         ),
-        route=Route.NOT_COMPUTABLE,
+        household_rule=gas_standing_charge_gains,
+        route=Route.DASHBOARD_STRUCTURAL,
         status=PH,
         lever="bills",
         likelihood="announced",
-        limit_reason=(
-            "The data hold gas spending in pounds, not kWh, and do not say "
-            "which homes are on mains gas, so moving the standing charge "
-            "into the unit rate cannot be estimated (issue #4)."
-        ),
     ),
     Reform(
         id="electricity_standing_charge_shift",
@@ -285,9 +305,9 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="low",
         limit_reason=(
-            "The data hold electricity spending in pounds, not kWh or "
-            "tariff type, so a change to the standing charge cannot be "
-            "estimated (issue #4)."
+            "The data hold each household's electricity kWh but not its "
+            "tariff type, so Economy 7 homes cannot be told apart and a "
+            "change to the standing charge cannot be estimated (issue #4)."
         ),
     ),
     Reform(
@@ -333,7 +353,10 @@ REFORMS: list[Reform] = [
         lever="support",
         likelihood="low",
         limit_reason=(
-            "The model does not include the Cold Weather Payment (issue #8)."
+            "The model does not include the Cold Weather Payment "
+            "(policyengine-uk issue 435). Scotland pays the Winter Heating "
+            "Payment instead, so a change would not reach all of Great "
+            "Britain."
         ),
     ),
     Reform(
@@ -375,6 +398,11 @@ BY_ID: dict[str, Reform] = {r.id: r for r in REFORMS}
 
 def get(reform_id: str) -> Reform:
     return BY_ID[reform_id]
+
+
+def household_rules() -> list[Reform]:
+    """Computable measures worked out from household records, not the engine."""
+    return [r for r in computable() if r.household_rule is not None]
 
 
 def computable() -> list[Reform]:

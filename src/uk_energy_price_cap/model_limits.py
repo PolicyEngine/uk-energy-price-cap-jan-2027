@@ -2,8 +2,8 @@
 
 ``MODEL_LIMITS`` names levers with no parameter or variable in
 policyengine-uk. ``MIN_ENGINE`` names parameters that exist only from a
-given policyengine-uk version. The certified bundle in policyengine 6.17.2
-pins policyengine-uk 2.174.1, which has all of them (issue #1).
+given policyengine-uk version. The model run uses policyengine-uk 2.177.7
+(``data_build.DATA_BUILD``), which has all of them (issue #1).
 """
 
 import warnings
@@ -30,7 +30,10 @@ MODEL_LIMITS: dict[str, str] = {
         "Values mix the 2023 and 2026 typical consumption bases across July "
         "2026, and epg_subsidy scales by their ratio (issue #3)."
     ),
-    "cold_weather_payment": "No Cold Weather Payment variable (issue #8).",
+    "cold_weather_payment": (
+        "No Cold Weather Payment variable (policyengine-uk#435). Scotland "
+        "pays the Winter Heating Payment instead, so coverage is not GB."
+    ),
 }
 
 # The first policyengine-uk release on PyPI with each path in the form this
@@ -51,8 +54,6 @@ MIN_ENGINE: dict[str, str] = {
 }
 
 BUDGET_ERA_ENGINE = "2.170.2"
-
-CERTIFIED_ENGINE = "2.174.1"
 
 
 def model_limit_reason(path: str) -> str | None:

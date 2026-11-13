@@ -26,11 +26,11 @@ Probable levers between the 25 November announcement and spring 2027, with the r
 | `universal_bill_credit` | Credit on every bill | £150 | £100 to £400 | low | dashboard-param | none |
 | `wfp_top_up` | Larger Winter Fuel Payment | +£100 | +£50 to +£200 | low | dashboard-param | none |
 | `targeted_energy_discount` | Targeted discount | £175 below £24,000 | flat or tiered, about £2bn | medium | needs-pe-uk-first | port existing contributed code into `measures/` |
-| `gas_standing_charge_removal` | Gas standing charge into the unit rate | revenue neutral | from 2027; government says about 60% of households save about £45 a year | announced (detail pending) | not-computable | #4 |
+| `gas_standing_charge_removal` | Gas standing charge into the unit rate | revenue neutral | from 2027; government says about 60% of households save about £45 a year | announced (detail pending) | dashboard-structural (file `gas_kwh`) | #4 |
 | `electricity_standing_charge_shift` | Part of the electricity standing charge into the unit rate | 50% | 0 to 100% | low | not-computable | #4 |
 | `price_guarantee` | Bills held at a set level | £1,723 | £1,723 to £2,000 | low | needs-pe-uk-first | #3 |
 | `levies_off_electricity` | Remaining policy costs off electricity | about £40 to £80 | unconfirmed | low | needs-pe-uk-first | #2 |
-| `cold_weather_payment` | Larger Cold Weather Payment | £50 a week | £25 to £50 | low | needs-pe-uk-first | #8 |
+| `cold_weather_payment` | Larger Cold Weather Payment | £50 a week | £25 to £50 | low | needs-pe-uk-first | policyengine-uk#435; Scotland pays the Winter Heating Payment |
 | `energy_debt_relief` | Energy debt relief | one-off | Ofgem to consult | announced | ledger | no arrears in the data |
 | `prepayment_levelisation` | Prepayment levelisation | – | Ofgem policy | low | not-computable | #4 |
 

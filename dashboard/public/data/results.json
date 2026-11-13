@@ -310,16 +310,16 @@
       "id": "gas_standing_charge_removal",
       "name": "Gas standing charge moved into the unit rate",
       "description": "Placeholder. Removes the gas standing charge and recovers the cost through a higher unit rate, so that bills raise the same total.",
-      "route": "not-computable",
+      "route": "dashboard-structural",
       "status": "placeholder",
       "lever": "bills",
       "likelihood": "announced",
-      "computable": false,
-      "reason": "The data hold gas spending in pounds, not kWh, and do not say which homes are on mains gas, so moving the standing charge into the unit rate cannot be estimated (issue #4).",
+      "computable": true,
+      "reason": null,
       "calculator_only": false,
-      "year": null,
-      "cost_gbp_m": null,
-      "households_reached_m": null
+      "year": 2027,
+      "cost_gbp_m": 0.0,
+      "households_reached_m": 11.97
     },
     {
       "id": "electricity_standing_charge_shift",
@@ -330,7 +330,7 @@
       "lever": "bills",
       "likelihood": "low",
       "computable": false,
-      "reason": "The data hold electricity spending in pounds, not kWh or tariff type, so a change to the standing charge cannot be estimated (issue #4).",
+      "reason": "The data hold each household's electricity kWh but not its tariff type, so Economy 7 homes cannot be told apart and a change to the standing charge cannot be estimated (issue #4).",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -375,7 +375,7 @@
       "lever": "support",
       "likelihood": "low",
       "computable": false,
-      "reason": "The model does not include the Cold Weather Payment (issue #8).",
+      "reason": "The model does not include the Cold Weather Payment (policyengine-uk issue 435). Scotland pays the Winter Heating Payment instead, so a change would not reach all of Great Britain.",
       "calculator_only": false,
       "year": null,
       "cost_gbp_m": null,
@@ -2743,6 +2743,86 @@
       "year": 2026,
       "avg_change_gbp": {
         "value": 37.33
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 1,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 0.18
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 2,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 1.37
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 3,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 2.22
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 4,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": -0.66
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 5,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": -3.12
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 6,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 1.94
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 7,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": -1.89
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 8,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": -1.01
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 9,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 0.88
+      }
+    },
+    {
+      "measure_id": "gas_standing_charge_removal",
+      "decile": 10,
+      "year": 2027,
+      "avg_change_gbp": {
+        "value": 0.09
       }
     }
   ],

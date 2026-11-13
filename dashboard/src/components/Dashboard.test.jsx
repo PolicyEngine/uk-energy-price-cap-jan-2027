@@ -76,10 +76,27 @@ describe("Dashboard", () => {
     expect(screen.getAllByTestId("policy-card")[0].textContent).toMatch(/Placeholder/);
   });
 
-  it("labels the run as unvalidated on the Methodology tab, with sources and plain basis labels", () => {
-    window.history.replaceState(null, "", "/?tab=methodology");
+  it("shows a revenue-neutral bills measure by who pays less, not as a £0 cost", () => {
     render(<Dashboard data={results} />);
-    expect(screen.getByTestId("replication").textContent).toMatch(/unvalidated under this engine/i);
+    fireEvent.click(screen.getByRole("tab", { name: "Policies" }));
+    const gas = results.measures.find((m) => m.id === "gas_standing_charge_removal");
+    expect(gas.computable && gas.lever === "bills").toBe(true);
+    const card = document.getElementById("measure-gas_standing_charge_removal");
+    expect(card.querySelector('[data-testid="bills-reach"]').textContent).toMatch(/Households paying less: [\d.]+m/);
+    expect(card.textContent).not.toMatch(/Cost:/);
+  });
+
+  it("labels the run with its build and engine on the Methodology tab, with sources and plain basis labels", () => {
+    window.history.replaceState(null, "", "/?tab=methodology");
+    const label =
+      "build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policyengine-uk 2.177.7, not in a policyengine.py release";
+    const { unmount } = render(
+      <Dashboard data={{ ...results, meta: { ...results.meta, engine: { ...results.meta.engine, label } } }} />,
+    );
+    expect(screen.getByTestId("replication").textContent).toContain(`Engine and data: ${label}.`);
+    unmount();
+    render(<Dashboard data={results} />);
+    expect(screen.getByTestId("replication").textContent).toMatch(/Not a model run/);
     expect(screen.getByTestId("sources").querySelectorAll("li")).toHaveLength(Object.keys(results.cap.sources).length);
     expect(screen.getByTestId("basis-list").textContent).toMatch(/What is measured/);
     expect(screen.getByTestId("basis-list").textContent).not.toMatch(/\bflow\b:/);

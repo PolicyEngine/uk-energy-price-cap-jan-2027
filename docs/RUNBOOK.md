@@ -8,7 +8,7 @@ Ofgem announces the cap for 1 January to 31 March 2027 on or before 25 November 
 - [ ] Income measure for support charts confirmed (issue #5; docs/METHOD.md states the current choice).
 - [ ] Spend level choice recorded in docs/METHOD.md (issue #7).
 - [ ] Northern Ireland treatment checked in the pipeline (issue #8).
-- [ ] `uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>` run once on the frozen pair, alone on the machine. The manifest's cap-lever check for the OBR path scenario must be about zero.
+- [ ] `uk-energy-price-cap generate --source model --allow-unmanaged --dataset <file>` run once on the frozen pair, alone on the machine. The run takes the machine-wide lock itself (`heavy.py`: the file `/tmp/pe-heavy.lock` holding "<pid> uk-energy-price-cap-generate", created with noclobber and removed only by its owner) and waits for 22 GB of free+inactive memory before the first simulation; it waits, without loading anything, while another job holds the lock. The manifest's cap-lever check for the OBR path scenario must be about zero.
 - [ ] Drill on Friday 13 November run and its retro filed (plan: https://github.com/PolicyEngine/uk-energy-price-cap-jan-2027/blob/drill-plan/DRILL.md).
 
 ## Ledger classes (G1)

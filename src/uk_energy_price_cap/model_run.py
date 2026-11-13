@@ -10,7 +10,8 @@ without ``allow_unmanaged`` or on a dirty tree.
 
 Each simulation runs in its own fresh process (one simulation per
 process), so memory is returned between runs; the parent keeps only the
-household arrays it needs. A national run is a heavy job: run it alone.
+household arrays it needs. A national run is a heavy job: it holds the
+machine-wide lock and waits for 22 GB of free memory first (``heavy``).
 
 What it reads (household level):
 - baseline, fiscal 2026-27: electricity and gas spend, restated to annual
@@ -31,7 +32,7 @@ import multiprocessing
 from pathlib import Path
 from typing import Callable
 
-from uk_energy_price_cap import cap, publication, reforms
+from uk_energy_price_cap import cap, heavy, publication, reforms
 from uk_energy_price_cap.data_build import DATA_BUILD, LABEL
 from uk_energy_price_cap.model_limits import BUDGET_ERA_ENGINE
 
@@ -194,8 +195,6 @@ def build(
     runner: Callable = _run,
 ) -> dict:
     """Run the model and assemble the results file (pipeline.assemble)."""
-    from uk_energy_price_cap import pipeline
-
     if not allow_unmanaged:
         raise ModelRunError(
             "No policyengine.py release covers the engine and data pair "
@@ -217,6 +216,18 @@ def build(
         raise ModelRunError(record["engine_problem"])
     if record.get("dataset_problem"):
         raise ModelRunError(record["dataset_problem"])
+    if runner is not _run:
+        return _run_and_assemble(path, record, assemble, runner)
+    # A national run: take the machine-wide lock and wait for memory first.
+    with heavy.heavy_lock("uk-energy-price-cap-generate"):
+        return _run_and_assemble(path, record, assemble, runner)
+
+
+def _run_and_assemble(
+    path: Path, record: dict, assemble: Callable, runner: Callable
+) -> dict:
+    """The simulations and the results file, after build()'s checks."""
+    from uk_energy_price_cap import pipeline
 
     support_measures = [
         r

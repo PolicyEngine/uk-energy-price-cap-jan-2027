@@ -80,21 +80,9 @@
       "placeholder": true
     },
     {
-      "id": "low",
-      "label": "Low (placeholder)",
-      "direct_debit": 1950,
-      "placeholder": true
-    },
-    {
       "id": "central",
-      "label": "Central (placeholder)",
-      "direct_debit": 2180,
-      "placeholder": true
-    },
-    {
-      "id": "high",
-      "label": "High (placeholder)",
-      "direct_debit": 2300,
+      "label": "Announced cap (MOCK, drill 7)",
+      "direct_debit": 2027,
       "placeholder": true
     }
   ],

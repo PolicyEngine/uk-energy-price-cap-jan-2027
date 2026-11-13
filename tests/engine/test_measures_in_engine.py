@@ -65,6 +65,7 @@ PIP = {
 # measure id -> (situation, variable, year)
 CASES = {
     "hep_top_up": (_situation(), "household_energy_payment", 2026),
+    "hep_second_apr_2027": (_situation(), "household_energy_payment", 2027),
     "hep_band_e": (_situation(band="E"), "household_energy_payment", 2026),
     "hep_great_britain": (
         _situation("SCOTLAND"),
@@ -175,3 +176,11 @@ def test_cap_lever_moves_only_january_to_march_2027():
     # Fiscal 2027-28 is unchanged: the gap lasts one quarter.
     assert reform_fy[2027] == pytest.approx(base_fy[2027])
     assert reform_fy[2026][0] > base_fy[2026][0]
+
+
+def test_second_hep_pays_exactly_100_in_2027_28():
+    situation, variable, year = CASES["hep_second_apr_2027"]
+    changes = reforms.get("hep_second_apr_2027").parameter_changes
+    base, _ = _run(None, situation, variable, year)
+    reformed, _ = _run(changes, situation, variable, year)
+    assert (base, reformed) == (0, 100)

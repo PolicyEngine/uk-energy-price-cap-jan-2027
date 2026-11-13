@@ -196,6 +196,8 @@ def _measure_gain(measure_id: str, h: HouseholdRecord) -> tuple[int, float]:
     ew = h.country in ("ENGLAND", "WALES")
     if measure_id == "hep_top_up":
         return 2026, 100.0 if england_ad else 0.0
+    if measure_id == "hep_second_apr_2027":
+        return 2027, 100.0 if england_ad else 0.0
     if measure_id == "hep_band_e":
         return 2026, 100.0 if (
             h.country == "ENGLAND" and h.council_tax_band == "E"
@@ -205,7 +207,7 @@ def _measure_gain(measure_id: str, h: HouseholdRecord) -> tuple[int, float]:
             h.country in ("SCOTLAND", "WALES") and h.council_tax_band in "ABCD"
         ) else 0.0
     if measure_id == "whd_uplift":
-        return 2026, 150.0 if (ew and h.qualifying_benefit) else 0.0
+        return 2026, 100.0 if (ew and h.qualifying_benefit) else 0.0
     if measure_id == "whd_disability_benefits":
         return 2026, 150.0 if (
             ew and h.disability_benefit and not h.qualifying_benefit

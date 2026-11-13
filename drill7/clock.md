@@ -18,6 +18,7 @@ All figures: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policye
 | T0_release.md | read 10:53 (released 10:00) | b660a82e…283d7 | yes |
 | T40_documents.md | read 10:53 (released 10:40) | b6dd3d0a…6481f | yes |
 | T40_scoring_sheet.csv | read 10:53 (released 10:40) | f7583abc…c4a99 | yes |
+| T75_inject.md | read 11:15:06 (released 11:15) | 45208400…82dde | yes |
 
 ## Gates
 
@@ -27,6 +28,8 @@ All figures: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policye
 | G1 ledger | 10:10 | 11:04 | MISSED (late 54 min) | drill7/ledger.csv, 21 lines, each routed with route and cause; trap rows marked |
 | G2 provisional + hand checks | 10:30 | 11:02 | MISSED (late 32 min) | registry commit 808c8e7; typical bill from GB-average rates 2,027.26 vs level 2,027 (within £1); hand checks below |
 | G3 re-base and reconcile | 11:10 | 11:06 | MET | ledger + reconciliation commit c889c50; gaps over 10% with written reasons: N5 (timing), N6 (data_calibration), N10 (data_calibration), N11 (timing); cause vs gap scan done (only N7/L15 share `coverage`, justified in N7). calculator presets re-based to published rates by payment method at fa1aa35 (11:07; matches S1-S5 bills exactly) |
+| G5 correction | on inject (11:15) | 11:18:33 | MET | inject read 11:15:06; inputs fixed in one commit c136a00 (11:15:21); every specimen row rescored (drill7/households_G5.csv, scoring SHA c136a00); G2 hand check re-run: typical DD bill 2,013.01 vs corrected 2,013; engine hand checks unaffected (support amounts unchanged); national rerun at ef64159 11:15:28 to 11:18:21; ledger L01/L02/L10 causes reviewed and L22/L23 added; reconciliation N1-N5, N11, N13 updated (33a730e); nothing was public, so no withdraw step |
+| G4 publication check | 11:40 | 11:18:51 | MET | `NEXT_PUBLIC_MOCK=1 bun run build` ok; `bun run start -p 4873`; X-Robots-Tag: noindex, nofollow; meta robots noindex, nofollow, nocache; MOCK banner present; build label on page; `MOCK=1 scripts/smoke-built-site.sh` 0 failures; `make check` 0 problems (validate, check_public_data, check-public); meta.placeholder true and no measure drops placeholder (announced ones keep it, others withdrawn); server stopped by PID, port free. One checker only (one agent) |
 
 ### G2 hand checks (one per coded measure)
 
@@ -46,6 +49,10 @@ All figures: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policye
 | pytest (full, incl. engine) | 10:56 | 11:01 | three runs while fixing drill-day test pins |
 | National run `make generate DATASET=…` at 08e0b8b | 11:01:48 | 11:04:52 | 184 s wall; peak RSS 14.9 GB; took and released /tmp/pe-heavy.lock (pid 55262); receipt dataset_sha256 e268e3af…c9ae = G0 SHA; meta.placeholder true; cap lever check obr_path 0.000, central 1.525 bn |
 | make check | 11:06:05 | 11:06:09 | validate 0, check_public_data 0, check-public 0 |
+| G5 national rerun at ef64159 | 11:15:28 | 11:18:21 | 173 s wall; peak RSS 14.9 GB; lock taken and released; receipt dataset_sha256 = G0 SHA; cap lever check obr_path 0.000, central 1.385 bn |
+| make check (G5) | 11:18:25 | 11:18:33 | 0 problems |
+| G4 build + start + curl + smoke | 11:18:35 | 11:18:51 | all pass |
+| Known test failures at stop | – | – | pytest test_committed_file_matches_the_generator and 4 dashboard tests pin the placeholder results.json; they fail because results.json now holds the model run (expected on the day; not a publication check) |
 
 ## People time
 
@@ -56,6 +63,10 @@ All figures: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policye
 | Specimen scorer and G3 scoring | 11:01 | 11:02:35 |
 | Ledger | 11:02:40 | 11:04 |
 | Reconciliation | 11:05 | 11:06 |
+| Wait for inject | 11:08 | 11:15 |
+| Read inject, fix inputs, rescore | 11:15:06 | 11:15:28 |
+| Ledger + reconciliation update (G5) | 11:15:30 | 11:18:33 |
+| Stop | 11:19 | – |
 
 ## Commits
 
@@ -69,15 +80,27 @@ All figures: build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policye
 | beffdf1 | 11:02:35 | S7 note fix; **scoring run 1 (G3) SHA** |
 | 3f3c5d5 | 11:02:35 | households_G3.csv (scored at beffdf1) |
 | c889c50 | 11:06:11 | national results, ledger, reconciliation |
+| c3d7e95 | 11:06:32 | clock through G3 |
+| fa1aa35 | 11:07:28 | calculator re-based to published rates by method |
+| 52f8aca | 11:07:59 | build label beside model figures |
+| c136a00 | 11:15:21 | correction applied; **scoring run 2 (G5) SHA** |
+| ef64159 | 11:15:27 | households_G5.csv; G5 national run commit |
+| 33a730e | 11:18:33 | G5 results, ledger, reconciliation |
+| stop commit | see ~/drill7-int/FREEZE.txt and ~/drill7-work/FREEZE_POSTED | this file is in the stop commit and cannot name its own SHA |
 
 ## Scoring runs (one SHA per run)
 
 | Run | SHA | Output |
 |---|---|---|
 | 1 (G3) | beffdf1 | drill7/households_G3.csv |
+| 2 (G5, scored) | c136a00 | drill7/households_G5.csv (final scored file) |
 
 ## Defects (reconciler)
 
 | Time found | Defect | Time read by integrator | Fix |
 |---|---|---|---|
 | 11:02 | S7 alternative-net note had an arithmetic slip (204.65 vs 203.65) before scoring run 1 | 11:02 | beffdf1 (scored figures unaffected) |
+
+## Stop
+
+Stop at about 11:20 (before the 11:50 stop slot). Scored outputs: drill7/households_G5.csv, drill7/ledger.csv, drill7/reconciliation.csv, drill7/clock.md, dashboard/public/data/results.json. Hashes in ~/drill7-int/FREEZE.txt. No change to any scored file after the freeze.

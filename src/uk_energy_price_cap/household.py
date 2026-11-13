@@ -149,8 +149,42 @@ def _method_factor(method: str) -> float:
     return levels[method] / levels["direct_debit"]
 
 
-def bill(preset: Preset, factor: float = 1.0) -> dict[str, float]:
-    """Annual bill at current rates scaled by ``factor``."""
+# The announced scenario is priced from the published rates by payment
+# method (G3 re-base); other scenarios keep the single scaling.
+PUBLISHED = {"central": "2027Q1", None: "2026Q4"}
+
+
+def published_bill(preset: Preset, period: str) -> dict[str, float] | None:
+    """Annual bill from the published rates by payment method, if any."""
+    table = cap.CAP.get("rates_by_method", {}).get(period)
+    if not table:
+        return None
+    r = table[preset.payment_method]
+    if preset.payment_method == "economy_7_direct_debit":
+        share = cap.CAP["rates_by_method"]["economy_7_day_share"]
+        kwh = preset.electricity_kwh
+        p = (
+            kwh * share * r["day_p_per_kwh"]
+            + kwh * (1 - share) * r["night_p_per_kwh"]
+            + cap.DAYS * r["electricity_standing_p_per_day"]
+        )
+        total = cap.pence_to_pounds(p / 100)
+        return {"electricity": total, "gas": 0.0, "total": total}
+    return cap.annual_bill(preset.electricity_kwh, preset.gas_kwh, dict(r))
+
+
+def bill(
+    preset: Preset, factor: float = 1.0, scenario_id: str | None = None
+) -> dict[str, float]:
+    """Annual bill at current rates scaled by ``factor``.
+
+    With a published period for the scenario (``PUBLISHED``), the bill
+    comes from the published rates for the preset's payment method.
+    """
+    if scenario_id in PUBLISHED and (scenario_id or factor == 1.0):
+        published = published_bill(preset, PUBLISHED[scenario_id])
+        if published is not None:
+            return published
     if preset.payment_method == "economy_7_direct_debit":
         levels = cap.CAP["payment_methods"][cap.CURRENT_PERIOD]
         multi = cap.CAP["tdcv_bases"][cap.CURRENT_BASIS]["multi_register_kwh"]
@@ -208,8 +242,8 @@ def support(preset: Preset, overrides: dict | None = None) -> dict[str, float]:
 def calculate(preset_id: str, scenario_id: str = "central") -> dict:
     """Bills now and under a scenario, the change, and support."""
     preset = BY_ID[preset_id]
-    now = bill(preset)
-    then = bill(preset, cap.price_factor(scenario_id))
+    now = bill(preset, scenario_id=None)
+    then = bill(preset, cap.price_factor(scenario_id), scenario_id)
     sup = support(preset)
     change = cap.pence_to_pounds(then["total"] - now["total"])
     return {
@@ -231,10 +265,10 @@ def all_presets(scenarios: list[str] | None = None) -> list[dict]:
             "id": preset.id,
             "label": preset.label,
             "inputs": asdict(preset),
-            "bill_oct_dec_2026": bill(preset)["total"],
+            "bill_oct_dec_2026": bill(preset, scenario_id=None)["total"],
             "support": support(preset),
             "bill_jan_mar_2027": {
-                s: bill(preset, cap.price_factor(s))["total"]
+                s: bill(preset, cap.price_factor(s), s)["total"]
                 for s in scenarios
             },
         }

@@ -1,13 +1,37 @@
 {
   "results": {
     "path": "results.json",
-    "sha256": "fa53a3b9b1e55069eac9284dc983bdb68d19937dbb5982a0b443f7a9cda5bec0"
+    "sha256": "e954569abd7126d4efe42dd797f88a451dc75ffc90cccaff11caa409b422a856"
   },
-  "source": "synthetic",
+  "source": "model",
   "placeholder": true,
   "engine": {
-    "policyengine_uk": "not run (placeholder)",
-    "dataset": "none (synthetic households)",
-    "validated": false
+    "policyengine_uk": "2.177.7",
+    "policyengine_core": "3.34.10",
+    "policyengine": null,
+    "dataset": "uk-frs-calibration-attempt-20261112T133744Z-6f918b81",
+    "dataset_sha256": "e268e3af7932784ad4471f008097a5acc6c3c5bc15c4c54fbb5a489b2a0ac9ae",
+    "validated": false,
+    "label": "build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policyengine-uk 2.177.7, not in a policyengine.py release"
+  },
+  "run": {
+    "commit": "ef6415993d7dcc703d9b82470f2280474131d26a",
+    "clean": true,
+    "versions": {
+      "policyengine": null,
+      "policyengine-uk": "2.177.7",
+      "policyengine-core": "3.34.10"
+    },
+    "dataset": {
+      "path": "microcosm_uk_2024_25.h5",
+      "build": "uk-frs-calibration-attempt-20261112T133744Z-6f918b81",
+      "sha256": "e268e3af7932784ad4471f008097a5acc6c3c5bc15c4c54fbb5a489b2a0ac9ae"
+    },
+    "checks": {
+      "cap_lever_fiscal_2026_27_gbp_bn": {
+        "obr_path": 0.0,
+        "central": 1.385
+      }
+    }
   }
 }

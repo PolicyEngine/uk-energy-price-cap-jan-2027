@@ -327,7 +327,10 @@ def _run_and_assemble(
         "model",
         engine,
         any_placeholder,
-        pipeline.PLACEHOLDER_NOTICE
+        (
+            "Provisional: measures still carry the placeholder flag. "
+            f"Every figure: {LABEL}."
+        )
         if any_placeholder
         else f"Figures from {LABEL}: see Methodology.",
     )

@@ -25,7 +25,7 @@ from uk_energy_price_cap.models import Reform, Route, Status
 
 # Placeholder cap level for January to March 2027 (central of the
 # planning range, docs/candidate-reforms.md). Replace with Ofgem's figure.
-PLACEHOLDER_Q1_CAP = 2180
+PLACEHOLDER_Q1_CAP = 2013  # drill 7 MOCK release, corrected 11:15, Direct Debit, 2026 basis
 OCT_DEC_2026_CAP = 1723  # Ofgem, 2026 typical consumption basis
 # The typical bill the OBR's path implies for January to March 2027 (EFO
 # October 2026, para 2.22), on the 2026 basis: the baseline the lever moves.
@@ -90,9 +90,23 @@ REFORMS: list[Reform] = [
         ),
         parameter_changes=amount_change(f"{HEP}.amount", {"2026": 200}),
         route=Route.DASHBOARD_PARAM,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="medium",
+    ),
+    Reform(
+        id="hep_second_apr_2027",
+        name="Second Household Energy Payment, April 2027",
+        description=(
+            "Placeholder. A second £100 Household Energy Payment for "
+            "households in council tax bands A to D in England, paid in "
+            "April 2027 (fiscal 2027-28)."
+        ),
+        parameter_changes=amount_change(f"{HEP}.amount", {"2027": 100}),
+        route=Route.DASHBOARD_PARAM,
+        status=PH,
+        lever="support",
+        likelihood="announced",
     ),
     Reform(
         id="hep_band_e",
@@ -105,7 +119,7 @@ REFORMS: list[Reform] = [
             f"{HEP}.bands", {"2026": ["A", "B", "C", "D", "E"]}
         ),
         route=Route.DASHBOARD_PARAM,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="low",
     ),
@@ -132,10 +146,10 @@ REFORMS: list[Reform] = [
         id="whd_uplift",
         name="Larger Warm Home Discount",
         description=(
-            "Placeholder. Raises the Warm Home Discount from £150 to £300 "
+            "Placeholder. Raises the Warm Home Discount from £150 to £250 "
             "for the 2026-27 scheme year (England and Wales)."
         ),
-        parameter_changes=amount_change(f"{WHD}.amount", {"2026": 300}),
+        parameter_changes=amount_change(f"{WHD}.amount", {"2026": 250}),
         route=Route.DASHBOARD_PARAM,
         status=PH,
         lever="support",
@@ -163,7 +177,7 @@ REFORMS: list[Reform] = [
             },
         ),
         route=Route.DASHBOARD_PARAM,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="low",
     ),
@@ -179,7 +193,7 @@ REFORMS: list[Reform] = [
             ELEC_VAT_GB, {"2027-07-01.2028-03-31": 0.0}
         ),
         route=Route.DASHBOARD_PARAM,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="medium",
     ),
@@ -188,7 +202,7 @@ REFORMS: list[Reform] = [
         name="0% VAT on domestic gas",
         description="Placeholder. Cuts VAT on domestic gas from 5% to 0%.",
         route=Route.NEEDS_PE_UK_FIRST,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="low",
         limit_reason=(
@@ -206,7 +220,7 @@ REFORMS: list[Reform] = [
         ),
         parameter_changes=amount_change(BILL_CREDIT, {"2026": 150}),
         route=Route.DASHBOARD_PARAM,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="low",
     ),
@@ -233,7 +247,7 @@ REFORMS: list[Reform] = [
             **amount_change(f"{WFP}.lower_shared", {"2026": 150}),
         },
         route=Route.DASHBOARD_PARAM,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="low",
     ),
@@ -246,7 +260,7 @@ REFORMS: list[Reform] = [
             "means-tested benefit."
         ),
         route=Route.NEEDS_PE_UK_FIRST,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="medium",
         limit_reason=(
@@ -281,7 +295,7 @@ REFORMS: list[Reform] = [
             "into the unit rate."
         ),
         route=Route.NOT_COMPUTABLE,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="bills",
         likelihood="low",
         limit_reason=(
@@ -298,7 +312,7 @@ REFORMS: list[Reform] = [
             "Debit bill at £1,723 for January to March 2027."
         ),
         route=Route.NEEDS_PE_UK_FIRST,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="low",
         limit_reason=(
@@ -315,7 +329,7 @@ REFORMS: list[Reform] = [
             "Feed-in Tariff costs from electricity bills into taxation."
         ),
         route=Route.NEEDS_PE_UK_FIRST,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="bills",
         likelihood="low",
         limit_reason=(
@@ -327,7 +341,7 @@ REFORMS: list[Reform] = [
     Reform(
         id="cold_weather_payment",
         name="Larger Cold Weather Payment",
-        description="Placeholder. Raises the payment from £25 to £50 a week.",
+        description="Placeholder. Raises the payment from £25 to £50 for each 7-day cold spell in winter 2026-27.",
         route=Route.NEEDS_PE_UK_FIRST,
         status=PH,
         lever="support",
@@ -344,7 +358,7 @@ REFORMS: list[Reform] = [
             "on means-tested or disability benefits."
         ),
         route=Route.LEDGER,
-        status=PH,
+        status=Status.WITHDRAWN,
         lever="support",
         likelihood="announced",
         limit_reason=(

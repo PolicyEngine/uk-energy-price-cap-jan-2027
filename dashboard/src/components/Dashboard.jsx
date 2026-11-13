@@ -116,7 +116,7 @@ export default function Dashboard({ data }) {
         {/* While every figure is a placeholder the banner says so; this slot
             carries the run's own notice (the build and engine label) once it
             is not. */}
-        {!meta.placeholder && (
+        {(!meta.placeholder || meta.source === "model") && (
           <p className="note-card rounded-xl p-4 text-sm" data-testid="run-note">
             {meta.notice}
           </p>

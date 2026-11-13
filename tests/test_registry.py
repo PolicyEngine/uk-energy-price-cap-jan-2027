@@ -15,7 +15,12 @@ def test_ids_unique():
 
 
 def test_every_entry_is_a_placeholder_before_the_event():
-    assert all(r.status == Status.PLACEHOLDER for r in reforms.REFORMS)
+    # Drill 7: candidate levers not announced are withdrawn (ledger line
+    # kept); announced ones keep the placeholder flag (DRILL.md MOCK rules).
+    assert all(
+        r.status in (Status.PLACEHOLDER, Status.WITHDRAWN)
+        for r in reforms.REFORMS
+    )
     assert all(
         r.description.startswith("Placeholder.") for r in reforms.REFORMS
     )

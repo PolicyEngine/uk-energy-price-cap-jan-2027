@@ -80,21 +80,9 @@
       "placeholder": true
     },
     {
-      "id": "low",
-      "label": "Low (placeholder)",
-      "direct_debit": 1950,
-      "placeholder": true
-    },
-    {
       "id": "central",
-      "label": "Central (placeholder)",
-      "direct_debit": 2180,
-      "placeholder": true
-    },
-    {
-      "id": "high",
-      "label": "High (placeholder)",
-      "direct_debit": 2300,
+      "label": "Announced cap, corrected 11:15 (MOCK, drill 7)",
+      "direct_debit": 2013,
       "placeholder": true
     }
   ],
@@ -114,6 +102,60 @@
     "range": {
       "label": "Supplier and market forecasts, 30 September to 4 November 2026 (placeholder range only)",
       "url": null
+    }
+  },
+  "rates_by_method": {
+    "_note": "MOCK drill 7 (T40 documents, GB average, VAT included). Annex 9 rates by payment method; Economy 7 day share 1,972 of 3,400 kWh.",
+    "economy_7_day_share": 0.58,
+    "2026Q4": {
+      "direct_debit": {
+        "electricity_unit_p_per_kwh": 26.32,
+        "electricity_standing_p_per_day": 54.83,
+        "gas_unit_p_per_kwh": 7.97,
+        "gas_standing_p_per_day": 29.68
+      },
+      "standard_credit": {
+        "electricity_unit_p_per_kwh": 28.2,
+        "electricity_standing_p_per_day": 60.1,
+        "gas_unit_p_per_kwh": 8.55,
+        "gas_standing_p_per_day": 34.0
+      },
+      "prepayment": {
+        "electricity_unit_p_per_kwh": 25.52,
+        "electricity_standing_p_per_day": 54.83,
+        "gas_unit_p_per_kwh": 7.7,
+        "gas_standing_p_per_day": 29.68
+      },
+      "economy_7_direct_debit": {
+        "day_p_per_kwh": 31.9,
+        "night_p_per_kwh": 15.21,
+        "electricity_standing_p_per_day": 54.83
+      }
+    },
+    "2027Q1": {
+      "direct_debit": {
+        "electricity_unit_p_per_kwh": 28.94,
+        "electricity_standing_p_per_day": 56.4,
+        "gas_unit_p_per_kwh": 10.21,
+        "gas_standing_p_per_day": 31.15
+      },
+      "standard_credit": {
+        "electricity_unit_p_per_kwh": 30.62,
+        "electricity_standing_p_per_day": 61.9,
+        "gas_unit_p_per_kwh": 10.82,
+        "gas_standing_p_per_day": 34.85
+      },
+      "prepayment": {
+        "electricity_unit_p_per_kwh": 28.08,
+        "electricity_standing_p_per_day": 56.4,
+        "gas_unit_p_per_kwh": 10.02,
+        "gas_standing_p_per_day": 31.15
+      },
+      "economy_7_direct_debit": {
+        "day_p_per_kwh": 35.2,
+        "night_p_per_kwh": 16.95,
+        "electricity_standing_p_per_day": 56.4
+      }
     }
   }
 }

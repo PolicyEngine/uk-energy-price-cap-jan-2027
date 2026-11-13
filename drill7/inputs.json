@@ -1,0 +1,217 @@
+{
+ "_note": "MOCK drill 7 packet inputs (T40_documents.md sections 2-4). Local branch only; never pushed.",
+ "source": "T40_documents.md, corrected by T75_inject.md (DD gas 10.21, SC gas 10.82)",
+ "rates": {
+  "oct_dec_2026": {
+   "direct_debit": {
+    "elec_unit": "26.32",
+    "elec_sc": "54.83",
+    "gas_unit": "7.97",
+    "gas_sc": "29.68"
+   },
+   "standard_credit": {
+    "elec_unit": "28.20",
+    "elec_sc": "60.10",
+    "gas_unit": "8.55",
+    "gas_sc": "34.00"
+   },
+   "prepayment": {
+    "elec_unit": "25.52",
+    "elec_sc": "54.83",
+    "gas_unit": "7.70",
+    "gas_sc": "29.68"
+   },
+   "economy_7_direct_debit": {
+    "day": "31.90",
+    "night": "15.21",
+    "elec_sc": "54.83"
+   }
+  },
+  "jan_mar_2027": {
+   "direct_debit": {
+    "elec_unit": "28.94",
+    "elec_sc": "56.40",
+    "gas_unit": "10.21",
+    "gas_sc": "31.15"
+   },
+   "standard_credit": {
+    "elec_unit": "30.62",
+    "elec_sc": "61.90",
+    "gas_unit": "10.82",
+    "gas_sc": "34.85"
+   },
+   "prepayment": {
+    "elec_unit": "28.08",
+    "elec_sc": "56.40",
+    "gas_unit": "10.02",
+    "gas_sc": "31.15"
+   },
+   "economy_7_direct_debit": {
+    "day": "35.20",
+    "night": "16.95",
+    "elec_sc": "56.40"
+   }
+  }
+ },
+ "support": {
+  "hep_first": {
+   "amount": "100",
+   "countries": [
+    "England"
+   ],
+   "bands": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ]
+  },
+  "devolved": {
+   "amount": "100",
+   "countries": [
+    "Scotland",
+    "Wales"
+   ],
+   "bands": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ]
+  },
+  "whd": {
+   "amount": "150",
+   "countries": [
+    "England",
+    "Wales"
+   ]
+  },
+  "whd_top_up": {
+   "amount": "100",
+   "countries": [
+    "England",
+    "Wales"
+   ]
+  },
+  "wfp": {
+   "lower": "200",
+   "higher": "300",
+   "lower_age": 66,
+   "higher_age": 80
+  },
+  "hep_second": {
+   "amount": "100",
+   "countries": [
+    "England"
+   ],
+   "bands": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ]
+  }
+ },
+ "households": [
+  {
+   "id": "S1",
+   "method": "direct_debit",
+   "elec": "2500",
+   "gas": "9500",
+   "country": "England",
+   "band": "D",
+   "benefit": false,
+   "oldest": 45,
+   "note": "; GB average DD rates, typical consumption (matches release headline)"
+  },
+  {
+   "id": "S2",
+   "method": "prepayment",
+   "elec": "1800",
+   "gas": "5000",
+   "country": "England",
+   "band": "A",
+   "benefit": true,
+   "oldest": 32,
+   "note": "; prepayment rates"
+  },
+  {
+   "id": "S3",
+   "method": "direct_debit",
+   "elec": "3600",
+   "gas": "14000",
+   "country": "England",
+   "band": "E",
+   "benefit": false,
+   "oldest": 44,
+   "note": "; band E: no Household Energy Payment"
+  },
+  {
+   "id": "S4",
+   "method": "economy_7_direct_debit",
+   "day": "1972",
+   "night": "1428",
+   "gas": "0",
+   "country": "England",
+   "band": "B",
+   "benefit": false,
+   "oldest": 58,
+   "note": "; Economy 7 DD, electricity only: no gas standing charge"
+  },
+  {
+   "id": "S5",
+   "method": "direct_debit",
+   "elec": "2700",
+   "gas": "11000",
+   "country": "England",
+   "band": "B",
+   "benefit": true,
+   "oldest": 81,
+   "note": "; WFP higher rate (oldest 81)"
+  },
+  {
+   "id": "S6",
+   "method": "standard_credit",
+   "elec": "2900",
+   "gas": "10500",
+   "country": "England",
+   "band": "E",
+   "benefit": false,
+   "oldest": 40,
+   "note": "; band E: no Household Energy Payment; standard credit rates"
+  },
+  {
+   "id": "S7",
+   "method": "direct_debit",
+   "elec": "2500",
+   "gas": "9500",
+   "country": "Scotland",
+   "band": "C",
+   "benefit": true,
+   "oldest": 70,
+   "note": "; Scotland: WHD rows in s3 are England and Wales only, so no WHD; WFP applied as s3 states (no country limit; real-world Scottish PAWHP not used); alternative if WFP were excluded in Scotland: support 100.00, net (see G5 row: annual change minus 100.00)"
+  },
+  {
+   "id": "S8",
+   "method": "prepayment",
+   "elec": "2200",
+   "gas": "8000",
+   "country": "Wales",
+   "band": "C",
+   "benefit": true,
+   "oldest": 29,
+   "note": "; Wales band C: devolved £100, not the England HEP; second HEP is England only"
+  },
+  {
+   "id": "S9",
+   "method": "direct_debit",
+   "elec": "3100",
+   "gas": "0",
+   "country": "Northern Ireland",
+   "band": null,
+   "benefit": false,
+   "oldest": 50,
+   "out_of_scope": "Northern Ireland: outside the GB cap and outside the GB payments in this drill (T40 s3); local supplier, heating oil. No cap bill or support computed; cells left blank, not £0."
+  }
+ ]
+}

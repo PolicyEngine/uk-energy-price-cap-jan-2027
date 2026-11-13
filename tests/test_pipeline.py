@@ -137,16 +137,16 @@ def test_model_run_assembles_the_same_schema():
     expected = (1000 * 1.1 + 700) * (factor - 1)
     assert row["gross_change_gbp"]["value"] == pytest.approx(expected, 0.01)
     # A gain is the change in gross support; VAT counts down.
-    hep = next(m for m in results["measures"] if m["id"] == "hep_top_up")
+    hep = next(m for m in results["measures"] if m["id"] == "whd_uplift")
     # Four support payments, each up £10, for 40 households of 100,000.
     assert hep["cost_gbp_m"] == pytest.approx(160)
+    # Drill 7: the VAT lever is withdrawn, so it carries no figure.
     vat = next(
         m
         for m in results["measures"]
         if m["id"] == "electricity_vat_to_march_2028"
     )
-    # The fake raises VAT by £10, so the gain is negative.
-    assert vat["year"] == 2027 and vat["cost_gbp_m"] == pytest.approx(-40)
+    assert vat["cost_gbp_m"] is None
 
 
 def test_policy_year_reads_the_first_key():

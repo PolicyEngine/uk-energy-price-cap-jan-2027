@@ -30,7 +30,10 @@ MODEL_LIMITS: dict[str, str] = {
         "Values mix the 2023 and 2026 typical consumption bases across July "
         "2026, and epg_subsidy scales by their ratio (issue #3)."
     ),
-    "cold_weather_payment": "No Cold Weather Payment variable (issue #8).",
+    "cold_weather_payment": (
+        "No Cold Weather Payment variable (policyengine-uk#435). Scotland "
+        "pays the Winter Heating Payment instead, so coverage is not GB."
+    ),
 }
 
 # The first policyengine-uk release on PyPI with each path in the form this

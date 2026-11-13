@@ -22,6 +22,9 @@ What it reads (household level):
 - each computable support measure, in its policy year: the change in the
   gross support it acts on (payments up, electricity VAT down), so gains
   are gross of the Winter Fuel Payment charge as the declared basis says;
+- household gas kWh, from the file's ``gas_kwh`` column joined on
+  ``household_id`` (``household_kwh.py``; the engine does not expose it),
+  for measures with a household rule such as the gas standing charge;
 - the cap lever for each scenario, fiscal 2026-27: the change in
   electricity and gas spend against the OBR path (a check for G2, kept in
   the manifest, not on a chart).
@@ -32,12 +35,13 @@ import multiprocessing
 from pathlib import Path
 from typing import Callable
 
-from uk_energy_price_cap import cap, heavy, publication, reforms
+from uk_energy_price_cap import cap, heavy, household_kwh, publication, reforms
 from uk_energy_price_cap.data_build import DATA_BUILD, LABEL
 from uk_energy_price_cap.model_limits import BUDGET_ERA_ENGINE
 
 YEAR = 2026
 HOUSEHOLD = [
+    "household_id",
     "household_weight",
     "household_income_decile",
     "region",
@@ -193,6 +197,7 @@ def build(
     allow_unmanaged: bool,
     assemble: Callable,
     runner: Callable = _run,
+    kwh_reader: Callable = household_kwh.join,
 ) -> dict:
     """Run the model and assemble the results file (pipeline.assemble)."""
     if not allow_unmanaged:
@@ -217,14 +222,18 @@ def build(
     if record.get("dataset_problem"):
         raise ModelRunError(record["dataset_problem"])
     if runner is not _run:
-        return _run_and_assemble(path, record, assemble, runner)
+        return _run_and_assemble(path, record, assemble, runner, kwh_reader)
     # A national run: take the machine-wide lock and wait for memory first.
     with heavy.heavy_lock("uk-energy-price-cap-generate"):
-        return _run_and_assemble(path, record, assemble, runner)
+        return _run_and_assemble(path, record, assemble, runner, kwh_reader)
 
 
 def _run_and_assemble(
-    path: Path, record: dict, assemble: Callable, runner: Callable
+    path: Path,
+    record: dict,
+    assemble: Callable,
+    runner: Callable,
+    kwh_reader: Callable = household_kwh.join,
 ) -> dict:
     """The simulations and the results file, after build()'s checks."""
     from uk_energy_price_cap import pipeline
@@ -250,6 +259,15 @@ def _run_and_assemble(
     def col(name, year=YEAR):
         return base[f"{name}@{year}"]
 
+    rules = [
+        r for r in reforms.household_rules() if r.status.value != "withdrawn"
+    ]
+    gas_kwh = (
+        kwh_reader(col("household_id"), path)["gas_kwh"]
+        if rules
+        else [0.0] * n
+    )
+
     hh = []
     for i in range(n):
         hep = col("household_energy_payment")[i]
@@ -274,6 +292,7 @@ def _run_and_assemble(
                 current_support=current,
                 hep=hep,
                 weight=col("household_weight")[i],
+                gas_kwh=gas_kwh[i],
             )
         )
 
@@ -292,6 +311,8 @@ def _run_and_assemble(
             for i in range(n):
                 values[i] += sign * (after[i] - before[i])
         gains[r.id] = (year, values)
+    for r in rules:
+        gains[r.id] = r.household_rule(hh)
 
     checks = {}
     weights = col("household_weight")

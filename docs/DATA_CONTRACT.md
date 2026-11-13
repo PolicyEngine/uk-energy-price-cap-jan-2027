@@ -9,11 +9,13 @@ What the pipeline reads from Microcosm and the model, and what it must never wri
 | `electricity_consumption`, `gas_consumption` | Bill change | In the data (pounds, 2024 prices; `energy_price_basis` = calendar 2024) |
 | `household_weight` | Aggregation | In the data; never written to a public file |
 | `region`, `country` | Groups; Northern Ireland exclusion | In the data |
-| `tenure_type`, `council_tax_band` | Groups; Household Energy Payment | In the data. Northern Ireland households carry bands (issue #8) |
-| `uses_energy_prepayment_meter` | Prepayment group | In the data (about 12.5% of households); docstring out of date (issue #8) |
+| `household_id` | Join to the file's kWh columns | In the data; never written to a public file |
+| `tenure_type`, `council_tax_band` | Groups; Household Energy Payment | In the data. Scotland and Wales band counts are calibration targets and land within 0.5% (María Juaristi, 13 November 2026). Northern Ireland households carry bands (issue #8) |
+| `uses_energy_prepayment_meter` | Prepayment group | In the data (12.6% of households weighted, build 6f918b81); docstring out of date (issue #8); payment method beyond prepayment is issue #19 |
 | `household_net_income` or `hbai_household_net_income` | Deciles; gains | Choice open (issue #5) |
 | `household_energy_payment`, `warm_home_discount`, `winter_fuel_allowance` | Current support | Model, policyengine-uk 2.175 or later (issue #1) |
-| `electricity_consumption_kwh`, `gas_consumption_kwh` | Rate reforms | Not filled (issue #4) |
+| `gas_kwh`, `electricity_kwh` (file columns, calendar 2024) | Gas households and the gas standing-charge route | In the file as household export columns, not exposed by policyengine-uk. `household_kwh.py` reads them with h5py from `household/table` and joins on `household_id`; a household with no row is an error, never 0. `gas_kwh > 0` matches `gas_consumption > 0` on every row: 24.34m households weighted (84.0%, UK incl. Northern Ireland) on build 6f918b81, in line with DESNZ's 84% on gas |
+| `electricity_consumption_kwh`, `gas_consumption_kwh` (engine inputs) | Engine rate reforms | Not filled until policyengine-uk#2890 item 1 (issue #4) |
 
 ## Writes
 

@@ -116,7 +116,7 @@ def _clean_record(versions):
 def test_national_run_holds_the_lock_for_every_simulation(
     tmp_path, monkeypatch
 ):
-    from test_pipeline import _fake_runner
+    from test_pipeline import _fake_kwh_reader, _fake_runner
 
     dataset = tmp_path / "microcosm.h5"
     dataset.write_bytes(b"x")
@@ -147,6 +147,7 @@ def test_national_run_holds_the_lock_for_every_simulation(
         allow_unmanaged=True,
         assemble=pipeline.assemble,
         runner=runner,
+        kwh_reader=_fake_kwh_reader,
     )
     assert labels == ["uk-energy-price-cap-generate"]
     assert held == [True, False]

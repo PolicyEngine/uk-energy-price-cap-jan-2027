@@ -1477,6 +1477,8 @@ dependencies = [
 
 [package.optional-dependencies]
 dev = [
+    { name = "h5py" },
+    { name = "numpy" },
     { name = "pytest" },
     { name = "ruff" },
 ]
@@ -1489,7 +1491,9 @@ model = [
 
 [package.metadata]
 requires-dist = [
+    { name = "h5py", marker = "extra == 'dev'", specifier = ">=3.0.0" },
     { name = "h5py", marker = "extra == 'model'", specifier = ">=3.0.0" },
+    { name = "numpy", marker = "extra == 'dev'", specifier = ">=1.24.0" },
     { name = "numpy", marker = "extra == 'model'", specifier = ">=1.24.0" },
     { name = "policyengine-core", marker = "extra == 'model'", specifier = "==3.34.10" },
     { name = "policyengine-uk", marker = "extra == 'model'", specifier = "==2.177.7" },

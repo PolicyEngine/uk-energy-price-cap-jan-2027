@@ -76,6 +76,16 @@ describe("Dashboard", () => {
     expect(screen.getAllByTestId("policy-card")[0].textContent).toMatch(/Placeholder/);
   });
 
+  it("shows a revenue-neutral bills measure by who pays less, not as a £0 cost", () => {
+    render(<Dashboard data={results} />);
+    fireEvent.click(screen.getByRole("tab", { name: "Policies" }));
+    const gas = results.measures.find((m) => m.id === "gas_standing_charge_removal");
+    expect(gas.computable && gas.lever === "bills").toBe(true);
+    const card = document.getElementById("measure-gas_standing_charge_removal");
+    expect(card.querySelector('[data-testid="bills-reach"]').textContent).toMatch(/Households paying less: [\d.]+m/);
+    expect(card.textContent).not.toMatch(/Cost:/);
+  });
+
   it("labels the run with its build and engine on the Methodology tab, with sources and plain basis labels", () => {
     window.history.replaceState(null, "", "/?tab=methodology");
     const label =

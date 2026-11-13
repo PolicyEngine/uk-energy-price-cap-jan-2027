@@ -1,8 +1,9 @@
 """The reform model, copied from the Autumn Budget 2026 pipeline.
 
-A reform is either parameter changes (simple reforms) or a simulation
+A reform is either parameter changes (simple reforms), a simulation
 modifier (structural reforms), against current law or against its own
-baseline. The event fields below it (route, status, limits) are what the
+baseline, or a household rule: a structural measure computed from data
+the file holds but the engine does not expose (household kWh). The event fields below it (route, status, limits) are what the
 coverage ledger and the publication gate read.
 
 ``policyengine_uk`` is imported only when a scenario is built, so the
@@ -82,6 +83,16 @@ class Reform(BaseModel):
         ...,
         description="certain, announced, medium, low (docs/candidate-reforms.md)",
     )
+    household_rule: Optional[Callable] = Field(
+        default=None,
+        description=(
+            "Structural measure computed outside the engine: a function of "
+            "the household records (pipeline.HouseholdRecord) returning "
+            "(policy year, annual gain in £ per household). Used where the "
+            "input lives in the data file but not in policyengine-uk, such "
+            "as household kWh (household_kwh.py)."
+        ),
+    )
     calculator_only: bool = Field(
         default=False,
         description="Shown in the household calculator only, never charted",
@@ -98,6 +109,7 @@ class Reform(BaseModel):
         has_change = (
             self.parameter_changes is not None
             or self.simulation_modifier is not None
+            or self.household_rule is not None
         )
         if computable and not has_change:
             raise ValueError(
@@ -110,6 +122,7 @@ class Reform(BaseModel):
             )
         if self.route == Route.DASHBOARD_PARAM and (
             self.simulation_modifier is not None
+            or self.household_rule is not None
         ):
             raise ValueError(
                 f"{self.id}: a dashboard-param route takes no modifier"

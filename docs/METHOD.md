@@ -18,7 +18,7 @@ Status: pre-release template. This note describes the method planned for the day
 | Behaviour | Static: households do not change how much energy they use. |
 | Support | Gross: the change in the payments a measure acts on (Household Energy Payment, Warm Home Discount, Winter Fuel Payment, bill credit) or in electricity VAT. Winter Fuel Payment recovery through income tax above £35,000 is not netted off. The Warm Home Discount counts as support here although suppliers fund it and `household_net_income` leaves it out (issue #5). |
 | Income | Shares of income use `household_net_income`. |
-| Spend level | One spending level. Builds from Microcosm main after PolicyEngine/microcosm#1420 set electricity spend to ONS household spending (Consumer Trends, September 2026 edition, 04.5.1). Gas spend stays at DESNZ volumes times DESNZ prices, close to ONS 04.5.2; that line also counts bottled gas, and netting it out is open as PolicyEngine/microcosm#1095. Older builds sit above ONS on both fuels (issue #7). The G0 freeze names the build and its gap, from the build's `calibration_diagnostics.json`. |
+| Spend level | One spending level. Builds from Microcosm main after PolicyEngine/microcosm#1420 set electricity spend to ONS household spending (Consumer Trends, September 2026 edition, 04.5.1). Gas spend stays at DESNZ volumes times DESNZ prices, close to ONS 04.5.2; that line also counts bottled gas, and netting it out is open as PolicyEngine/microcosm#1095. On build 6f918b81 against the September 2026 edition, electricity is −0.3% (£28.0bn) and gas +5.5% (£19.3bn) (María Juaristi; the earlier 29 to 32% gas gap was against the June edition). Older builds sit above ONS on both fuels (issue #7). The G0 freeze names the build and its gap, from the build's `calibration_diagnostics.json`. |
 | Fuel stress | Energy spend above 10% of net income, a proxy, not the official fuel poverty measure. |
 
 ## The cap shock
@@ -37,7 +37,7 @@ Never take a ratio of cap levels across July 2026 without restating both on one 
 | Measure | Current law in the model (2026-27) | Parameter |
 |---|---|---|
 | Household Energy Payment | £100, England, council tax bands A to D | `gov.treasury.household_energy_payment.*` |
-| Warm Home Discount | £150, England and Wales; Pension Credit, Universal Credit, Housing Benefit, income-related ESA; receipt 85% and 70%. Scotland runs its own scheme (Core Group 1, Pension Credit Guarantee Credit), which the model does not compute: the household examples include it, national figures do not | `gov.ofgem.warm_home_discount.*` |
+| Warm Home Discount | £150, England and Wales; Pension Credit, Universal Credit, Housing Benefit, income-related ESA; receipt 85% and 70%. Microcosm does not impute it: policyengine-uk computes it from the qualifying benefits and a receipt draw. Scotland runs its own scheme (Core Group 1, Pension Credit Guarantee Credit), which the model does not compute: the household examples include it, national figures do not | `gov.ofgem.warm_home_discount.*` |
 | VAT on domestic electricity | 0% in Great Britain from 1 October 2026 to 30 June 2027 | `gov.hmrc.vat.domestic_electricity_rate.great_britain` |
 | Winter Fuel Payment | £200 or £300 a household (shared rates where two eligible people live together); recovered above £35,000 taxable income. Not paid in Scotland | `gov.dwp.winter_fuel_payment.*` |
 | Pension Age Winter Heating Payment (Scotland) | £211.15 under 80, £316.70 at 80 or over (2026-27) | `gov.social_security_scotland.pawhp.*` |
@@ -46,7 +46,9 @@ These measures are already in the baseline. A statement that repeats them is not
 
 ## What is not computable, and why
 
-The data hold electricity and gas spend in pounds. They hold no kilowatt-hours, tariff or payment method other than a prepayment flag, heating fuel, mains gas flag or energy debt. So standing-charge reforms, per-unit subsidies, rates by region or payment method, and debt relief are not computable (issue #4). They are published as not computable with the reason, never as £0. The registry (`src/uk_energy_price_cap/reforms.py`) records each reason.
+The data hold electricity and gas spend in pounds. The Microcosm file also exports household `gas_kwh` and `electricity_kwh` (calendar 2024), which policyengine-uk does not expose (its monthly kWh inputs stay unfilled until policyengine-uk#2890 item 1). They hold no tariff or payment method other than a prepayment flag, heating fuel or energy debt. So electricity standing-charge reforms (Economy 7 homes cannot be told apart), rates by region or payment method, and debt relief are not computable (issue #4). The Cold Weather Payment is not in the model (policyengine-uk#435); Scotland pays the Winter Heating Payment instead, so a change to it would not cover Great Britain.
+
+The gas standing charge is the exception. `household_kwh.py` reads `gas_kwh` with h5py and joins it on `household_id`; a home with `gas_kwh > 0` is a gas household (it matches `gas_consumption > 0` on every row). The measure `gas_standing_charge_removal` (route `dashboard-structural`, a household rule, not an engine reform) takes the standing charge off each gas bill in Great Britain and raises the unit rate so the weighted total is unchanged: a household's change is its kWh times the unit-rate rise less the standing charge. Low users gain, high users pay more, electric-only and Northern Ireland homes are unchanged. It is static, uses calendar-2024 kWh and the October to December 2026 standing charge until the 2027 rates are set; its card reports households paying less, not a cost. They are published as not computable with the reason, never as £0. The registry (`src/uk_energy_price_cap/reforms.py`) records each reason.
 
 ## Market Stabilisation Charge
 

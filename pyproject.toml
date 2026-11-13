@@ -35,6 +35,9 @@ model = [
 dev = [
     "pytest>=8.0.0",
     "ruff>=0.6.0",
+    # tests/test_household_kwh.py writes a small Microcosm-shaped file.
+    "h5py>=3.0.0",
+    "numpy>=1.24.0",
 ]
 
 [project.scripts]

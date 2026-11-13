@@ -93,6 +93,7 @@ def _fake_runner(n=40):
                 }
                 continue
             values = {
+                "household_id": [float(i + 1) for i in range(n)],
                 "household_weight": [100_000.0] * n,
                 "household_income_decile": [i % 10 + 1 for i in range(n)],
                 "region": [regions[i % 4] for i in range(n)],
@@ -110,6 +111,15 @@ def _fake_runner(n=40):
     return run
 
 
+def _fake_kwh_reader(household_ids, path):
+    """Stand-in for household_kwh.join: every third household has no gas."""
+    gas = [
+        0.0 if int(i) % 3 == 0 else 2_000.0 * (int(i) % 5 + 1)
+        for i in household_ids
+    ]
+    return {"gas_kwh": gas, "electricity_kwh": [2_500.0] * len(gas)}
+
+
 def test_model_run_assembles_the_same_schema():
     from uk_energy_price_cap import model_run
 
@@ -118,6 +128,7 @@ def test_model_run_assembles_the_same_schema():
         allow_unmanaged=True,
         assemble=pipeline.assemble,
         runner=_fake_runner(),
+        kwh_reader=_fake_kwh_reader,
     )
     assert publication.validate(results) == []
     assert results["meta"]["source"] == "model"
@@ -147,6 +158,16 @@ def test_model_run_assembles_the_same_schema():
     )
     # The fake raises VAT by £10, so the gain is negative.
     assert vat["year"] == 2027 and vat["cost_gbp_m"] == pytest.approx(-40)
+    # The gas standing charge reads kWh joined on household_id: revenue
+    # neutral, so the net gain is zero and only low users gain.
+    gas = next(
+        m
+        for m in results["measures"]
+        if m["id"] == "gas_standing_charge_removal"
+    )
+    assert gas["computable"] and gas["year"] == 2027
+    assert gas["cost_gbp_m"] == pytest.approx(0, abs=1)
+    assert 0 < gas["households_reached_m"] < 4
 
 
 def test_policy_year_reads_the_first_key():

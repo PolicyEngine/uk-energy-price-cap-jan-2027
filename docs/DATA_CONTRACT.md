@@ -13,7 +13,7 @@ What the pipeline reads from Microcosm and the model, and what it must never wri
 | `uses_energy_prepayment_meter` | Prepayment group | In the data (about 12.5% of households); docstring out of date (issue #8) |
 | `household_net_income` or `hbai_household_net_income` | Deciles; gains | Choice open (issue #5) |
 | `household_energy_payment`, `warm_home_discount`, `winter_fuel_allowance` | Current support | Model, policyengine-uk 2.175 or later (issue #1) |
-| `electricity_consumption_kwh`, `gas_consumption_kwh` | Rate reforms | Not filled (issue #4) |
+| `electricity_consumption_kwh`, `gas_consumption_kwh` | Rate reforms | Not filled (issue #4). The build exports annual `household.electricity_kwh` and `household.gas_kwh` (calendar 2024, from `eeb6093e`); mapping them onto these monthly inputs waits on policyengine-uk#2890 item 1 |
 
 ## Writes
 

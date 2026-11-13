@@ -46,7 +46,7 @@ These measures are already in the baseline. A statement that repeats them is not
 
 ## What is not computable, and why
 
-The data hold electricity and gas spend in pounds. They hold no kilowatt-hours, tariff or payment method other than a prepayment flag, heating fuel, mains gas flag or energy debt. So standing-charge reforms, per-unit subsidies, rates by region or payment method, and debt relief are not computable (issue #4). They are published as not computable with the reason, never as £0. The registry (`src/uk_energy_price_cap/reforms.py`) records each reason.
+The data hold electricity and gas spend in pounds. Builds from `eeb6093e` on also export annual kWh by fuel (calendar 2024), but policyengine-uk's kWh inputs are monthly and are not filled from them until policyengine-uk#2890 item 1. The data hold no tariff or payment method other than a prepayment flag, heating fuel, mains gas flag or energy debt. So standing-charge reforms, per-unit subsidies, rates by region or payment method, and debt relief are not computable (issue #4). They are published as not computable with the reason, never as £0. The registry (`src/uk_energy_price_cap/reforms.py`) records each reason.
 
 ## Market Stabilisation Charge
 

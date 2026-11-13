@@ -79,7 +79,7 @@ describe("Dashboard", () => {
   it("labels the run with its build and engine on the Methodology tab, with sources and plain basis labels", () => {
     window.history.replaceState(null, "", "/?tab=methodology");
     const label =
-      "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release";
+      "build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policyengine-uk 2.177.7, not in a policyengine.py release";
     const { unmount } = render(
       <Dashboard data={{ ...results, meta: { ...results.meta, engine: { ...results.meta.engine, label } } }} />,
     );

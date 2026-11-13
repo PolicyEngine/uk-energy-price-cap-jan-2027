@@ -40,11 +40,10 @@ class DataBuild:
         )
 
 
-# TODO: switch to build uk-frs-calibration-attempt-...-6f918b81 (also
-# policyengine-uk 2.177.7) once it is published; it supersedes 9e18f010.
+# Build 6f918b81 (published 13 Nov 2026) supersedes 9e18f010; same engine.
 DATA_BUILD = DataBuild(
-    id="uk-frs-calibration-attempt-20261110T204756Z-9e18f010",
-    sha256="adb6204d0af5e08a42cccec81250ce116518687f964e31c654a17d658b3416e8",
+    id="uk-frs-calibration-attempt-20261112T133744Z-6f918b81",
+    sha256="e268e3af7932784ad4471f008097a5acc6c3c5bc15c4c54fbb5a489b2a0ac9ae",
     engine="2.177.7",
     core="3.34.10",
 )

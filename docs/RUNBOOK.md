@@ -4,7 +4,7 @@ Ofgem announces the cap for 1 January to 31 March 2027 on or before 25 November 
 
 ## Before the day (by Friday 20 November)
 
-- [ ] Engine and data pair fixed in `data_build.DATA_BUILD` and labelled "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release" (issue #1); switch to build `…-6f918b81` if it is published first.
+- [ ] Engine and data pair fixed in `data_build.DATA_BUILD` and labelled "build uk-frs-calibration-attempt-20261112T133744Z-6f918b81, policyengine-uk 2.177.7, not in a policyengine.py release" (issue #1); switch to build `…-6f918b81` if it is published first.
 - [ ] Income measure for support charts confirmed (issue #5; docs/METHOD.md states the current choice).
 - [ ] Spend level choice recorded in docs/METHOD.md (issue #7).
 - [ ] Northern Ireland treatment checked in the pipeline (issue #8).

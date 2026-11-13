@@ -19,7 +19,7 @@ dependencies = [
 
 [project.optional-dependencies]
 # The engine for real runs: the policyengine-uk and policyengine-core
-# versions Microcosm build uk-frs-calibration-attempt-20261110T204756Z-9e18f010
+# versions Microcosm build uk-frs-calibration-attempt-20261112T133744Z-6f918b81
 # was built and certified on (src/uk_energy_price_cap/data_build.py). No
 # policyengine.py release pins this pair, so the model run loads
 # policyengine_uk and the dataset file directly (it never imported

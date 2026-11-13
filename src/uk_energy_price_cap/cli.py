@@ -28,7 +28,7 @@ def main(argv: list[str] | None = None) -> int:
     gen.add_argument(
         "--allow-unmanaged",
         action="store_true",
-        help='run on an uncertified pair; figures are labelled "unvalidated"',
+        help="run on a pair no policyengine.py release covers; figures carry the build label",
     )
     sub.add_parser("ledger", help="print the coverage ledger as CSV")
     val = sub.add_parser("validate", help="check a results file and manifest")

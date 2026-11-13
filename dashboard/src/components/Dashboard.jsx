@@ -114,7 +114,7 @@ export default function Dashboard({ data }) {
       </div>
       <main className="relative z-[1] mx-auto max-w-[1200px] space-y-6 px-6 py-8">
         {/* While every figure is a placeholder the banner says so; this slot
-            carries the run's own notice (for example "unvalidated") once it
+            carries the run's own notice (the build and engine label) once it
             is not. */}
         {!meta.placeholder && (
           <p className="note-card rounded-xl p-4 text-sm" data-testid="run-note">

@@ -31,7 +31,7 @@ OCT_DEC_2026_CAP = 1723  # Ofgem, 2026 typical consumption basis
 # October 2026, para 2.22), on the 2026 basis: the baseline the lever moves.
 OBR_Q1_2027_CAP = cap.scenario("obr_path")["direct_debit"]
 # The OBR's year-on-year CPI utilities rates the lever replaces, as in
-# policyengine-uk 2.174.1 energy_prices/obr.yaml (tests/engine checks them
+# policyengine-uk 2.177.7 energy_prices/obr.yaml (tests/engine checks them
 # against the installed engine).
 OBR_UTILITIES = {"2027Q1": 0.113241, "2028Q1": -0.105705}
 

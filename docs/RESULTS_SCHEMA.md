@@ -11,7 +11,7 @@ A **cell** is `{"value": number}` or `{"withheld": true}`. A withheld cell carri
 | `meta.title`, `meta.event_quarter` | Page title; `2027Q1`. |
 | `meta.source` | `synthetic` (template) or `model`. |
 | `meta.template_date` | Fixed date of the placeholder build, so the file is reproducible. |
-| `meta.engine` | `policyengine_uk`, `dataset`, `validated` (bool); a model run adds `policyengine_core`, `policyengine`, `dataset_sha256` and `label` ("unvalidated under this engine"). |
+| `meta.engine` | `policyengine_uk`, `dataset`, `validated` (bool); a model run adds `policyengine_core`, `policyengine`, `dataset_sha256` and `label` ("build <id>, policyengine-uk <version>, not in a policyengine.py release", from `data_build.LABEL`). |
 | `meta.run` | Model run only: `commit`, `clean`, `versions`, `dataset`, `checks`. |
 | `meta.basis` | The declared basis (`years.json`). |
 | `meta.years` | `[{year, label}]` policy years. |

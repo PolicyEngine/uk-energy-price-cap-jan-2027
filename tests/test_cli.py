@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from uk_energy_price_cap import cli
 
@@ -24,3 +25,32 @@ def test_freeze_records_the_sha_of_a_present_dataset(tmp_path, capsys):
     assert record["dataset"]["path"] == "data.h5"
     assert len(record["dataset"]["sha256"]) == 64
     assert record["label"]
+    # Not the build's file: named as a problem, so a run would refuse it.
+    assert record["dataset"]["build"] is None
+    assert "dataset_problem" in record
+
+
+def test_label_names_the_build_and_engine():
+    from uk_energy_price_cap.data_build import DATA_BUILD, LABEL
+
+    assert LABEL == (
+        "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, "
+        "policyengine-uk 2.177.7, not in a policyengine.py release"
+    )
+    assert DATA_BUILD.hf_path == (
+        "releases/microcosm-uk-2024-25-national/"
+        "uk-frs-calibration-attempt-20261110T204756Z-9e18f010/"
+        "microcosm_uk_2024_25.h5"
+    )
+
+
+def test_model_extra_pins_the_engine_the_build_was_made_on():
+    import tomllib
+
+    from uk_energy_price_cap.data_build import DATA_BUILD
+
+    root = Path(__file__).resolve().parents[1]
+    pyproject = tomllib.loads((root / "pyproject.toml").read_text())
+    model = pyproject["project"]["optional-dependencies"]["model"]
+    assert f"policyengine-uk=={DATA_BUILD.engine}" in model
+    assert f"policyengine-core=={DATA_BUILD.core}" in model

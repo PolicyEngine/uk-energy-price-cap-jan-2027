@@ -1,11 +1,12 @@
-"""The model run: Microcosm through policyengine-uk, unmanaged.
+"""The model run: Microcosm through policyengine-uk, loaded directly.
 
-policyengine 6.17.2 certifies a Microcosm build for policyengine-uk 2.174.1,
-but this run does not go through the bundle (issue #1), so it is unmanaged:
-it loads a dataset file named at the
-freeze, records its SHA-256 and the installed versions, and labels every
-figure "unvalidated under this engine". It refuses to start without
-``allow_unmanaged`` or on a dirty tree.
+The run uses the build in ``data_build.DATA_BUILD`` with the
+policyengine-uk version it was built on; no policyengine.py release covers
+that pair (issue #1). It loads the dataset file named at the freeze,
+refuses a file whose SHA-256 differs from the build's or an installed
+policyengine-uk other than the build's, records the installed versions,
+and labels every figure with ``data_build.LABEL``. It refuses to start
+without ``allow_unmanaged`` or on a dirty tree.
 
 Each simulation runs in its own fresh process (one simulation per
 process), so memory is returned between runs; the parent keeps only the
@@ -31,9 +32,9 @@ from pathlib import Path
 from typing import Callable
 
 from uk_energy_price_cap import cap, publication, reforms
+from uk_energy_price_cap.data_build import DATA_BUILD, LABEL
 from uk_energy_price_cap.model_limits import BUDGET_ERA_ENGINE
 
-UNVALIDATED = "unvalidated under this engine"
 YEAR = 2026
 HOUSEHOLD = [
     "household_weight",
@@ -82,10 +83,17 @@ def freeze_record(dataset: Path | str | None = None) -> dict:
         "versions": versions,
         "managed": False,
         "certified": False,
-        "label": UNVALIDATED,
+        "label": LABEL,
+        "expected": {
+            "build": DATA_BUILD.id,
+            "sha256": DATA_BUILD.sha256,
+            "policyengine-uk": DATA_BUILD.engine,
+            "policyengine-core": DATA_BUILD.core,
+        },
         "reason": (
-            "The run loads the dataset file directly, not through the "
-            "certified bundle (issue #1)."
+            "The run loads the dataset file directly with the "
+            "policyengine-uk version the build was made on; no "
+            "policyengine.py release covers that pair (issue #1)."
         ),
     }
     uk = versions.get("policyengine-uk")
@@ -94,22 +102,26 @@ def freeze_record(dataset: Path | str | None = None) -> dict:
             f"policyengine-uk {uk} predates {BUDGET_ERA_ENGINE}: no "
             "Household Energy Payment or energy price indices"
         )
+    elif uk and uk != DATA_BUILD.engine:
+        record["engine_problem"] = (
+            f"policyengine-uk {uk} is installed, but build "
+            f"{DATA_BUILD.id} was made on {DATA_BUILD.engine}: never mix a "
+            "build with another engine version"
+        )
     if dataset is not None:
         path = Path(dataset).expanduser()
+        sha = file_sha256(path) if path.exists() else None
         record["dataset"] = {
             "path": path.name,
-            "build": _build_id(path),
-            "sha256": file_sha256(path) if path.exists() else None,
+            "build": DATA_BUILD.id if sha == DATA_BUILD.sha256 else None,
+            "sha256": sha,
         }
+        if sha is not None and sha != DATA_BUILD.sha256:
+            record["dataset_problem"] = (
+                f"{path.name} has SHA-256 {sha}, not that of build "
+                f"{DATA_BUILD.id} ({DATA_BUILD.sha256})"
+            )
     return record
-
-
-def _build_id(path: Path) -> str | None:
-    """The 8-character build id from a Microcosm release path, if any."""
-    for part in reversed(path.parts):
-        if part.startswith("microcosm-uk-") and "-" in part:
-            return part.rsplit("-", 1)[-1]
-    return None
 
 
 def _decode(values) -> list:
@@ -186,9 +198,9 @@ def build(
 
     if not allow_unmanaged:
         raise ModelRunError(
-            "The run does not go through the certified bundle (issue #1). "
-            "Pass --allow-unmanaged to run on the frozen pair; every figure is "
-            f'then labelled "{UNVALIDATED}".'
+            "No policyengine.py release covers the engine and data pair "
+            "(issue #1). Pass --allow-unmanaged to run on the frozen pair; "
+            f'every figure is then labelled "{LABEL}".'
         )
     if dataset is None:
         raise ModelRunError("Name the frozen dataset file with --dataset.")
@@ -203,6 +215,8 @@ def build(
         )
     if record.get("engine_problem"):
         raise ModelRunError(record["engine_problem"])
+    if record.get("dataset_problem"):
+        raise ModelRunError(record["dataset_problem"])
 
     support_measures = [
         r
@@ -295,7 +309,7 @@ def build(
         "dataset": (record.get("dataset") or {}).get("build") or path.name,
         "dataset_sha256": (record.get("dataset") or {}).get("sha256"),
         "validated": False,
-        "label": UNVALIDATED,
+        "label": LABEL,
     }
     any_placeholder = any(r.is_placeholder for r in reforms.REFORMS)
     meta = pipeline._meta(
@@ -304,7 +318,7 @@ def build(
         any_placeholder,
         pipeline.PLACEHOLDER_NOTICE
         if any_placeholder
-        else f"Figures {UNVALIDATED}: see Methodology.",
+        else f"Figures from {LABEL}: see Methodology.",
     )
     meta["run"] = {
         "commit": record.get("commit"),

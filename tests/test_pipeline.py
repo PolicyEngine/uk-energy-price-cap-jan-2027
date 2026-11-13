@@ -3,7 +3,13 @@ from pathlib import Path
 
 import pytest
 
-from uk_energy_price_cap import cap, pipeline, publication, reforms
+from uk_energy_price_cap import (
+    cap,
+    data_build,
+    pipeline,
+    publication,
+    reforms,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 COMMITTED = ROOT / "dashboard" / "public" / "data" / "results.json"
@@ -115,7 +121,7 @@ def test_model_run_assembles_the_same_schema():
     )
     assert publication.validate(results) == []
     assert results["meta"]["source"] == "model"
-    assert results["meta"]["engine"]["label"] == model_run.UNVALIDATED
+    assert results["meta"]["engine"]["label"] == data_build.LABEL
     placeholder = pipeline.build_placeholder()
     assert set(results) == set(placeholder)
     assert set(results["bills"]) == set(placeholder["bills"])

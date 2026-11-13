@@ -5,11 +5,12 @@ Two sources, one output schema (docs/RESULTS_SCHEMA.md):
 - ``placeholder`` (default, what CI runs): synthetic households built here
   from a fixed seed. No microdata, no model. Every figure is a placeholder
   and the file says so in ``meta``.
-- ``model`` (the day): Microcosm through policyengine-uk, unmanaged
-  (``model_run.py``). It loads the dataset file directly, not through
-  the certified bundle (issue #1), so it runs only with
-  ``--allow-unmanaged`` and labels every figure "unvalidated under this
-  engine".
+- ``model`` (the day): Microcosm through policyengine-uk, loaded
+  directly (``model_run.py``). It uses the build in
+  ``data_build.DATA_BUILD`` with the policyengine-uk version it was built
+  on, a pair no policyengine.py release covers (issue #1), so it runs only
+  with ``--allow-unmanaged`` and labels every figure with
+  ``data_build.LABEL``.
 
 Basis (docs/METHOD.md, stated once there): household and decile bill
 changes are annualised, a full year at January to March 2027 prices

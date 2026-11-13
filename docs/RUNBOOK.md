@@ -4,7 +4,7 @@ Ofgem announces the cap for 1 January to 31 March 2027 on or before 25 November 
 
 ## Before the day (by Friday 20 November)
 
-- [ ] Engine and data pair certified, or the "unvalidated under this engine" label agreed (issue #1).
+- [ ] Engine and data pair fixed in `data_build.DATA_BUILD` and labelled "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release" (issue #1); switch to build `…-6f918b81` if it is published first.
 - [ ] Income measure for support charts confirmed (issue #5; docs/METHOD.md states the current choice).
 - [ ] Spend level choice recorded in docs/METHOD.md (issue #7).
 - [ ] Northern Ireland treatment checked in the pipeline (issue #8).
@@ -21,7 +21,7 @@ Status: `announced` (published with figures), `withdrawn` (a candidate lever not
 
 ## G0: freeze (by T−60 minutes)
 
-`make freeze DATASET=<file>` prints the record. Post it in the PR: start commit SHA; installed policyengine, policyengine-uk and policyengine-core versions; dataset build id and SHA-256; certified pair or "unvalidated"; the declared basis (docs/METHOD.md).
+`make freeze DATASET=<file>` prints the record. Post it in the PR: start commit SHA; installed policyengine, policyengine-uk and policyengine-core versions; dataset build id and SHA-256 (the record shows `dataset_problem` or `engine_problem` if either differs from `DATA_BUILD`); the label; the declared basis (docs/METHOD.md).
 
 ## G1: coverage ledger (T to T+10)
 

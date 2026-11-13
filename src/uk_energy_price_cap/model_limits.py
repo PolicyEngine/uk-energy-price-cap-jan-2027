@@ -2,8 +2,8 @@
 
 ``MODEL_LIMITS`` names levers with no parameter or variable in
 policyengine-uk. ``MIN_ENGINE`` names parameters that exist only from a
-given policyengine-uk version. The certified bundle in policyengine 6.17.2
-pins policyengine-uk 2.174.1, which has all of them (issue #1).
+given policyengine-uk version. The model run uses policyengine-uk 2.177.7
+(``data_build.DATA_BUILD``), which has all of them (issue #1).
 """
 
 import warnings
@@ -51,8 +51,6 @@ MIN_ENGINE: dict[str, str] = {
 }
 
 BUDGET_ERA_ENGINE = "2.170.2"
-
-CERTIFIED_ENGINE = "2.174.1"
 
 
 def model_limit_reason(path: str) -> str | None:

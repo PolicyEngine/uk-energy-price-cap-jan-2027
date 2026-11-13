@@ -37,7 +37,7 @@ def test_computable_entries_avoid_limited_paths():
 
 def test_energy_paths_need_the_newer_engine():
     # The Budget-era baseline needs 2.170.2 (model_limits.MIN_ENGINE);
-    # policyengine 6.17.2 pins 2.174.1, which has it.
+    # The model run uses 2.177.7 (data_build.DATA_BUILD), which has it.
     assert needs_newer_engine(reforms.ENERGY_PRICE_PATH) == "2.170.2"
     assert needs_newer_engine(reforms.ELEC_VAT_GB) == "2.165.1"
 

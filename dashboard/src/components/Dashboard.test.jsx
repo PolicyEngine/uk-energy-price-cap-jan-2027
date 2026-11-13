@@ -76,10 +76,17 @@ describe("Dashboard", () => {
     expect(screen.getAllByTestId("policy-card")[0].textContent).toMatch(/Placeholder/);
   });
 
-  it("labels the run as unvalidated on the Methodology tab, with sources and plain basis labels", () => {
+  it("labels the run with its build and engine on the Methodology tab, with sources and plain basis labels", () => {
     window.history.replaceState(null, "", "/?tab=methodology");
+    const label =
+      "build uk-frs-calibration-attempt-20261110T204756Z-9e18f010, policyengine-uk 2.177.7, not in a policyengine.py release";
+    const { unmount } = render(
+      <Dashboard data={{ ...results, meta: { ...results.meta, engine: { ...results.meta.engine, label } } }} />,
+    );
+    expect(screen.getByTestId("replication").textContent).toContain(`Engine and data: ${label}.`);
+    unmount();
     render(<Dashboard data={results} />);
-    expect(screen.getByTestId("replication").textContent).toMatch(/unvalidated under this engine/i);
+    expect(screen.getByTestId("replication").textContent).toMatch(/Not a model run/);
     expect(screen.getByTestId("sources").querySelectorAll("li")).toHaveLength(Object.keys(results.cap.sources).length);
     expect(screen.getByTestId("basis-list").textContent).toMatch(/What is measured/);
     expect(screen.getByTestId("basis-list").textContent).not.toMatch(/\bflow\b:/);

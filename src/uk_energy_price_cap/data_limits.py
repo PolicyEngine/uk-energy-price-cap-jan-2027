@@ -4,12 +4,14 @@ A measure that acts only through one of these inputs is published as not
 computable, with the reason, and never as £0. Microcosm holds household
 energy spend in pounds (``electricity_consumption``, ``gas_consumption``),
 a prepayment flag and council tax band. It holds no tariff or payment
-method other than prepayment, heating fuel, mains gas flag or energy debt
+method other than prepayment, heating fuel or energy debt
 (audit of build a6299504, 5 November 2026; issue #4). Builds from eeb6093e on
 also export annual kWh by fuel (``household.electricity_kwh``,
 ``household.gas_kwh``, calendar 2024; microcosm#1535), but policyengine-uk's
 kWh inputs are monthly and stay unfilled until policyengine-uk#2890 item 1,
-so a reform that acts through kWh still moves no one.
+so a reform that acts through the model's kWh inputs still moves no one. The
+gas standing charge can be costed from the file's ``gas_kwh`` instead
+(``gas_kwh > 0`` marks 24.3m gas households on build 6f918b81).
 """
 
 import warnings
@@ -35,7 +37,9 @@ DATA_LIMITS: dict[str, str] = {
         "Economy 7 are not distinguished (issue #4)."
     ),
     "has_mains_gas": (
-        "No mains gas flag; gas spend above zero is the only proxy (issue #4)."
+        "No mains gas variable in the engine; gas_kwh > 0 in the file "
+        "identifies gas households (matches gas spend above zero on every "
+        "row, 24.3m households on build 6f918b81)."
     ),
     "main_heating_fuel": "No heating fuel variable (issue #4).",
     "energy_debt": "No energy arrears in the survey data.",

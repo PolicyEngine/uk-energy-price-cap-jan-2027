@@ -268,9 +268,10 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="announced",
         limit_reason=(
-            "The data hold gas spending in pounds, not kWh, and do not say "
-            "which homes are on mains gas, so moving the standing charge "
-            "into the unit rate cannot be estimated (issue #4)."
+            "Computable from the data but not yet computed here: the Microcosm "
+            "file holds annual household gas kWh (calendar 2024), and gas kWh "
+            "above zero identifies gas households (24.3m on build 6f918b81), "
+            "so the shift can be costed as a household rule (issue #4)."
         ),
     ),
     Reform(
@@ -285,9 +286,9 @@ REFORMS: list[Reform] = [
         lever="bills",
         likelihood="low",
         limit_reason=(
-            "The data hold electricity spending in pounds, not kWh or "
-            "tariff type, so a change to the standing charge cannot be "
-            "estimated (issue #4)."
+            "The data hold annual electricity kWh but not tariff type, so "
+            "Economy 7 homes cannot be told apart and a change to the "
+            "standing charge cannot be estimated (issue #4)."
         ),
     ),
     Reform(

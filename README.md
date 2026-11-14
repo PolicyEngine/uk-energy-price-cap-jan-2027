@@ -15,7 +15,7 @@ PolicyEngine dashboard for the Ofgem energy price cap that covers 1 January to 3
 
 ## Method in brief
 
-The figures will come from PolicyEngine UK, a static microsimulation model of the UK tax and benefit system, run on Microcosm, PolicyEngine's calibrated survey-based dataset. Microcosm holds household spending on electricity and gas in pounds. The model moves that spending with an energy price index, so the cap shock is a change to that index, compared against the forecast path the model uses now. Support measures are changes to model parameters. Results are static: households do not change how much energy they use. Costs are on a fiscal-year basis (April to March) unless a figure says otherwise. Northern Ireland is outside the Ofgem cap and is reported apart. A measure that acts only through something the data do not hold, such as kilowatt-hours or tariff type, is reported as not computable, with the reason, and never as £0.
+The figures will come from PolicyEngine UK, a static microsimulation model of the UK tax and benefit system, run on Microcosm, PolicyEngine's calibrated survey-based dataset. Microcosm holds household spending on electricity and gas in pounds. The model moves that spending with an energy price index, so the cap shock is a change to that index, compared against the forecast path the model uses now. Support measures are changes to model parameters. Results are static: households do not change how much energy they use. Costs are on a fiscal-year basis (April to March) unless a figure says otherwise. Northern Ireland is outside the Ofgem cap and is reported apart. Microcosm also exports annual household kilowatt-hours by fuel, so the gas standing charge is computable from the file; the model's own monthly kWh inputs stay unfilled until policyengine-uk#2890 item 1. A measure that acts only through something the data do not hold, such as tariff type, is reported as not computable, with the reason, and never as £0.
 
 ## Data and model versions
 
@@ -24,7 +24,7 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 | policyengine | 6.17.2 (`policyengine[uk]`) |
 | policyengine-uk | 2.174.1 (pinned by policyengine 6.17.2; 2.170.2 or later holds the Household Energy Payment, the energy price indices and the July 2027 VAT end date) |
 | policyengine-core | 3.33.3 |
-| Microcosm | certified by policyengine 6.17.2: `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`, SHA-256 `0a9b77db1c0dee2693cb2d47bad68da34cb662916eee4829942bcd45de581f25`; the file is fixed at the freeze |
+| Microcosm | certified by policyengine 6.17.2: `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`, SHA-256 `0a9b77db1c0dee2693cb2d47bad68da34cb662916eee4829942bcd45de581f25`; the file is fixed at the freeze. The pair planned for the day is build `uk-frs-calibration-attempt-20261112T133744Z-6f918b81` with policyengine-uk 2.177.7 (not in a policyengine.py release) (#18) |
 
 policyengine 6.17.2 is a certified bundle whose policyengine-uk (2.174.1) has the energy measures above (6.16.1 was the first to pin 2.174.1). The model run still loads the dataset file directly rather than through the bundle, so every figure stays labelled as unvalidated under this engine until that changes (issue #1). The README will record the final engine and data pair used on the day.
 

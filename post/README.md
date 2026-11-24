@@ -55,7 +55,7 @@ The dataset is in the private Hugging Face dataset `policyengine/populace-uk-pri
    ```bash
    uv run python render_post.py --app-v2 <path to policyengine-app-v2>
    ```
-   It prints how many placeholders are left. Two need words, not numbers: the date (from `announced_on`) and the reasons Ofgem gives for the change. Write the reasons into `template.md` and render again.
+   It prints how many placeholders are left. Three need words, not numbers: the date (from `announced_on`), the link to Ofgem's announcement (Table 1 sources) and the reasons Ofgem gives for the change, attributed to Ofgem in its own wording ("Ofgem attributes the change to …"). Write them into `template.md` and render again. If Ofgem announces on a day other than 25 November, change `date` in `meta.json` too.
 4. **Read the rendered post** before publishing. The template is written for a cap that rises; `render_post.py` picks "above" or "below", "more" or "less" and the direction of the standing-charge limitation from the figures, but read every sentence against Ofgem's numbers, particularly if a standing charge falls or one fuel moves the other way.
 5. Commit `inputs.json` and `results/results-6.20.3.json` here, and the three files in policyengine-app-v2.
 

@@ -191,6 +191,30 @@ def figures(res, key, previous):
     F["jan_standing_vs_fc_e"] = diff(F["jan_standing_e"], F["fc_standing_e"])
     F["jan_standing_vs_fc_g"] = diff(F["jan_standing_g"], F["fc_standing_g"])
 
+    # Sentences whose wording depends on the figures.
+    if isinstance(F["jan_vs_fc"], Missing):
+        F["vs_fc_sentence"] = "Ofgem's cap is **[Ofgem: difference]** **[Ofgem: above or below]** that forecast."
+    elif rnd(F["jan_vs_fc"]) == 0:
+        F["vs_fc_sentence"] = "Ofgem's cap equals that forecast."
+    else:
+        F["vs_fc_sentence"] = f"Ofgem's cap is {fmt(F['jan_vs_fc_abs'], 'gbp')} {F['dir_vs_fc']} that forecast."
+    fe, fg = F["jan_fuel_change_e"], F["jan_fuel_change_g"]
+    if isinstance(fe, Missing):
+        F["gas_share_clause"] = ", so gas accounts for **[Ofgem: gas share]** of the change"
+    elif fe * fg > 0:  # a share means something only when both fuels move the same way
+        F["gas_share_clause"] = f", so gas accounts for {fmt(F['gas_share'], 'pct0')} of the change"
+    else:
+        F["gas_share_clause"] = ""
+    if sc is None:
+        F["decile_sign_note"] = ""
+    else:
+        sign = lambda x: (x > 0) - (x < 0)
+        odd = [d["decile"] for d in sc["deciles"] if sign(d["mean_change"]) != sign(sc["gb"]["mean_change"])]
+        F["decile_sign_note"] = (
+            f" **[CHECK: in decile(s) {', '.join(map(str, odd))} the average bill moves the other way to the "
+            "average for all households, because of their mix of electricity and gas; explain this here.]**"
+            if odd else "")
+
     v = res["versions"]
     F["pe_version"] = v["policyengine"]
     F["pe_uk_version"] = v["policyengine-uk"]
@@ -199,11 +223,12 @@ def figures(res, key, previous):
         pf = previous["scenarios"]["cornwall"]
         F["prev_pe_version"] = previous["versions"]["policyengine"]
         F["prev_build_short"] = previous["dataset"]["build"][-8:]
+        F["prev_pe_uk_version"] = previous["versions"]["policyengine-uk"]
         F["prev_mean_change"] = pf["gb"]["mean_change"]
         F["prev_d1_share_before"] = pf["deciles"][0]["share_before"]
         F["prev_over10_before"] = pf["gb"]["spend_over_10pct_income_before_m"]
     else:
-        for k in ("prev_pe_version", "prev_build_short", "prev_mean_change",
+        for k in ("prev_pe_version", "prev_pe_uk_version", "prev_build_short", "prev_mean_change",
                   "prev_d1_share_before", "prev_over10_before"):
             F[k] = Missing("earlier run: pass --previous")
     F["_sc"], F["_fc"], F["_base"], F["_res"] = sc, fc, base, res

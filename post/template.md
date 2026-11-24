@@ -1,12 +1,12 @@
-On {{ofgem_date}}, Ofgem [announced](https://www.ofgem.gov.uk/energy-price-cap) the energy price cap for 1 January to 31 March 2027: {{jan_total:gbp}} a year for a household with typical consumption paying by Direct Debit, a change of {{jan_change:sgbp}} ({{jan_change_pct:spct1}}) from the [current cap](https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges) of {{oct_total:gbp}}. The consultancy Cornwall Insight had forecast {{fc_total:gbp}} on 18 November; Ofgem's cap is {{jan_vs_fc_abs:gbp}} {{dir_vs_fc}} that forecast.
+On {{ofgem_date}}, Ofgem [announced](https://www.ofgem.gov.uk/energy-price-cap) the energy price cap for 1 January to 31 March 2027: {{jan_total:gbp}} a year for a household with typical consumption paying by Direct Debit, a change of {{jan_change:sgbp}} ({{jan_change_pct:spct1}}) from the [current cap](https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges) of {{oct_total:gbp}}. The consultancy Cornwall Insight had forecast {{fc_total:gbp}} on 18 November; {{vs_fc_sentence}}
 
-Using [PolicyEngine UK](https://github.com/PolicyEngine/uk-energy-price-cap-jan-2027/tree/main/post), we estimate what Ofgem's cap means for household energy bills across the income distribution in Great Britain. Our [earlier post](https://policyengine.org/uk/research/uk-energy-price-cap-january-2027-forecast) estimated the effects of Cornwall Insight's forecast; this post uses Ofgem's announced rates, and the last section compares the two.
+Using [PolicyEngine UK](https://policyengine.org/uk), we estimate what Ofgem's cap means for household energy bills across the income distribution in Great Britain. Our [earlier post](https://policyengine.org/uk/research/uk-energy-price-cap-january-2027-forecast) estimated the effects of Cornwall Insight's forecast; this post uses Ofgem's announced rates, and the last section compares the two.
 
 Key results under Ofgem's cap (annual rates unless stated, Great Britain):
 
-- A household with typical consumption pays {{ex_typ_change:agbp}} a year {{dir_more_less}} at the January rates ({{ex_typ_change_pct:spct1}}), or about {{ex_typ_q1_change:agbp}} {{dir_more_less}} over January to March
+- A household with typical consumption sees its bill change by {{ex_typ_change:sgbp}} a year at the January rates ({{ex_typ_change_pct:spct1}}), or about {{ex_typ_q1_change:sgbp}} over January to March
 - The average household in Great Britain spends {{mean_after:gbp}} a year on electricity and gas at the January rates, against {{mean_before:gbp}} at October rates (a change of {{mean_change:sgbp}})
-- Bills in the bottom income decile change by an average of {{d1_change:sgbp}} a year, and households' energy spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} of their net income; in the top decile, bills change by an average of {{d10_change:sgbp}}, and from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} of income
+- Bills in the bottom income decile change by an average of {{d1_change:sgbp}} a year, and households' energy spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} of their net income; in the top decile, bills change by an average of {{d10_change:sgbp}}, and households' energy spending goes from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} of their net income
 - The number of households spending more than 10% of their net income on energy goes from {{over10_before:m1}} to {{over10_after:m1}}
 - On Cornwall Insight's forecast, the same model gives an average change of {{fc_mean_change:sgbp}} a year, against {{mean_change:sgbp}} under Ofgem's cap
 
@@ -38,7 +38,7 @@ Until July 2026, Ofgem quoted the cap at its previous typical values of 2,700 kW
 | ------- | --------------------: | -------------------------------------------------------------: | -------------------------: |
 {{table1_rows}}
 
-Sources: Ofgem's announcements of each cap, from [January to March 2025](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2025) to January to March 2027, and its [restatement of the April to June and July to September 2026 caps](https://www.ofgem.gov.uk/sites/default/files/2026-06/Summary-of-changes-to-energy-price-cap-1-July-to-30-September-2026-revised-TDCV.pdf). The last column for January 2025 to March 2026 is our calculation from Ofgem's average rates for each quarter.
+Sources: Ofgem's announcements of each cap, from [January to March 2025](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2025) to [October to December 2026](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026) and **[Ofgem: link to the January to March 2027 announcement]**, and its [restatement of the April to June and July to September 2026 caps](https://www.ofgem.gov.uk/sites/default/files/2026-06/Summary-of-changes-to-energy-price-cap-1-July-to-30-September-2026-revised-TDCV.pdf). The last column for January 2025 to March 2026 is our calculation from Ofgem's average rates for each quarter.
 
 Table 2 and Figure 2 compare Ofgem's January rates with its October rates and with Cornwall Insight's forecast.
 
@@ -69,7 +69,7 @@ Sources: Ofgem, [energy price cap unit rates and standing charges](https://www.o
 }
 ```
 
-At typical consumption, the gas bill changes by {{jan_fuel_change_g:sgbp}} and the electricity bill by {{jan_fuel_change_e:sgbp}} ({{jan_rate_change:sgbp}} in total on Ofgem's rates as published, against Ofgem's {{jan_change:sgbp}}), so gas accounts for {{gas_share:pct0}} of the change. **[Ofgem: the reasons Ofgem gives for the change, from its announcement]**
+At typical consumption, the gas bill changes by {{jan_fuel_change_g:sgbp}} and the electricity bill by {{jan_fuel_change_e:sgbp}} ({{jan_rate_change:sgbp}} in total on Ofgem's rates as published, against Ofgem's {{jan_change:sgbp}}){{gas_share_clause}}. **[Ofgem: the reasons Ofgem gives for the change, from its announcement]**
 
 Ofgem expresses the cap as an annual rate. A household pays the January rates for three months. UK households use on average {{q1_share_e:pct1}} of a year's electricity and {{q1_share_g:pct1}} of a year's gas in January to March.[^1] Applying those shares to the unit-rate part of the bill, and 90 days to the standing charges, the cap changes a typical household's bills over January to March by about {{ex_typ_q1_change:sgbp}}.
 
@@ -124,7 +124,7 @@ Table 3 and Figures 3 and 4 apply the rates in Table 2 to four levels of consump
 
 Cells with two figures give the October bill, then the January bill, at annual rates. The standing charge and unit-rate columns split the total bill. Figures may not sum because of rounding. The last column applies the change in unit rates to the shares of a year's electricity ({{q1_share_e:pct1}}) and gas ({{q1_share_g:pct1}}) used in January to March and the change in standing charges to 90 days, as for the typical household above. Ofgem publishes its rates to two decimal places, so the typical bill here can differ from Ofgem's headline by £1.
 
-Standing charges change by {{jan_standing_pct_e:spct1}} (electricity) and {{jan_standing_pct_g:spct1}} (gas), and unit rates by {{jan_unit_pct_e:spct1}} and {{jan_unit_pct_g:spct1}}, so the bill changes by {{ex_low_change_pct:spct1}} at low use, {{ex_typ_change_pct:spct1}} at typical use and {{ex_high_change_pct:spct1}} at high use. Standing charges make up {{ex_low_standing_share_jan:pct1}} of the low-use bill in January and {{ex_high_standing_share_jan:pct1}} of the high-use bill. A home without gas using 2,500 kWh faces a change of {{ex_eo_change_pct:spct1}}, against {{ex_typ_change_pct:spct1}} at typical use of both fuels, because the cap changes electricity unit rates by {{eo_vs_gas}} than gas unit rates. In our data, households that do not use gas spend an average of {{elec_only_mean_before:gbp}} a year on electricity at October prices, against {{ex_eo_oct_total:gbp}} at 2,500 kWh.
+Standing charges change by {{jan_standing_pct_e:spct1}} (electricity) and {{jan_standing_pct_g:spct1}} (gas), and unit rates by {{jan_unit_pct_e:spct1}} and {{jan_unit_pct_g:spct1}}, so the bill changes by {{ex_low_change_pct:spct1}} at low use, {{ex_typ_change_pct:spct1}} at typical use and {{ex_high_change_pct:spct1}} at high use. Standing charges make up {{ex_low_standing_share_jan:pct1}} of the low-use bill in January and {{ex_high_standing_share_jan:pct1}} of the high-use bill. A home without gas using 2,500 kWh faces a change of {{ex_eo_change_pct:spct1}}, against {{ex_typ_change_pct:spct1}} at typical use of both fuels, because the typical electricity bill changes by {{jan_bill_pct_e:spct1}} and the typical gas bill by {{jan_bill_pct_g:spct1}} (Table 2). In our data, households that do not use gas spend an average of {{elec_only_mean_before:gbp}} a year on electricity at October prices, against {{ex_eo_oct_total:gbp}} at 2,500 kWh.
 
 ## Bills across the income distribution
 
@@ -149,7 +149,7 @@ We apply Ofgem's cap to the electricity and gas spending of every household in G
 }
 ```
 
-Households in the top decile spend more on energy than those in the bottom (Figure 5), so their bills change by more in pounds (Figure 7): {{d10_change:sgbp}} a year against {{d1_change:sgbp}}. As a share of net income (Figure 6 and Table 4), spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} in the bottom decile and from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} in the top.
+Households in the top decile spend more on energy than those in the bottom (Figure 5). Their bills change by an average of {{d10_change:sgbp}} a year, against {{d1_change:sgbp}} in the bottom decile (Figure 7).{{decile_sign_note}} As a share of net income (Figure 6 and Table 4), spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} in the bottom decile and from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} in the top.
 
 ```chart
 {
@@ -229,7 +229,7 @@ Cornwall Insight forecast a typical bill of {{fc_total:gbp}}; Ofgem's cap is {{j
 }
 ```
 
-Our earlier post estimated an average change of {{prev_mean_change:sgbp}} on Cornwall Insight's forecast with policyengine {{prev_pe_version}} (Microcosm build {{prev_build_short}}). On the version used here, the same forecast gives {{fc_mean_change:sgbp}}, and the October figures move too: the bottom decile's energy spending is {{d1_share_before:pct1}} of its net income, against {{prev_d1_share_before:pct1}} in the earlier post, and {{over10_before:m1}} households spend more than 10% of their net income on energy, against {{prev_over10_before:m1}}.
+Our earlier post estimated an average change of {{prev_mean_change:sgbp}} on Cornwall Insight's forecast with `policyengine` {{prev_pe_version}} (PolicyEngine UK {{prev_pe_uk_version}}, Microcosm build {{prev_build_short}}). This post uses `policyengine` {{pe_version}} (PolicyEngine UK {{pe_uk_version}}, Microcosm build {{build_short}}), a newer model and dataset; with them, the same forecast gives {{fc_mean_change:sgbp}}, and the October figures move too: the bottom decile's energy spending is {{d1_share_before:pct1}} of its net income, against {{prev_d1_share_before:pct1}} in the earlier post, and {{over10_before:m1}} households spend more than 10% of their net income on energy, against {{prev_over10_before:m1}}.
 
 ## Methodology
 
@@ -239,7 +239,7 @@ The method has five limitations:
 
 - **Tariffs.** We apply the cap change to every household. The cap covers default tariffs; households on fixed tariffs see no change in January.
 - **Payment method.** We apply the Direct Debit change to every household. Ofgem sets a different cap for standard credit and prepayment, and our data do not separate Direct Debit from standard credit.
-- **Standing charges.** We scale each household's spending on a fuel by one factor, the change in the typical bill. Under Ofgem's cap, this would {{sc_low}} the change for households that use less than the typical amount and {{sc_high}} it for those that use more. For a household using half the typical amount, the change is {{half_pct_e:spct1}} against {{typ_pct_e:spct1}} for electricity and {{half_pct_g:spct1}} against {{typ_pct_g:spct1}} for gas.
+- **Standing charges.** We scale each household's spending on a fuel by one factor, the change in the typical bill, so households that use less or more than the typical amount get the typical household's percentage change. For a household using half the typical amount, the cap gives {{half_pct_e:spct1}} against {{typ_pct_e:spct1}} for electricity and {{half_pct_g:spct1}} against {{typ_pct_g:spct1}} for gas.
 - **Annual rates.** We hold the January rates for a full year, as Ofgem's typical bill does. Ofgem sets the cap for April to June 2027 separately, in February 2027.
 - **Fixed use.** We hold each household's energy use fixed as prices change.
 

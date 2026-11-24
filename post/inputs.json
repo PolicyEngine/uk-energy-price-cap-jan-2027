@@ -1,0 +1,49 @@
+{
+  "_about": "Cap levels for post/run_cap.py. On the day, fill in the ofgem block from Ofgem's announcement (Great Britain average, Direct Debit, nil-kWh standing charges, VAT included at 0% on electricity and 5% on gas) and rerun. Every null in the ofgem block is a placeholder; the script emits no Ofgem figures until all of them are filled.",
+  "typical_consumption_kwh": { "electricity": 2500, "gas": 9500 },
+  "days_in_year": 365,
+  "days_in_january_to_march": 90,
+  "october": {
+    "label": "October to December 2026",
+    "source": "Ofgem, energy price cap unit rates and standing charges, 1 October to 31 December 2026",
+    "unit_p_per_kwh": { "electricity": 26.32, "gas": 7.97 },
+    "standing_p_per_day": { "electricity": 54.83, "gas": 29.68 },
+    "typical_bill_announced": 1723
+  },
+  "scenarios": {
+    "cornwall": {
+      "label": "January to March 2027 (Cornwall Insight forecast)",
+      "kind": "forecast",
+      "source": "Cornwall Insight, final forecast of the January to March 2027 cap, press release of 18 November 2026",
+      "unit_p_per_kwh": { "electricity": 32.54, "gas": 10.90 },
+      "standing_p_per_day": { "electricity": 56, "gas": 31 },
+      "standing_rounded_to_penny": true,
+      "typical_bill_by_fuel": { "electricity": 1017.09, "gas": 1148.80 },
+      "typical_bill_announced": 2166
+    },
+    "ofgem": {
+      "label": "January to March 2027 (Ofgem cap)",
+      "kind": "actual",
+      "source": "Ofgem, energy price cap for 1 January to 31 March 2027, announced 25 November 2026",
+      "announced_on": null,
+      "unit_p_per_kwh": { "electricity": null, "gas": null },
+      "standing_p_per_day": { "electricity": null, "gas": null },
+      "standing_rounded_to_penny": false,
+      "typical_bill_by_fuel": { "electricity": null, "gas": null },
+      "typical_bill_announced": null
+    }
+  },
+  "history": {
+    "_about": "Table 1 and Figure 1: Ofgem's announced typical Direct Debit dual-fuel cap and the typical values it was quoted at; at_current_tdcv is the cap at 2,500 kWh and 9,500 kWh (PolicyEngine's calculation from Ofgem's average rates before July 2026; Ofgem's restatement for April to September 2026). Copied from the 19 November 2026 post.",
+    "quarters": [
+      { "quarter": "Jan–Mar 2025", "label": "January to March 2025", "announced": 1738, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1562 },
+      { "quarter": "Apr–Jun 2025", "label": "April to June 2025", "announced": 1849, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1655 },
+      { "quarter": "Jul–Sep 2025", "label": "July to September 2025", "announced": 1720, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1541 },
+      { "quarter": "Oct–Dec 2025", "label": "October to December 2025", "announced": 1755, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1576 },
+      { "quarter": "Jan–Mar 2026", "label": "January to March 2026", "announced": 1758, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1584 },
+      { "quarter": "Apr–Jun 2026", "label": "April to June 2026", "announced": 1641, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1477 },
+      { "quarter": "Jul–Sep 2026", "label": "July to September 2026", "announced": 1862, "tdcv": "2,700 and 11,500", "at_current_tdcv": 1663 },
+      { "quarter": "Oct–Dec 2026", "label": "October to December 2026", "announced": 1723, "tdcv": "2,500 and 9,500", "at_current_tdcv": 1723 }
+    ]
+  }
+}

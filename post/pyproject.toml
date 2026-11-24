@@ -1,0 +1,15 @@
+[project]
+name = "uk-energy-price-cap-jan-2027-post"
+version = "0.1.0"
+description = "PolicyEngine UK estimates of household energy bills under Ofgem's January to March 2027 energy price cap"
+readme = "README.md"
+license = { text = "AGPL-3.0-only" }
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "policyengine[uk]==6.20.3",
+    "huggingface_hub",
+    "numpy",
+]
+
+[tool.uv]
+package = false

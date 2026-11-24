@@ -287,6 +287,72 @@ def model_figures(arrays, factor):
     return out
 
 
+# The Budget's support, set against the change (all for Great Britain):
+# - Household Energy Payment: the engine's household_energy_payment for
+#   2026-27, a one-off £100 to households in council tax bands A to D in
+#   England, paid from January 2027.
+# - Electricity VAT: Ofgem's caps carry 0% VAT on electricity from 1 October
+#   2026, so the cut is in both the October and the January bill. Its value is
+#   what 5% VAT would add to the January electricity bill (annual rate).
+# "Net of support" subtracts the payment, and then the VAT cut's value, from
+# the change in the annual bill; the post states that definition.
+VAT_FORGONE = 0.05
+
+
+def hep_reach(arrays):
+    """Who the Household Energy Payment reaches, by income decile."""
+    w, gb, eng, hep, decile = (arrays[k] for k in ("w", "gb", "england", "hep", "decile"))
+    got = hep > 0
+
+    def share(m):
+        return float(w[m & got].sum() / w[m].sum())
+
+    out = {
+        "recipients_m": float(w[gb & got].sum() / 1e6),
+        "cost_bn": float(np.sum(hep[gb] * w[gb]) / 1e9),
+        "share_gb": share(gb),
+        "share_england": share(gb & eng),
+        "england_households_m": float(w[gb & eng].sum() / 1e6),
+        "deciles": [],
+    }
+    for d in range(1, 11):
+        m = gb & (decile == d)
+        out["deciles"].append({
+            "decile": d,
+            "share_gb": share(m),
+            "share_england": share(m & eng),
+            "mean_gb": float(np.sum(hep[m] * w[m]) / np.sum(w[m])),
+            "missed_gb_m": float(w[m & ~got].sum() / 1e6),
+            "missed_england_m": float(w[m & eng & ~got].sum() / 1e6),
+        })
+    return out
+
+
+def support_figures(arrays, factor):
+    """The change in the annual bill, gross and net of the support."""
+    w, gb, decile, hep, elec_q4, gas_q4 = (arrays[k] for k in ("w", "gb", "decile", "hep", "elec_q4", "gas_q4"))
+    elec_jan = elec_q4 * factor["electricity"]
+    change = elec_jan + gas_q4 * factor["gas"] - elec_q4 - gas_q4
+    vat = elec_jan * VAT_FORGONE
+    vat_oct = elec_q4 * VAT_FORGONE
+
+    def wm(x, m):
+        return float(np.sum(x[m] * w[m]) / np.sum(w[m]))
+
+    def row(m):
+        return {
+            "change": wm(change, m),
+            "hep": wm(hep, m),
+            "vat_cut_jan": wm(vat, m),
+            "vat_cut_oct": wm(vat_oct, m),
+            "change_net_hep": wm(change - hep, m),
+            "change_net_hep_vat": wm(change - hep - vat, m),
+            "share_change_offset_by_hep": float(np.sum(hep[m] * w[m]) / np.sum(change[m] * w[m])),
+        }
+
+    return {"gb": row(gb), "deciles": [{"decile": d, **row(gb & (decile == d))} for d in range(1, 11)]}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--inputs", default=HERE / "inputs.json", type=Path)
@@ -338,6 +404,8 @@ def main():
             "gas_fy": gas_fy,
             "elec_q4": elec_fy * to_q4["electricity"] / (1 + ENERGY_INPUT_VAT),
             "gas_q4": gas_fy * to_q4["gas"],
+            "england": calc("country").astype(str) == "ENGLAND",
+            "hep": calc("household_energy_payment").astype(float),
         }
     finally:
         release_lock()
@@ -348,7 +416,9 @@ def main():
         "to_q4": to_q4,
         "october": {**oct_cfg, "rates": oct_rates},
         "history": cfg["history"]["quarters"],
+        "peak_2022": {k: v for k, v in cfg.get("peak_2022", {}).items() if not k.startswith("_")},
         "decile_values_present": sorted(set(arrays["decile"][arrays["gb"]].tolist())),
+        "hep_reach": hep_reach(arrays),
         "scenarios": {},
     }
     for key, s in scenarios.items():
@@ -362,6 +432,7 @@ def main():
             "inputs": {k: v for k, v in arith.items() if k != "examples"},
             "examples": arith["examples"],
             **model_figures(arrays, arith["factor"]),
+            "support": support_figures(arrays, arith["factor"]),
         }
     out["unfilled_scenarios"] = [k for k in cfg["scenarios"] if k not in scenarios]
 

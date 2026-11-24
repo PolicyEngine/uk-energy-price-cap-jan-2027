@@ -45,6 +45,8 @@ The dataset is in the private Hugging Face dataset `policyengine/populace-uk-pri
    - `typical_bill_announced`: the headline typical dual-fuel bill, pounds a year (2,500 kWh electricity, 9,500 kWh gas)
    - `typical_bill_by_fuel`: Ofgem's typical bill for each fuel if it gives one; otherwise leave null and the script computes it from the rates
 
+   Also fill `peak_2022` (label, typical bill, basis, source) if Ofgem's announcement compares the January cap with the 2022-23 peak, in Ofgem's terms; otherwise the post keeps a placeholder there.
+
    The script refuses a partly filled block, and stops if the typical bill from the rates is more than £1.50 from the headline (a typing error, or rates for another payment method or region).
 2. **Run the model:**
    ```bash
@@ -82,5 +84,7 @@ As in the 19 November post:
 3. Per fuel, the ratio of the January typical bill to the October typical bill (Ofgem's October rates at 2,500 kWh electricity and 9,500 kWh gas) applied to each household's spending.
 4. Great Britain only; Northern Ireland is outside the Ofgem cap. Households do not change their use.
 5. Results for Great Britain and by income decile (HBAI net income before housing costs, equivalised, person-weighted): average bills before and after, the change, spending as a share of net income, households spending more than 10% of net income on energy, and four household examples from the published rates alone. January to March changes use the engine's quarterly consumption shares (DESNZ Energy Trends) and 90 days of standing charges.
+
+Support (the sections on the Budget's support and the Household Energy Payment): the payment is the engine's `household_energy_payment` for 2026-27, £100 one-off to households in council tax bands A to D in England (the model cannot exclude households whose landlord is liable for council tax, so it overstates recipients slightly). Both Ofgem caps carry 0% VAT on electricity, so the VAT cut is valued as what 5% VAT would add to the January electricity bill. "Net of support" is the change in the annual bill less the payment, then less that VAT value; the post states this definition. Government figures quoted: £45 a year average saving from the VAT cut (DESNZ, 28 October 2026) and around £50 off the April 2027 cap from its extension (Budget 2026).
 
 Limits: the cap covers default tariffs, but the change is applied to every household; the Direct Debit change is applied to every payment method; one factor per fuel misstates the change for households far from typical use when standing charges and unit rates move differently; January rates are held for a full year.

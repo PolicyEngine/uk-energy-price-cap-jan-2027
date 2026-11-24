@@ -59,6 +59,7 @@ FMT = {
     "pct0": lambda x: num(100 * x) + "%",
     "pct2": lambda x: num(100 * x, 2) + "%",
     "agbp": lambda x: "£" + num(abs(x)),
+    "bn2": lambda x: num(x, 2),
     "npct1": lambda x: float(rnd(100 * x, 1)),
     "p2": lambda x: num(x, 2),
     "m1": lambda x: num(x, 1) + " million",
@@ -71,7 +72,11 @@ FMT = {
 
 def fmt(value, kind):
     if isinstance(value, Missing):
-        return "null" if kind.startswith("n") else f"**[Ofgem: {value.name}]**"
+        if kind.startswith("n"):
+            return "null"
+        if value.name.startswith("model run"):
+            return "**[Pending the 6.20.3 model run]**"
+        return f"**[Ofgem: {value.name}]**"
     if isinstance(value, str):
         return value
     out = FMT[kind](value)
@@ -215,6 +220,37 @@ def figures(res, key, previous):
             "average for all households, because of their mix of electricity and gas; explain this here.]**"
             if odd else "")
 
+    # Support and the Household Energy Payment.
+    reach = res.get("hep_reach")
+    if reach:
+        F["hep_recipients"] = reach["recipients_m"]
+        F["hep_cost"] = reach["cost_bn"]
+        F["hep_share_gb"] = reach["share_gb"]
+        F["hep_share_england"] = reach["share_england"]
+        d1, d10 = reach["deciles"][0], reach["deciles"][9]
+        F["hep_d1_share_england"] = d1["share_england"]
+        F["hep_d1_missed_england"] = 1 - d1["share_england"]
+        F["hep_d1_missed_england_m"] = d1["missed_england_m"]
+        F["hep_d1_missed_gb"] = 1 - d1["share_gb"]
+        F["hep_d10_share_england"] = d10["share_england"]
+    else:
+        for k in ("hep_recipients", "hep_cost", "hep_share_gb", "hep_share_england", "hep_d1_share_england",
+                  "hep_d1_missed_england", "hep_d1_missed_england_m", "hep_d1_missed_gb", "hep_d10_share_england"):
+            F[k] = Missing("model run with the Household Energy Payment")
+    fsup = fc.get("support")
+    F["vat_cut_oct"] = fsup["gb"]["vat_cut_oct"] if fsup else Missing("model run with the support figures")
+    F["hep_mean"] = fsup["gb"]["hep"] if fsup else Missing("model run with the support figures")
+    F["vat_cut_jan"] = g("support.gb.vat_cut_jan") if (sc is None or sc.get("support")) else Missing("support")
+    F["hep_offset"] = g("support.gb.share_change_offset_by_hep") if (sc is None or sc.get("support")) else Missing("support")
+    peak = res.get("peak_2022") or {}
+    if all(peak.get(k) is not None for k in ("label", "typical_bill", "basis", "source")) and not isinstance(F["jan_total"], Missing):
+        gap = F["jan_total"] - peak["typical_bill"]
+        F["peak_sentence"] = (
+            f"The January cap is {fmt(abs(gap), 'gbp')} {'below' if gap < 0 else 'above'} the cap for {peak['label']} "
+            f"({fmt(peak['typical_bill'], 'gbp')} a year, {peak['basis']}; {peak['source']}).")
+    else:
+        F["peak_sentence"] = "**[Ofgem: how the January cap compares with the 2022-23 peak, from inputs.json peak_2022]**"
+
     v = res["versions"]
     F["pe_version"] = v["policyengine"]
     F["pe_uk_version"] = v["policyengine-uk"]
@@ -311,7 +347,7 @@ def blocks(F, kind_label):
         for i in range(10))
     B["fig7_data"] = ",\n".join(
         f'    {{ "decile": "{i + 1}", "change": {fmt(dec(i, "mean_change", sc), "n0")} }}' for i in range(10))
-    B["fig8_data"] = ",\n".join(
+    B["forecast_fig_data"] = ",\n".join(
         f'    {{ "decile": "{i + 1}", "forecast": {fmt(fc["deciles"][i]["mean_change"], "n0")}, '
         f'"ofgem": {fmt(dec(i, "mean_change", sc), "n0")} }}' for i in range(10))
     t4 = []
@@ -326,10 +362,32 @@ def blocks(F, kind_label):
               f"| {fmt(F['share_before'], 'pct1')} | {fmt(F['share_after'], 'pct1')} |")
     B["table4_rows"] = "\n".join(t4)
 
+    sup = None if sc is None else sc.get("support")
+    reach = res.get("hep_reach")
+
+    def s(i, k):
+        if sup is None:
+            return Missing("all households" if i is None else f"decile {i + 1}")
+        return (sup["deciles"][i] if i is not None else sup["gb"])[k]
+
+    t6 = []
+    for i in list(range(10)) + [None]:
+        name = "All" if i is None else {0: "1 (lowest)", 9: "10 (highest)"}.get(i, str(i + 1))
+        hep = (fc["support"]["deciles"][i] if i is not None else fc["support"]["gb"])["hep"] if fc.get("support") else Missing("support")
+        t6.append(f"| {name} | {fmt(s(i, 'change'), 'sgbp')} | {fmt(hep, 'gbp')} | {fmt(s(i, 'change_net_hep'), 'sgbp')} "
+                  f"| {fmt(s(i, 'vat_cut_jan'), 'gbp')} | {fmt(s(i, 'change_net_hep_vat'), 'sgbp')} |")
+    B["support_rows"] = "\n".join(t6)
+    B["support_fig_data"] = ",\n".join(
+        f'    {{ "decile": "{i + 1}", "gross": {fmt(s(i, "change"), "n0")}, "net_hep": {fmt(s(i, "change_net_hep"), "n0")}, '
+        f'"net_both": {fmt(s(i, "change_net_hep_vat"), "n0")} }}' for i in range(10))
+    B["hep_fig_data"] = ",\n".join(
+        f'    {{ "decile": "{i + 1}", "england": {"null" if not reach else fmt(reach["deciles"][i]["share_england"] * 100, "n1")}, '
+        f'"gb": {"null" if not reach else fmt(reach["deciles"][i]["share_gb"] * 100, "n1")} }}' for i in range(10))
+
     def rr(label, f, j, d, kind, dkind):
         return f"| {label} | {fmt(f, kind)} | {fmt(j, kind)} | {fmt(d, dkind)} |"
 
-    B["table5_rows"] = "\n".join([
+    B["forecast_rows"] = "\n".join([
         rr("Typical dual-fuel bill (£ a year)", F["fc_total"], F["jan_total"], F["jan_vs_fc"], "int", "sgbp"),
         rr("Electricity unit rate (pence per kWh)", F["fc_unit_e"], F["jan_unit_e"], F["jan_unit_vs_fc_e"], "p2", "p2"),
         rr("Gas unit rate (pence per kWh)", F["fc_unit_g"], F["jan_unit_g"], F["jan_unit_vs_fc_g"], "p2", "p2"),

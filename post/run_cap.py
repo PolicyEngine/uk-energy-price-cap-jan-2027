@@ -334,7 +334,9 @@ def support_figures(arrays, factor, q1_share):
     over January to March. Both caps carry no VAT on electricity, so the change
     already includes the zero rate; vat_on_change is how much 5% VAT would add
     to the change, and vat_cut_jan / vat_cut_oct what it would add to the bill."""
-    w, gb, decile, hep, elec_q4, gas_q4 = (arrays[k] for k in ("w", "gb", "decile", "hep", "elec_q4", "gas_q4"))
+    w, gb, eng, decile, hep, elec_q4, gas_q4 = (
+        arrays[k] for k in ("w", "gb", "england", "decile", "hep", "elec_q4", "gas_q4")
+    )
     d_elec = elec_q4 * (factor["electricity"] - 1)
     d_gas = gas_q4 * (factor["gas"] - 1)
     change = d_elec + d_gas
@@ -358,7 +360,14 @@ def support_figures(arrays, factor, q1_share):
             "share_change_q1_offset_by_hep": float(np.sum(hep[m] * w[m]) / np.sum(change_q1[m] * w[m])),
         }
 
-    return {"gb": row(gb), "deciles": [{"decile": d, **row(gb & (decile == d))} for d in range(1, 11)]}
+    # The payment is England's; Wales and Scotland pay their own £100, which the
+    # model does not cover, so the payment is set against the change in England.
+    return {
+        "gb": row(gb),
+        "deciles": [{"decile": d, **row(gb & (decile == d))} for d in range(1, 11)],
+        "england": row(gb & eng),
+        "deciles_england": [{"decile": d, **row(gb & eng & (decile == d))} for d in range(1, 11)],
+    }
 
 
 def main():

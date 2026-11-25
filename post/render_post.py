@@ -240,13 +240,17 @@ def figures(res, key, previous):
             F[k] = Missing("model run with the Household Energy Payment")
     fsup = fc.get("support")
     F["vat_cut_oct"] = fsup["gb"]["vat_cut_oct"] if fsup else Missing("model run with the support figures")
-    F["hep_mean"] = fsup["gb"]["hep"] if fsup else Missing("model run with the support figures")
+    F["hep_mean"] = fsup["england"]["hep"] if fsup and "england" in fsup else Missing("model run with the support figures")
     F["vat_cut_jan"] = g("support.gb.vat_cut_jan") if (sc is None or sc.get("support")) else Missing("support")
     F["hep_offset"] = g("support.gb.share_change_offset_by_hep") if (sc is None or sc.get("support")) else Missing("support")
     have_sup = sc is None or bool(sc.get("support"))
-    for k, path in (("vat_on_change", "support.gb.vat_on_change"), ("mean_change_q1", "support.gb.change_q1"),
-                    ("mean_change_q1_net_hep", "support.gb.change_q1_net_hep"),
-                    ("hep_offset_q1", "support.gb.share_change_q1_offset_by_hep")):
+    # The payment is England's, so the support set against the change is for
+    # households in England; the VAT figures stay Great Britain.
+    for k, path in (("vat_on_change", "support.gb.vat_on_change"), ("mean_change_q1", "support.england.change_q1"),
+                    ("mean_change_eng", "support.england.change"),
+                    ("mean_change_q1_net_hep", "support.england.change_q1_net_hep"),
+                    ("hep_offset_q1", "support.england.share_change_q1_offset_by_hep"),
+                    ("hep_offset_annual", "support.england.share_change_offset_by_hep")):
         F[k] = g(path) if have_sup else Missing("support")
     F["vat_on_change_typ"] = (Missing("typical change") if isinstance(F.get("jan_fuel_change_e"), Missing)
                               else F["jan_fuel_change_e"] * 0.05)
@@ -270,10 +274,10 @@ def figures(res, key, previous):
     if any(isinstance(x, Missing) or x is None for x in sp) or max(abs(x) for x in sp) >= 0.005:
         F["fig2_note"] = ""
     elif fmt(sp[0], "spct1") == fmt(sp[1], "spct1"):
-        F["fig2_note"] = f". Standing charges change by {fmt(sp[0], 'spct1')} for both fuels, too little to show as a bar"
+        F["fig2_note"] = f". Standing charges change by {fmt(sp[0], 'spct1')} for both fuels, too small to show as a bar"
     else:
         F["fig2_note"] = (f". Standing charges change by {fmt(sp[0], 'spct1')} (electricity) and {fmt(sp[1], 'spct1')} (gas), "
-                          "too little to show as bars")
+                          "too small to show as bars")
     F["hep_typ_share_annual"] = Missing("change") if isinstance(F["jan_change"], Missing) else 100 / F["jan_change"]
     F["hep_typ_share_q1"] = Missing("change") if isinstance(F["ex_typ_q1_change"], Missing) else 100 / F["ex_typ_q1_change"]
     F["jan_typical_exact"] = g("inputs.jan_typical_total")
@@ -404,7 +408,7 @@ def blocks(F, kind_label):
     def s(i, k):
         if sup is None:
             return Missing("all households" if i is None else f"decile {i + 1}")
-        return (sup["deciles"][i] if i is not None else sup["gb"])[k]
+        return (sup["deciles_england"][i] if i is not None else sup["england"])[k]
 
     t6 = []
     for i in list(range(10)) + [None]:

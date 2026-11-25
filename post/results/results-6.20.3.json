@@ -561,113 +561,135 @@
       "support": {
         "gb": {
           "change": 414.24263556890656,
+          "change_q1": 151.51488232578808,
           "hep": 69.33550567545952,
+          "change_q1_net_hep": 82.17937665032855,
+          "vat_on_change": 9.287750867145048,
           "vat_cut_jan": 59.426577857169285,
           "vat_cut_oct": 50.13882699002424,
-          "change_net_hep": 344.90712989344706,
-          "change_net_hep_vat": 285.48055203627774,
-          "share_change_offset_by_hep": 0.16737897000929547
+          "share_change_offset_by_hep": 0.16737897000929547,
+          "share_change_q1_offset_by_hep": 0.4576151504798978
         },
         "deciles": [
           {
             "decile": 1,
             "change": 373.097794922708,
+            "change_q1": 136.26987760756637,
             "hep": 71.44386241833548,
+            "change_q1_net_hep": 64.82601518923087,
+            "vat_on_change": 8.43932067925228,
             "vat_cut_jan": 53.997997424899296,
             "vat_cut_oct": 45.55867674564701,
-            "change_net_hep": 301.6539325043725,
-            "change_net_hep_vat": 247.65593507947318,
-            "share_change_offset_by_hep": 0.19148829982534743
+            "share_change_offset_by_hep": 0.19148829982534743,
+            "share_change_q1_offset_by_hep": 0.5242821353672998
           },
           {
             "decile": 2,
             "change": 384.7864375813266,
+            "change_q1": 140.57883487143076,
             "hep": 78.04354409217052,
+            "change_q1_net_hep": 62.53529077926024,
+            "vat_on_change": 8.688645382525756,
             "vat_cut_jan": 55.5932721154823,
             "vat_cut_oct": 46.904626732956544,
-            "change_net_hep": 306.74289348915613,
-            "change_net_hep_vat": 251.1496213736738,
-            "share_change_offset_by_hep": 0.20282301159763616
+            "share_change_offset_by_hep": 0.20282301159763616,
+            "share_change_q1_offset_by_hep": 0.555158563972641
           },
           {
             "decile": 3,
             "change": 376.0007179940792,
+            "change_q1": 137.68007664955502,
             "hep": 74.86570647899399,
+            "change_q1_net_hep": 62.81437017056102,
+            "vat_on_change": 8.372531604060795,
             "vat_cut_jan": 53.57065540920038,
             "vat_cut_oct": 45.19812380513959,
-            "change_net_hep": 301.1350115150851,
-            "change_net_hep_vat": 247.56435610588477,
-            "share_change_offset_by_hep": 0.19911054127341557
+            "share_change_offset_by_hep": 0.19911054127341557,
+            "share_change_q1_offset_by_hep": 0.543765723413664
           },
           {
             "decile": 4,
             "change": 397.23273955196714,
+            "change_q1": 145.21889002092843,
             "hep": 78.25895059754295,
+            "change_q1_net_hep": 66.95993942338546,
+            "vat_on_change": 8.934528496842397,
             "vat_cut_jan": 57.16652620527387,
             "vat_cut_oct": 48.23199770843146,
-            "change_net_hep": 318.97378895442415,
-            "change_net_hep_vat": 261.8072627491503,
-            "share_change_offset_by_hep": 0.19701032368532878
+            "share_change_offset_by_hep": 0.19701032368532878,
+            "share_change_q1_offset_by_hep": 0.5389033794864053
           },
           {
             "decile": 5,
             "change": 402.464835882991,
+            "change_q1": 148.02507685766358,
             "hep": 72.68952567444717,
+            "change_q1_net_hep": 75.3355511832164,
+            "vat_on_change": 8.714034213704611,
             "vat_cut_jan": 55.75571955559291,
             "vat_cut_oct": 47.04168534188829,
-            "change_net_hep": 329.7753102085438,
-            "change_net_hep_vat": 274.0195906529509,
-            "share_change_offset_by_hep": 0.18061087377974128
+            "share_change_offset_by_hep": 0.18061087377974128,
+            "share_change_q1_offset_by_hep": 0.4910622390309124
           },
           {
             "decile": 6,
             "change": 396.1742913822165,
+            "change_q1": 144.68966723087487,
             "hep": 74.62273817937701,
+            "change_q1_net_hep": 70.06692905149787,
+            "vat_on_change": 8.964574794310046,
             "vat_cut_jan": 57.358773893796304,
             "vat_cut_oct": 48.394199099486265,
-            "change_net_hep": 321.5515532028395,
-            "change_net_hep_vat": 264.1927793090432,
-            "share_change_offset_by_hep": 0.18835835591205324
+            "share_change_offset_by_hep": 0.18835835591205324,
+            "share_change_q1_offset_by_hep": 0.5157433810411964
           },
           {
             "decile": 7,
             "change": 420.50585831121714,
+            "change_q1": 154.30051043776757,
             "hep": 66.90360179685791,
+            "change_q1_net_hep": 87.39690864090966,
+            "vat_on_change": 9.240908154617607,
             "vat_cut_jan": 59.126860289065675,
             "vat_cut_oct": 49.88595213444807,
-            "change_net_hep": 353.6022565143592,
-            "change_net_hep_vat": 294.4753962252936,
-            "share_change_offset_by_hep": 0.15910266283934252
+            "share_change_offset_by_hep": 0.15910266283934252,
+            "share_change_q1_offset_by_hep": 0.43359287410679986
           },
           {
             "decile": 8,
             "change": 414.4436200691006,
+            "change_q1": 150.85738813272184,
             "hep": 66.13159983231648,
+            "change_q1_net_hep": 84.72578830040534,
+            "vat_on_change": 9.56894413196288,
             "vat_cut_jan": 61.22575977792047,
             "vat_cut_oct": 51.6568156459576,
-            "change_net_hep": 348.3120202367841,
-            "change_net_hep_vat": 287.08626045886365,
-            "share_change_offset_by_hep": 0.1595671802627588
+            "share_change_offset_by_hep": 0.1595671802627588,
+            "share_change_q1_offset_by_hep": 0.43837163463373097
           },
           {
             "decile": 9,
             "change": 457.45356242771885,
+            "change_q1": 167.1348659291079,
             "hep": 61.662957883114316,
+            "change_q1_net_hep": 105.47190804599359,
+            "vat_on_change": 10.326607911685313,
             "vat_cut_jan": 66.07358205903994,
             "vat_cut_oct": 55.746974147354614,
-            "change_net_hep": 395.79060454460443,
-            "change_net_hep_vat": 329.7170224855646,
-            "share_change_offset_by_hep": 0.13479610379656304
+            "share_change_offset_by_hep": 0.13479610379656304,
+            "share_change_q1_offset_by_hep": 0.36894131897810806
           },
           {
             "decile": 10,
-            "change": 522.3169928654788,
+            "change": 522.3169928654789,
+            "change_q1": 191.13765967786583,
             "hep": 49.18698472738518,
+            "change_q1_net_hep": 141.95067495048062,
+            "vat_on_change": 11.675648103695215,
             "vat_cut_jan": 74.70525652465466,
             "vat_cut_oct": 63.02960842095945,
-            "change_net_hep": 473.13000813809373,
-            "change_net_hep_vat": 398.42475161343907,
-            "share_change_offset_by_hep": 0.09417075339161546
+            "share_change_offset_by_hep": 0.09417075339161544,
+            "share_change_q1_offset_by_hep": 0.25733800869113155
           }
         ]
       }
@@ -1032,113 +1054,135 @@
       "support": {
         "gb": {
           "change": 414.82704701524534,
+          "change_q1": 151.75237432483763,
           "hep": 69.33550567545952,
+          "change_q1_net_hep": 82.41686864937812,
+          "vat_on_change": 9.291870044148991,
           "vat_cut_jan": 59.43069703417324,
           "vat_cut_oct": 50.13882699002424,
-          "change_net_hep": 345.4915413397858,
-          "change_net_hep_vat": 286.06084430561253,
-          "share_change_offset_by_hep": 0.16714316526451412
+          "share_change_offset_by_hep": 0.16714316526451412,
+          "share_change_q1_offset_by_hep": 0.4568989841769561
         },
         "deciles": [
           {
             "decile": 1,
             "change": 373.6215611953076,
+            "change_q1": 136.48258955069423,
             "hep": 71.44386241833548,
+            "change_q1_net_hep": 65.03872713235876,
+            "vat_on_change": 8.443063572033122,
             "vat_cut_jan": 54.00174031768014,
             "vat_cut_oct": 45.55867674564701,
-            "change_net_hep": 302.1776987769722,
-            "change_net_hep_vat": 248.17595845929205,
-            "share_change_offset_by_hep": 0.19121985944753545
+            "share_change_offset_by_hep": 0.19121985944753545,
+            "share_change_q1_offset_by_hep": 0.5234650269571478
           },
           {
             "decile": 2,
             "change": 385.3271412076156,
+            "change_q1": 140.7984530451705,
             "hep": 78.04354409217052,
+            "change_q1_net_hep": 62.75490895299999,
+            "vat_on_change": 8.692498852409594,
             "vat_cut_jan": 55.597125585366136,
             "vat_cut_oct": 46.904626732956544,
-            "change_net_hep": 307.28359711544516,
-            "change_net_hep_vat": 251.68647153007905,
-            "share_change_offset_by_hep": 0.20253840372516188
+            "share_change_offset_by_hep": 0.20253840372516188,
+            "share_change_q1_offset_by_hep": 0.5542926247004493
           },
           {
             "decile": 3,
             "change": 376.53320502632033,
+            "change_q1": 137.89657317522358,
             "hep": 74.86570647899399,
+            "change_q1_net_hep": 63.03086669622958,
+            "vat_on_change": 8.37624487545896,
             "vat_cut_jan": 53.57436868059854,
             "vat_cut_oct": 45.19812380513959,
-            "change_net_hep": 301.6674985473264,
-            "change_net_hep_vat": 248.09312986672785,
-            "share_change_offset_by_hep": 0.19882896243841428
+            "share_change_offset_by_hep": 0.19882896243841428,
+            "share_change_q1_offset_by_hep": 0.5429120155427141
           },
           {
             "decile": 4,
             "change": 397.79216595242985,
+            "change_q1": 145.4461772616468,
             "hep": 78.25895059754295,
+            "change_q1_net_hep": 67.18722666410386,
+            "vat_on_change": 8.938491017462484,
             "vat_cut_jan": 57.17048872589396,
             "vat_cut_oct": 48.23199770843146,
-            "change_net_hep": 319.5332153548869,
-            "change_net_hep_vat": 262.36272662899296,
-            "share_change_offset_by_hep": 0.1967332624818498
+            "share_change_offset_by_hep": 0.1967332624818498,
+            "share_change_q1_offset_by_hep": 0.5380612407348523
           },
           {
             "decile": 5,
-            "change": 403.04349161902013,
+            "change": 403.0434916190201,
+            "change_q1": 148.26079492883414,
             "hep": 72.68952567444717,
+            "change_q1_net_hep": 75.57126925438699,
+            "vat_on_change": 8.71789894369771,
             "vat_cut_jan": 55.759584285586,
             "vat_cut_oct": 47.04168534188829,
-            "change_net_hep": 330.3539659445729,
-            "change_net_hep_vat": 274.5943816589869,
-            "share_change_offset_by_hep": 0.18035156797211724
+            "share_change_offset_by_hep": 0.18035156797211727,
+            "share_change_q1_offset_by_hep": 0.49028150502861173
           },
           {
             "decile": 6,
             "change": 396.73033835732747,
+            "change_q1": 144.91548300925228,
             "hep": 74.62273817937701,
+            "change_q1_net_hep": 70.29274482987528,
+            "vat_on_change": 8.968550640655526,
             "vat_cut_jan": 57.36274974014179,
             "vat_cut_oct": 48.394199099486265,
-            "change_net_hep": 322.1076001779505,
-            "change_net_hep_vat": 264.74485043780874,
-            "share_change_offset_by_hep": 0.18809435771500221
+            "share_change_offset_by_hep": 0.18809435771500221,
+            "share_change_q1_offset_by_hep": 0.5149397195509651
           },
           {
             "decile": 7,
             "change": 421.1056741055149,
+            "change_q1": 154.54460417236348,
             "hep": 66.90360179685791,
+            "change_q1_net_hep": 87.64100237550555,
+            "vat_on_change": 9.245006556578486,
             "vat_cut_jan": 59.13095869102655,
             "vat_cut_oct": 49.88595213444807,
-            "change_net_hep": 354.20207230865697,
-            "change_net_hep_vat": 295.07111361763043,
-            "share_change_offset_by_hep": 0.15887603969946537
+            "share_change_offset_by_hep": 0.15887603969946537,
+            "share_change_q1_offset_by_hep": 0.4329080407248666
           },
           {
             "decile": 8,
-            "change": 415.01861070280734,
+            "change": 415.0186107028073,
+            "change_q1": 151.09054679990328,
             "hep": 66.13159983231648,
+            "change_q1_net_hep": 84.95894696758681,
+            "vat_on_change": 9.573188019981005,
             "vat_cut_jan": 61.230003665938604,
             "vat_cut_oct": 51.6568156459576,
-            "change_net_hep": 348.88701087049077,
-            "change_net_hep_vat": 287.6570072045522,
-            "share_change_offset_by_hep": 0.15934610672115854
+            "share_change_offset_by_hep": 0.15934610672115856,
+            "share_change_q1_offset_by_hep": 0.4376951519005213
           },
           {
             "decile": 9,
             "change": 458.0964796840544,
+            "change_q1": 167.39600562297645,
             "hep": 61.662957883114316,
+            "change_q1_net_hep": 105.73304773986212,
+            "vat_on_change": 10.331187828443097,
             "vat_cut_jan": 66.07816197579771,
             "vat_cut_oct": 55.746974147354614,
-            "change_net_hep": 396.43352180094007,
-            "change_net_hep_vat": 330.35535982514233,
-            "share_change_offset_by_hep": 0.13460692368918178
+            "share_change_offset_by_hep": 0.13460692368918178,
+            "share_change_q1_offset_by_hep": 0.36836576627758305
           },
           {
             "decile": 10,
             "change": 523.0551111446478,
+            "change_q1": 191.43767907679046,
             "hep": 49.18698472738518,
+            "change_q1_net_hep": 142.25069434940528,
+            "vat_on_change": 11.680826328419677,
             "vat_cut_jan": 74.71043474937913,
             "vat_cut_oct": 63.02960842095945,
-            "change_net_hep": 473.86812641726254,
-            "change_net_hep_vat": 399.1576916678834,
-            "share_change_offset_by_hep": 0.09403786270197217
+            "share_change_offset_by_hep": 0.09403786270197217,
+            "share_change_q1_offset_by_hep": 0.25693471089176256
           }
         ]
       }

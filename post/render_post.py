@@ -53,6 +53,7 @@ def signed(s, x, places=0):
 
 FMT = {
     "gbp": lambda x: "£" + num(x).lstrip(MINUS) if x >= 0 else MINUS + "£" + num(x).lstrip(MINUS),
+    "gbp2": lambda v: f"£{v:,.2f}",
     "sgbp": lambda x: signed("£" + num(abs(x)), x),
     "pct1": lambda x: num(100 * x, 1) + "%",
     "spct1": lambda x: signed(num(100 * abs(x), 1) + "%", x, 3),
@@ -242,6 +243,33 @@ def figures(res, key, previous):
     F["hep_mean"] = fsup["gb"]["hep"] if fsup else Missing("model run with the support figures")
     F["vat_cut_jan"] = g("support.gb.vat_cut_jan") if (sc is None or sc.get("support")) else Missing("support")
     F["hep_offset"] = g("support.gb.share_change_offset_by_hep") if (sc is None or sc.get("support")) else Missing("support")
+    have_sup = sc is None or bool(sc.get("support"))
+    for k, path in (("vat_on_change", "support.gb.vat_on_change"), ("mean_change_q1", "support.gb.change_q1"),
+                    ("mean_change_q1_net_hep", "support.gb.change_q1_net_hep"),
+                    ("hep_offset_q1", "support.gb.share_change_q1_offset_by_hep")):
+        F[k] = g(path) if have_sup else Missing("support")
+    F["vat_on_change_typ"] = (Missing("typical change") if isinstance(F.get("jan_fuel_change_e"), Missing)
+                              else F["jan_fuel_change_e"] * 0.05)
+    # The forecast and Ofgem's cap: what the mix of unit rates and standing
+    # charges does at other levels of use, and the typical bills behind the +£1.
+    days = res.get("days_in_year", 365)
+    tdcv = {"e": 2500, "g": 9500}
+    def mix_gap(scale):
+        if any(isinstance(F[f"{a}_{b}_{s}"], Missing) for a in ("jan", "fc") for b in ("unit", "standing") for s in "eg"):
+            return Missing("rates")
+        return sum((tdcv[s] * scale * (F[f"jan_unit_{s}"] - F[f"fc_unit_{s}"]) + days * (F[f"jan_standing_{s}"] - F[f"fc_standing_{s}"])) / 100
+                   for s in "eg")
+    F["mix_gap_half"], F["mix_gap_double"] = mix_gap(0.5), mix_gap(2)
+    if isinstance(F["mix_gap_half"], Missing):
+        F["mix_sentence"] = "**[Ofgem: how the mix of rates moves bills at other levels of use]**"
+    else:
+        hl = lambda x: f"{fmt(abs(x), 'gbp')} a year {'higher' if x >= 0 else 'lower'}"
+        F["mix_sentence"] = (f"Ofgem's rates give a bill {hl(F['mix_gap_half'])} than the forecast at half typical use "
+                             f"and {hl(F['mix_gap_double'])} at double typical use.")
+    F["hep_typ_share_annual"] = Missing("change") if isinstance(F["jan_change"], Missing) else 100 / F["jan_change"]
+    F["hep_typ_share_q1"] = Missing("change") if isinstance(F["ex_typ_q1_change"], Missing) else 100 / F["ex_typ_q1_change"]
+    F["jan_typical_exact"] = g("inputs.jan_typical_total")
+    F["fc_typical_exact"] = g("inputs.jan_typical_total", fc)
     peak = res.get("peak_2022") or {}
     if all(peak.get(k) is not None for k in ("label", "typical_bill", "basis", "source")) and not isinstance(F["jan_total"], Missing):
         gap = F["jan_total"] - peak["typical_bill"]
@@ -373,16 +401,18 @@ def blocks(F, kind_label):
     t6 = []
     for i in list(range(10)) + [None]:
         name = "All" if i is None else {0: "1 (lowest)", 9: "10 (highest)"}.get(i, str(i + 1))
-        hep = (fc["support"]["deciles"][i] if i is not None else fc["support"]["gb"])["hep"] if fc.get("support") else Missing("support")
-        t6.append(f"| {name} | {fmt(s(i, 'change'), 'sgbp')} | {fmt(hep, 'gbp')} | {fmt(s(i, 'change_net_hep'), 'sgbp')} "
-                  f"| {fmt(s(i, 'vat_cut_jan'), 'gbp')} | {fmt(s(i, 'change_net_hep_vat'), 'sgbp')} |")
+        t6.append(f"| {name} | {fmt(s(i, 'change'), 'sgbp')} | {fmt(s(i, 'change_q1'), 'sgbp')} | {fmt(s(i, 'hep'), 'gbp')} "
+                  f"| {fmt(s(i, 'change_q1_net_hep'), 'sgbp')} |")
     B["support_rows"] = "\n".join(t6)
     B["support_fig_data"] = ",\n".join(
-        f'    {{ "decile": "{i + 1}", "gross": {fmt(s(i, "change"), "n0")}, "net_hep": {fmt(s(i, "change_net_hep"), "n0")}, '
-        f'"net_both": {fmt(s(i, "change_net_hep_vat"), "n0")} }}' for i in range(10))
+        f'    {{ "decile": "{i + 1}", "q1": {fmt(s(i, "change_q1"), "n0")}, "q1_net_hep": {fmt(s(i, "change_q1_net_hep"), "n0")} }}'
+        for i in range(10))
     B["hep_fig_data"] = ",\n".join(
-        f'    {{ "decile": "{i + 1}", "england": {"null" if not reach else fmt(reach["deciles"][i]["share_england"] * 100, "n1")}, '
-        f'"gb": {"null" if not reach else fmt(reach["deciles"][i]["share_gb"] * 100, "n1")} }}' for i in range(10))
+        f'    {{ "decile": "{i + 1}", "england": {"null" if not reach else fmt(reach["deciles"][i]["share_england"] * 100, "n1")} }}'
+        for i in range(10))
+
+    def diff_(a, b):
+        return Missing("difference") if isinstance(a, Missing) or isinstance(b, Missing) else a - b
 
     def rr(label, f, j, d, kind, dkind):
         return f"| {label} | {fmt(f, kind)} | {fmt(j, kind)} | {fmt(d, dkind)} |"
@@ -390,12 +420,12 @@ def blocks(F, kind_label):
     B["forecast_rows"] = "\n".join([
         rr("Typical dual-fuel bill (£ a year)", F["fc_total"], F["jan_total"], F["jan_vs_fc"], "int", "sgbp"),
         rr("Electricity unit rate (pence per kWh)", F["fc_unit_e"], F["jan_unit_e"], F["jan_unit_vs_fc_e"], "p2", "p2"),
+        rr("Electricity standing charge (pence per day)", F["fc_standing_e"], F["jan_standing_e"], diff_(F["jan_standing_e"], F["fc_standing_e"]), "p2", "p2"),
         rr("Gas unit rate (pence per kWh)", F["fc_unit_g"], F["jan_unit_g"], F["jan_unit_vs_fc_g"], "p2", "p2"),
+        rr("Gas standing charge (pence per day)", F["fc_standing_g"], F["jan_standing_g"], diff_(F["jan_standing_g"], F["fc_standing_g"]), "p2", "p2"),
         rr("Change in the average household bill (£ a year)", F["fc_mean_change"], F["mean_change"], F["mean_vs_fc"], "sgbp", "sgbp"),
         rr("Change, lowest income decile (£ a year)", F["fc_d1_change"], F["d1_change"], F["d1_vs_fc"], "sgbp", "sgbp"),
         rr("Change, highest income decile (£ a year)", F["fc_d10_change"], F["d10_change"], F["d10_vs_fc"], "sgbp", "sgbp"),
-        f"| Households spending over 10% of net income on energy (million) | {fmt(F['fc_over10_after'], 'n1')} "
-        f"| {fmt(F['over10_after'], 'n1')} | {fmt(F['over10_vs_fc'], 'n1')} |".replace("null", "**[Ofgem]**"),
     ])
     return B
 
@@ -445,8 +475,10 @@ def main():
     article = render((HERE / "template.md").read_text(), F, B)
     meta_text = render((HERE / "meta.json").read_text(), F, B)
     meta = json.loads(meta_text.replace("**[Ofgem:", "[Ofgem:").replace("]**", "]"))
-    missing = sorted(set(re.findall(r"\*\*\[Ofgem: ([^\]]+)\]\*\*", article + json.dumps(meta, ensure_ascii=False))))
-    print(f"{len(missing)} distinct Ofgem placeholders left" + (f": {', '.join(missing[:8])}…" if missing else ""))
+    missing = sorted(set(re.findall(r"\*\*\[([^\]]+)\]\*\*", article + json.dumps(meta, ensure_ascii=False))))
+    missing += sorted(set(re.findall(r"\[Ofgem[^\]]*\]", json.dumps(meta, ensure_ascii=False))))
+    print(f"{len(missing)} distinct placeholders left (**[…]**: Ofgem, CHECK, Pending)"
+          + (f": {', '.join(missing[:8])}…" if missing else ""))
 
     if args.out:
         args.out.write_text(article)

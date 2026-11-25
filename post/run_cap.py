@@ -292,10 +292,11 @@ def model_figures(arrays, factor):
 #   2026-27, a one-off £100 to households in council tax bands A to D in
 #   England, paid from January 2027.
 # - Electricity VAT: Ofgem's caps carry 0% VAT on electricity from 1 October
-#   2026, so the cut is in both the October and the January bill. Its value is
-#   what 5% VAT would add to the January electricity bill (annual rate).
-# "Net of support" subtracts the payment, and then the VAT cut's value, from
-# the change in the annual bill; the post states that definition.
+#   2026, so the zero rate is in both the October and the January bill and the
+#   change between them already includes it. vat_on_change is what 5% VAT
+#   would add to the change; vat_cut_jan what it would add to the January bill.
+# The one-off payment is set against the change over January to March, not
+# the annual-rate change; the post states the approximation.
 VAT_FORGONE = 0.05
 
 
@@ -328,13 +329,18 @@ def hep_reach(arrays):
     return out
 
 
-def support_figures(arrays, factor):
-    """The change in the annual bill, gross and net of the support."""
+def support_figures(arrays, factor, q1_share):
+    """The change in the bill, and the one-off payment set against the change
+    over January to March. Both caps carry no VAT on electricity, so the change
+    already includes the zero rate; vat_on_change is how much 5% VAT would add
+    to the change, and vat_cut_jan / vat_cut_oct what it would add to the bill."""
     w, gb, decile, hep, elec_q4, gas_q4 = (arrays[k] for k in ("w", "gb", "decile", "hep", "elec_q4", "gas_q4"))
-    elec_jan = elec_q4 * factor["electricity"]
-    change = elec_jan + gas_q4 * factor["gas"] - elec_q4 - gas_q4
-    vat = elec_jan * VAT_FORGONE
-    vat_oct = elec_q4 * VAT_FORGONE
+    d_elec = elec_q4 * (factor["electricity"] - 1)
+    d_gas = gas_q4 * (factor["gas"] - 1)
+    change = d_elec + d_gas
+    # Approximation: each fuel's change scaled by its share of a year's use in
+    # January to March (standing charges included in the scaled amount).
+    change_q1 = d_elec * q1_share["electricity"] + d_gas * q1_share["gas"]
 
     def wm(x, m):
         return float(np.sum(x[m] * w[m]) / np.sum(w[m]))
@@ -342,12 +348,14 @@ def support_figures(arrays, factor):
     def row(m):
         return {
             "change": wm(change, m),
+            "change_q1": wm(change_q1, m),
             "hep": wm(hep, m),
-            "vat_cut_jan": wm(vat, m),
-            "vat_cut_oct": wm(vat_oct, m),
-            "change_net_hep": wm(change - hep, m),
-            "change_net_hep_vat": wm(change - hep - vat, m),
+            "change_q1_net_hep": wm(change_q1 - hep, m),
+            "vat_on_change": wm(d_elec * VAT_FORGONE, m),
+            "vat_cut_jan": wm(elec_q4 * factor["electricity"] * VAT_FORGONE, m),
+            "vat_cut_oct": wm(elec_q4 * VAT_FORGONE, m),
             "share_change_offset_by_hep": float(np.sum(hep[m] * w[m]) / np.sum(change[m] * w[m])),
+            "share_change_q1_offset_by_hep": float(np.sum(hep[m] * w[m]) / np.sum(change_q1[m] * w[m])),
         }
 
     return {"gb": row(gb), "deciles": [{"decile": d, **row(gb & (decile == d))} for d in range(1, 11)]}
@@ -432,7 +440,7 @@ def main():
             "inputs": {k: v for k, v in arith.items() if k != "examples"},
             "examples": arith["examples"],
             **model_figures(arrays, arith["factor"]),
-            "support": support_figures(arrays, arith["factor"]),
+            "support": support_figures(arrays, arith["factor"], q1_share),
         }
     out["unfilled_scenarios"] = [k for k in cfg["scenarios"] if k not in scenarios]
 

@@ -5,8 +5,8 @@ Using [PolicyEngine UK](https://policyengine.org/uk), we estimate what Ofgem's c
 Key results under Ofgem's cap (annual rates unless stated, Great Britain):
 
 - A household with typical consumption sees its bill change by {{ex_typ_change:sgbp}} a year at the January rates ({{ex_typ_change_pct:spct1}}), or about {{ex_typ_q1_change:sgbp}} over January to March
-- The average household in Great Britain spends {{mean_after:gbp}} a year on electricity and gas at the January rates, against {{mean_before:gbp}} at October rates (a change of {{mean_change:sgbp}})
-- Bills in the bottom income decile change by an average of {{d1_change:sgbp}} a year, and households' energy spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} of their net income; in the top decile, bills change by an average of {{d10_change:sgbp}}, and households' energy spending goes from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} of their net income
+- The average household in Great Britain spends {{mean_after:gbp}} a year on electricity and gas at the January rates, against {{mean_before:gbp}} at October rates (a change of {{mean_change:sgbp}} a year, or {{mean_change_q1_gb:sgbp}} over January to March)
+- Bills in the bottom income decile change by an average of {{d1_change:sgbp}} a year ({{d1_change_q1:sgbp}} over January to March), and households' energy spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} of their net income; in the top decile, bills change by an average of {{d10_change:sgbp}} ({{d10_change_q1:sgbp}} over January to March), and households' energy spending goes from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} of their net income
 - The number of households spending more than 10% of their net income on energy goes from {{over10_before:m1}} to {{over10_after:m1}}
 - On Cornwall Insight's forecast, the same model gives an average change of {{fc_mean_change:sgbp}} a year, against {{mean_change:sgbp}} under Ofgem's cap
 
@@ -115,7 +115,7 @@ Standing charges change by {{jan_standing_pct_e:spct1}} (electricity) and {{jan_
 
 ## Bills across the income distribution
 
-We apply Ofgem's cap to the electricity and gas spending of every household in Great Britain in PolicyEngine UK's data, [Microcosm UK](https://www.policyengine.org/uk/model/data). We first restate each household's spending at October to December 2026 prices, using PolicyEngine UK's energy price indices. We then change each household's electricity spending by {{jan_bill_pct_e:spct1}} and its gas spending by {{jan_bill_pct_g:spct1}}, the changes in the typical bill for each fuel in Table 2. All figures are annual rates and assume that households do not change how much energy they use. At October prices, households that use both fuels spend an average of {{dual_mean_before:gbp}} a year in our data, and the median such household spends {{dual_median_before:gbp}}, against Ofgem's typical bill of {{oct_total:gbp}}.
+We apply Ofgem's cap to the electricity and gas spending of every household in Great Britain in PolicyEngine UK's data, [Microcosm UK](https://www.policyengine.org/uk/model/data). We first restate each household's spending at October to December 2026 prices, using PolicyEngine UK's energy price indices. We then change each household's electricity spending by {{jan_bill_pct_e:spct1}} and its gas spending by {{jan_bill_pct_g:spct1}}, the changes in the typical bill for each fuel in Table 2. Figures are annual rates unless they say January to March, and assume that households do not change how much energy they use. At October prices, households that use both fuels spend an average of {{dual_mean_before:gbp}} a year in our data, and the median such household spends {{dual_median_before:gbp}}, against Ofgem's typical bill of {{oct_total:gbp}}.
 
 ```chart
 {
@@ -161,25 +161,28 @@ Households in the top decile spend more on energy than those in the bottom (Figu
 {
   "type": "bar",
   "title": "Figure 6: Change in the average household energy bill by income decile, Great Britain",
-  "subtitle": "Annual rate, from Ofgem's October to December 2026 rates to its January to March 2027 rates; {{mean_change:sgbp}} across all households",
+  "subtitle": "From Ofgem's October to December 2026 rates to its January to March 2027 rates, at an annual rate and over the three months; {{mean_change:sgbp}} a year and {{mean_change_q1_gb:sgbp}} over January to March across all households",
   "xKey": "decile",
-  "series": [{ "key": "change", "name": "Change in average bill", "color": "primary" }],
+  "series": [
+    { "key": "change", "name": "Annual rate", "color": "primary" },
+    { "key": "q1", "name": "Over January to March", "color": "quinary" }
+  ],
   "data": [
 {{fig7_data}}
   ],
-  "yLabel": "Change in average annual bill (£)",
+  "yLabel": "Change in average bill (£)",
   "format": { "decimals": 0, "prefix": "£", "signed": true },
-  "legend": false
+  "valueLabels": false
 }
 ```
 
-**Table 4: Household energy bills by income decile, Great Britain (annual rates)**
+**Table 4: Household energy bills by income decile, Great Britain**
 
-| Income decile | Average net income | Bill, October rates | Bill, January rates | Change | Share of income, October | Share of income, January |
-| ------------- | -----------------: | ------------------: | ------------------: | -----: | -----------------------: | -----------------------: |
+| Income decile | Average net income | Bill, October rates | Bill, January rates | Change, annual rate | Change over January to March | Share of income, October | Share of income, January |
+| ------------- | -----------------: | ------------------: | ------------------: | ------------------: | ---------------------------: | -----------------------: | -----------------------: |
 {{table4_rows}}
 
-We calculate changes from unrounded bills. Net income is household net income before housing costs, as in the Department for Work and Pensions' Households Below Average Income statistics. We rank households into deciles by that income, adjusted for household size, so that each decile holds a tenth of people in the UK.
+Bills, income and shares are annual rates. The change over January to March applies each fuel's share of a year's use in January to March ({{q1_share_e:pct1}} for electricity and {{q1_share_g:pct1}} for gas) to each household's annual change, as in Table 5. We calculate changes from unrounded bills. Net income is household net income before housing costs, as in the Department for Work and Pensions' Households Below Average Income statistics. We rank households into deciles by that income, adjusted for household size, so that each decile holds a tenth of people in the UK.
 
 In our data, {{n_elec_only:m1}} households in Great Britain have no gas spending. Their bills change by an average of {{elec_only_mean_change:sgbp}} a year, against {{dual_mean_change:sgbp}} for the {{n_dual:m1}} households that use both fuels.
 

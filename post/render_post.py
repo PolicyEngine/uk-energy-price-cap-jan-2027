@@ -252,6 +252,9 @@ def figures(res, key, previous):
                     ("hep_offset_q1", "support.england.share_change_q1_offset_by_hep"),
                     ("hep_offset_annual", "support.england.share_change_offset_by_hep")):
         F[k] = g(path) if have_sup else Missing("support")
+    F["mean_change_q1_gb"] = g("support.gb.change_q1") if have_sup else Missing("support")
+    F["d1_change_q1"] = g("support.deciles.0.change_q1") if have_sup else Missing("support")
+    F["d10_change_q1"] = g("support.deciles.9.change_q1") if have_sup else Missing("support")
     F["vat_on_change_typ"] = (Missing("typical change") if isinstance(F.get("jan_fuel_change_e"), Missing)
                               else F["jan_fuel_change_e"] * 0.05)
     # The forecast and Ofgem's cap: what the mix of unit rates and standing
@@ -388,8 +391,14 @@ def blocks(F, kind_label):
         f'    {{ "decile": "{i + 1}", "oct": {fmt(base["deciles"][i]["share_before"] * 100, "n3")}, '
         f'"jan": {"null" if sc is None else fmt(sc["deciles"][i]["share_after"] * 100, "n3")} }}'
         for i in range(10))
+    sup_gb = None if sc is None else sc.get("support")
+
+    def q1(i):
+        return Missing("January to March change") if sup_gb is None else sup_gb["deciles"][i]["change_q1"]
+
     B["fig7_data"] = ",\n".join(
-        f'    {{ "decile": "{i + 1}", "change": {fmt(dec(i, "mean_change", sc), "n0")} }}' for i in range(10))
+        f'    {{ "decile": "{i + 1}", "change": {fmt(dec(i, "mean_change", sc), "n0")}, "q1": {fmt(q1(i), "n0")} }}'
+        for i in range(10))
     B["forecast_fig_data"] = ",\n".join(
         f'    {{ "decile": "{i + 1}", "forecast": {fmt(fc["deciles"][i]["mean_change"], "n0")}, '
         f'"ofgem": {fmt(dec(i, "mean_change", sc), "n0")} }}' for i in range(10))
@@ -399,10 +408,10 @@ def blocks(F, kind_label):
         name = {0: "1 (lowest)", 9: "10 (highest)"}.get(i, str(i + 1))
         t4.append(
             f"| {name} | {fmt(b['mean_net_income'], 'gbp')} | {fmt(b['mean_before'], 'gbp')} | {fmt(dec(i, 'mean_after', sc), 'gbp')} "
-            f"| {fmt(dec(i, 'mean_change', sc), 'sgbp')} | {fmt(b['share_before'], 'pct1')} | {fmt(dec(i, 'share_after', sc), 'pct1')} |"
+            f"| {fmt(dec(i, 'mean_change', sc), 'sgbp')} | {fmt(q1(i), 'sgbp')} | {fmt(b['share_before'], 'pct1')} | {fmt(dec(i, 'share_after', sc), 'pct1')} |"
         )
     t4.append(f"| All | | {fmt(F['mean_before'], 'gbp')} | {fmt(F['mean_after'], 'gbp')} | {fmt(F['mean_change'], 'sgbp')} "
-              f"| {fmt(F['share_before'], 'pct1')} | {fmt(F['share_after'], 'pct1')} |")
+              f"| {fmt(F['mean_change_q1_gb'], 'sgbp')} | {fmt(F['share_before'], 'pct1')} | {fmt(F['share_after'], 'pct1')} |")
     B["table4_rows"] = "\n".join(t4)
 
     sup = None if sc is None else sc.get("support")

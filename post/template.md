@@ -238,7 +238,7 @@ Both October and January caps already carry no VAT on electricity, so the change
 
 ## Who the Household Energy Payment reaches
 
-We estimate that {{hep_recipients:m1}} households receive the payment, at a cost of £{{hep_cost:bn2}} billion; the Budget puts the cost at £2.6 billion for "up to 20 million households". That is {{hep_share_england:pct0}} of households in England and {{hep_share_gb:pct0}} of households in Great Britain. Scotland and Wales receive funding through the Barnett formula instead, which their governments decide how to use and which we do not model.
+We estimate that {{hep_recipients:m1}} households receive the payment, at a cost of £{{hep_cost:bn2}} billion: {{hep_share_england:pct0}} of households in England and {{hep_share_gb:pct0}} of households in Great Britain. The Budget gives £2.6 billion for the payment, "supporting up to 20 million households"; that sum includes the share that Scotland, Wales and Northern Ireland receive through the Barnett formula, which their governments decide how to use and which we do not model.
 
 Figure 9 shows the share of households in each income decile that receive the payment. In the lowest income decile, {{hep_d1_share_england:pct0}} of households in England receive it and {{hep_d1_missed_england:pct0}} ({{hep_d1_missed_england_m:m1}}) do not, because they live in a home in council tax band E or above; across Great Britain, {{hep_d1_missed_gb:pct0}} of the lowest decile do not receive it. In the highest decile, {{hep_d10_share_england:pct0}} of households in England receive it.
 

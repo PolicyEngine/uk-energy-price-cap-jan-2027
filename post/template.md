@@ -1,4 +1,4 @@
-On {{ofgem_date}}, Ofgem [announced](https://www.ofgem.gov.uk/energy-price-cap) the energy price cap for 1 January to 31 March 2027: {{jan_total:gbp}} a year for a household with typical consumption paying by Direct Debit, a change of {{jan_change:sgbp}} ({{jan_change_pct:spct1}}) from the [current cap](https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges) of {{oct_total:gbp}}. The consultancy Cornwall Insight had forecast {{fc_total:gbp}} on 18 November; {{vs_fc_sentence}}
+On {{ofgem_date}}, Ofgem [announced](https://www.ofgem.gov.uk/sites/default/files/2026-11/summary-of-changes-to-energy-price-cap-1-January-to-31-March-2027.pdf) the energy price cap for 1 January to 31 March 2027: {{jan_total:gbp}} a year for a household with typical consumption paying by Direct Debit, a change of {{jan_change:sgbp}} ({{jan_change_pct:spct1}}) from the [current cap](https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges) of {{oct_total:gbp}}. The consultancy Cornwall Insight had forecast {{fc_total:gbp}} on 18 November; {{vs_fc_sentence}}
 
 Using [PolicyEngine UK](https://policyengine.org/uk), we estimate what Ofgem's cap means for household energy bills across the income distribution in Great Britain. Our [earlier post](https://policyengine.org/uk/research/uk-energy-price-cap-january-2027-forecast) estimated the effects of Cornwall Insight's forecast; this post uses Ofgem's announced rates, and the last section compares the two.
 
@@ -38,7 +38,7 @@ Until July 2026, Ofgem quoted the cap at its previous typical values of 2,700 kW
 | ------- | --------------------: | -------------------------------------------------------------: | -------------------------: |
 {{table1_rows}}
 
-Sources: Ofgem's announcements of each cap, from [January to March 2025](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2025) to [October to December 2026](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026) and **[Ofgem: link to the January to March 2027 announcement]**, and its [restatement of the April to June and July to September 2026 caps](https://www.ofgem.gov.uk/sites/default/files/2026-06/Summary-of-changes-to-energy-price-cap-1-July-to-30-September-2026-revised-TDCV.pdf). The last column for January 2025 to March 2026 is our calculation from Ofgem's average rates for each quarter.
+Sources: Ofgem's announcements of each cap, from [January to March 2025](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2025) to [October to December 2026](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026) and [January to March 2027](https://www.ofgem.gov.uk/sites/default/files/2026-11/summary-of-changes-to-energy-price-cap-1-January-to-31-March-2027.pdf), and its [restatement of the April to June and July to September 2026 caps](https://www.ofgem.gov.uk/sites/default/files/2026-06/Summary-of-changes-to-energy-price-cap-1-July-to-30-September-2026-revised-TDCV.pdf). The last column for January 2025 to March 2026 is our calculation from Ofgem's average rates for each quarter.
 
 Table 2 and Figure 2 compare Ofgem's January rates with its October rates and with Cornwall Insight's forecast.
 
@@ -73,7 +73,7 @@ At typical consumption, the gas bill changes by {{jan_fuel_change_g:sgbp}} and t
 
 ### Why the cap changed
 
-**[Ofgem: the reasons Ofgem gives for the change, attributed to its announcement in its own words, such as wholesale gas prices]** {{peak_sentence}}
+Ofgem's [letter on the January update](https://www.ofgem.gov.uk/sites/default/files/2026-11/summary-of-changes-to-energy-price-cap-1-January-to-31-March-2027.pdf) attributes the change mainly to wholesale costs. Its wholesale cost allowance rises by 50%, to 56% of the typical bill from 47% in October to December: by 59% for gas and 39% for electricity. Ofgem cites conflict and geopolitical instability in the Middle East, historically low European gas storage at the start of winter, and greater reliance on gas-fired power during periods of low wind. Allowances that move with the cap level, including suppliers' earnings allowance, headroom, debt costs and VAT on gas, rise with it.
 
 Ofgem expresses the cap as an annual rate. A household pays the January rates for three months. UK households use on average {{q1_share_e:pct1}} of a year's electricity and {{q1_share_g:pct1}} of a year's gas in January to March.[^1] Applying those shares to the unit-rate part of the bill, and 90 days to the standing charges, the cap changes a typical household's bills over January to March by about {{ex_typ_q1_change:sgbp}}.
 

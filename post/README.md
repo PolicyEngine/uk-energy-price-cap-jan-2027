@@ -2,7 +2,7 @@
 
 The analysis behind PolicyEngine's post on Ofgem's energy price cap for 1 January to 31 March 2027 and what it means for household energy bills in Great Britain, by income decile. It follows the [19 November 2026 post](https://policyengine.org/uk/research/uk-energy-price-cap-january-2027-forecast) on Cornwall Insight's forecast, whose code (`uk-energy-price-cap-2027/run_cap.py`) this folder generalises.
 
-**Status: waiting for Ofgem.** The `ofgem` block in `inputs.json` is empty. The results here hold Cornwall Insight's forecast only; the draft post renders every Ofgem figure as a visible placeholder, **[Ofgem: …]**, until the block is filled and the scripts rerun.
+**Status: Ofgem's cap is in.** The `ofgem` block in `inputs.json` holds Ofgem's January to March 2027 rates (announced 25 November 2026), and `results/results-6.20.3.json` holds both Cornwall Insight's forecast and Ofgem's cap. Ofgem publishes no per-fuel typical bills, so the script computes them from its rates; they sum to £2,166.58 against Ofgem's headline of £2,166.
 
 ## Files
 

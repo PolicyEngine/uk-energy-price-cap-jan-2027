@@ -42,22 +42,22 @@
     "ofgem": {
       "label": "January to March 2027 (Ofgem cap)",
       "kind": "actual",
-      "source": "Ofgem, energy price cap for 1 January to 31 March 2027, announced 25 November 2026",
-      "announced_on": null,
+      "source": "Ofgem, energy price cap unit rates and standing charges, 1 January to 31 March 2027, and its letter of 25 November 2026 on the cap update",
+      "announced_on": "25 November 2026",
       "unit_p_per_kwh": {
-        "electricity": null,
-        "gas": null
+        "electricity": 32.69,
+        "gas": 10.96
       },
       "standing_p_per_day": {
-        "electricity": null,
-        "gas": null
+        "electricity": 54.77,
+        "gas": 29.65
       },
       "standing_rounded_to_penny": false,
       "typical_bill_by_fuel": {
         "electricity": null,
         "gas": null
       },
-      "typical_bill_announced": null
+      "typical_bill_announced": 2166
     }
   },
   "history": {

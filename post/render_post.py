@@ -270,14 +270,17 @@ def figures(res, key, previous):
         hl = lambda x: f"{fmt(abs(x), 'gbp')} a year {'higher' if x >= 0 else 'lower'}"
         F["mix_sentence"] = (f"Ofgem's rates give a bill {hl(F['mix_gap_half'])} than the forecast at half typical use "
                              f"and {hl(F['mix_gap_double'])} at double typical use.")
-    sp = [F.get(f"jan_standing_pct_{s}") for s in "eg"]
-    if any(isinstance(x, Missing) or x is None for x in sp) or max(abs(x) for x in sp) >= 0.005:
-        F["fig2_note"] = ""
-    elif fmt(sp[0], "spct1") == fmt(sp[1], "spct1"):
-        F["fig2_note"] = f". Standing charges change by {fmt(sp[0], 'spct1')} for both fuels, too small to show as a bar"
+    # Figure 2 was dropped (the standing-charge bars were too small to see);
+    # the rate changes are stated in the text instead.
+    rp = [F.get(f"jan_{k}_pct_{s}") for k in ("unit", "standing") for s in "eg"]
+    if any(isinstance(x, Missing) or x is None for x in rp):
+        F["rates_sentence"] = "**[Ofgem: change in unit rates and standing charges]**"
     else:
-        F["fig2_note"] = (f". Standing charges change by {fmt(sp[0], 'spct1')} (electricity) and {fmt(sp[1], 'spct1')} (gas), "
-                          "too small to show as bars")
+        ue, ug, se, sg = (fmt(x, "spct1") for x in rp)
+        stand = (f"standing charges change by {se} for both fuels" if se == sg
+                 else f"standing charges change by {se} for electricity and {sg} for gas")
+        F["rates_sentence"] = (f"From October to January, the unit rate changes by {ue} for electricity and {ug} for gas, "
+                               f"while {stand}.")
     F["hep_typ_share_annual"] = Missing("change") if isinstance(F["jan_change"], Missing) else 100 / F["jan_change"]
     F["hep_typ_share_q1"] = Missing("change") if isinstance(F["ex_typ_q1_change"], Missing) else 100 / F["ex_typ_q1_change"]
     F["jan_typical_exact"] = g("inputs.jan_typical_total")

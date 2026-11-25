@@ -40,7 +40,7 @@ Until July 2026, Ofgem quoted the cap at its previous typical values of 2,700 kW
 
 Sources: Ofgem's announcements of each cap, from [January to March 2025](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2025) to [October to December 2026](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026) and [January to March 2027](https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2027), and its [restatement of the April to June and July to September 2026 caps](https://www.ofgem.gov.uk/sites/default/files/2026-06/Summary-of-changes-to-energy-price-cap-1-July-to-30-September-2026-revised-TDCV.pdf). The last column for January 2025 to March 2026 is our calculation from Ofgem's average rates for each quarter. Caps before October 2026 include 5% VAT on electricity; from October 2026 electricity carries no VAT, so, as Ofgem notes, the caps on either side of that change are not directly comparable.
 
-Table 2 and Figure 2 compare Ofgem's January rates with its October rates and with Cornwall Insight's forecast.
+Table 2 compares Ofgem's January rates with its October rates and with Cornwall Insight's forecast.
 
 **Table 2: Price cap for a typical household paying by Direct Debit, Great Britain average**
 
@@ -50,24 +50,7 @@ Table 2 and Figure 2 compare Ofgem's January rates with its October rates and wi
 
 Sources: Ofgem, [energy price cap unit rates and standing charges](https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges); Cornwall Insight, [press release](https://www.cornwall-insight.com/press-releases/energy-bills-set-for-steep-rise-in-january/), 18 November 2026. We compute the typical bills by fuel from Ofgem's rates. Ofgem's rates carry no VAT on electricity and 5% VAT on gas. Cornwall Insight publishes standing charges to the nearest penny a day; the forecast column gives the standing charges its fuel totals imply.
 
-```chart
-{
-  "type": "bar",
-  "title": "Figure 2: Change in energy price cap rates by fuel",
-  "subtitle": "Percentage change from Ofgem's October to December 2026 cap to its January to March 2027 cap, Direct Debit, Great Britain average{{fig2_note}}",
-  "xKey": "fuel",
-  "series": [
-    { "key": "unit", "name": "Unit rate", "color": "primary" },
-    { "key": "standing", "name": "Standing charge", "color": "quinary" }
-  ],
-  "data": [
-    { "fuel": "Electricity", "unit": {{jan_unit_pct_e:npct1}}, "standing": {{jan_standing_pct_e:npct1}} },
-    { "fuel": "Gas", "unit": {{jan_unit_pct_g:npct1}}, "standing": {{jan_standing_pct_g:npct1}} }
-  ],
-  "yLabel": "Change (%)",
-  "format": { "decimals": 1, "suffix": "%", "signed": true }
-}
-```
+{{rates_sentence}}
 
 At typical consumption, the gas bill changes by {{jan_fuel_change_g:sgbp}} and the electricity bill by {{jan_fuel_change_e:sgbp}} ({{jan_rate_change:sgbp}} in total on Ofgem's rates as published, against Ofgem's {{jan_change:sgbp}}){{gas_share_clause}}.
 
@@ -86,7 +69,7 @@ Table 3 and Figures 3 and 4 apply the rates in Table 2 to four levels of consump
 ```chart
 {
   "type": "bar",
-  "title": "Figure 3: Annual energy bill by household type, Direct Debit",
+  "title": "Figure 2: Annual energy bill by household type, Direct Debit",
   "subtitle": "Annual rate, at Ofgem's October to December 2026 rates and its January to March 2027 rates",
   "xKey": "household",
   "series": [
@@ -104,7 +87,7 @@ Table 3 and Figures 3 and 4 apply the rates in Table 2 to four levels of consump
 ```chart
 {
   "type": "bar",
-  "title": "Figure 4: Annual energy bill by fuel and household type under the January to March 2027 cap, Direct Debit",
+  "title": "Figure 3: Annual energy bill by fuel and household type under the January to March 2027 cap, Direct Debit",
   "subtitle": "Annual rate at Ofgem's January to March 2027 rates; the label gives the total",
   "xKey": "household",
   "series": [
@@ -137,7 +120,7 @@ We apply Ofgem's cap to the electricity and gas spending of every household in G
 ```chart
 {
   "type": "bar",
-  "title": "Figure 5: Average household energy bill by income decile, Great Britain",
+  "title": "Figure 4: Average household energy bill by income decile, Great Britain",
   "subtitle": "Annual rate, at Ofgem's October to December 2026 rates and its January to March 2027 rates",
   "xKey": "decile",
   "series": [
@@ -153,12 +136,12 @@ We apply Ofgem's cap to the electricity and gas spending of every household in G
 }
 ```
 
-Households in the top decile spend more on energy than those in the bottom (Figure 5). Their bills change by an average of {{d10_change:sgbp}} a year, against {{d1_change:sgbp}} in the bottom decile (Figure 7).{{decile_sign_note}} As a share of net income (Figure 6 and Table 4), spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} in the bottom decile and from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} in the top.
+Households in the top decile spend more on energy than those in the bottom (Figure 4). Their bills change by an average of {{d10_change:sgbp}} a year, against {{d1_change:sgbp}} in the bottom decile (Figure 6).{{decile_sign_note}} As a share of net income (Figure 5 and Table 4), spending goes from {{d1_share_before:pct1}} to {{d1_share_after:pct1}} in the bottom decile and from {{d10_share_before:pct1}} to {{d10_share_after:pct1}} in the top.
 
 ```chart
 {
   "type": "bar",
-  "title": "Figure 6: Household energy spending as a share of net income by income decile, Great Britain",
+  "title": "Figure 5: Household energy spending as a share of net income by income decile, Great Britain",
   "subtitle": "Total energy spending in each decile over its total net income before housing costs, at annual rates",
   "xKey": "decile",
   "series": [
@@ -177,7 +160,7 @@ Households in the top decile spend more on energy than those in the bottom (Figu
 ```chart
 {
   "type": "bar",
-  "title": "Figure 7: Change in the average household energy bill by income decile, Great Britain",
+  "title": "Figure 6: Change in the average household energy bill by income decile, Great Britain",
   "subtitle": "Annual rate, from Ofgem's October to December 2026 rates to its January to March 2027 rates; {{mean_change:sgbp}} across all households",
   "xKey": "decile",
   "series": [{ "key": "change", "name": "Change in average bill", "color": "primary" }],
@@ -208,7 +191,7 @@ The bills in these figures leave out the support that households receive outside
 
 Two Autumn Budget measures bear on bills this winter. The Autumn Budget announced the £100 Household Energy Payment, a one-off payment from January 2027 to households in council tax bands A to D in England, which local authorities pay outside the cap. The zero rate of VAT on household electricity has applied since 1 October 2026, is in both the October and the January caps, and the [Budget](https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html) extended it to July 2027; the Department for Energy Security and Net Zero [says](https://www.gov.uk/government/news/what-the-autumn-budget-2026-means-for-your-energy-bills) it saves households an average of £45 a year. In our data, 5% VAT would add {{vat_cut_oct:gbp}} a year to the average household's electricity bill at October rates and {{vat_cut_jan:gbp}} at January rates. Because both caps carry no VAT on electricity, the zero rate lowers the October-to-January change itself by {{vat_on_change:gbp}} a year for the average household ({{vat_on_change_typ:gbp}} at typical use); the figures in this post already include it.
 
-The payment is made once, while the changes above are annual rates. Table 5 and Figure 8 set the payment against the change over January to March, the three months the January cap covers, for households in England, where the payment applies; Table 5 also gives the annual-rate change. We approximate that change by multiplying each household's annual change for each fuel by the share of a year's use in January to March ({{q1_share_e:pct1}} for electricity and {{q1_share_g:pct1}} for gas); this applies the same share to standing charges, which accrue evenly through the year. For the average household in England, bills change by {{mean_change_q1:sgbp}} over January to March and the payment averages {{hep_mean:gbp}}, {{hep_offset_q1:pct0}} of that change ({{hep_offset_annual:pct0}} of the {{mean_change_eng:sgbp}} annual-rate change). For a typical household in England that receives it, £100 is {{hep_typ_share_q1:pct0}} of the {{ex_typ_q1_change:sgbp}} change over January to March, against {{hep_typ_share_annual:pct0}} of the {{jan_change:sgbp}} annual-rate change.
+The payment is made once, while the changes above are annual rates. Table 5 and Figure 7 set the payment against the change over January to March, the three months the January cap covers, for households in England, where the payment applies; Table 5 also gives the annual-rate change. We approximate that change by multiplying each household's annual change for each fuel by the share of a year's use in January to March ({{q1_share_e:pct1}} for electricity and {{q1_share_g:pct1}} for gas); this applies the same share to standing charges, which accrue evenly through the year. For the average household in England, bills change by {{mean_change_q1:sgbp}} over January to March and the payment averages {{hep_mean:gbp}}, {{hep_offset_q1:pct0}} of that change ({{hep_offset_annual:pct0}} of the {{mean_change_eng:sgbp}} annual-rate change). For a typical household in England that receives it, £100 is {{hep_typ_share_q1:pct0}} of the {{ex_typ_q1_change:sgbp}} change over January to March, against {{hep_typ_share_annual:pct0}} of the {{jan_change:sgbp}} annual-rate change.
 
 **Table 5: Change in the average household energy bill by income decile, and the Household Energy Payment, England (£)**
 
@@ -221,7 +204,7 @@ The table covers households in England only. The payment column averages the £1
 ```chart
 {
   "type": "bar",
-  "title": "Figure 8: Change in the average household energy bill over January to March 2027 by income decile, before and after the Household Energy Payment, England",
+  "title": "Figure 7: Change in the average household energy bill over January to March 2027 by income decile, before and after the Household Energy Payment, England",
   "subtitle": "From Ofgem's October to December 2026 rates to its January to March 2027 rates, over the three months; less the one-off £100 Household Energy Payment (England, council tax bands A to D), averaged over all households in England",
   "xKey": "decile",
   "series": [
@@ -243,12 +226,12 @@ We estimate that {{hep_recipients:m1}} households receive the payment, {{hep_sha
 
 The Welsh Government [has said](https://www.gov.wales/written-statement-welsh-government-response-uk-autumn-budget-2026) it will make a £100 cost-of-living payment to households in council tax bands A to D, and the Scottish Government [has said](https://www.gov.scot/news/uk-budget-delivers-real-cut-to-scotlands-funding/) that households in Scotland will receive a one-time £100 payment, without saying which households. We model neither, so the figures below cover England only.
 
-Figure 9 shows the share of households in each income decile that receive the payment. In the lowest income decile, {{hep_d1_share_england:pct0}} of households in England receive it and {{hep_d1_missed_england:pct0}} ({{hep_d1_missed_england_m:m1}}) do not, because they live in a home in council tax band E or above. In the highest decile, {{hep_d10_share_england:pct0}} of households in England receive it.
+Figure 8 shows the share of households in each income decile that receive the payment. In the lowest income decile, {{hep_d1_share_england:pct0}} of households in England receive it and {{hep_d1_missed_england:pct0}} ({{hep_d1_missed_england_m:m1}}) do not, because they live in a home in council tax band E or above. In the highest decile, {{hep_d10_share_england:pct0}} of households in England receive it.
 
 ```chart
 {
   "type": "bar",
-  "title": "Figure 9: Share of households receiving the Household Energy Payment by income decile",
+  "title": "Figure 8: Share of households receiving the Household Energy Payment by income decile",
   "subtitle": "Households in council tax bands A to D in England receive £100; share of households in England in each income decile",
   "xKey": "decile",
   "series": [
@@ -267,7 +250,7 @@ The model pays every household in a home in bands A to D in England. The Governm
 
 ## Ofgem's cap against the forecast
 
-Cornwall Insight forecast a typical bill of {{fc_total:gbp}}; Ofgem's cap is {{jan_total:gbp}}. Table 6 and Figure 10 run both through the same model and data, so the differences come from the rates alone. Ofgem's unit rates are above the forecast and its standing charges below, so the two give much the same typical bill: {{jan_typical_exact:gbp2}} on Ofgem's rates against {{fc_typical_exact:gbp2}} on Cornwall Insight's figures for each fuel, both of which round to £2,166. That small gap is why our estimates differ by about £1. At other levels of use the mix matters more: {{mix_sentence}} Our method, which scales each household's spending by the change in the typical bill, does not capture this.
+Cornwall Insight forecast a typical bill of {{fc_total:gbp}}; Ofgem's cap is {{jan_total:gbp}}. Table 6 and Figure 9 run both through the same model and data, so the differences come from the rates alone. Ofgem's unit rates are above the forecast and its standing charges below, so the two give much the same typical bill: {{jan_typical_exact:gbp2}} on Ofgem's rates against {{fc_typical_exact:gbp2}} on Cornwall Insight's figures for each fuel, both of which round to £2,166. That small gap is why our estimates differ by about £1. At other levels of use the mix matters more: {{mix_sentence}} Our method, which scales each household's spending by the change in the typical bill, does not capture this.
 
 **Table 6: Cornwall Insight's forecast and Ofgem's cap for January to March 2027, Great Britain (annual rates)**
 
@@ -280,7 +263,7 @@ The forecast's standing charges are those its fuel totals imply, as in Table 2.
 ```chart
 {
   "type": "bar",
-  "title": "Figure 10: Change in the average household energy bill by income decile, forecast and actual cap, Great Britain",
+  "title": "Figure 9: Change in the average household energy bill by income decile, forecast and actual cap, Great Britain",
   "subtitle": "Annual rate, from Ofgem's October to December 2026 rates to Cornwall Insight's January to March 2027 forecast and to Ofgem's January to March 2027 cap",
   "xKey": "decile",
   "series": [

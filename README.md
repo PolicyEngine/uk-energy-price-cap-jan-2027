@@ -26,6 +26,10 @@ The figures will come from PolicyEngine UK, a static microsimulation model of th
 
 These versions are provisional. The certified bundle in policyengine 6.14.0 pins policyengine-uk 2.151.0, which lacks the energy measures above. Until a certified pair exists, every figure is labelled as unvalidated under this engine. The README will record the final engine and data pair used on the day.
 
+## Ofgem post: running it on the day
+
+The [`post/`](post/) folder holds the analysis for PolicyEngine's blog post on Ofgem's January to March 2027 cap, separate from the dashboard. Ofgem's rates go into `post/inputs.json`; `post/run_cap.py` then computes every figure the post quotes and `post/render_post.py` writes the post into policyengine-app-v2. The steps, the engine and data pair (policyengine 6.20.3, Microcosm build b891aa69) and a dry run that reproduces the post on Cornwall Insight's forecast are in [`post/README.md`](post/README.md). Its results hold Cornwall Insight's forecast only until Ofgem publishes.
+
 ## Licence
 
 [GNU Affero General Public License v3.0](LICENSE), like other PolicyEngine repositories.

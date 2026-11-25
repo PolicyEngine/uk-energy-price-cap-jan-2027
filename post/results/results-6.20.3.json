@@ -1,0 +1,1458 @@
+{
+  "versions": {
+    "policyengine": "6.20.3",
+    "policyengine-uk": "2.179.2",
+    "policyengine-core": "3.34.10"
+  },
+  "dataset": {
+    "build": "uk-frs-calibration-attempt-20261122T100732Z-b891aa69",
+    "sha256": "ae116bc3cff798fe68df253083f0b26d779e02a0a818ee68df7d29fbc557165a"
+  },
+  "to_q4": {
+    "electricity": 1.0093310161552957,
+    "gas": 1.0117777050842718
+  },
+  "october": {
+    "label": "October to December 2026",
+    "source": "Ofgem, energy price cap unit rates and standing charges, 1 October to 31 December 2026",
+    "unit_p_per_kwh": {
+      "electricity": 26.32,
+      "gas": 7.97
+    },
+    "standing_p_per_day": {
+      "electricity": 54.83,
+      "gas": 29.68
+    },
+    "typical_bill_announced": 1723,
+    "rates": {
+      "unit": {
+        "electricity": 26.32,
+        "gas": 7.97
+      },
+      "standing": {
+        "electricity": 54.83,
+        "gas": 29.68
+      }
+    }
+  },
+  "history": [
+    {
+      "quarter": "Jan\u2013Mar 2025",
+      "label": "January to March 2025",
+      "announced": 1738,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1562
+    },
+    {
+      "quarter": "Apr\u2013Jun 2025",
+      "label": "April to June 2025",
+      "announced": 1849,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1655
+    },
+    {
+      "quarter": "Jul\u2013Sep 2025",
+      "label": "July to September 2025",
+      "announced": 1720,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1541
+    },
+    {
+      "quarter": "Oct\u2013Dec 2025",
+      "label": "October to December 2025",
+      "announced": 1755,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1576
+    },
+    {
+      "quarter": "Jan\u2013Mar 2026",
+      "label": "January to March 2026",
+      "announced": 1758,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1584
+    },
+    {
+      "quarter": "Apr\u2013Jun 2026",
+      "label": "April to June 2026",
+      "announced": 1641,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1477
+    },
+    {
+      "quarter": "Jul\u2013Sep 2026",
+      "label": "July to September 2026",
+      "announced": 1862,
+      "tdcv": "2,700 and 11,500",
+      "at_current_tdcv": 1663
+    },
+    {
+      "quarter": "Oct\u2013Dec 2026",
+      "label": "October to December 2026",
+      "announced": 1723,
+      "tdcv": "2,500 and 9,500",
+      "at_current_tdcv": 1723
+    }
+  ],
+  "peak_2022": {
+    "label": null,
+    "typical_bill": null,
+    "basis": null,
+    "source": null
+  },
+  "decile_values_present": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "hep_reach": {
+    "recipients_m": 19.65837869469254,
+    "cost_bn": 1.965837869469254,
+    "share_gb": 0.6933550567545952,
+    "share_england": 0.8061497085112801,
+    "england_households_m": 24.38551857941591,
+    "deciles": [
+      {
+        "decile": 1,
+        "share_gb": 0.7144386241833548,
+        "share_england": 0.8594728535377278,
+        "mean_gb": 71.44386241833548,
+        "missed_gb_m": 0.9307871867688726,
+        "missed_england_m": 0.3807535133921262
+      },
+      {
+        "decile": 2,
+        "share_gb": 0.7804354409217051,
+        "share_england": 0.9125864284716374,
+        "mean_gb": 78.04354409217052,
+        "missed_gb_m": 0.5940226756879464,
+        "missed_england_m": 0.20224725039564817
+      },
+      {
+        "decile": 3,
+        "share_gb": 0.7486570647899399,
+        "share_england": 0.8947006535284128,
+        "mean_gb": 74.86570647899399,
+        "missed_gb_m": 0.718702294470992,
+        "missed_england_m": 0.2519493239004612
+      },
+      {
+        "decile": 4,
+        "share_gb": 0.7825895059754294,
+        "share_england": 0.9119224980602912,
+        "mean_gb": 78.25895059754295,
+        "missed_gb_m": 0.6166775790449921,
+        "missed_england_m": 0.21439701486130805
+      },
+      {
+        "decile": 5,
+        "share_gb": 0.7268952567444718,
+        "share_england": 0.8400727021838686,
+        "mean_gb": 72.68952567444717,
+        "missed_gb_m": 0.7880067431396991,
+        "missed_england_m": 0.39928063947583364
+      },
+      {
+        "decile": 6,
+        "share_gb": 0.7462273817937701,
+        "share_england": 0.8726423560792239,
+        "mean_gb": 74.62273817937701,
+        "missed_gb_m": 0.7019277677405477,
+        "missed_england_m": 0.3012364846778289
+      },
+      {
+        "decile": 7,
+        "share_gb": 0.6690360179685791,
+        "share_england": 0.7658433302975136,
+        "mean_gb": 66.90360179685791,
+        "missed_gb_m": 0.873779719054319,
+        "missed_england_m": 0.5400541705346518
+      },
+      {
+        "decile": 8,
+        "share_gb": 0.6613159983231649,
+        "share_england": 0.7842031577478473,
+        "mean_gb": 66.13159983231648,
+        "missed_gb_m": 0.9257569167962633,
+        "missed_england_m": 0.49742523163540286
+      },
+      {
+        "decile": 9,
+        "share_gb": 0.6166295788311432,
+        "share_england": 0.7034274445564731,
+        "mean_gb": 61.662957883114316,
+        "missed_gb_m": 1.0293698162801126,
+        "missed_england_m": 0.6980536972859437
+      },
+      {
+        "decile": 10,
+        "share_gb": 0.49186984727385186,
+        "share_england": 0.5415201950811107,
+        "mean_gb": 49.18698472738518,
+        "missed_gb_m": 1.5151330781533965,
+        "missed_england_m": 1.2417425585641642
+      }
+    ]
+  },
+  "scenarios": {
+    "cornwall": {
+      "label": "January to March 2027 (Cornwall Insight forecast)",
+      "kind": "forecast",
+      "source": "Cornwall Insight, final forecast of the January to March 2027 cap, press release of 18 November 2026",
+      "announced_on": null,
+      "typical_bill_announced": 2166,
+      "inputs": {
+        "oct_typical_bill": {
+          "electricity": 858.1295,
+          "gas": 865.482
+        },
+        "oct_typical_total": 1723.6115,
+        "jan_typical_bill": {
+          "electricity": 1017.09,
+          "gas": 1148.8
+        },
+        "jan_typical_total": 2165.89,
+        "factor": {
+          "electricity": 1.1852406891966771,
+          "gas": 1.3273528507814143
+        },
+        "jan_unit_p_per_kwh": {
+          "electricity": 32.54,
+          "gas": 10.9
+        },
+        "jan_standing_p_per_day": {
+          "electricity": 55.778082191780825,
+          "gas": 31.041095890410958
+        },
+        "unit_change_pct": {
+          "electricity": 0.23632218844984787,
+          "gas": 0.36762860727728985
+        },
+        "standing_change_pct": {
+          "electricity": 0.017291303880737408,
+          "gas": 0.04585902595724245
+        },
+        "typical_fuel_change": {
+          "electricity": 158.96050000000002,
+          "gas": 283.318
+        },
+        "typical_fuel_change_pct": {
+          "electricity": 0.18524068919667722,
+          "gas": 0.3273528507814143
+        },
+        "gas_share_of_typical_change": 0.6405873222415288,
+        "q1_share": {
+          "electricity": 0.2929,
+          "gas": 0.425
+        }
+      },
+      "examples": {
+        "low_dual_fuel_half_typical": {
+          "kwh": {
+            "electricity": 1250.0,
+            "gas": 4750.0
+          },
+          "oct": {
+            "electricity": 529.1295,
+            "gas": 486.907,
+            "total": 1016.0364999999999,
+            "standing": 308.4615,
+            "unit": 707.575,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 610.34,
+            "gas": 631.05,
+            "total": 1241.3899999999999,
+            "standing": 316.89,
+            "unit": 924.5,
+            "fuel_change_pct": {
+              "electricity": 0.15347944123319524,
+              "gas": 0.29603805244122583
+            }
+          },
+          "change": 225.35349999999994,
+          "change_pct": 0.22179665789565625,
+          "standing_share_jan": 0.2552703018390675,
+          "q1_change": 84.00061027397261
+        },
+        "typical_dual_fuel": {
+          "kwh": {
+            "electricity": 2500,
+            "gas": 9500
+          },
+          "oct": {
+            "electricity": 858.1295,
+            "gas": 865.482,
+            "total": 1723.6115,
+            "standing": 308.4615,
+            "unit": 1415.15,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 1017.09,
+            "gas": 1148.8,
+            "total": 2165.89,
+            "standing": 316.89,
+            "unit": 1849.0,
+            "fuel_change_pct": {
+              "electricity": 0.18524068919667713,
+              "gas": 0.3273528507814143
+            }
+          },
+          "change": 442.2784999999999,
+          "change_pct": 0.25659987764063996,
+          "standing_share_jan": 0.14630936935855468,
+          "q1_change": 165.92296027397262
+        },
+        "high_dual_fuel_double_typical": {
+          "kwh": {
+            "electricity": 5000,
+            "gas": 19000
+          },
+          "oct": {
+            "electricity": 1516.1295,
+            "gas": 1622.632,
+            "total": 3138.7615,
+            "standing": 308.4615,
+            "unit": 2830.3,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 1830.59,
+            "gas": 2184.3,
+            "total": 4014.8900000000003,
+            "standing": 316.89,
+            "unit": 3698.0,
+            "fuel_change_pct": {
+              "electricity": 0.2074100530330687,
+              "gas": 0.34614626113622804
+            }
+          },
+          "change": 876.1285000000003,
+          "change_pct": 0.2791319123800901,
+          "standing_share_jan": 0.07892868795907235,
+          "q1_change": 329.76766027397264
+        },
+        "electric_only_typical_electricity": {
+          "kwh": {
+            "electricity": 2500,
+            "gas": 0
+          },
+          "oct": {
+            "electricity": 858.1295,
+            "gas": 0.0,
+            "total": 858.1295,
+            "standing": 200.1295,
+            "unit": 658.0,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 1017.09,
+            "gas": 0.0,
+            "total": 1017.09,
+            "standing": 203.59,
+            "unit": 813.5,
+            "fuel_change_pct": {
+              "electricity": 0.18524068919667713,
+              "gas": null
+            }
+          },
+          "change": 158.96050000000002,
+          "change_pct": 0.18524068919667722,
+          "standing_share_jan": 0.20016910991161058,
+          "q1_change": 46.399223972602734
+        }
+      },
+      "gb": {
+        "households_m": 28.352542471829683,
+        "households_dual_fuel_m": 23.877138371906092,
+        "households_electric_only_m": 4.47540409992359,
+        "households_no_energy_spend_m": 0.0,
+        "elec_total_bn_fy_model": 29.57684563175742,
+        "gas_total_bn_fy_model": 19.559306287958858,
+        "before_total_bn": 48.22093446351903,
+        "after_total_bn": 59.96576638212912,
+        "change_total_bn": 11.74483191861009,
+        "mean_before": 1700.7622689016353,
+        "mean_after": 2115.004904470542,
+        "mean_change": 414.2426355689066,
+        "median_before": 1415.5333736762639,
+        "dual_mean_before": 1805.692836395904,
+        "dual_median_before": 1508.045027705199,
+        "dual_mean_change": 452.272117142757,
+        "elec_only_mean_before": 1140.9375863559746,
+        "elec_only_mean_change": 211.34806482697405,
+        "share_of_income_before": 0.032173104988924554,
+        "share_of_income_after": 0.04000928059602703,
+        "spend_over_10pct_income_before_m": 2.2624954064688607,
+        "spend_over_10pct_income_after_m": 3.6202845413912423,
+        "share_of_household_net_income_before": 0.0264638531857386,
+        "net_income_nonpositive_m": 0.0890346152718123
+      },
+      "deciles": [
+        {
+          "decile": 1,
+          "households_m": 3.2594995878102146,
+          "mean_net_income": 16411.59429283019,
+          "mean_elec_before": 911.1735349129403,
+          "mean_gas_before": 624.1319751758897,
+          "mean_before": 1535.30551008883,
+          "mean_after": 1908.4033050115377,
+          "mean_change": 373.097794922708,
+          "share_before": 0.09355005264537683,
+          "share_after": 0.1162838461005139,
+          "share_before_household_net_income": 0.060125732627696514,
+          "median_hh_share_before": 0.08516046722473826,
+          "median_hh_share_after": 0.10549650637434724,
+          "share_dual_fuel": 0.8381057805605605
+        },
+        {
+          "decile": 2,
+          "households_m": 2.7054579217227994,
+          "mean_net_income": 27421.43758346411,
+          "mean_elec_before": 938.0925346591307,
+          "mean_gas_before": 644.6057501167544,
+          "mean_before": 1582.6982847758852,
+          "mean_after": 1967.4847223572117,
+          "mean_change": 384.7864375813266,
+          "share_before": 0.05771755328138945,
+          "share_after": 0.07174987512484246,
+          "share_before_household_net_income": 0.04020197941290334,
+          "median_hh_share_before": 0.05268733514301058,
+          "median_hh_share_after": 0.06519898168314563,
+          "share_dual_fuel": 0.8567630960008916
+        },
+        {
+          "decile": 3,
+          "households_m": 2.8594489591296277,
+          "mean_net_income": 31599.785263401638,
+          "mean_elec_before": 903.9624761027916,
+          "mean_gas_before": 637.08040243132,
+          "mean_before": 1541.0428785341117,
+          "mean_after": 1917.0435965281908,
+          "mean_change": 376.0007179940792,
+          "share_before": 0.048767511098213784,
+          "share_after": 0.060666348854860094,
+          "share_before_household_net_income": 0.03587845706529888,
+          "median_hh_share_before": 0.04370678370837335,
+          "median_hh_share_after": 0.05463339661219215,
+          "share_dual_fuel": 0.8655336900090886
+        },
+        {
+          "decile": 4,
+          "households_m": 2.8364664815825242,
+          "mean_net_income": 36224.63257051518,
+          "mean_elec_before": 964.6399541686294,
+          "mean_gas_before": 667.604296383684,
+          "mean_before": 1632.2442505523131,
+          "mean_after": 2029.4769901042805,
+          "mean_change": 397.23273955196714,
+          "share_before": 0.04505895946287301,
+          "share_after": 0.05602477778494186,
+          "share_before_household_net_income": 0.03471038154394886,
+          "median_hh_share_before": 0.04117940324367108,
+          "median_hh_share_after": 0.05046374552289168,
+          "share_dual_fuel": 0.8436894408008805
+        },
+        {
+          "decile": 5,
+          "households_m": 2.8853645445564706,
+          "mean_net_income": 41200.50112736045,
+          "mean_elec_before": 940.8337068377658,
+          "mean_gas_before": 697.0586969510334,
+          "mean_before": 1637.8924037887994,
+          "mean_after": 2040.3572396717902,
+          "mean_change": 402.46483588299094,
+          "share_before": 0.0397541864533562,
+          "share_after": 0.049522631614711814,
+          "share_before_household_net_income": 0.032082537795600635,
+          "median_hh_share_before": 0.034673727648572746,
+          "median_hh_share_after": 0.04317444709243232,
+          "share_dual_fuel": 0.8640723852263729
+        },
+        {
+          "decile": 6,
+          "households_m": 2.765971256875798,
+          "mean_net_income": 47984.36336376386,
+          "mean_elec_before": 967.883981989725,
+          "mean_gas_before": 662.5352275940201,
+          "mean_before": 1630.419209583745,
+          "mean_after": 2026.5935009659618,
+          "mean_change": 396.17429138221655,
+          "share_before": 0.03397813569440793,
+          "share_after": 0.04223445637076797,
+          "share_before_household_net_income": 0.028533260291462307,
+          "median_hh_share_before": 0.029930360818153322,
+          "median_hh_share_after": 0.03715130451803178,
+          "share_dual_fuel": 0.8335811536686628
+        },
+        {
+          "decile": 7,
+          "households_m": 2.640105167006858,
+          "mean_net_income": 56962.96537045575,
+          "mean_elec_before": 997.7190426889614,
+          "mean_gas_before": 719.9805795375294,
+          "mean_before": 1717.6996222264904,
+          "mean_after": 2138.2054805377074,
+          "mean_change": 420.50585831121714,
+          "share_before": 0.030154673498044182,
+          "share_after": 0.03753676562714031,
+          "share_before_household_net_income": 0.025721332843465592,
+          "median_hh_share_before": 0.027629506060773672,
+          "median_hh_share_after": 0.03429192160354739,
+          "share_dual_fuel": 0.8603880221281617
+        },
+        {
+          "decile": 8,
+          "households_m": 2.733394291471731,
+          "mean_net_income": 64441.775969368675,
+          "mean_elec_before": 1033.1363129191518,
+          "mean_gas_before": 681.4198712409922,
+          "mean_before": 1714.5561841601439,
+          "mean_after": 2128.9998042292445,
+          "mean_change": 414.4436200691006,
+          "share_before": 0.02660628386429216,
+          "share_after": 0.0330375718577531,
+          "share_before_household_net_income": 0.023942051677372924,
+          "median_hh_share_before": 0.023967208654153624,
+          "median_hh_share_after": 0.02973646709196115,
+          "share_dual_fuel": 0.8168291061278343
+        },
+        {
+          "decile": 9,
+          "households_m": 2.6850527830020647,
+          "mean_net_income": 77353.41106248823,
+          "mean_elec_before": 1114.9394829470923,
+          "mean_gas_before": 766.5166305869814,
+          "mean_before": 1881.456113534074,
+          "mean_after": 2338.9096759617923,
+          "mean_change": 457.45356242771885,
+          "share_before": 0.024322859039974092,
+          "share_after": 0.030236671451661725,
+          "share_before_household_net_income": 0.021913448350684928,
+          "median_hh_share_before": 0.022409522008582355,
+          "median_hh_share_after": 0.027604908046509613,
+          "share_dual_fuel": 0.8194600730588589
+        },
+        {
+          "decile": 10,
+          "households_m": 2.9817814786715933,
+          "mean_net_income": 131523.56444715246,
+          "mean_elec_before": 1260.5921684191892,
+          "mean_gas_before": 882.2407689506266,
+          "mean_before": 2142.832937369815,
+          "mean_after": 2665.149930235294,
+          "mean_change": 522.3169928654789,
+          "share_before": 0.016292387956310505,
+          "share_after": 0.020263668654647654,
+          "share_before_household_net_income": 0.013645264593366365,
+          "median_hh_share_before": 0.017012226834829267,
+          "median_hh_share_after": 0.02115883512710933,
+          "share_dual_fuel": 0.8236688186027489
+        }
+      ],
+      "support": {
+        "gb": {
+          "change": 414.24263556890656,
+          "change_q1": 151.51488232578808,
+          "hep": 69.33550567545952,
+          "change_q1_net_hep": 82.17937665032855,
+          "vat_on_change": 9.287750867145048,
+          "vat_cut_jan": 59.426577857169285,
+          "vat_cut_oct": 50.13882699002424,
+          "share_change_offset_by_hep": 0.16737897000929547,
+          "share_change_q1_offset_by_hep": 0.4576151504798978
+        },
+        "deciles": [
+          {
+            "decile": 1,
+            "change": 373.097794922708,
+            "change_q1": 136.26987760756637,
+            "hep": 71.44386241833548,
+            "change_q1_net_hep": 64.82601518923087,
+            "vat_on_change": 8.43932067925228,
+            "vat_cut_jan": 53.997997424899296,
+            "vat_cut_oct": 45.55867674564701,
+            "share_change_offset_by_hep": 0.19148829982534743,
+            "share_change_q1_offset_by_hep": 0.5242821353672998
+          },
+          {
+            "decile": 2,
+            "change": 384.7864375813266,
+            "change_q1": 140.57883487143076,
+            "hep": 78.04354409217052,
+            "change_q1_net_hep": 62.53529077926024,
+            "vat_on_change": 8.688645382525756,
+            "vat_cut_jan": 55.5932721154823,
+            "vat_cut_oct": 46.904626732956544,
+            "share_change_offset_by_hep": 0.20282301159763616,
+            "share_change_q1_offset_by_hep": 0.555158563972641
+          },
+          {
+            "decile": 3,
+            "change": 376.0007179940792,
+            "change_q1": 137.68007664955502,
+            "hep": 74.86570647899399,
+            "change_q1_net_hep": 62.81437017056102,
+            "vat_on_change": 8.372531604060795,
+            "vat_cut_jan": 53.57065540920038,
+            "vat_cut_oct": 45.19812380513959,
+            "share_change_offset_by_hep": 0.19911054127341557,
+            "share_change_q1_offset_by_hep": 0.543765723413664
+          },
+          {
+            "decile": 4,
+            "change": 397.23273955196714,
+            "change_q1": 145.21889002092843,
+            "hep": 78.25895059754295,
+            "change_q1_net_hep": 66.95993942338546,
+            "vat_on_change": 8.934528496842397,
+            "vat_cut_jan": 57.16652620527387,
+            "vat_cut_oct": 48.23199770843146,
+            "share_change_offset_by_hep": 0.19701032368532878,
+            "share_change_q1_offset_by_hep": 0.5389033794864053
+          },
+          {
+            "decile": 5,
+            "change": 402.464835882991,
+            "change_q1": 148.02507685766358,
+            "hep": 72.68952567444717,
+            "change_q1_net_hep": 75.3355511832164,
+            "vat_on_change": 8.714034213704611,
+            "vat_cut_jan": 55.75571955559291,
+            "vat_cut_oct": 47.04168534188829,
+            "share_change_offset_by_hep": 0.18061087377974128,
+            "share_change_q1_offset_by_hep": 0.4910622390309124
+          },
+          {
+            "decile": 6,
+            "change": 396.1742913822165,
+            "change_q1": 144.68966723087487,
+            "hep": 74.62273817937701,
+            "change_q1_net_hep": 70.06692905149787,
+            "vat_on_change": 8.964574794310046,
+            "vat_cut_jan": 57.358773893796304,
+            "vat_cut_oct": 48.394199099486265,
+            "share_change_offset_by_hep": 0.18835835591205324,
+            "share_change_q1_offset_by_hep": 0.5157433810411964
+          },
+          {
+            "decile": 7,
+            "change": 420.50585831121714,
+            "change_q1": 154.30051043776757,
+            "hep": 66.90360179685791,
+            "change_q1_net_hep": 87.39690864090966,
+            "vat_on_change": 9.240908154617607,
+            "vat_cut_jan": 59.126860289065675,
+            "vat_cut_oct": 49.88595213444807,
+            "share_change_offset_by_hep": 0.15910266283934252,
+            "share_change_q1_offset_by_hep": 0.43359287410679986
+          },
+          {
+            "decile": 8,
+            "change": 414.4436200691006,
+            "change_q1": 150.85738813272184,
+            "hep": 66.13159983231648,
+            "change_q1_net_hep": 84.72578830040534,
+            "vat_on_change": 9.56894413196288,
+            "vat_cut_jan": 61.22575977792047,
+            "vat_cut_oct": 51.6568156459576,
+            "share_change_offset_by_hep": 0.1595671802627588,
+            "share_change_q1_offset_by_hep": 0.43837163463373097
+          },
+          {
+            "decile": 9,
+            "change": 457.45356242771885,
+            "change_q1": 167.1348659291079,
+            "hep": 61.662957883114316,
+            "change_q1_net_hep": 105.47190804599359,
+            "vat_on_change": 10.326607911685313,
+            "vat_cut_jan": 66.07358205903994,
+            "vat_cut_oct": 55.746974147354614,
+            "share_change_offset_by_hep": 0.13479610379656304,
+            "share_change_q1_offset_by_hep": 0.36894131897810806
+          },
+          {
+            "decile": 10,
+            "change": 522.3169928654789,
+            "change_q1": 191.13765967786583,
+            "hep": 49.18698472738518,
+            "change_q1_net_hep": 141.95067495048062,
+            "vat_on_change": 11.675648103695215,
+            "vat_cut_jan": 74.70525652465466,
+            "vat_cut_oct": 63.02960842095945,
+            "share_change_offset_by_hep": 0.09417075339161544,
+            "share_change_q1_offset_by_hep": 0.25733800869113155
+          }
+        ],
+        "england": {
+          "change": 415.8368592326193,
+          "change_q1": 152.14964877765004,
+          "hep": 80.614970851128,
+          "change_q1_net_hep": 71.53467792652204,
+          "vat_on_change": 9.303942617794526,
+          "vat_cut_jan": 59.530178862878756,
+          "vat_cut_oct": 50.22623624508423,
+          "share_change_offset_by_hep": 0.19386201357882024,
+          "share_change_q1_offset_by_hep": 0.5298400061963857
+        },
+        "deciles_england": [
+          {
+            "decile": 1,
+            "change": 385.20249195141076,
+            "change_q1": 141.06701357466764,
+            "hep": 85.94728535377278,
+            "change_q1_net_hep": 55.11972822089485,
+            "vat_on_change": 8.570796935912924,
+            "vat_cut_jan": 54.839232737363545,
+            "vat_cut_oct": 46.26843580145063,
+            "share_change_offset_by_hep": 0.22312235032117636,
+            "share_change_q1_offset_by_hep": 0.6092656474100543
+          },
+          {
+            "decile": 2,
+            "change": 384.3192726577461,
+            "change_q1": 140.49819368838362,
+            "hep": 91.25864284716374,
+            "change_q1_net_hep": 49.2395508412199,
+            "vat_on_change": 8.64401861890933,
+            "vat_cut_jan": 55.30773303497722,
+            "vat_cut_oct": 46.663714416067876,
+            "share_change_offset_by_hep": 0.23745528611164327,
+            "share_change_q1_offset_by_hep": 0.6495360577344489
+          },
+          {
+            "decile": 3,
+            "change": 380.97657665011036,
+            "change_q1": 139.53667797352023,
+            "hep": 89.47006535284127,
+            "change_q1_net_hep": 50.066612620678974,
+            "vat_on_change": 8.470237359113034,
+            "vat_cut_jan": 54.19581415244842,
+            "vat_cut_oct": 45.72557679333539,
+            "share_change_offset_by_hep": 0.23484400573794534,
+            "share_change_q1_offset_by_hep": 0.6411938900381443
+          },
+          {
+            "decile": 4,
+            "change": 397.40484798692023,
+            "change_q1": 145.21717772937583,
+            "hep": 91.19224980602912,
+            "change_q1_net_hep": 54.024927923346674,
+            "vat_on_change": 8.962862477314644,
+            "vat_cut_jan": 57.34781783557521,
+            "vat_cut_oct": 48.38495535826058,
+            "share_change_offset_by_hep": 0.22946939441722797,
+            "share_change_q1_offset_by_hep": 0.627971506070538
+          },
+          {
+            "decile": 5,
+            "change": 405.1955687192238,
+            "change_q1": 149.10768186047616,
+            "hep": 84.00727021838686,
+            "change_q1_net_hep": 65.1004116420893,
+            "vat_on_change": 8.743540819528361,
+            "vat_cut_jan": 55.944514090821954,
+            "vat_cut_oct": 47.2009732712936,
+            "share_change_offset_by_hep": 0.20732524416277331,
+            "share_change_q1_offset_by_hep": 0.5634000151447233
+          },
+          {
+            "decile": 6,
+            "change": 397.89829917441045,
+            "change_q1": 145.54690431939596,
+            "hep": 87.26423560792239,
+            "change_q1_net_hep": 58.28266871147358,
+            "vat_on_change": 8.917438618368093,
+            "vat_cut_jan": 57.057178634667146,
+            "vat_cut_oct": 48.13974001629905,
+            "share_change_offset_by_hep": 0.21931291435269976,
+            "share_change_q1_offset_by_hep": 0.5995609182894406
+          },
+          {
+            "decile": 7,
+            "change": 416.9143713260339,
+            "change_q1": 152.84112880858464,
+            "hep": 76.58433302975136,
+            "change_q1_net_hep": 76.2567957788333,
+            "vat_on_change": 9.215548450030198,
+            "vat_cut_jan": 58.964599212013155,
+            "vat_cut_oct": 49.749050761982964,
+            "share_change_offset_by_hep": 0.1836931952865236,
+            "share_change_q1_offset_by_hep": 0.5010714957860861
+          },
+          {
+            "decile": 8,
+            "change": 409.9788532887071,
+            "change_q1": 149.32960450444804,
+            "hep": 78.42031577478473,
+            "change_q1_net_hep": 70.90928872966332,
+            "vat_on_change": 9.42899626920987,
+            "vat_cut_jan": 60.330319893625585,
+            "vat_cut_oct": 50.90132362441573,
+            "share_change_offset_by_hep": 0.19127892852454306,
+            "share_change_q1_offset_by_hep": 0.5251491560231705
+          },
+          {
+            "decile": 9,
+            "change": 449.07480249517124,
+            "change_q1": 163.7616759213476,
+            "hep": 70.3427444556473,
+            "change_q1_net_hep": 93.41893146570025,
+            "vat_on_change": 10.255531846744963,
+            "vat_cut_jan": 65.61881024534922,
+            "vat_cut_oct": 55.36327839860427,
+            "share_change_offset_by_hep": 0.15663925935012504,
+            "share_change_q1_offset_by_hep": 0.4295433840664401
+          },
+          {
+            "decile": 10,
+            "change": 521.4284048447163,
+            "change_q1": 190.85368359131556,
+            "hep": 54.15201950811107,
+            "change_q1_net_hep": 136.7016640832045,
+            "vat_on_change": 11.640192455597589,
+            "vat_cut_jan": 74.47839774449473,
+            "vat_cut_oct": 62.838205288897136,
+            "share_change_offset_by_hep": 0.10385322127634719,
+            "share_change_q1_offset_by_hep": 0.2837357838168294
+          }
+        ]
+      }
+    },
+    "ofgem": {
+      "label": "January to March 2027 (Ofgem cap)",
+      "kind": "actual",
+      "source": "Ofgem, energy price cap unit rates and standing charges, 1 January to 31 March 2027, and its letter of 25 November 2026 on the cap update",
+      "announced_on": "25 November 2026",
+      "typical_bill_announced": 2166,
+      "inputs": {
+        "oct_typical_bill": {
+          "electricity": 858.1295,
+          "gas": 865.482
+        },
+        "oct_typical_total": 1723.6115,
+        "jan_typical_bill": {
+          "electricity": 1017.1605000000001,
+          "gas": 1149.4225000000001
+        },
+        "jan_typical_total": 2166.583,
+        "factor": {
+          "electricity": 1.1853228446289286,
+          "gas": 1.3280721031748786
+        },
+        "jan_unit_p_per_kwh": {
+          "electricity": 32.69,
+          "gas": 10.96
+        },
+        "jan_standing_p_per_day": {
+          "electricity": 54.77,
+          "gas": 29.65
+        },
+        "unit_change_pct": {
+          "electricity": 0.24202127659574457,
+          "gas": 0.3751568381430366
+        },
+        "standing_change_pct": {
+          "electricity": -0.0010942914462884756,
+          "gas": -0.001010781671159089
+        },
+        "typical_fuel_change": {
+          "electricity": 159.03100000000006,
+          "gas": 283.94050000000016
+        },
+        "typical_fuel_change_pct": {
+          "electricity": 0.18532284462892845,
+          "gas": 0.32807210317487845
+        },
+        "gas_share_of_typical_change": 0.6409904474667106,
+        "q1_share": {
+          "electricity": 0.2929,
+          "gas": 0.425
+        }
+      },
+      "examples": {
+        "low_dual_fuel_half_typical": {
+          "kwh": {
+            "electricity": 1250.0,
+            "gas": 4750.0
+          },
+          "oct": {
+            "electricity": 529.1295,
+            "gas": 486.907,
+            "total": 1016.0364999999999,
+            "standing": 308.4615,
+            "unit": 707.575,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 608.5355000000001,
+            "gas": 628.8225,
+            "total": 1237.3580000000002,
+            "standing": 308.13300000000004,
+            "unit": 929.225,
+            "fuel_change_pct": {
+              "electricity": 0.15006912296517205,
+              "gas": 0.29146325684370944
+            }
+          },
+          "change": 221.32150000000024,
+          "change_pct": 0.2178282965228122,
+          "standing_share_jan": 0.24902493861921934,
+          "q1_change": 83.60178750000001
+        },
+        "typical_dual_fuel": {
+          "kwh": {
+            "electricity": 2500,
+            "gas": 9500
+          },
+          "oct": {
+            "electricity": 858.1295,
+            "gas": 865.482,
+            "total": 1723.6115,
+            "standing": 308.4615,
+            "unit": 1415.15,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 1017.1605000000001,
+            "gas": 1149.4225000000001,
+            "total": 2166.583,
+            "standing": 308.13300000000004,
+            "unit": 1858.45,
+            "fuel_change_pct": {
+              "electricity": 0.18532284462892856,
+              "gas": 0.32807210317487856
+            }
+          },
+          "change": 442.9715000000001,
+          "change_pct": 0.25700194040246316,
+          "standing_share_jan": 0.14222072267713723,
+          "q1_change": 167.28457500000002
+        },
+        "high_dual_fuel_double_typical": {
+          "kwh": {
+            "electricity": 5000,
+            "gas": 19000
+          },
+          "oct": {
+            "electricity": 1516.1295,
+            "gas": 1622.632,
+            "total": 3138.7615,
+            "standing": 308.4615,
+            "unit": 2830.3,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 1834.4105,
+            "gas": 2190.6225,
+            "total": 4025.033,
+            "standing": 308.13300000000004,
+            "unit": 3716.9,
+            "fuel_change_pct": {
+              "electricity": 0.2099299565109709,
+              "gas": 0.3500427083898259
+            }
+          },
+          "change": 886.2714999999998,
+          "change_pct": 0.2823634417587956,
+          "standing_share_jan": 0.07655415495972333,
+          "q1_change": 334.65015000000005
+        },
+        "electric_only_typical_electricity": {
+          "kwh": {
+            "electricity": 2500,
+            "gas": 0
+          },
+          "oct": {
+            "electricity": 858.1295,
+            "gas": 0.0,
+            "total": 858.1295,
+            "standing": 200.1295,
+            "unit": 658.0,
+            "fuel_change_pct": null
+          },
+          "jan": {
+            "electricity": 1017.1605000000001,
+            "gas": 0.0,
+            "total": 1017.1605000000001,
+            "standing": 199.91050000000004,
+            "unit": 817.25,
+            "fuel_change_pct": {
+              "electricity": 0.18532284462892856,
+              "gas": null
+            }
+          },
+          "change": 159.03100000000006,
+          "change_pct": 0.18532284462892845,
+          "standing_share_jan": 0.19653781286237523,
+          "q1_change": 46.59032499999998
+        }
+      },
+      "gb": {
+        "households_m": 28.352542471829683,
+        "households_dual_fuel_m": 23.877138371906092,
+        "households_electric_only_m": 4.47540409992359,
+        "households_no_energy_spend_m": 0.0,
+        "elec_total_bn_fy_model": 29.57684563175742,
+        "gas_total_bn_fy_model": 19.559306287958858,
+        "before_total_bn": 48.22093446351903,
+        "after_total_bn": 59.98233593248247,
+        "change_total_bn": 11.761401468963433,
+        "mean_before": 1700.7622689016353,
+        "mean_after": 2115.589315916881,
+        "mean_change": 414.82704701524534,
+        "median_before": 1415.5333736762639,
+        "dual_mean_before": 1805.692836395904,
+        "dual_median_before": 1508.045027705199,
+        "dual_mean_change": 452.94849852425733,
+        "elec_only_mean_before": 1140.9375863559746,
+        "elec_only_mean_change": 211.44179904755305,
+        "share_of_income_before": 0.032173104988924554,
+        "share_of_income_after": 0.04002033583353058,
+        "spend_over_10pct_income_before_m": 2.2624954064688607,
+        "spend_over_10pct_income_after_m": 3.6216487513986713,
+        "share_of_household_net_income_before": 0.0264638531857386,
+        "net_income_nonpositive_m": 0.0890346152718123
+      },
+      "deciles": [
+        {
+          "decile": 1,
+          "households_m": 3.2594995878102146,
+          "mean_net_income": 16411.59429283019,
+          "mean_elec_before": 911.1735349129403,
+          "mean_gas_before": 624.1319751758897,
+          "mean_before": 1535.30551008883,
+          "mean_after": 1908.9270712841376,
+          "mean_change": 373.6215611953076,
+          "share_before": 0.09355005264537683,
+          "share_after": 0.11631576050585772,
+          "share_before_household_net_income": 0.060125732627696514,
+          "median_hh_share_before": 0.08516046722473826,
+          "median_hh_share_after": 0.1055254393475264,
+          "share_dual_fuel": 0.8381057805605605
+        },
+        {
+          "decile": 2,
+          "households_m": 2.7054579217227994,
+          "mean_net_income": 27421.43758346411,
+          "mean_elec_before": 938.0925346591307,
+          "mean_gas_before": 644.6057501167544,
+          "mean_before": 1582.6982847758852,
+          "mean_after": 1968.0254259835003,
+          "mean_change": 385.3271412076156,
+          "share_before": 0.05771755328138945,
+          "share_after": 0.07176959340637466,
+          "share_before_household_net_income": 0.04020197941290334,
+          "median_hh_share_before": 0.05268733514301058,
+          "median_hh_share_after": 0.06521537477650656,
+          "share_dual_fuel": 0.8567630960008916
+        },
+        {
+          "decile": 3,
+          "households_m": 2.8594489591296277,
+          "mean_net_income": 31599.785263401638,
+          "mean_elec_before": 903.9624761027916,
+          "mean_gas_before": 637.08040243132,
+          "mean_before": 1541.0428785341117,
+          "mean_after": 1917.5760835604317,
+          "mean_change": 376.53320502632033,
+          "share_before": 0.048767511098213784,
+          "share_after": 0.06068319982482088,
+          "share_before_household_net_income": 0.03587845706529888,
+          "median_hh_share_before": 0.04370678370837335,
+          "median_hh_share_after": 0.0546439947591298,
+          "share_dual_fuel": 0.8655336900090886
+        },
+        {
+          "decile": 4,
+          "households_m": 2.8364664815825242,
+          "mean_net_income": 36224.63257051518,
+          "mean_elec_before": 964.6399541686294,
+          "mean_gas_before": 667.604296383684,
+          "mean_before": 1632.2442505523131,
+          "mean_after": 2030.0364165047433,
+          "mean_change": 397.79216595242985,
+          "share_before": 0.04505895946287301,
+          "share_after": 0.05604022104442486,
+          "share_before_household_net_income": 0.03471038154394886,
+          "median_hh_share_before": 0.04117940324367108,
+          "median_hh_share_after": 0.050481245339635175,
+          "share_dual_fuel": 0.8436894408008805
+        },
+        {
+          "decile": 5,
+          "households_m": 2.8853645445564706,
+          "mean_net_income": 41200.50112736045,
+          "mean_elec_before": 940.8337068377658,
+          "mean_gas_before": 697.0586969510334,
+          "mean_before": 1637.8924037887994,
+          "mean_after": 2040.935895407819,
+          "mean_change": 403.04349161902013,
+          "share_before": 0.0397541864533562,
+          "share_after": 0.04953667648601666,
+          "share_before_household_net_income": 0.032082537795600635,
+          "median_hh_share_before": 0.034673727648572746,
+          "median_hh_share_after": 0.043190343357995084,
+          "share_dual_fuel": 0.8640723852263729
+        },
+        {
+          "decile": 6,
+          "households_m": 2.765971256875798,
+          "mean_net_income": 47984.36336376386,
+          "mean_elec_before": 967.883981989725,
+          "mean_gas_before": 662.5352275940201,
+          "mean_before": 1630.419209583745,
+          "mean_after": 2027.1495479410728,
+          "mean_change": 396.73033835732747,
+          "share_before": 0.03397813569440793,
+          "share_after": 0.04224604445772237,
+          "share_before_household_net_income": 0.028533260291462307,
+          "median_hh_share_before": 0.029930360818153322,
+          "median_hh_share_after": 0.0371629281826288,
+          "share_dual_fuel": 0.8335811536686628
+        },
+        {
+          "decile": 7,
+          "households_m": 2.640105167006858,
+          "mean_net_income": 56962.96537045575,
+          "mean_elec_before": 997.7190426889614,
+          "mean_gas_before": 719.9805795375294,
+          "mean_before": 1717.6996222264904,
+          "mean_after": 2138.8052963320056,
+          "mean_change": 421.1056741055149,
+          "share_before": 0.030154673498044182,
+          "share_after": 0.037547295552863055,
+          "share_before_household_net_income": 0.025721332843465592,
+          "median_hh_share_before": 0.027629506060773672,
+          "median_hh_share_after": 0.03430111473340063,
+          "share_dual_fuel": 0.8603880221281617
+        },
+        {
+          "decile": 8,
+          "households_m": 2.733394291471731,
+          "mean_net_income": 64441.775969368675,
+          "mean_elec_before": 1033.1363129191518,
+          "mean_gas_before": 681.4198712409922,
+          "mean_before": 1714.5561841601439,
+          "mean_after": 2129.5747948629514,
+          "mean_change": 415.01861070280734,
+          "share_before": 0.02660628386429216,
+          "share_after": 0.03304649449567016,
+          "share_before_household_net_income": 0.023942051677372924,
+          "median_hh_share_before": 0.023967208654153624,
+          "median_hh_share_after": 0.029742238176210904,
+          "share_dual_fuel": 0.8168291061278343
+        },
+        {
+          "decile": 9,
+          "households_m": 2.6850527830020647,
+          "mean_net_income": 77353.41106248823,
+          "mean_elec_before": 1114.9394829470923,
+          "mean_gas_before": 766.5166305869814,
+          "mean_before": 1881.456113534074,
+          "mean_after": 2339.552593218128,
+          "mean_change": 458.0964796840544,
+          "share_before": 0.024322859039974092,
+          "share_after": 0.030244982879011926,
+          "share_before_household_net_income": 0.021913448350684928,
+          "median_hh_share_before": 0.022409522008582355,
+          "median_hh_share_after": 0.02761198029850714,
+          "share_dual_fuel": 0.8194600730588589
+        },
+        {
+          "decile": 10,
+          "households_m": 2.9817814786715933,
+          "mean_net_income": 131523.56444715246,
+          "mean_elec_before": 1260.5921684191892,
+          "mean_gas_before": 882.2407689506266,
+          "mean_before": 2142.832937369815,
+          "mean_after": 2665.888048514463,
+          "mean_change": 523.0551111446478,
+          "share_before": 0.016292387956310505,
+          "share_after": 0.020269280715743108,
+          "share_before_household_net_income": 0.013645264593366365,
+          "median_hh_share_before": 0.017012226834829267,
+          "median_hh_share_after": 0.021165542005353612,
+          "share_dual_fuel": 0.8236688186027489
+        }
+      ],
+      "support": {
+        "gb": {
+          "change": 414.82704701524534,
+          "change_q1": 151.75237432483763,
+          "hep": 69.33550567545952,
+          "change_q1_net_hep": 82.41686864937812,
+          "vat_on_change": 9.291870044148991,
+          "vat_cut_jan": 59.43069703417324,
+          "vat_cut_oct": 50.13882699002424,
+          "share_change_offset_by_hep": 0.16714316526451412,
+          "share_change_q1_offset_by_hep": 0.4568989841769561
+        },
+        "deciles": [
+          {
+            "decile": 1,
+            "change": 373.6215611953076,
+            "change_q1": 136.48258955069423,
+            "hep": 71.44386241833548,
+            "change_q1_net_hep": 65.03872713235876,
+            "vat_on_change": 8.443063572033122,
+            "vat_cut_jan": 54.00174031768014,
+            "vat_cut_oct": 45.55867674564701,
+            "share_change_offset_by_hep": 0.19121985944753545,
+            "share_change_q1_offset_by_hep": 0.5234650269571478
+          },
+          {
+            "decile": 2,
+            "change": 385.3271412076156,
+            "change_q1": 140.7984530451705,
+            "hep": 78.04354409217052,
+            "change_q1_net_hep": 62.75490895299999,
+            "vat_on_change": 8.692498852409594,
+            "vat_cut_jan": 55.597125585366136,
+            "vat_cut_oct": 46.904626732956544,
+            "share_change_offset_by_hep": 0.20253840372516188,
+            "share_change_q1_offset_by_hep": 0.5542926247004493
+          },
+          {
+            "decile": 3,
+            "change": 376.53320502632033,
+            "change_q1": 137.89657317522358,
+            "hep": 74.86570647899399,
+            "change_q1_net_hep": 63.03086669622958,
+            "vat_on_change": 8.37624487545896,
+            "vat_cut_jan": 53.57436868059854,
+            "vat_cut_oct": 45.19812380513959,
+            "share_change_offset_by_hep": 0.19882896243841428,
+            "share_change_q1_offset_by_hep": 0.5429120155427141
+          },
+          {
+            "decile": 4,
+            "change": 397.79216595242985,
+            "change_q1": 145.4461772616468,
+            "hep": 78.25895059754295,
+            "change_q1_net_hep": 67.18722666410386,
+            "vat_on_change": 8.938491017462484,
+            "vat_cut_jan": 57.17048872589396,
+            "vat_cut_oct": 48.23199770843146,
+            "share_change_offset_by_hep": 0.1967332624818498,
+            "share_change_q1_offset_by_hep": 0.5380612407348523
+          },
+          {
+            "decile": 5,
+            "change": 403.0434916190201,
+            "change_q1": 148.26079492883414,
+            "hep": 72.68952567444717,
+            "change_q1_net_hep": 75.57126925438699,
+            "vat_on_change": 8.71789894369771,
+            "vat_cut_jan": 55.759584285586,
+            "vat_cut_oct": 47.04168534188829,
+            "share_change_offset_by_hep": 0.18035156797211727,
+            "share_change_q1_offset_by_hep": 0.49028150502861173
+          },
+          {
+            "decile": 6,
+            "change": 396.73033835732747,
+            "change_q1": 144.91548300925228,
+            "hep": 74.62273817937701,
+            "change_q1_net_hep": 70.29274482987528,
+            "vat_on_change": 8.968550640655526,
+            "vat_cut_jan": 57.36274974014179,
+            "vat_cut_oct": 48.394199099486265,
+            "share_change_offset_by_hep": 0.18809435771500221,
+            "share_change_q1_offset_by_hep": 0.5149397195509651
+          },
+          {
+            "decile": 7,
+            "change": 421.1056741055149,
+            "change_q1": 154.54460417236348,
+            "hep": 66.90360179685791,
+            "change_q1_net_hep": 87.64100237550555,
+            "vat_on_change": 9.245006556578486,
+            "vat_cut_jan": 59.13095869102655,
+            "vat_cut_oct": 49.88595213444807,
+            "share_change_offset_by_hep": 0.15887603969946537,
+            "share_change_q1_offset_by_hep": 0.4329080407248666
+          },
+          {
+            "decile": 8,
+            "change": 415.0186107028073,
+            "change_q1": 151.09054679990328,
+            "hep": 66.13159983231648,
+            "change_q1_net_hep": 84.95894696758681,
+            "vat_on_change": 9.573188019981005,
+            "vat_cut_jan": 61.230003665938604,
+            "vat_cut_oct": 51.6568156459576,
+            "share_change_offset_by_hep": 0.15934610672115856,
+            "share_change_q1_offset_by_hep": 0.4376951519005213
+          },
+          {
+            "decile": 9,
+            "change": 458.0964796840544,
+            "change_q1": 167.39600562297645,
+            "hep": 61.662957883114316,
+            "change_q1_net_hep": 105.73304773986212,
+            "vat_on_change": 10.331187828443097,
+            "vat_cut_jan": 66.07816197579771,
+            "vat_cut_oct": 55.746974147354614,
+            "share_change_offset_by_hep": 0.13460692368918178,
+            "share_change_q1_offset_by_hep": 0.36836576627758305
+          },
+          {
+            "decile": 10,
+            "change": 523.0551111446478,
+            "change_q1": 191.43767907679046,
+            "hep": 49.18698472738518,
+            "change_q1_net_hep": 142.25069434940528,
+            "vat_on_change": 11.680826328419677,
+            "vat_cut_jan": 74.71043474937913,
+            "vat_cut_oct": 63.02960842095945,
+            "share_change_offset_by_hep": 0.09403786270197217,
+            "share_change_q1_offset_by_hep": 0.25693471089176256
+          }
+        ],
+        "england": {
+          "change": 416.42420557151206,
+          "change_q1": 152.38836913344963,
+          "hep": 80.614970851128,
+          "change_q1_net_hep": 71.77339828232161,
+          "vat_on_change": 9.308068975943605,
+          "vat_cut_jan": 59.534305221027836,
+          "vat_cut_oct": 50.22623624508423,
+          "share_change_offset_by_hep": 0.19358858052088926,
+          "share_change_q1_offset_by_hep": 0.5290099980040591
+        },
+        "deciles_england": [
+          {
+            "decile": 1,
+            "change": 385.748243071924,
+            "change_q1": 141.28891502165388,
+            "hep": 85.94728535377278,
+            "change_q1_net_hep": 55.34162966788113,
+            "vat_on_change": 8.574598139255789,
+            "vat_cut_jan": 54.84303394070642,
+            "vat_cut_oct": 46.26843580145063,
+            "share_change_offset_by_hep": 0.22280667999762643,
+            "share_change_q1_offset_by_hep": 0.6083087646373428
+          },
+          {
+            "decile": 2,
+            "change": 384.8605150531817,
+            "change_q1": 140.71809313014978,
+            "hep": 91.25864284716374,
+            "change_q1_net_hep": 49.45945028298604,
+            "vat_on_change": 8.647852296537641,
+            "vat_cut_jan": 55.31156671260551,
+            "vat_cut_oct": 46.663714416067876,
+            "share_change_offset_by_hep": 0.23712134468913554,
+            "share_change_q1_offset_by_hep": 0.6485210310713837
+          },
+          {
+            "decile": 3,
+            "change": 381.51656965255995,
+            "change_q1": 139.75625005040254,
+            "hep": 89.47006535284127,
+            "change_q1_net_hep": 50.286184697561275,
+            "vat_on_change": 8.473993963639435,
+            "vat_cut_jan": 54.19957075697482,
+            "vat_cut_oct": 45.72557679333539,
+            "share_change_offset_by_hep": 0.23451161094869355,
+            "share_change_q1_offset_by_hep": 0.6401865055807826
+          },
+          {
+            "decile": 4,
+            "change": 397.96365877042234,
+            "change_q1": 145.4441701327165,
+            "hep": 91.19224980602912,
+            "change_q1_net_hep": 54.25192032668736,
+            "vat_on_change": 8.966837564236569,
+            "vat_cut_jan": 57.35179292249714,
+            "vat_cut_oct": 48.38495535826058,
+            "share_change_offset_by_hep": 0.22914717913636481,
+            "share_change_q1_offset_by_hep": 0.6269914409275876
+          },
+          {
+            "decile": 5,
+            "change": 405.77918946285615,
+            "change_q1": 149.3454754856921,
+            "hep": 84.00727021838686,
+            "change_q1_net_hep": 65.33820526730523,
+            "vat_on_change": 8.747418635890153,
+            "vat_cut_jan": 55.948391907183755,
+            "vat_cut_oct": 47.2009732712936,
+            "share_change_offset_by_hep": 0.20702705412170141,
+            "share_change_q1_offset_by_hep": 0.5625029479144489
+          },
+          {
+            "decile": 6,
+            "change": 398.45978732824955,
+            "change_q1": 145.77508783026056,
+            "hep": 87.26423560792239,
+            "change_q1_net_hep": 58.51085222233817,
+            "vat_on_change": 8.921393559517604,
+            "vat_cut_jan": 57.06113357581665,
+            "vat_cut_oct": 48.13974001629905,
+            "share_change_offset_by_hep": 0.2190038703605352,
+            "share_change_q1_offset_by_hep": 0.5986224183211073
+          },
+          {
+            "decile": 7,
+            "change": 417.507185436846,
+            "change_q1": 153.08227654277889,
+            "hep": 76.58433302975136,
+            "change_q1_net_hep": 76.49794351302752,
+            "vat_on_change": 9.219635604799649,
+            "vat_cut_jan": 58.968686366782606,
+            "vat_cut_oct": 49.749050761982964,
+            "share_change_offset_by_hep": 0.18343237122882008,
+            "share_change_q1_offset_by_hep": 0.5002821669453671
+          },
+          {
+            "decile": 8,
+            "change": 410.54894248735104,
+            "change_q1": 149.5608440447857,
+            "hep": 78.42031577478473,
+            "change_q1_net_hep": 71.14052827000096,
+            "vat_on_change": 9.433178089454408,
+            "vat_cut_jan": 60.33450171387014,
+            "vat_cut_oct": 50.90132362441573,
+            "share_change_offset_by_hep": 0.19101331816778666,
+            "share_change_q1_offset_by_hep": 0.5243372105556044
+          },
+          {
+            "decile": 9,
+            "change": 449.7018030079193,
+            "change_q1": 164.01613428213864,
+            "hep": 70.3427444556473,
+            "change_q1_net_hep": 93.67338982649133,
+            "vat_on_change": 10.260080240812655,
+            "vat_cut_jan": 65.62335863941692,
+            "vat_cut_oct": 55.36327839860427,
+            "share_change_offset_by_hep": 0.15642086374825714,
+            "share_change_q1_offset_by_hep": 0.4288769806916955
+          },
+          {
+            "decile": 10,
+            "change": 522.1658142891417,
+            "change_q1": 191.15344328041462,
+            "hep": 54.15201950811107,
+            "change_q1_net_hep": 137.00142377230353,
+            "vat_on_change": 11.645354955515002,
+            "vat_cut_jan": 74.48356024441213,
+            "vat_cut_oct": 62.838205288897136,
+            "share_change_offset_by_hep": 0.10370655838860636,
+            "share_change_q1_offset_by_hep": 0.28329083995977083
+          }
+        ]
+      }
+    }
+  },
+  "unfilled_scenarios": []
+}
